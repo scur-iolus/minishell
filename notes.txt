@@ -1,0 +1,126 @@
+============ readline ============
+#include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+char *        readline (const char *prompt);
+The line returned is allocated with malloc(3); the caller must free it when
+finished. The line returned has the final newline removed, so only the text of
+the line remains.
+
+============ rl_clear_history ============ 
+void rl_clear_history (void)
+Clear the history list by deleting all of the entries, in the same manner as the
+History library's clear_history() function. This differs from clear_history
+because it frees private data Readline saves in the history list.
+
+============ rl_on_new_line ============ 
+int rl_on_new_line ()
+Tell the update routines that we have moved onto a new (empty) line, usually
+after ouputting a newline. 
+
+============ rl_replace_line ============ 
+void rl_replace_line (const char *text, int clear_undo)
+Replace the contents of rl_line_buffer (le contenu courant du tampon de ligne)
+with text. The point and mark are preserved, if possible. If clear_undo is
+non-zero, the undo list associated with the current line is cleared. 
+
+============ rl_redisplay ============ 
+void rl_redisplay (void)
+Change what's displayed on the screen to reflect the current contents of
+rl_line_buffer.
+
+============ add_history ============ 
+void add_history (const char *string)
+Place string at the end of the history list. The associated data field (if any)
+is set to NULL. 
+
+============ access ============ 
+#include <unistd.h>
+int access(const char *pathname, int mode);
+access() vérifie si le processus appelant peut accéder au fichier pathname. Si
+pathname est un lien symbolique, il est déréférencé. 
+Le mode indique la (les) vérification(s) d'accessibilité à effectuer (F_OK,
+R_OK, W_OK, X_OK).
+L'appel renvoie 0 s'il réussit (toutes les requêtes sont autorisées), ou -1 s'il
+échoue (au moins une requête du mode est interdite), auquel cas errno contient 
+le code d'erreur.
+
+============ fork ============ 
+
+
+============ wait ============ 
+
+============ waitpid ============ 
+
+============ wait3 ============ 
+
+============ wait4 ============ 
+
+============ signal ============ 
+
+============ sigaction ============ 
+
+============ kill ============ 
+
+============ exit ============ 
+
+============ getcwd ============ 
+
+============ chdir ============ 
+
+============ stat, ============ 
+
+============ lstat ============ 
+
+============ fstat ============ 
+
+============ unlink ============ 
+
+============ execve ============ 
+
+============ dup ============ 
+
+============ dup2 ============ 
+
+============ pipe ============ 
+
+============ opendir ============ 
+
+============ readdir ============ 
+
+============ closedir ============ 
+
+============ strerror ============ 
+
+============ perror ============ 
+
+============ isatty ============ 
+
+============ ttyname ============ 
+
+============ ttyslot ============ 
+
+============ ioctl ============ 
+
+============ getenv ============ 
+
+============ tcsetattr ============ 
+
+============ tcgetattr ============ 
+
+============ tgetent ============ 
+
+============ tgetflag ============ 
+
+============ tgetnum ============ 
+
+============ tgetstr ============ 
+
+============ tgoto ============ 
+
+============ tputs ============ 
+
+
+
+
+https://velog.io/@du0928/Minishell
