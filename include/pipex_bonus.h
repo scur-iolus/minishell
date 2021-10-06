@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:46:20 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/06 15:11:48 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:48:37 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_data
 // +------------------------------------------+ //
 //                  main                        //
 // +------------------------------------------+ //
-int		main(int argc, char **argv, char **env);   /// a changer 
+int		multi_pipe(int argc, char **argv, char **env);   /// a changer 
 t_data	*init_struct(int argc, char **argv, int flag_hd);
 void	init_pipe(int argc, t_data *data);
 void	pipex(int argc, t_data *data, char **env);

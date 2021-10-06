@@ -6,17 +6,14 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 14:52:55 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/09/28 12:05:52 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:59:28 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
 
-t_data	*init_struct(int argc, char **argv, int flag_hd)
+void	init_struct(int argc, char **argv, t_data *data)
 {
-	t_data	*data;
-
-	data = malloc(sizeof(t_data));
 	data->cmd = NULL;
 	data->path = NULL;
 	data->list = NULL;

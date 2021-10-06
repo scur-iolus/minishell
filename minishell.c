@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/06 15:46:03 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:33:44 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,16 @@ int main(int argc, char **argv, char **env)
         {
             line = readline("Mishell>");
             if  (ft_strlen(line) > 0)
-                add_history(line);
+                add_history(line);  // free quelque part ??
 
             // fonction de parsing
 
-            
-            // fonction qui fait la ou les commandes    
+
+            // fonction qui fait la ou les commandes
             printf("line read --> %s\n", line);
 
             //fonction qui free tout avant le prochaine ligne de commande
+            //multipipe(structure principale);
             free(line);
             line = NULL;
         }

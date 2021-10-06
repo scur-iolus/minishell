@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 11:05:18 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/09/28 14:50:57 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:07:45 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	parse_cmd(int argc, char **argv, t_data *data)
 	i = 1 + data->flag_hd;
 	while (++i < argc - 1)
 	{
-		data->cmd = ft_split(argv[i], ' ');
+		data->cmd = ft_split(argv[i], ' '); // ici il faut remplacer argv[i] par la string de la commande 
 		if (!data->cmd)
 			free_all_failure(data);
 		new = ft_lstnew(data->cmd);

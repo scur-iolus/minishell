@@ -6,30 +6,24 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:40:49 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/09/28 14:38:04 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:35:12 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
 
-int	main(int argc, char **argv, char **env)
+int	multi_pipe(int argc, char **argv, char **env) // pipex en cours de reconstruction 
 {
 	int		fd1;
 	int		fd2;
-	int		flag_hd;
-	t_data	*data;
+	t_data	data;
 
-	flag_hd = 0;
 	if (argc >= 5)
 	{
-		if (!ft_strncmp(argv[1], "here_doc", 8) && argc >= 6)
-			flag_hd = 1;
-		data = init_struct(argc, argv, flag_hd);
-		take_env(data, env);
-		parse_cmd(argc, argv, data);
-		init_pipe(argc, data);
-		if (data->flag_hd)
-			here_doc_filling(argv, data);
+		data = init_struct(argc, argv, &data); // changer l initialisation de structure
+		take_env(data, env); // on prend les différents PATH dans l'environnement --> on garde
+		parse_cmd(argc, argv, data); // étape devant être fait avant lors du parsing
+		init_pipe(argc, data); //pipe initialisé en fonction de la longueur de la liste chainées commande 
 		pipex(argc, data, env);
 		free_all_success(data);
 	}
