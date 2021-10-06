@@ -1,0 +1,4 @@
+=========== NOMENCLATURE ===========
+
+Print sur le terminal ---> On utilse seulement Write pour écrire sur le terminal
+
