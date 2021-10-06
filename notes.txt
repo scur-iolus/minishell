@@ -7,118 +7,182 @@ The line returned is allocated with malloc(3); the caller must free it when
 finished. The line returned has the final newline removed, so only the text of
 the line remains.
 
-============ rl_clear_history ============ 
+============ rl_clear_history ============
 void rl_clear_history (void)
 Clear the history list by deleting all of the entries, in the same manner as the
 History library's clear_history() function. This differs from clear_history
 because it frees private data Readline saves in the history list.
 
-============ rl_on_new_line ============ 
+============ rl_on_new_line ============
 int rl_on_new_line ()
 Tell the update routines that we have moved onto a new (empty) line, usually
-after ouputting a newline. 
+after ouputting a newline.
 
-============ rl_replace_line ============ 
+============ rl_replace_line ============
 void rl_replace_line (const char *text, int clear_undo)
 Replace the contents of rl_line_buffer (le contenu courant du tampon de ligne)
 with text. The point and mark are preserved, if possible. If clear_undo is
-non-zero, the undo list associated with the current line is cleared. 
+non-zero, the undo list associated with the current line is cleared.
 
-============ rl_redisplay ============ 
+============ rl_redisplay ============
 void rl_redisplay (void)
 Change what's displayed on the screen to reflect the current contents of
 rl_line_buffer.
 
-============ add_history ============ 
+============ add_history ============
 void add_history (const char *string)
 Place string at the end of the history list. The associated data field (if any)
-is set to NULL. 
+is set to NULL.
 
-============ access ============ 
+============ access ============
 #include <unistd.h>
 int access(const char *pathname, int mode);
 access() vérifie si le processus appelant peut accéder au fichier pathname. Si
-pathname est un lien symbolique, il est déréférencé. 
+pathname est un lien symbolique, il est déréférencé.
 Le mode indique la (les) vérification(s) d'accessibilité à effectuer (F_OK,
 R_OK, W_OK, X_OK).
 L'appel renvoie 0 s'il réussit (toutes les requêtes sont autorisées), ou -1 s'il
-échoue (au moins une requête du mode est interdite), auquel cas errno contient 
+échoue (au moins une requête du mode est interdite), auquel cas errno contient
 le code d'erreur.
 
-============ fork ============ 
+============ fork ============
+#include <unistd.h>
+pid_t fork(void);
+Causes creation of a new process. The child process has its own copy of the
+parent's descriptors. But these descriptors reference the same underlying
+objects : an lseek on a descriptor in the child process can affect a subsequent
+read or write by the parent. Returns 0 to the child process and the process ID
+of the child to the parent.
+
+============ wait ============
+#include <sys/wait.h>
+pid_t wait(int *stat_loc);
+If wait() returns due to a stopped or terminated child process, the process ID
+of the child is returned to the calling process.  Otherwise, a value of -1 is
+returned and errno is set to indicate the error.
+
+============ wait4 ============
+pid_t wait4(pid_t pid, int *stat_loc, int options, struct rusage *rusage);
+Provides a more general interface for programs that need to wait for certain
+child processes, that need resource utilization statistics accumulated by child
+processes, or that require options.
+If pid is -1, the call waits for any child process. If pid is 0, the call waits
+for any child process in the process group of the caller.
+If pid is less than -1, the call waits for any process whose process group id
+equals the absolute value of pid.
+If wait3(), wait4(), or waitpid() returns due to a stopped or terminated child
+process, the process ID of the child is returned to the calling process.
+If there are no children not previously awaited, -1 is returned with errno set
+to [ECHILD].  Otherwise, ...
+
+============ waitpid ============
+pid_t waitpid(pid_t pid, int *stat_loc, int options);
+The waitpid() call is identical to wait4() with an rusage value of zero.
+
+============ wait3 ============
+pid_t wait3(int *stat_loc, int options, struct rusage *rusage);
+The older wait3() call is the same as wait4() with a pid value of -1.
+
+============ signal ============
+#include <signal.h>
+void (*signal(int sig, void (*func)(int)))(int);
+Simplified interface to the more general sigaction(2).
+The previous action is returned on a successful call.
+When a process which has installed signal handlers forks, the child process
+inherits the signals.
+
+============ sigaction ============
+int sigaction(int sig, const struct sigaction *restrict act,
+	struct sigaction *restrict oact);
+After a fork(2) or vfork(2) all signals, the signal mask, the signal stack, and
+the restart/interrupt flags are inherited by the child.
+The sigaction() function returns the value 0 if successful; otherwise the value
+-1 is returned.
+
+============ kill ============
+int kill(pid_t pid, int sig);
+A value of 0 causes error checking to be performed (with no signal being sent).
+
+============ exit ============
+#include <stdlib.h>
+void exit(int status);
+Flush all open output streams, close all open streams.
+
+============ getcwd ============
+#include <unistd.h>
+char *getcwd(char *buf, size_t size);
+Copies the absolute pathname of the current working directory into the memory
+referenced by buf and returns a pointer to buf.  The size argument is the
+size, in bytes, of the array referenced by buf.
+Returns NULL in case of error.
+
+============ chdir ============
+#include <unistd.h>
+int chdir(const char *path);
+Success returns 0, otherwise -1.
+
+============ stat ============
+#include <sys/stat.h>
+int stat(const char *restrict path, struct stat *restrict buf);
+Obtains information about the file pointed to by path. In case of symlinks:
+returns info about the file the link references.
+
+============ lstat ============
+#include <sys/stat.h>
 
 
-============ wait ============ 
+============ fstat ============
 
-============ waitpid ============ 
+============ unlink ============
 
-============ wait3 ============ 
+============ execve ============
 
-============ wait4 ============ 
+The execve(2) system call reinstates the default action for all signals which
+were caught and resets all signals to be caught on the user stack.  Ignored
+signals remain ignored; the signal mask remains the same; signals that restart
+pending system calls continue to do so.
 
-============ signal ============ 
+============ dup ============
 
-============ sigaction ============ 
+============ dup2 ============
 
-============ kill ============ 
+============ pipe ============
 
-============ exit ============ 
+============ opendir ============
 
-============ getcwd ============ 
+============ readdir ============
 
-============ chdir ============ 
+============ closedir ============
 
-============ stat, ============ 
+============ strerror ============
 
-============ lstat ============ 
+============ perror ============
 
-============ fstat ============ 
+============ isatty ============
 
-============ unlink ============ 
+============ ttyname ============
 
-============ execve ============ 
+============ ttyslot ============
 
-============ dup ============ 
+============ ioctl ============
 
-============ dup2 ============ 
+============ getenv ============
 
-============ pipe ============ 
+============ tcsetattr ============
 
-============ opendir ============ 
+============ tcgetattr ============
 
-============ readdir ============ 
+============ tgetent ============
 
-============ closedir ============ 
+============ tgetflag ============
 
-============ strerror ============ 
+============ tgetnum ============
 
-============ perror ============ 
+============ tgetstr ============
 
-============ isatty ============ 
+============ tgoto ============
 
-============ ttyname ============ 
-
-============ ttyslot ============ 
-
-============ ioctl ============ 
-
-============ getenv ============ 
-
-============ tcsetattr ============ 
-
-============ tcgetattr ============ 
-
-============ tgetent ============ 
-
-============ tgetflag ============ 
-
-============ tgetnum ============ 
-
-============ tgetstr ============ 
-
-============ tgoto ============ 
-
-============ tputs ============ 
+============ tputs ============
 
 
 
