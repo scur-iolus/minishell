@@ -1,0 +1,13 @@
+- makefile
+- header
+	- structure (a discuter)
+	- include des fonctions qu'on peut utiliser
+- lifbt avec bonus
+- implementer le pipex dans minishell
+- implementer le readline et bien le comprendre
+
+
+fmonbeig
+
+
+lallba
