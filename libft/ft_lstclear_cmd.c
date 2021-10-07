@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 11:52:06 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/06 15:55:06 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/07 12:05:02 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static void	free_split2(char **ptr)
 	free(ptr);
 }
 
-void	ft_lstclear_cmd(t_list *lst)
+void	ft_lstclear_cmd(t_cmd *lst)
 {
-	t_list	*lst_next;
-	t_list	*delete;
+	t_cmd	*lst_next;
+	t_cmd	*delete;
 
 	if (lst)
 	{

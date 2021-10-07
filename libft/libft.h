@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 11:03:52 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/06 15:51:42 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/07 12:04:24 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-typedef struct s_list
+typedef struct s_cmd
 {
 	char			**cmd;
 	char			*cmd_path;
-	struct s_list	*next;
-}				t_list;
+	struct s_cmd	*next;
+}				t_cmd;
 
 void	ft_swap(int *a, int *b);
 void	ft_sort_int_tab(int *tab, int size);
@@ -66,23 +66,19 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putnbr(int n);
 int		ft_countnbr(int n);
 // LISTE CHAINÉES
-t_list	*ft_lstnew_cmd(char **cmd);
-
-void	ft_lstadd_front(t_list **alst, t_list *new);
-int		ft_lstsize(t_list *lst);
-t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_back(t_list **alst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(void*));
-
-void	ft_lstclear_cmd(t_list *lst);
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_cmd	*ft_lstnew_cmd(char **cmd);
+void	ft_lstadd_front(t_cmd **alst, t_cmd *new);
+int		ft_lstsize(t_cmd *lst);
+t_cmd	*ft_lstlast(t_cmd *lst);
+void	ft_lstadd_back(t_cmd **alst, t_cmd *new);
+void	ft_lstclear_cmd(t_cmd *lst);
 //Fonctions custom pour printf
 void	ft_putnbr_no_minus(int n);
 void	ft_putnbr_base(unsigned int nbr, char *base);
 void	ft_putnbr_base_pointer(unsigned long int nbr, char *base);
 int		ft_countnbr_base(unsigned int nbr, char *base);
 void	ft_putnbr_unsigned_int(unsigned int n);
+
 int		ft_countnbr_unsigned_int(unsigned int n);
 int		ft_countnbr_base_pointer(unsigned long int nbr, char *base);
 

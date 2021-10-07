@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:29:05 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/06 15:26:16 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/07 12:07:27 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew_cmd(char **cmd)
+t_cmd	*ft_lstnew_cmd(char **cmd)
 {
-	t_list	*list;
+	t_cmd	*list;
 
 	list = malloc(sizeof(*list));
 	list->cmd_path = NULL;

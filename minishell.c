@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/06 17:33:44 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/07 11:51:15 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int main(int argc, char **argv, char **env)
             // fonction qui fait la ou les commandes
             printf("line read --> %s\n", line);
 
-            //fonction qui free tout avant le prochaine ligne de commande
             //multipipe(structure principale);
+            //fonction qui free tout avant la prochaine ligne de commande
             free(line);
             line = NULL;
         }

@@ -1,4 +1,4 @@
 =========== NOMENCLATURE ===========
 
 Print sur le terminal ---> On utilse seulement Write pour écrire sur le terminal
-
+Pour les variables Booleenne on utilisera le type short

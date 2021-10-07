@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_lstlast_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 23:13:03 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/05/20 16:30:52 by fmonbeig         ###   ########.fr       */
+/*   Created: 2021/05/07 15:40:51 by fmonbeig          #+#    #+#             */
+/*   Updated: 2021/10/07 12:06:06 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **alst, t_list *new)
+t_cmd	*ft_lstlast(t_cmd *lst)
 {
-	t_list	*temp;
-
-	temp = *alst;
-	*alst = new;
-	new->next = temp;
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
