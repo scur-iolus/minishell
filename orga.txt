@@ -7,9 +7,17 @@
 - lifbt avec bonus
 - implementer le pipex dans minishell
 - implementer le readline et bien le comprendre
-- 
+-
 
 fmonbeig
 
 
 lallba
+
+
+
+
+
+======== TESTS A FAIRE DANS BASH ========
+
+https://docs.google.com/spreadsheets/d/1Of8hhQD8XkSf3qokHBO2m7fMA7M-YPsckW_JV9sM6eE/edit#gid=1627853444

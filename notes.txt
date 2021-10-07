@@ -128,47 +128,126 @@ Obtains information about the file pointed to by path. In case of symlinks:
 returns info about the file the link references.
 
 ============ lstat ============
-#include <sys/stat.h>
-
+int lstat(const char *restrict path, struct stat *restrict buf);
+In the case where the named file is a symbolic link; lstat() returns information
+about the link.
 
 ============ fstat ============
+int fstat(int fildes, struct stat *buf);
+The fstat() obtains the same information about an open file known by the file
+descriptor fildes.
 
 ============ unlink ============
+#include <unistd.h>
+int unlink(const char *path);
+The unlink() function removes the link named by path from its directory and
+decrements the link count of the file which was referenced by the link.
+Upon successful completion, a value of 0 is returned.  Otherwise, -1.
 
 ============ execve ============
-
+#include <unistd.h>
+int execve(const char *path, char *const argv[], char *const envp[]);
+execve() transforms the calling process into a new process. The new process is
+constructed from an ordinary file, whose name is pointed to by path.
+If any optional args are specified, they become the first (& more) argument to
+the interpreter.
 The execve(2) system call reinstates the default action for all signals which
 were caught and resets all signals to be caught on the user stack.  Ignored
 signals remain ignored; the signal mask remains the same; signals that restart
 pending system calls continue to do so.
 
 ============ dup ============
+#include <unistd.h>
+int dup(int fildes);
+dup() duplicates an existing object descriptor and returns its value.
+read(2), write(2) and lseek(2) calls all move a single pointer into the file,
+and append mode, non-blocking I/O and asynchronous I/O options are shared
+between the references.
+If a separate pointer into the file is desired, a different object reference
+to the file must be obtained by issuing an additional open(2) call.
+-1 is returned in case of error.
 
 ============ dup2 ============
+int dup2(int fildes, int fildes2);
+In dup2(), the value of the new descriptor fildes2 is specified.
+-1 is returned in case of error.
 
 ============ pipe ============
+#include <unistd.h>
+int pipe(int fildes[2]);
+The pipe() function creates a pipe (an object that allows unidirectional data
+flow) and allocates a pair of file descriptors. [0 : read, 1 : write]
+Returns 0 on success, -1 in case of issue.
 
 ============ opendir ============
+#include <dirent.h>
+DIR *opendir(const char *filename);
+The opendir() function opens the directory named by filename, associates a
+directory stream with it and returns a pointer to be used to identify the
+directory stream in subsequent operations.
+Returns a NULL pointer in case of issue.
 
 ============ readdir ============
+int readdir_r(DIR *dirp, struct dirent *entry, struct dirent **result);
+The readdir() function returns a pointer to the next directory entry.  It
+returns NULL upon reaching the end of the directory or on error.
 
 ============ closedir ============
+int closedir(DIR *dirp);
 
 ============ strerror ============
+#include <stdio.h>
+char *strerror(int errnum);
+Look up the error message string corresponding to an error number.
 
 ============ perror ============
+void perror(const char *str);
+The perror() function finds the error message corresponding to the current
+value of the global variable errno (intro(2)) and writes it, followed by a
+newline, to the standard error file descriptor.
+str will be appended at the beginning of the error message followed by ': '.
 
 ============ isatty ============
+#include <unistd.h>
+int isatty(int fd);
+Determines if the file descriptor fd refers to a valid terminal type device.
+If yes, returns 1. Else, returns 0.
 
 ============ ttyname ============
+char *ttyname(int fd);
+Gets the related device name of a file descriptor for which isatty() is true.
+Returns the null terminated name if the device is found and isatty() is true;
+otherwise a NULL pointer is returned.
 
 ============ ttyslot ============
+#include <unistd.h>
+int ttyslot(void);
+Returns the index of the current user's entry in some file.
+<=>
+Renvoie l'index du terminal de contrôle du processus appelant dans le fichier
+/etc/ttys, qui est aussi (en principe) l'index de l'entrée pour l'utilisateur
+en cours dans le fichier /etc/utmp
+Comme les systèmes Linux n'ont habituellement pas de /etc/ttys,
+elle renverra toujours 0.
 
 ============ ioctl ============
+#include <sys/ioctl.h>
+int ioctl(int fildes, unsigned long request, ...);
+The argument fildes must be an open file descriptor.
+It manipulates the underlying device parameters of special files (terminals).
+If an error has occurred, a value of -1 is returned.
 
 ============ getenv ============
+#include <stdlib.h>
+char * getenv(const char *name);
+Obtains the current value of the environment variable, name.
+If the variable name is not in the current environment, NULL is returned.
 
 ============ tcsetattr ============
+#include <termios.h>
+int
+ tcsetattr(int fildes, int optional_actions, const struct termios *termios_p);
+
 
 ============ tcgetattr ============
 
@@ -188,3 +267,5 @@ pending system calls continue to do so.
 
 
 https://velog.io/@du0928/Minishell
+(a la fin)
+https://viewsourcecode.org/snaptoken/kilo/01.setup.html
