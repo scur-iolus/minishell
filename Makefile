@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/10/07 17:40:01 by llalba           ###   ########.fr        #
+#    Updated: 2021/10/07 18:27:57 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,9 @@ HEADERS		= include/
 
 SRC_PATH	= src/
 
-CLIENT_SRC	= \
+SRC			= \
 			$(SRC_PATH)minishell.c \
+			$(SRC_PATH)env.c \
 			$(SRC_PATH)parsing.c
 
 OBJS		= $(SRC:.c=.o)
