@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/07 14:51:43 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/07 18:25:11 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_data
 	char	*outfile_name;//       outfile        cat -e > test   --> outfile = test
 	char	*infile; // permet de recup le fd de l ouverture du infile
 	char	*outfile; // 										outfile
-	t_pipe	*pipe;
+	//t_pipe	*pipe;
 	t_cmd	*l_cmd;
 }		t_data;
 
@@ -69,6 +69,13 @@ typedef struct s_pipe
 	int		i;  // ??
 	int		argc;
 }		t_pipe;
+
+typedef struct s_env
+{
+	char			*var;
+	char			*value;
+	struct s_env	*next;
+}		t_env;
 
 // +------------------------------------------+ //
 //   Main                                       //
@@ -86,5 +93,14 @@ typedef struct s_pipe
 //   Error                                      //
 // +------------------------------------------+ //
 
+// +------------------------------------------+ //
+//   Parsing                                    //
+// +------------------------------------------+ //
+
+// +------------------------------------------+ //
+//   Environnement                               //
+// +------------------------------------------+ //
+
+void	init_env(void);
 
 #endif
