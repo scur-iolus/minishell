@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:46:20 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/07 12:14:44 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/07 18:31:38 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 //   System header files                        //
 // +------------------------------------------+ //
 
- # include <stdlib.h>
- # include <unistd.h>
- # include <stdio.h>
- # include <fcntl.h>
- # include <errno.h>
- # include <sys/types.h>
- # include <sys/wait.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <errno.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 // +------------------------------------------+ //
 //   Libft                                      //

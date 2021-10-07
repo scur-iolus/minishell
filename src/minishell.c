@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/07 18:05:02 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/07 18:19:07 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv, char **env)
 			add_history(line);  // free quelque part ??
 		if  (ft_strlen(line) > 0 && ft_strchr(line, (int)'#'))
 			remove_comment(line);
-		// mettre env dans liste chainee
+		init_env();// mettre env dans liste chainee
 		// fonction de parsing
 
 
