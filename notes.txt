@@ -288,5 +288,9 @@ The tputs routine is described on the curs_terminfo(3X) manual page. It can
 retrieve capabilities by either termcap or terminfo name.
 
 https://velog.io/@du0928/Minishell
-(a la fin)
 https://viewsourcecode.org/snaptoken/kilo/01.setup.html
+https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
+http://i.paysdu42.fr/?page=minishell.c
+https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
+https://github.55860.com/topics/minishell
+https://githubmemory.com/repo/maxime-42/minishell
