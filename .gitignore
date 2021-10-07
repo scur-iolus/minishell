@@ -28,4 +28,11 @@
 *.idb
 *.pdb
 
+# VS Code config
 .vscode/*
+
+# Server config files
+.nfs*
+
+# vim swap files
+*.swp
