@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:07:53 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/05/26 16:37:07 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:32:36 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	**malloc_word(int words, char **ptr, char const *s, char c)
 				free(ptr[index]);
 			free(ptr);
 			return (NULL);
-		}	
+		}
 		i = 0;
 		while (*s != c && *s)
 			ptr[index][i++] = *s++;
@@ -79,7 +79,7 @@ char	**ft_split(char const *s, char c)
 	char	**ptr;
 	int		words;
 
-	if (!s)
+	if (!s || !(*str))
 		return (NULL);
 	words = wordcount(s, c);
 	ptr = malloc(sizeof(char *) * (words + 1));
