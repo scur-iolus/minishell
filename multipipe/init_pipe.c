@@ -6,28 +6,20 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:18:10 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/07 12:22:47 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/07 18:21:02 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	init_struct(int argc, char **argv, t_data *data)
+void	init_struct(t_pipe *pipe)
 {
-	if (data->in == 1)
-		data->here_doc = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		data->outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_APPEND, 0644);
-		if (data->here_doc < 0 || data->outfile < 0)
-			error_opening_file(data);
-	}
-	else
-	{
-		data->infile = open(argv[1], O_RDONLY);
-		data->outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
-		if (data->infile < 0 || data->outfile < 0)
-			error_opening_file(data);
-	}
-	return (data);
+	pipe->path = NULL; //split du path
+	pipe->end = NULL;
+	pipe->infile = NULL; // permet de recup le fd de l ouverture du infile
+	pipe->outfile = NULL; // 										outfile
+	pipe->i = NULL;
+	pipe->argc = NULL;
 }
 
 void	init_pipe(int argc, t_data *data)

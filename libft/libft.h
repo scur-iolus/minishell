@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 11:03:52 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/07 12:04:24 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:55:32 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ typedef struct s_cmd
 {
 	char			**cmd;
 	char			*cmd_path;
+	int				in; // no < = 0 , < = 1 , << = 2
+	int				out; // no > = 0 , > = 1 , >> = 2
+	char			*infile_name; //nom du infile . e.g  test < cat -e    --> infile = test
+	char			*outfile_name;//       outfile        cat -e > test   --> outfile = test
 	struct s_cmd	*next;
 }				t_cmd;
 
