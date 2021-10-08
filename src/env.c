@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/08 15:58:41 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/08 16:52:10 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,20 @@ char	*get_var_name(char *str, char *equals_sign)
 char	*get_var_value(char *str, char *equals_sign)
 {
 	size_t	i;
+	size_t	j;
 	char	*var_value;
 
 	i = 0;
+	j = 0;
 	while (str[i] != '=')
 		i++;
 	var_value = (char *) ft_calloc(ft_strlen(str) - i, sizeof(char));
+	i++;
 	while (str[i])
 	{
-		var_value[i] = str[i];
+		var_value[j] = str[i];
 		i++;
+		j++;
 	}
 	return (var_value);
 }
