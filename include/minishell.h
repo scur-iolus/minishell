@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/07 18:25:11 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/08 10:36:48 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ typedef struct s_env
 //   Environnement                               //
 // +------------------------------------------+ //
 
-void	init_env(void);
+t_env	*init_env(char **env);
 
 #endif

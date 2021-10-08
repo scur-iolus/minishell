@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/07 18:19:07 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/08 10:33:22 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,18 @@ void	remove_comment(char *line)
 
 int	main(int argc, char **argv, char **env)
 {
-	char *line;
+	char	*line;
+	t_env	*env_lst;
+
 	(void)argv;
-	(void)env;
 	while (argc == 1)
 	{
 		line = readline("Mishell c'est le Brésil>");
-		if  (ft_strlen(line) > 0)
-			add_history(line);  // free quelque part ??
-		if  (ft_strlen(line) > 0 && ft_strchr(line, (int)'#'))
+		if (ft_strlen(line) > 0)
+			add_history(line);
+		if (ft_strlen(line) > 0 && ft_strchr(line, (int) '#'))
 			remove_comment(line);
-		init_env();// mettre env dans liste chainee
+		env_lst = init_env(env);
 		// fonction de parsing
 
 
@@ -60,6 +61,6 @@ int	main(int argc, char **argv, char **env)
 		line = NULL;
 		// l'exit(0) ne peut se faire que si l'utilisateur tape exit
 	}
-	printf("ERROR : no argument is required");
+	printf("ERROR: no argument is required.\n");
 	return (1);
 }
