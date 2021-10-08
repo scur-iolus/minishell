@@ -6,9 +6,20 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/10/07 18:27:57 by llalba           ###   ########.fr        #
+#    Updated: 2021/10/08 11:19:06 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+UNAME := $(shell uname)
+
+LIBFT_DIR	= libft
+
+ifeq ($(UNAME), Linux)
+ADDONS		= -L/usr/include -lreadline -L$(PWD)/$(LIBFT_DIR) -lft
+endif
+ifeq ($(UNAME), Darwin)
+ADDONS		=
+endif
 
 NAME		= minishell
 
@@ -28,17 +39,17 @@ SRC			= \
 OBJS		= $(SRC:.c=.o)
 
 $(NAME):	$(OBJS)
-			make -C libft
-			$(CC) $(FLAGS) -o $(NAME) $(OBJS)
+			make -C $(LIBFT_DIR)
+			$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(ADDONS)
 
 all:		$(NAME)
 
 clean:
-			make clean -C libft
+			make clean -C $(LIBFT_DIR)
 			@rm -rf $(OBJS)
 
 fclean:		clean
-			make fclean -C libft
+			make fclean -C $(LIBFT_DIR)
 			@rm -f $(CLIENT_NAME)
 
 re:			fclean all
