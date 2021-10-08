@@ -9,10 +9,8 @@
 - implementer le readline et bien le comprendre
 -
 
-fmonbeig
-
-
-lallba
+======== QUESTIONS EN SUSPENS ========
+- free add_history quelque part ??
 
 
 
