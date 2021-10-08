@@ -6,25 +6,76 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/08 10:37:51 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/08 15:58:41 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+void	env_add_front(t_env **head, t_env *new)
+{
+	t_env	*temp;
+
+	temp = *head;
+	*head = new;
+	new->next = temp;
+}
+
+char	*get_var_name(char *str, char *equals_sign)
+{
+	size_t	i;
+	char	*var_name;
+
+	i = 0;
+	while (str[i] != '=')
+		i++;
+	var_name = (char *) ft_calloc(i, sizeof(char));
+	i = 0;
+	while (str[i] != '=')
+	{
+		var_name[i] = str[i];
+		i++;
+	}
+	return (var_name);
+}
+
+char	*get_var_value(char *str, char *equals_sign)
+{
+	size_t	i;
+	char	*var_value;
+
+	i = 0;
+	while (str[i] != '=')
+		i++;
+	var_value = (char *) ft_calloc(ft_strlen(str) - i, sizeof(char));
+	while (str[i])
+	{
+		var_value[i] = str[i];
+		i++;
+	}
+	return (var_value);
+}
+
 t_env	*init_env(char **env)
 {
-	char	*line;
 	size_t	i;
 	t_env	*head;
+	t_env	*new;
+	char	*equals_sign;
 
 	if (!env)
 		return (0);
 	i = 0;
-	line = *env;
+	head = 0;
 	while (env[i])
 	{
-		printf("%s\n", env[i]);
+		equals_sign = ft_strchr(env[i], '=');
+		if (!equals_sign)
+			exit (1); // erreur à gérer, pas de signe égal dans env[i], c'est pas censé arriver
+		new = (t_env *) malloc(sizeof(t_env));
+		new->var = get_var_name(env[i], equals_sign);
+		new->value = get_var_value(env[i], equals_sign);
+		env_add_front(&head, new);
 		i++;
 	}
 	return (head);
