@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/10/11 16:28:35 by llalba           ###   ########.fr        #
+#    Updated: 2021/10/11 18:55:16 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC			= \
 			$(SRC_PATH)env_to_list.c \
 			$(SRC_PATH)list_to_env.c \
 			$(SRC_PATH)parsing.c
+			$(SRC_PATH)builtins.c \
 
 OBJS		= $(SRC:.c=.o)
 

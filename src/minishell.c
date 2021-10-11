@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/11 17:27:56 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/11 18:54:46 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	remove_comment(char *line)
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
-	t_env	*env_lst;
 	t_data	data;
 
 	(void)argv;
@@ -49,6 +48,12 @@ int	main(int argc, char **argv, char **env)
 		data.env_lst = init_env(env);
 		line = convert_env_var(data.env_lst, line);
 		// fonction de parsing
+
+
+		// fonction de parsing
+
+		if(!ft_strcmp("pwd", line))
+			ft_pwd(&data);
 
 		// fonction qui fait la ou les commandes
 		printf("line read --> %s\n", line);
