@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/08 16:54:18 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/11 15:17:32 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ int	main(int argc, char **argv, char **env)
 		if (ft_strlen(line) > 0 && ft_strchr(line, (int) '#'))
 			remove_comment(line);
 		env_lst = init_env(env);
-		// fonction de parsing
 
 		while(env_lst)// test : lecture de la liste chainee, on checke qu'on a bien tout
 		{
 			printf("%s  ===  %s\n", env_lst->var, env_lst->value);
 			env_lst = env_lst->next;
 		}
+
+		// fonction de parsing
 
 
 		// fonction qui fait la ou les commandes
