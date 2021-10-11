@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   env_to_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/08 16:52:10 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/11 16:39:44 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*get_var_name(char *str, char *equals_sign)
 	while (str[i] != '=')
 		i++;
 	var_name = (char *) ft_calloc(i, sizeof(char));
+	if (!var_name)
+		exit (1); // malloc fail, free et exit à coder proprement
 	i = 0;
 	while (str[i] != '=')
 	{
@@ -50,6 +52,8 @@ char	*get_var_value(char *str, char *equals_sign)
 	while (str[i] != '=')
 		i++;
 	var_value = (char *) ft_calloc(ft_strlen(str) - i, sizeof(char));
+	if (!var_value)
+		exit (1); // malloc fail, free et exit à coder proprement
 	i++;
 	while (str[i])
 	{

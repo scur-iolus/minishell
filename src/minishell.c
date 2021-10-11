@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/11 15:17:32 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/11 17:07:24 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,38 @@ int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_env	*env_lst;
+	t_data	data;
 
 	(void)argv;
 	while (argc == 1)
 	{
+
 		line = readline("Mishell c'est le Brésil>");
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		if (ft_strlen(line) > 0 && ft_strchr(line, (int) '#'))
 			remove_comment(line);
-		env_lst = init_env(env);
+		data.env_lst = init_env(env);
 
-		while(env_lst)// test : lecture de la liste chainee, on checke qu'on a bien tout
-		{
-			printf("%s  ===  %s\n", env_lst->var, env_lst->value);
-			env_lst = env_lst->next;
-		}
+// test lecture de la liste chainee, on checke qu'on a bien tout
+t_env	*tmp = data.env_lst;
+while (tmp)
+{
+	printf("%s  ===  %s\n", tmp->var, tmp->value);
+	tmp = tmp->next;
+}
+printf("\n\n\n\n");
+// test ecriture de la liste chainee dans un char **
+char	**test;
+test = list_to_env(data.env_lst);
+int i = 0;
+while(test[i])
+{
+	printf("%s\n", test[i]);
+	i++;
+}
 
 		// fonction de parsing
-
 
 		// fonction qui fait la ou les commandes
 		printf("line read --> %s\n", line);

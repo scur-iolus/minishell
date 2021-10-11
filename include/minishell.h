@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/11 15:19:34 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/11 17:01:04 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,6 @@
 //   Type definition                            //
 // +------------------------------------------+ //
 
-// Idee de struct principale
-typedef struct s_data
-{
-	int		len_line;
-	t_pipe	*pipe;
-	t_cmd	*l_cmd;
-}		t_data;
 
 // struct pour le pipe
 
@@ -71,6 +64,16 @@ typedef struct s_env
 	char			*value;
 	struct s_env	*next;
 }		t_env;
+
+// Idee de struct principale
+typedef struct s_data
+{
+	int		len_line;
+	t_pipe	*pipe;
+	t_cmd	*l_cmd;
+	t_env	*env_lst;
+}		t_data;
+
 
 // +------------------------------------------+ //
 //   Main                                       //
@@ -97,5 +100,6 @@ typedef struct s_env
 // +------------------------------------------+ //
 
 t_env	*init_env(char **env);
+char	**list_to_env(t_env *env_lst);
 
 #endif
