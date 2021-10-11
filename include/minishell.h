@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/11 15:19:34 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/11 16:55:12 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,7 @@
 // +------------------------------------------+ //
 
 // Idee de struct principale
-typedef struct s_data
-{
-	int		len_line;
-	t_pipe	*pipe;
-	t_cmd	*l_cmd;
-}		t_data;
+
 
 // struct pour le pipe
 
@@ -72,6 +67,14 @@ typedef struct s_env
 	struct s_env	*next;
 }		t_env;
 
+typedef struct s_data
+{
+	int		len_line;
+	t_env *env_lst;
+	t_pipe	*pipe;
+	t_cmd	*l_cmd;
+}		t_data;
+
 // +------------------------------------------+ //
 //   Main                                       //
 // +------------------------------------------+ //
@@ -80,6 +83,10 @@ typedef struct s_env
 //   Utils                                      //
 // +------------------------------------------+ //
 
+// +------------------------------------------+ //
+//   Builtins                                   //
+// +------------------------------------------+ //
+void	ft_pwd(t_data *data);
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
@@ -97,5 +104,6 @@ typedef struct s_env
 // +------------------------------------------+ //
 
 t_env	*init_env(char **env);
+t_env	*find_var_env(t_data *data, char *var_name);
 
 #endif

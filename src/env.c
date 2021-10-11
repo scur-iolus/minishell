@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/08 16:52:10 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/11 17:41:16 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,20 @@ t_env	*init_env(char **env)
 		i++;
 	}
 	return (head);
+}
+
+t_env	*find_var_env(t_data *data, char *var_name)
+{
+	t_env *temp;
+	int i;
+
+	temp = data->env_lst;
+	i = -1;
+	while(temp)
+	{
+		if (!ft_strcmp(var_name, temp->var))
+			return (temp);
+		temp = temp->next;
+	}
+	return(NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/11 15:17:32 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/11 17:08:06 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	remove_comment(char *line)
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
-	t_env	*env_lst;
+	t_data	data;
 
 	(void)argv;
 	while (argc == 1)
@@ -45,16 +45,18 @@ int	main(int argc, char **argv, char **env)
 			add_history(line);
 		if (ft_strlen(line) > 0 && ft_strchr(line, (int) '#'))
 			remove_comment(line);
-		env_lst = init_env(env);
+		data.env_lst = init_env(env);
 
-		while(env_lst)// test : lecture de la liste chainee, on checke qu'on a bien tout
-		{
-			printf("%s  ===  %s\n", env_lst->var, env_lst->value);
-			env_lst = env_lst->next;
-		}
+		// while(data.env_lst)// test : lecture de la liste chainee, on checke qu'on a bien tout
+		// {
+		// 	printf("%s  ===  %s\n", data.env_lst->var, data.env_lst->value);
+		// 	data.env_lst = data.env_lst->next;
+		// }
 
 		// fonction de parsing
 
+		if(!ft_strcmp("pwd", line))
+			ft_pwd(&data);
 
 		// fonction qui fait la ou les commandes
 		printf("line read --> %s\n", line);

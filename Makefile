@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
+#    By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/10/08 11:19:06 by llalba           ###   ########.fr        #
+#    Updated: 2021/10/11 16:55:41 by fmonbeig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRC_PATH	= src/
 SRC			= \
 			$(SRC_PATH)minishell.c \
 			$(SRC_PATH)env.c \
-			$(SRC_PATH)parsing.c
+			$(SRC_PATH)parsing.c \
+			$(SRC_PATH)builtins.c \
 
 OBJS		= $(SRC:.c=.o)
 
