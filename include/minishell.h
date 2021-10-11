@@ -6,11 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/10/08 10:36:48 by llalba           ###   ########.fr       */
-=======
-/*   Updated: 2021/10/07 18:00:06 by fmonbeig         ###   ########.fr       */
->>>>>>> origin/multipipe
+/*   Updated: 2021/10/11 15:19:34 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +49,7 @@
 typedef struct s_data
 {
 	int		len_line;
-<<<<<<< HEAD
-	int		in; // no < = 0 , < = 1 , << = 2
-	int		out; // no > = 0 , > = 1 , >> = 2
-	char	*infile_name; //nom du infile . e.g  test < cat -e    --> infile = test
-	char	*outfile_name;//       outfile        cat -e > test   --> outfile = test
-	char	*infile; // permet de recup le fd de l ouverture du infile
-	char	*outfile; // 										outfile
-	//t_pipe	*pipe;
-=======
 	t_pipe	*pipe;
->>>>>>> origin/multipipe
 	t_cmd	*l_cmd;
 }		t_data;
 
