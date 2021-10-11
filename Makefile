@@ -6,7 +6,7 @@
 #    By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/10/11 16:55:41 by fmonbeig         ###   ########.fr        #
+#    Updated: 2021/10/11 18:29:56 by fmonbeig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,9 @@ SRC			= \
 			$(SRC_PATH)env.c \
 			$(SRC_PATH)parsing.c \
 			$(SRC_PATH)builtins.c \
+			$(SRC_PATH)multipipe/init_pipe.c \
+			$(SRC_PATH)multipipe/multipipe.c \
+			$(SRC_PATH)multipipe/utils_multipipe.c \
 
 OBJS		= $(SRC:.c=.o)
 
