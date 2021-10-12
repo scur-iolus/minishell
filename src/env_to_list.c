@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/11 18:56:22 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/12 17:56:39 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	env_add_front(t_env **head, t_env *new)
 	new->next = temp;
 }
 
-char	*get_var_name(char *str, char *equals_sign)
+char	*get_var_name(char *str)
 {
 	size_t	i;
 	char	*var_name;
@@ -41,7 +41,7 @@ char	*get_var_name(char *str, char *equals_sign)
 	return (var_name);
 }
 
-char	*get_var_value(char *str, char *equals_sign)
+char	*get_var_value(char *str)
 {
 	size_t	i;
 	size_t	j;
@@ -81,8 +81,8 @@ t_env	*init_env(char **env)
 		if (!equals_sign)
 			exit (1); // erreur à gérer, pas de signe égal dans env[i], c'est pas censé arriver
 		new = (t_env *) malloc(sizeof(t_env));
-		new->var = get_var_name(env[i], equals_sign);
-		new->value = get_var_value(env[i], equals_sign);
+		new->var = get_var_name(env[i]);
+		new->value = get_var_value(env[i]);
 		env_add_front(&head, new);
 		i++;
 	}
@@ -92,10 +92,8 @@ t_env	*init_env(char **env)
 t_env	*find_var_env(t_data *data, char *var_name)
 {
 	t_env *temp;
-	int i;
 
 	temp = data->env_lst;
-	i = -1;
 	while(temp)
 	{
 		if (!ft_strcmp(var_name, temp->var))

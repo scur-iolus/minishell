@@ -6,46 +6,127 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/11 18:47:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/12 19:01:52 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-short	to_be_interpreted(char *dollar, char *line)
+static size_t	get_var_name_len(char *str)
 {
+	size_t	i;
 
-	return (1);
+	i = 0;
+	while (str[i] && str[i] != '<' && str[i] != '>' && str[i] != '$' && \
+		str[i] != '|' && str[i] != '?' && str[i] != ' ')
+		i++;
+	return (i);
 }
 
-void	check_next_char(char *line, size_t *position, char *output)
+static void	add_var_value(char **output, char *var_name, t_data *data)
 {
+	char	*new;
+	size_t	value_len;
+	size_t	i;
+	t_env	*node;
 
-
-
-		to_be_interpreted(ft_strchr(line, (int) '$'), line)
-		len = ft_strlen(line);
-		output = ft_calloc(len, sizeof(char));
-		if (!output)
-			exit (1); // malloc fail, free et exit à coder proprement
+	node = find_var_env(data, var_name);
+	if (!node)
+		return ;
+	value_len = ft_strlen(node->value);
+	new = (char *) ft_calloc(ft_strlen(*output) + value_len + 1, sizeof(char));
+	if (!new)
+		exit (1); // malloc fail, free et exit à coder proprement
+	i = 0;
+	while ((*output)[i])
+	{
+		new[i] = (*output)[i];
+		i++;
+	}
+	while (value_len)
+	{
+		new[i + value_len - 1] = node->value[value_len];
+		value_len--;
+	}
+	free(*output);
+	*output = new;
 }
 
-char	*convert_env_var(t_env *env_lst, char *line)
+static void	replace_var(char **output, char *line, size_t *pos, t_data *data)
 {
-	char	*output;
-	size_t	position;
+	size_t	name_len;
+	char	*var_name;
+	size_t	i;
+
+	(*pos)++;
+	name_len = get_var_name_len(line + (*pos));
+	var_name = (char *) ft_calloc(name_len + 1, sizeof(char));
+	if (!var_name)
+		exit (1); // malloc fail, free et exit à coder proprement
+	i = 0;
+	while (i < name_len)
+	{
+		var_name[i] = *(line + (*pos) + i);
+		i++;
+	}
+	add_var_value(output, var_name, data);
+	(*pos) += name_len;
+	free(var_name);
+}
+
+static void	add_one_char(char **old, char *line, size_t *position)
+{
+	char	*new;
+	size_t	i;
+
+	new = (char *) ft_calloc(ft_strlen(*old) + 2, sizeof(char));
+	if (!new)
+		exit (1); // malloc fail, free et exit à coder proprement
+	i = 0;
+	while ((*old)[i])
+	{
+		new[i] = (*old)[i];
+		i++;
+	}
+	new[i] = line[*position];
+	free(*old);
+	(*position)++;
+	*old = new;
+}
+
+char	*convert_env_var(t_data *data, char *line)
+{
+	char		*output;
+	size_t		position;
+	static long	between_apostrophes = 0;
 
 	output = (char *) malloc(0);
 	position = 0;
 	while (line[position])
-		check_next_char(line, &position, output);
+	{
+		if (position == 0 || between_apostrophes % 2 == 0)
+			between_apostrophes = 0;
+		if (line[position] == '\'')
+			between_apostrophes += 1;
+		if (line[position] == '$' && between_apostrophes % 2 == 0)
+			replace_var(&output, line, &position, data);
+		else
+			add_one_char(&output, line, &position);
+	}
 	free(line);
 	return (output);
 }
 
 /*
 
-\ ; unclosed quotes
+1) se debarrasser du commentaire : parcourir line de G a D et au premier
+ESPACE# que je rencontre hors de guillemets, je vire tout ce qui est apres
+2) preliminary checks: \ ; unclosed quotes #
+3) convertir les $var en leur valeur =============================== DONE
+4) supprimer les guillemets (et ne pas toucher les char entre les guillemets)
+
+
+
 $$
 $?
 $VAR

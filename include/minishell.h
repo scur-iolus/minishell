@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/11 18:56:38 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/12 18:36:45 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 // +------------------------------------------+ //
 
 # include "../libft/libft.h"
-# include "multipipe.h"
 
 // +------------------------------------------+ //
 //   Define                                     //
@@ -106,5 +105,6 @@ void	ft_pwd(t_data *data);
 t_env	*init_env(char **env);
 char	**list_to_env(t_env *env_lst);
 t_env	*find_var_env(t_data *data, char *var_name);
+char	*convert_env_var(t_data *data, char *line);
 
 #endif

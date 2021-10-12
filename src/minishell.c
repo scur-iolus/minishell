@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/12 12:00:46 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/12 18:44:44 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ int	main(int argc, char **argv, char **env)
 		if (ft_strlen(line) > 0 && ft_strchr(line, (int) '#'))
 			remove_comment(line);
 		data.env_lst = init_env(env);
-		line = convert_env_var(data.env_lst, line);
+		printf("\n");
+		line = convert_env_var(&data, line);
+		printf("line vaut === %s\n", line);
 		// fonction de parsing
 
-
 		// fonction de parsing
-
+		/*
 		if(!ft_strcmp("pwd", line))
 			ft_pwd(&data);
 		if(!ft_strcmp("env", line))
@@ -59,6 +60,7 @@ int	main(int argc, char **argv, char **env)
 
 		// fonction qui fait la ou les commandes
 		printf("line read --> %s\n", line);
+		*/
 
 		//multipipe(structure principale);
 		//fonction qui free tout avant la prochaine ligne de commande
