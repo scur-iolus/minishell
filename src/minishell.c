@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/11 18:54:46 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/12 12:00:46 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	main(int argc, char **argv, char **env)
 
 		if(!ft_strcmp("pwd", line))
 			ft_pwd(&data);
+		if(!ft_strcmp("env", line))
+			ft_env(&data);
 
 		// fonction qui fait la ou les commandes
 		printf("line read --> %s\n", line);
