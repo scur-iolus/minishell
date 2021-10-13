@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/11 18:56:38 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/12 17:49:05 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@
 // +------------------------------------------+ //
 //   Libft                                      //
 // +------------------------------------------+ //
-
 # include "../libft/libft.h"
-# include "multipipe.h"
-
 // +------------------------------------------+ //
 //   Define                                     //
 // +------------------------------------------+ //
 
-//////////
+# define BUFFER_SIZE 25
 
 // +------------------------------------------+ //
 //   Type definition                            //
@@ -60,6 +57,7 @@ typedef struct s_pipe
 
 typedef struct s_env
 {
+	int				is_env;
 	char			*var;
 	char			*value;
 	struct s_env	*next;
@@ -87,6 +85,12 @@ typedef struct s_data
 //   Builtins                                   //
 // +------------------------------------------+ //
 void	ft_pwd(t_data *data);
+void	ft_env(t_data *data);
+// +------------------------------------------+ //
+//   Export                                     //
+// +------------------------------------------+ //
+void	ft_export(t_data *data, char *line);
+int		check_is_env(char *line);
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
@@ -103,8 +107,17 @@ void	ft_pwd(t_data *data);
 //   Environnement                               //
 // +------------------------------------------+ //
 
+void	env_add_front(t_env **head, t_env *new);
 t_env	*init_env(char **env);
 char	**list_to_env(t_env *env_lst);
 t_env	*find_var_env(t_data *data, char *var_name);
+char	*get_var_name(char *str);
+char	*get_var_value(char *str);
+
+// +------------------------------------------+ //
+//   Multipipe                                  //
+// +------------------------------------------+ //
+void	take_path(t_data *data);
+void	parse_cmd(t_data *data, char *cmd_line);
 
 #endif
