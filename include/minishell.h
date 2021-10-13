@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/12 17:49:05 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/13 17:42:21 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_env
 typedef struct s_data
 {
 	int		len_line;
+	int		exit_status;
 	t_pipe	*pipe;
 	t_cmd	*l_cmd;
 	t_env	*env_lst;
@@ -76,7 +77,8 @@ typedef struct s_data
 // +------------------------------------------+ //
 //   Main                                       //
 // +------------------------------------------+ //
-
+void	remove_comment(char *line);
+void	reset_data(t_data *data);
 // +------------------------------------------+ //
 //   Utils                                      //
 // +------------------------------------------+ //
@@ -86,15 +88,20 @@ typedef struct s_data
 // +------------------------------------------+ //
 void	ft_pwd(t_data *data);
 void	ft_env(t_data *data);
+void	ft_exit(t_data *data);
 // +------------------------------------------+ //
 //   Export                                     //
 // +------------------------------------------+ //
 void	ft_export(t_data *data, char *line);
 int		check_is_env(char *line);
+int		error_var_name(char *line);
+void	print_export(t_data *data);
+void	print_env_with_export_layout(t_data *data);
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
-
+void	delete_one_env_list(t_env *env);
+void	ft_lstclear_env(t_env *lst);
 // +------------------------------------------+ //
 //   Error                                      //
 // +------------------------------------------+ //

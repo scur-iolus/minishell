@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/12 12:00:46 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/13 15:19:40 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,24 @@ void	remove_comment(char *line)
 	line = output;
 }
 
+void	reset_data(t_data *data)
+{
+	data->len_line = 0;
+	data->exit_status = 0;
+	//free -----> data->pipe = ;
+	//free -----> l_cmd = ;
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_data	data;
 
 	(void)argv;
+
 	while (argc == 1)
 	{
+		reset_data(&data);
 		line = readline("Mishell c'est le Brésil>");
 		if (ft_strlen(line) > 0)
 			add_history(line);
