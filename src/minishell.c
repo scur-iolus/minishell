@@ -6,30 +6,39 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/12 18:44:44 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/14 16:01:21 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	remove_comment(char *line)
+void	remove_comment(char **line)
 {
-	size_t	new_len;
-	size_t	i;
+	size_t	len;
 	char	*output;
+	short	btwn_apo;
 
-	new_len = 0;
-	while (line[new_len] && line[new_len] != '#')
-		new_len++;
-	output = calloc(new_len + 1, sizeof(char));
-	i = 0;
-	while (i < new_len)
+	len = 0;
+	btwn_apo = 0;
+	while ((*line)[len] && ((*line)[0] != '#'))
 	{
-		output[i] = line[i];
-		i++;
+		if ((*line)[len] == '\'')
+			btwn_apo = !btwn_apo;
+		if (len && (*line)[len] == '#' && (*line)[len - 1] == ' ' && !btwn_apo)
+		{
+			len--;
+			break ;
+		}
+		len++;
 	}
-	free(line);
-	line = output;
+	output = calloc(len + 1, sizeof(char));
+	while (len)
+	{
+		output[len - 1] = (*line)[len - 1];
+		len--;
+	}
+	free(*line);
+	(*line) = output;
 }
 
 int	main(int argc, char **argv, char **env)
@@ -44,12 +53,11 @@ int	main(int argc, char **argv, char **env)
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		if (ft_strlen(line) > 0 && ft_strchr(line, (int) '#'))
-			remove_comment(line);
+			remove_comment(&line);
 		data.env_lst = init_env(env);
 		printf("\n");
 		line = convert_env_var(&data, line);
-		printf("line vaut === %s\n", line);
-		// fonction de parsing
+		printf("line vaut === %s$\n", line);
 
 		// fonction de parsing
 		/*
