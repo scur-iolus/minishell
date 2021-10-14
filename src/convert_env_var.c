@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/12 19:01:52 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/14 15:57:56 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,19 +96,18 @@ static void	add_one_char(char **old, char *line, size_t *position)
 
 char	*convert_env_var(t_data *data, char *line)
 {
-	char		*output;
-	size_t		position;
-	static long	between_apostrophes = 0;
+	char	*output;
+	size_t	position;
+	short	between_apostrophes;
 
 	output = (char *) malloc(0);
 	position = 0;
+	between_apostrophes = 0;
 	while (line[position])
 	{
-		if (position == 0 || between_apostrophes % 2 == 0)
-			between_apostrophes = 0;
 		if (line[position] == '\'')
-			between_apostrophes += 1;
-		if (line[position] == '$' && between_apostrophes % 2 == 0)
+			between_apostrophes = !between_apostrophes;
+		if (line[position] == '$' && !between_apostrophes)
 			replace_var(&output, line, &position, data);
 		else
 			add_one_char(&output, line, &position);
@@ -123,7 +122,9 @@ char	*convert_env_var(t_data *data, char *line)
 ESPACE# que je rencontre hors de guillemets, je vire tout ce qui est apres
 2) preliminary checks: \ ; unclosed quotes #
 3) convertir les $var en leur valeur =============================== DONE
-4) supprimer les guillemets (et ne pas toucher les char entre les guillemets)
+4) $$ $?
+5) supprimer les guillemets (et ne pas toucher les char entre les guillemets)
+6) exit n
 
 
 
