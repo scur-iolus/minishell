@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/12 17:56:39 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/14 16:32:58 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_env	*init_env(char **env)
 		new = (t_env *) malloc(sizeof(t_env));
 		new->var = get_var_name(env[i]);
 		new->value = get_var_value(env[i]);
+		new->is_env = 1;
 		env_add_front(&head, new);
 		i++;
 	}
