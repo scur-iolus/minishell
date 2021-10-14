@@ -6,11 +6,24 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/14 16:01:21 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/14 16:25:54 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void	check_bad_characters(char *line)
+{
+	size_t	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i])
+			// RAISE
+		i++;
+	}
+}
 
 void	remove_comment(char **line)
 {
@@ -65,10 +78,6 @@ int	main(int argc, char **argv, char **env)
 			ft_pwd(&data);
 		if(!ft_strcmp("env", line))
 			ft_env(&data);
-
-		// fonction qui fait la ou les commandes
-		printf("line read --> %s\n", line);
-		*/
 
 		//multipipe(structure principale);
 		//fonction qui free tout avant la prochaine ligne de commande

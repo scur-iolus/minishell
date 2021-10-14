@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/14 15:57:56 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/14 16:03:36 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,6 @@ char	*convert_env_var(t_data *data, char *line)
 
 /*
 
-1) se debarrasser du commentaire : parcourir line de G a D et au premier
-ESPACE# que je rencontre hors de guillemets, je vire tout ce qui est apres
 2) preliminary checks: \ ; unclosed quotes #
 3) convertir les $var en leur valeur =============================== DONE
 4) $$ $?
