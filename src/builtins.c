@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 16:01:58 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/13 18:04:47 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/14 14:43:45 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ void	ft_env(t_data *data)
 	}
 }
 
-void	ft_exit(t_data *data)
+void	ft_exit(t_data *data, int n)
 {
 	// s' il y a une commande apres le exit alors exit ne renvoie rien dans le stdin
 	ft_putstr_fd("exit", 1);
-	free_all_sucess(data);
+	free_all_sucess(data); // faire un free all success special avec un exit n
+	exit(n);
 }

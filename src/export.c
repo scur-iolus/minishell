@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:36:27 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/13 15:12:44 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/14 15:00:22 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ void	ft_export(t_data *data, char *line) // changer avec la line du parsing // f
 	}
 	if (line)
 	{
-		new = (t_env *) malloc(sizeof(t_env));
+		new = find_var_env(data, line);
+		if(!new)
+			new = (t_env *) malloc(sizeof(t_env));
+		if(!new)
+			free_all_failure(data);
 		new->var = get_var_name(line);
 		new->value = get_var_value(line); // s accorder sur le parsing
 		new->is_env = check_is_env(line);

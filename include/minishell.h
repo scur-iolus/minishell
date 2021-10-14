@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/13 17:42:21 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/14 14:58:59 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ void	print_env_with_export_layout(t_data *data);
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
+void	free_all_success(t_data *data);
+void	free_all_failure(t_data *data);
+void	free_all_success_ft_exit(t_data *data, int n);
 void	delete_one_env_list(t_env *env);
 void	ft_lstclear_env(t_env *lst);
 // +------------------------------------------+ //
