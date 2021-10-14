@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 17:18:11 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/14 14:58:22 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/14 16:53:25 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	free_all_failure(t_data *data)
 	exit(EXIT_FAILURE);
 }
 
-void	free_all_success_ft_exit(t_data *data, int n)
+void	free_all(t_data *data, int n)
 {
 	if (data->env_lst)
 		ft_lstclear_env(data->env_lst);

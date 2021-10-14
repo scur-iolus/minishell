@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:36:27 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/14 15:00:22 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/14 16:40:56 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_export(t_data *data, char *line) // changer avec la line du parsing // f
 	{
 		ft_putstr_fd("export: '", 1);
 		ft_putstr_fd(get_var_name(line), 1);
-		ft_putstr_fd("': not a valid identifier", 1);
+		ft_putstr_fd("': not a valid identifier\n", 1);
 		data->exit_status = 1;
 		return ;
 	}

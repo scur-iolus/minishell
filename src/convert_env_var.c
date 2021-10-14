@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/14 16:03:36 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/14 16:54:51 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,21 +115,3 @@ char	*convert_env_var(t_data *data, char *line)
 	free(line);
 	return (output);
 }
-
-/*
-
-2) preliminary checks: \ ; unclosed quotes #
-3) convertir les $var en leur valeur =============================== DONE
-4) $$ $?
-5) supprimer les guillemets (et ne pas toucher les char entre les guillemets)
-6) exit n
-
-
-
-$$
-$?
-$VAR
-$nimp donne rien
-| < > << >>
-
-*/

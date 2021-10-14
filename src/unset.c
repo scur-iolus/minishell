@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/13 17:36:16 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/14 16:46:44 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_unset(t_data *data, char *line)
 	{
 		ft_putstr_fd("unset: ", 1);
 		ft_putstr_fd(line, 1);
-		ft_putstr_fd(": invalid parameter name", 1);
+		ft_putstr_fd(": invalid parameter name\n", 1);
 		data->exit_status = 1; // exit status = 127 ?
 		return ;
 	}
@@ -68,4 +68,3 @@ t_env	*find_previous_var_env(t_data *data, char *var_name)
 	}
 	return(NULL);
 }
-

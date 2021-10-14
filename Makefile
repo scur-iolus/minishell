@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/10/14 16:32:57 by llalba           ###   ########.fr        #
+#    Updated: 2021/10/14 18:53:43 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,12 +36,13 @@ SRC			= \
 			$(SRC_PATH)env_to_list.c \
 			$(SRC_PATH)list_to_env.c \
 			$(SRC_PATH)parsing.c \
-			$(SRC_PATH)builtins.c \
-			$(SRC_PATH)export.c \
-			$(SRC_PATH)unset.c \
+			$(SRC_PATH)convert_env_var.c \
+			#$(SRC_PATH)export.c \
+			#$(SRC_PATH)unset.c \
+			#$(SRC_PATH)builtins.c \
 			#$(SRC_PATH)multipipe/init_pipe.c \
 			#$(SRC_PATH)multipipe/multipipe.c \
-			#$(SRC_PATH)multipipe/utils_multipipe.c \
+			#$(SRC_PATH)multipipe/utils_multipipe.c
 
 OBJS		= $(SRC:.c=.o)
 
