@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/14 16:54:51 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/15 17:51:56 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static size_t	get_var_name_len(char *str)
 
 	i = 0;
 	while (str[i] && str[i] != '<' && str[i] != '>' && str[i] != '$' && \
-		str[i] != '|' && str[i] != '?' && str[i] != ' ')
+		str[i] != '|' && str[i] != '?' && str[i] != ' ' && str[i] != '.')
 		i++;
 	return (i);
 }
@@ -36,7 +36,7 @@ static void	add_var_value(char **output, char *var_name, t_data *data)
 	value_len = ft_strlen(node->value);
 	new = (char *) ft_calloc(ft_strlen(*output) + value_len + 1, sizeof(char));
 	if (!new)
-		exit (1); // malloc fail, free et exit à coder proprement
+		exit (1); // TODO: malloc fail, free et exit à coder proprement
 	i = 0;
 	while ((*output)[i])
 	{
@@ -60,9 +60,14 @@ static void	replace_var(char **output, char *line, size_t *pos, t_data *data)
 
 	(*pos)++;
 	name_len = get_var_name_len(line + (*pos));
+	if (!name_len)
+	{
+		(*pos) += add_special_case(output, line, pos, data);
+		return ;
+	}
 	var_name = (char *) ft_calloc(name_len + 1, sizeof(char));
 	if (!var_name)
-		exit (1); // malloc fail, free et exit à coder proprement
+		exit (1); // TODO: malloc fail, free et exit à coder proprement
 	i = 0;
 	while (i < name_len)
 	{
@@ -74,23 +79,28 @@ static void	replace_var(char **output, char *line, size_t *pos, t_data *data)
 	free(var_name);
 }
 
-static void	add_one_char(char **old, char *line, size_t *position)
+void	add_one_char(char **old, char *line, size_t *position, int c)
 {
 	char	*new;
 	size_t	i;
 
 	new = (char *) ft_calloc(ft_strlen(*old) + 2, sizeof(char));
 	if (!new)
-		exit (1); // malloc fail, free et exit à coder proprement
+		exit (1); // TODO: malloc fail, free et exit à coder proprement
 	i = 0;
 	while ((*old)[i])
 	{
 		new[i] = (*old)[i];
 		i++;
 	}
-	new[i] = line[*position];
+	if (c)
+		new[i] = c;
+	else
+	{
+		new[i] = line[*position];
+		(*position)++;
+	}
 	free(*old);
-	(*position)++;
 	*old = new;
 }
 
@@ -110,7 +120,7 @@ char	*convert_env_var(t_data *data, char *line)
 		if (line[position] == '$' && !between_apostrophes)
 			replace_var(&output, line, &position, data);
 		else
-			add_one_char(&output, line, &position);
+			add_one_char(&output, line, &position, 0);
 	}
 	free(line);
 	return (output);

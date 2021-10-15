@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/14 18:37:43 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/15 17:51:09 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@
 //   Define                                     //
 // +------------------------------------------+ //
 
-# define BUFFER_SIZE 25
+# define INVALID_CHAR_ERR	"Error: invalid characters in your command.\n"
+# define TOO_MANY_ARG		"Error: minishell does not accept any argument.\n"
+# define BUFFER_SIZE 		25
 
 // +------------------------------------------+ //
 //   Type definition                            //
@@ -66,11 +68,11 @@ typedef struct s_env
 // Idee de struct principale
 typedef struct s_data
 {
-	int		len_line;
-	int		exit_status;
-	t_pipe	*pipe;
-	t_cmd	*l_cmd;
-	t_env	*env_lst;
+	int			len_line;
+	long long	exit_status;
+	t_pipe		*pipe;
+	t_cmd		*l_cmd;
+	t_env		*env_lst;
 }		t_data;
 
 
@@ -109,6 +111,10 @@ void	ft_lstclear_env(t_env *lst);
 // +------------------------------------------+ //
 
 // +------------------------------------------+ //
+//   Preliminary checks                         //
+// +------------------------------------------+ //
+void	preliminary_checks(char **line, t_data *data, char **env);
+// +------------------------------------------+ //
 //   Parsing                                    //
 // +------------------------------------------+ //
 
@@ -123,6 +129,8 @@ t_env	*find_var_env(t_data *data, char *var_name);
 char	*convert_env_var(t_data *data, char *line);
 char	*get_var_name(char *str);
 char	*get_var_value(char *str);
+void	add_one_char(char **old, char *line, size_t *position, int c);
+short	add_special_case(char **output, char *line, size_t *pos, t_data *data);
 
 // +------------------------------------------+ //
 //   Multipipe                                  //
