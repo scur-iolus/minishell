@@ -6,32 +6,35 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:36:27 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/14 15:00:22 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/15 17:44:49 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_export(t_data *data, char *line) // changer avec la line du parsing // faut il afficher la liste en ordre alphabetique ??
-// changer le fd sur lequel on travaille avec les pipes
-{
+void	ft_export(t_data *data, char *line) // faut il afficher la liste en ordre alphabetique ??
+{ // FONCTION TROP LONGUE, attente de la gestion des fd pour la decoupe
 	t_env *new;
 
+	data->exit_status = 0;
 	if (error_var_name(line))
 	{
 		ft_putstr_fd("export: '", 1);
 		ft_putstr_fd(get_var_name(line), 1);
-		ft_putstr_fd("': not a valid identifier", 1);
+		ft_putstr_fd("': not a valid identifier\n", 1);
 		data->exit_status = 1;
 		return ;
 	}
-	if (line)
+	if (line) // COUPER ci dessous 
 	{
 		new = find_var_env(data, line);
 		if(!new)
 			new = (t_env *) malloc(sizeof(t_env));
 		if(!new)
 			free_all_failure(data);
+		if (new)
+			free(new->var);
+			free(new->value);
 		new->var = get_var_name(line);
 		new->value = get_var_value(line); // s accorder sur le parsing
 		new->is_env = check_is_env(line);
@@ -50,7 +53,7 @@ int	error_var_name(char *line)
 		return(1);
 	while(line[++i] && line[i]!= '=')
 	{
-		if (!ft_is_alnum(line[i]))
+		if (!ft_isalnum(line[i]))
 			return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/14 14:58:59 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/15 15:25:10 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <linux/limits.h>
 
 // +------------------------------------------+ //
 //   Libft                                      //
@@ -73,7 +74,6 @@ typedef struct s_data
 	t_env	*env_lst;
 }		t_data;
 
-
 // +------------------------------------------+ //
 //   Main                                       //
 // +------------------------------------------+ //
@@ -100,11 +100,14 @@ void	print_env_with_export_layout(t_data *data);
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
-void	free_all_success(t_data *data);
-void	free_all_failure(t_data *data);
-void	free_all_success_ft_exit(t_data *data, int n);
+void	free_all(t_data *data, int exit_value);
 void	delete_one_env_list(t_env *env);
 void	ft_lstclear_env(t_env *lst);
+
+// +------------------------------------------+ //
+//   Echo                                       //
+// +------------------------------------------+ //
+void	ft_echo(t_data *data, char *line);
 // +------------------------------------------+ //
 //   Error                                      //
 // +------------------------------------------+ //

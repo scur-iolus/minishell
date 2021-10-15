@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 16:01:58 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/14 14:43:45 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/15 17:43:33 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	ft_pwd(t_data *data)
 {
 	t_env *pwd_env;
 
-	// s'il y a des arguments en plus du genre pwd bonjour alors --> pwd: too many arguments
-
+	data->exit_status = 0;
 	pwd_env = find_var_env(data, "PWD");
 	ft_putstr_fd(pwd_env->value, 1);
 }
@@ -26,6 +25,7 @@ void	ft_env(t_data *data)
 {
 	t_env *temp;
 
+	data->exit_status = 0;
 	temp  = data->env_lst;
 	while(temp)
 	{
@@ -42,6 +42,7 @@ void	ft_env(t_data *data)
 
 void	ft_exit(t_data *data, int n)
 {
+	data->exit_status = 0;
 	// s' il y a une commande apres le exit alors exit ne renvoie rien dans le stdin
 	ft_putstr_fd("exit", 1);
 	free_all_sucess(data); // faire un free all success special avec un exit n

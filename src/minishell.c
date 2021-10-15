@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/13 15:19:40 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/15 16:52:38 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	remove_comment(char *line)
 void	reset_data(t_data *data)
 {
 	data->len_line = 0;
-	data->exit_status = 0;
 	//free -----> data->pipe = ;
 	//free -----> l_cmd = ;
 }
@@ -59,19 +58,14 @@ int	main(int argc, char **argv, char **env)
 		line = convert_env_var(data.env_lst, line);
 		// fonction de parsing
 
-
-		// fonction de parsing
-
+		// test de l'appel des fonctions
 		if(!ft_strcmp("pwd", line))
 			ft_pwd(&data);
 		if(!ft_strcmp("env", line))
 			ft_env(&data);
-
 		// fonction qui fait la ou les commandes
 		printf("line read --> %s\n", line);
-
 		//multipipe(structure principale);
-		//fonction qui free tout avant la prochaine ligne de commande
 		free(line);
 		line = NULL;
 		// l'exit(0) ne peut se faire que si l'utilisateur tape exit
