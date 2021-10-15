@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/15 15:25:10 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:15:31 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 
 // struct pour le pipe
 
-typedef struct s_pipe
+typedef struct s_pipe // retravailler la structure pour le parsing
 {
 	char	**path; //split du path
 	int		**end;
