@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:32:59 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/15 16:50:28 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/18 14:46:54 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_cd(t_data *data, char *line)
 
 	getcwd(line, PATH_MAX);
 	data->exit_status = 0;
-	if (chdir(Nom du dir dans l_cmd))
+	if (chdir(Nom du dir dans l_cmd)) //FIXME 
 	{
 		if(!(temp = switch_old_pwd(data, line)));
 		{
