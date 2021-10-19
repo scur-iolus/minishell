@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 11:03:52 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/19 11:37:32 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/19 16:59:04 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_cmd
 	//rajouter une liste chainees pour les differents infile // outfile // char * que l on peut avoir
 	// exemple de ce qu on peut mettre dans cette liste :
 	// cat infile  < infile 2  > outfile3    >> POIL
-	struct s_info	*;
+	//struct s_info	*;
 	struct s_cmd	*next;
 }				t_cmd;
 //TODO:

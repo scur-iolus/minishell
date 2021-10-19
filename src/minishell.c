@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/19 16:57:34 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/19 16:59:28 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	init_data(t_data *data)
 	data->exit_status = 0;
 }
 
-static void	reset_data(t_data *data)
+void	reset_data(t_data *data)
 {
 	data->len_line = 0;
 	//free -----> data->pipe = ;
