@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/19 16:41:55 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/19 16:57:34 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	init_data(t_data *data)
 
 static void	reset_data(t_data *data)
 {
-	init_data(data);
+	data->len_line = 0;
 	//free -----> data->pipe = ;
 	//free -----> l_cmd = ;
 }

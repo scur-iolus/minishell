@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 11:03:52 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/12 15:17:20 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/19 11:37:32 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,23 @@ typedef struct s_cmd
 {
 	char			**cmd;
 	char			*cmd_path;
+	//rajouter une liste chainees pour les differents infile // outfile // char * que l on peut avoir
+	// exemple de ce qu on peut mettre dans cette liste :
+	// cat infile  < infile 2  > outfile3    >> POIL
+	struct s_info	*;
+	struct s_cmd	*next;
+}				t_cmd;
+//TODO:
+typedef struct s_info
+{
+	char			*str; // cette str sera soit utilisée comme infile comme pour la commande "cat infile" soit comme une str classique pour "echo infile" par exemple
+	int				pos; // position par rapport a la commande
 	int				in; // no < = 0 , < = 1 , << = 2
 	int				out; // no > = 0 , > = 1 , >> = 2
 	char			*infile_name; //nom du infile . e.g  test < cat -e    --> infile = test
 	char			*outfile_name;//       outfile        cat -e > test   --> outfile = test
-	
-	struct s_cmd	*next;
-}				t_cmd;
+	struct s_info	*next;
+}				t_info;
 
 void	ft_swap(int *a, int *b);
 void	ft_sort_int_tab(int *tab, int size);
