@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 11:03:52 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/19 16:59:04 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/19 17:16:05 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+
+/*
+** une s_cmd par pipe
+** cmd = head
+** cmd_path = /usr/bin/head ou autre du PATH
+*/
 
 typedef struct s_cmd
 {
@@ -27,17 +33,27 @@ typedef struct s_cmd
 	//struct s_info	*;
 	struct s_cmd	*next;
 }				t_cmd;
+
+/*
+** s_info : un noeud par fichier/texte
+** La liste chainee qui en resulte est contenus dns un s_cmd
+*/
+
 //TODO:
 typedef struct s_info
 {
 	char			*str; // cette str sera soit utilisée comme infile comme pour la commande "cat infile" soit comme une str classique pour "echo infile" par exemple
-	int				pos; // position par rapport a la commande
 	int				in; // no < = 0 , < = 1 , << = 2
 	int				out; // no > = 0 , > = 1 , >> = 2
-	char			*infile_name; //nom du infile . e.g  test < cat -e    --> infile = test
-	char			*outfile_name;//       outfile        cat -e > test   --> outfile = test
+	int				pos; // position par rapport a la commande (0 avant la commande, 1 apres la commande)
 	struct s_info	*next;
 }				t_info;
+
+
+// TODO : checker que deux chevrons ou deux pipes ne s'enchainent pas
+// TODO : construire la liste chainee de s_cmd
+// TODO : construire la liste chainee de s_info dans s_cmd
+
 
 void	ft_swap(int *a, int *b);
 void	ft_sort_int_tab(int *tab, int size);
