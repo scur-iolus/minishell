@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/15 18:41:24 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/19 16:28:09 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	init_data(t_data *data)
 	data->exit_status = 0;
 }
 
-void	reset_data(t_data *data)
+static void	reset_data(t_data *data)
 {
 	init_data(data);
 	//free -----> data->pipe = ;
@@ -29,6 +29,7 @@ int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_data	data;
+	char	last_char;
 
 	(void)argv;
 	while (argc == 1)
@@ -38,17 +39,23 @@ int	main(int argc, char **argv, char **env)
 		if (ft_strlen(line) > 0)
 			add_history(line);
 		preliminary_checks(&line, &data, env);
-		/*
-		if(!ft_strcmp("pwd", line))
-			ft_pwd(&data);
-		if(!ft_strcmp("env", line))
-			ft_env(&data);
-		*/
-		//multipipe(structure principale);
+		last_char = line[ft_strlen(line) - 1];
+		if (last_char != '<' && last_char != '>' && last_char != '|')
+		{
+			/*
+			if(!ft_strcmp("pwd", line))
+				ft_pwd(&data);
+			if(!ft_strcmp("env", line))
+				ft_env(&data);
+			*/
+			//multipipe(structure principale);
+			printf("line vaut === %s$\n", line);
+		}
+		else
+			write(2, INVALID_CHAR_ERR, ft_strlen(INVALID_CHAR_ERR));
 		free(line);
 		line = NULL;
-		// l'exit(0) ne peut se faire que si l'utilisateur tape exit
-	}
-	write(1, TOO_MANY_ARG, ft_strlen(TOO_MANY_ARG));
+	} // l'exit(0) ne peut se faire que si l'utilisateur tape exit
+	write(2, TOO_MANY_ARG, ft_strlen(TOO_MANY_ARG));
 	return (1);
 }

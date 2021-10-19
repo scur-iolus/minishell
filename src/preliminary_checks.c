@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:26:32 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/15 16:51:42 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/19 16:21:46 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,11 @@ void	preliminary_checks(char **line, t_data *data, char **env)
 		write(1, INVALID_CHAR_ERR, ft_strlen(INVALID_CHAR_ERR));
 		return ;
 	}
-	tmp = *line;
-	*line = ft_strtrim(*line, " 	");
-	free(tmp);
 	data->env_lst = init_env(env);
 	*line = convert_env_var(data, *line);
 	if (**line != '\0')
 		remove_quotation_marks(line);
-	// TODO : verifier que la line ne se termine pas par < > |
-	printf("line vaut === %s$\n", *line);
+	tmp = *line;
+	*line = ft_strtrim(*line, " 	");
+	free(tmp);
 }
