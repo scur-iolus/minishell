@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/15 17:51:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/19 16:45:15 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,9 @@ void	ft_lstclear_env(t_env *lst);
 // +------------------------------------------+ //
 //   Preliminary checks                         //
 // +------------------------------------------+ //
-void	preliminary_checks(char **line, t_data *data, char **env);
+short	preliminary_checks(char **line, t_data *data, char **env);
+short	file_not_found(char *line);
+short	invalid_end_of_line(char *line);
 // +------------------------------------------+ //
 //   Parsing                                    //
 // +------------------------------------------+ //

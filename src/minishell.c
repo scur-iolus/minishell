@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/19 16:28:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/19 16:41:55 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_data	data;
-	char	last_char;
 
 	(void)argv;
 	while (argc == 1)
@@ -38,9 +37,7 @@ int	main(int argc, char **argv, char **env)
 		line = readline("Mishell c'est le Brésil>");
 		if (ft_strlen(line) > 0)
 			add_history(line);
-		preliminary_checks(&line, &data, env);
-		last_char = line[ft_strlen(line) - 1];
-		if (last_char != '<' && last_char != '>' && last_char != '|')
+		if (preliminary_checks(&line, &data, env));
 		{
 			/*
 			if(!ft_strcmp("pwd", line))
@@ -51,8 +48,6 @@ int	main(int argc, char **argv, char **env)
 			//multipipe(structure principale);
 			printf("line vaut === %s$\n", line);
 		}
-		else
-			write(2, INVALID_CHAR_ERR, ft_strlen(INVALID_CHAR_ERR));
 		free(line);
 		line = NULL;
 	} // l'exit(0) ne peut se faire que si l'utilisateur tape exit

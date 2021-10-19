@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:26:32 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/19 16:21:46 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/19 16:45:32 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static void	remove_comment(char **line)
 	(*line) = output;
 }
 
-void	preliminary_checks(char **line, t_data *data, char **env)
+short	preliminary_checks(char **line, t_data *data, char **env)
 {
 	char	*tmp;
 
@@ -123,7 +123,7 @@ void	preliminary_checks(char **line, t_data *data, char **env)
 	if (ft_strlen(*line) > 0 && !line_is_valid(*line))
 	{
 		write(1, INVALID_CHAR_ERR, ft_strlen(INVALID_CHAR_ERR));
-		return ;
+		return (0);
 	}
 	data->env_lst = init_env(env);
 	*line = convert_env_var(data, *line);
@@ -132,4 +132,7 @@ void	preliminary_checks(char **line, t_data *data, char **env)
 	tmp = *line;
 	*line = ft_strtrim(*line, " 	");
 	free(tmp);
+	if (invalid_end_of_line(*line) || file_not_found(*line))
+		return (0);
+	return (1);
 }
