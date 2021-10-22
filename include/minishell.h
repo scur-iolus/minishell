@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/19 16:57:32 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/22 17:20:38 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@
 // +------------------------------------------+ //
 
 # define INVALID_CHAR_ERR	"Error: invalid characters in your command.\n"
+# define END_CHAR_ERR		"Error: invalid char at the end of your command.\n"
+# define START_CHAR_ERR1	"Error: invalid char at the beginning of "
+# define START_CHAR_ERR2	"your command.\n"
 # define TOO_MANY_ARG		"Error: minishell does not accept any argument.\n"
 # define BUFFER_SIZE 		25
 
@@ -69,11 +72,11 @@ typedef struct s_env
 // Idee de struct principale
 typedef struct s_data
 {
-	int			len_line;
-	long long	exit_status;
-	t_pipe		*pipe;
-	t_cmd		*l_cmd;
-	t_env		*env_lst;
+	int				len_line; // TODO: à quoi sert cette info ??
+	long long		exit_status;
+	struct s_pipe	*pipe;
+	struct s_cmd	*cmd;
+	struct s_env	*env_lst;
 }		t_data;
 
 // +------------------------------------------+ //
@@ -104,7 +107,6 @@ void	print_env_with_export_layout(t_data *data);
 void	free_all(t_data *data, int exit_value);
 void	delete_one_env_list(t_env *env);
 void	ft_lstclear_env(t_env *lst);
-
 // +------------------------------------------+ //
 //   Echo                                       //
 // +------------------------------------------+ //
@@ -118,15 +120,15 @@ void	ft_echo(t_data *data, char *line);
 // +------------------------------------------+ //
 short	preliminary_checks(char **line, t_data *data, char **env);
 short	file_not_found(char *line);
-short	invalid_end_of_line(char *line);
+short	valid_start_end(char *line);
+short	consecutive_chevrons_o_pipes(char *line);
 // +------------------------------------------+ //
 //   Parsing                                    //
 // +------------------------------------------+ //
-
+void	build_cmd_list(&data, *line);
 // +------------------------------------------+ //
 //   Environnement                               //
 // +------------------------------------------+ //
-
 void	env_add_front(t_env **head, t_env *new);
 t_env	*init_env(char **env);
 char	**list_to_env(t_env *env_lst);
@@ -136,7 +138,6 @@ char	*get_var_name(char *str);
 char	*get_var_value(char *str);
 void	add_one_char(char **old, char *line, size_t *position, int c);
 short	add_special_case(char **output, char *line, size_t *pos, t_data *data);
-
 // +------------------------------------------+ //
 //   Multipipe                                  //
 // +------------------------------------------+ //

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/19 16:59:28 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/22 17:19:16 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,7 @@ int	main(int argc, char **argv, char **env)
 			add_history(line);
 		if (preliminary_checks(&line, &data, env));
 		{
-			/*
-			if(!ft_strcmp("pwd", line))
-				ft_pwd(&data);
-			if(!ft_strcmp("env", line))
-				ft_env(&data);
-			*/
-			//multipipe(structure principale);
+			build_cmd_list(&data, *line);
 			printf("line vaut === %s$\n", line);
 		}
 		free(line);

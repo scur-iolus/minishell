@@ -1,13 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   s_cmd_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 14:26:32 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/07 18:12:20 by llalba           ###   ########.fr       */
+/*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
+/*   Updated: 2021/10/22 17:42:27 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void	build_cmd_list(t_data *data, char *line)
+{
+	char 	**ptr;
+	char	*tmp;
+	size_t	i;
+
+	i = 0;
+	ptr = ft_split(line, '|');
+	while (ptr[i])
+	{
+		tmp = ptr[i];
+		ptr[i] = ft_strtrim(ptr[i], ' 	');
+		free(tmp);
+		i++;
+	}
+
+
+}
