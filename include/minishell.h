@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/22 17:20:38 by llalba           ###   ########.fr       */
+/*   Updated: 2021/10/25 10:48:16 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef struct s_env
 // Idee de struct principale
 typedef struct s_data
 {
-	int				len_line; // TODO: à quoi sert cette info ??
 	long long		exit_status;
 	struct s_pipe	*pipe;
 	struct s_cmd	*cmd;
@@ -143,5 +142,6 @@ short	add_special_case(char **output, char *line, size_t *pos, t_data *data);
 // +------------------------------------------+ //
 void	take_path(t_data *data);
 void	parse_cmd(t_data *data, char *cmd_line);
+void	find_command_path(t_data *data, t_cmd *new, char *cmd_line);
 
 #endif

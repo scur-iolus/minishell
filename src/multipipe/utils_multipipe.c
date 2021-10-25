@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/11 18:57:27 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/10/25 10:58:23 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,37 +21,38 @@ void	take_path(t_data *data)
 	data->pipe->path = ft_split(temp->value, ':');
 }
 
-void	parse_cmd(t_data *data, char *cmd_line) // split une commande afin d'avoir chaque argument dans une string + trouve le Path de la commande
+void	parse_cmd(t_data *data, char *cmd_line) // ici la fonction va créer la nouvelle liste cmd en remplissant cmd et cmd_path
 {
-	//cmd_line = string de la commande avec ses arguments. ex : cat -e
+	//cmd_line = string de la commande avec ses arguments. ex : cat -e  ou head -1
 	int		i;
 	t_cmd	*new;
 
-	data->l_cmd->cmd = ft_split(cmd_line, ' ');
-	if (!data->l_cmd->cmd)
-		exit(1); // mettre la fonction qui free
-	find_command_path(data, );
+	new->cmd = ft_split(cmd_line, ' ');
+	if (!new->cmd)
+		free_all(data, 1);
+	find_command_path(data, new, cmd_line);
+	ft_lstadd_back(data->cmd, new);
 }
 
-void	find_command_path(t_data *data, char *cmd_line) // Comment on passe les infos ici et comment on crée la liste chaînées
+void	find_command_path(t_data *data, t_cmd *new, char *cmd_line) // Comment on passe les infos ici et comment on crée la liste chaînées
 {
 	int		i;
 	int		h;
 	char	*tmp;
 
 	i = -1;
-	while (data->path[++i])
+	while (data->pipe->path[++i])
 	{
-		tmp = ft_strjoin(data->path[i], "/");
-		list->cmd_path = ft_strjoin(tmp, data->cmd[0]);
+		tmp = ft_strjoin(data->pipe->path[i], "/");
+		new->cmd_path = ft_strjoin(tmp, new->cmd[0]);
 		free(tmp);
-		h = access(list->cmd_path, F_OK);
+		h = access(new->cmd_path, F_OK);
 		if (!h)
 			break ;
 		else
 		{
-			free(list->cmd_path);
-			list->cmd_path = NULL;
+			free(new->cmd_path);
+			new->cmd_path = NULL;
 		}
 	}
 }
