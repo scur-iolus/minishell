@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/09 14:59:00 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/09 16:42:45 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ typedef struct s_cmd
 }	t_cmd;
 
 t_cmd	*ft_lstnew_cmd(char *raw);
-void	ft_lstadd_front(t_cmd **alst, t_cmd *new);
+void	ft_lstadd_back_cmd(t_cmd **alst, t_cmd *new);
+void	ft_lstadd_front_cmd(t_cmd **alst, t_cmd *new);
 int		ft_lstsize(t_cmd *lst);
 t_cmd	*ft_lstlast(t_cmd *lst);
-void	ft_lstadd_back(t_cmd **alst, t_cmd *new);
 void	ft_lstclear_cmd(t_cmd *lst);
 
 #endif

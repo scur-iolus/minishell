@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/09 11:27:57 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/09 16:52:58 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	main(int argc, char **argv, char **env)
 			add_history(line);
 		if (preliminary_checks(&line, &data, env))
 		{
-			build_cmd_list(&data, *line);
 			printf("line vaut === %s$\n", line);
+			parse_cmd_list(&data, line);
 		}
 		free(line);
 		line = NULL;

@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/10/19 16:46:26 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/09 16:40:15 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,13 +32,20 @@ HEADERS		= include/
 SRC_PATH	= src/
 
 SRC			= \
+			$(SRC_PATH)ft_lstadd_back_cmd.c \
+			$(SRC_PATH)ft_lstadd_front_cmd.c \
+			$(SRC_PATH)ft_lstclear_cmd.c \
+			$(SRC_PATH)ft_lstlast_cmd.c \
+			$(SRC_PATH)ft_lstnew_cmd.c \
+			$(SRC_PATH)ft_lstsize_cmd.c \
 			$(SRC_PATH)minishell.c \
 			$(SRC_PATH)env_to_list.c \
 			$(SRC_PATH)list_to_env.c \
 			$(SRC_PATH)preliminary_checks.c \
+			$(SRC_PATH)secondary_checks.c \
 			$(SRC_PATH)convert_env_var.c \
 			$(SRC_PATH)convert_env_special_cases.c \
-			$(SRC_PATH)secondary_checks.c \
+			$(SRC_PATH)s_cmd_list.c \
 			#$(SRC_PATH)export.c \
 			#$(SRC_PATH)unset.c \
 			#$(SRC_PATH)builtins.c \
