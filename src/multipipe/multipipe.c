@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:53:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/11 18:53:34 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:38:29 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ int	multi_pipe(t_data *data) // pipex en cours de reconstruction
 	take_path(data); // OK
 	init_pipe(argc, data); //pipe initialisé en fonction de la longueur de la liste chainées commande
 	pipex(argc, data, env);
-	ree_all_success(data);
+	free_all_success(data);
 }

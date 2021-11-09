@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/19 16:57:33 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/09 11:38:19 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_unset(t_data *data, char *line)
 {
-		if (error_var_name(line))
+	if (error_var_name(line))
 	{
 		ft_putstr_fd("unset: ", 1);
 		ft_putstr_fd(line, 1);

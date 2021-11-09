@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/25 11:10:21 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:27:57 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv, char **env)
 		line = readline("Mishell c'est le Brésil>");
 		if (ft_strlen(line) > 0)
 			add_history(line);
-		if (preliminary_checks(&line, &data, env));
+		if (preliminary_checks(&line, &data, env))
 		{
 			build_cmd_list(&data, *line);
 			printf("line vaut === %s$\n", line);

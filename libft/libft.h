@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 11:03:52 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/22 17:32:27 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/09 11:39:47 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 ** La liste chainee qui en resulte est contenus dns un s_cmd
 */
 
-//TODO:
 typedef struct s_content
 {
 	char				*str; // cette str sera soit utilisée comme infile comme pour la commande "cat infile" soit comme une str classique pour "echo infile" par exemple
@@ -34,7 +33,7 @@ typedef struct s_content
 
 /*
 ** une s_cmd par pipe
-** cmd = head
+** cmd = ["cat", "-e"]
 ** cmd_path = /usr/bin/head ou autre du PATH
 */
 
@@ -45,10 +44,6 @@ typedef struct s_cmd
 	struct s_content	*content;
 	struct s_cmd		*next;
 }				t_cmd;
-
-// TODO : construire la liste chainee de s_cmd
-// TODO : construire la liste chainee de s_info dans s_cmd
-
 
 void	ft_swap(int *a, int *b);
 void	ft_sort_int_tab(int *tab, int size);

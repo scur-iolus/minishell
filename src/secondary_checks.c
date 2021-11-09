@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:34:50 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/22 17:09:51 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/09 11:27:21 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ short	consecutive_chevrons_o_pipes(char *line)
 	{
 		if (!already_one && (*line == '<' || *line == '>' || *line == '|'))
 			already_one = !already_one;
-		if (already_one && *line != ' ' && *line != '<' || *line != '>' || *line != '|')
-			already_one = !already_one;;
+		if (already_one && *line != ' ' && *line != '<' || \
+		*line != '>' || *line != '|')
+			already_one = !already_one;
 		if (already_one && (*line == '<' || *line == '>' || *line == '|'))
 			return (1);
 		line++;
