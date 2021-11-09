@@ -6,11 +6,58 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:34:50 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/09 11:27:21 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/09 14:27:01 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+static size_t	ft_strlen_wth_duplicates_spaces(char *str)
+{
+	size_t	i;
+	short	was_space;
+
+	i = 0;
+	was_space = 0;
+	while (*str)
+	{
+		if (!was_space || (was_space && *str != ' '))
+			i++;
+		if (*str == ' ')
+			was_space = 1;
+		else
+			was_space = 0;
+		str++;
+	}
+	return (i);
+}
+
+void	deduplicate_spaces(char **line)
+{
+	char	*new;
+	char	*str;
+	size_t	i;
+	short	was_space;
+
+	new = ft_calloc(ft_strlen_wth_duplicates_spaces(*line) + 1, sizeof(char));
+	if (!new)
+		exit(1); // FIXME error de malloc a gerer proprement
+	str = *line;
+	i = 0;
+	was_space = 0;
+	while (*str)
+	{
+		if (!was_space || (was_space && *str != ' '))
+			new[i++] = *str;
+		if (*str == ' ')
+			was_space = 1;
+		else
+			was_space = 0;
+		str++;
+	}
+	free(*line);
+	*line = new;
+}
 
 short	consecutive_chevrons_o_pipes(char *line)
 {
