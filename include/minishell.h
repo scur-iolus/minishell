@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/09 14:44:02 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/09 16:23:45 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ short	file_not_found(char *line);
 short	valid_start_end(char *line);
 short	consecutive_chevrons_o_pipes(char *line);
 void	deduplicate_spaces(char **line);
+void	space_before_after_chevron(char **line);
 // +------------------------------------------+ //
 //   Parsing                                    //
 // +------------------------------------------+ //

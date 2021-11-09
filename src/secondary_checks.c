@@ -6,11 +6,34 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:34:50 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/09 14:27:01 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/09 16:23:31 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void	space_before_after_chevron(char **line)
+{
+	size_t	i;
+	char	*ptr;
+
+	i = 0;
+	while ((*line)[i])
+	{
+		ptr = (*line) + i;
+		if ((*ptr == '<' || *ptr == '>') && i && *(ptr - 1) != ' ' && \
+		*(ptr - 1) != '<' && *(ptr - 1) != '>')
+		{
+			ft_str_insert(line, ' ', i);
+		}
+		if ((*ptr == '<' || *ptr == '>') && *(ptr + 1) && \
+		*(ptr + 1) != ' ' && *(ptr + 1) != '<' && *(ptr + 1) != '>')
+		{
+			ft_str_insert(line, ' ', i + 1);
+		}
+		i++;
+	}
+}
 
 static size_t	ft_strlen_wth_duplicates_spaces(char *str)
 {

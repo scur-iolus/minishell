@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+         #
+#    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/21 11:04:04 by fmonbeig          #+#    #+#              #
-#    Updated: 2021/10/11 17:07:57 by fmonbeig         ###   ########.fr        #
+#    Updated: 2021/11/09 15:41:19 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,12 +66,7 @@ ft_countnbr_base.c \
 ft_putnbr_unsigned_int.c \
 ft_countnbr_unsigned_int.c \
 ft_countnbr_base_pointer.c \
-ft_lstnew_cmd.c \
-ft_lstadd_front_cmd.c \
-ft_lstsize_cmd.c \
-ft_lstlast_cmd.c \
-ft_lstadd_back_cmd.c \
-ft_lstclear_cmd.c \
+ft_str_insert.c
 
 OBJ = $(SRC:.c=.o)
 
