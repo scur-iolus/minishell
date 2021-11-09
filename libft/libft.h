@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 11:03:52 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/09 11:39:47 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/09 14:53:13 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-
-/*
-** s_content : un noeud par fichier/texte
-** La liste chainee qui en resulte est contenus dns un s_cmd
-*/
-
-typedef struct s_content
-{
-	char				*str; // cette str sera soit utilisée comme infile comme pour la commande "cat infile" soit comme une str classique pour "echo infile" par exemple
-	int					in; // no < = 0 , < = 1 , << = 2
-	int					out; // no > = 0 , > = 1 , >> = 2
-	int					pos; // position par rapport a la commande (0 avant la commande, 1 apres la commande)
-	struct s_content	*next;
-}				t_content;
-
-/*
-** une s_cmd par pipe
-** cmd = ["cat", "-e"]
-** cmd_path = /usr/bin/head ou autre du PATH
-*/
-
-typedef struct s_cmd
-{
-	char				**cmd;
-	char				*cmd_path;
-	struct s_content	*content;
-	struct s_cmd		*next;
-}				t_cmd;
 
 void	ft_swap(int *a, int *b);
 void	ft_sort_int_tab(int *tab, int size);
@@ -87,20 +59,11 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putnbr(int n);
 int		ft_countnbr(int n);
-// LISTE CHAINÉES
-t_cmd	*ft_lstnew_cmd(char **cmd);
-void	ft_lstadd_front(t_cmd **alst, t_cmd *new);
-int		ft_lstsize(t_cmd *lst);
-t_cmd	*ft_lstlast(t_cmd *lst);
-void	ft_lstadd_back(t_cmd **alst, t_cmd *new);
-void	ft_lstclear_cmd(t_cmd *lst);
-//Fonctions custom pour printf
 void	ft_putnbr_no_minus(int n);
 void	ft_putnbr_base(unsigned int nbr, char *base);
 void	ft_putnbr_base_pointer(unsigned long int nbr, char *base);
 int		ft_countnbr_base(unsigned int nbr, char *base);
 void	ft_putnbr_unsigned_int(unsigned int n);
-
 int		ft_countnbr_unsigned_int(unsigned int n);
 int		ft_countnbr_base_pointer(unsigned long int nbr, char *base);
 

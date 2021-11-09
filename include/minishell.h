@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/25 10:48:16 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/09 14:44:02 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@
 # include <linux/limits.h>
 
 // +------------------------------------------+ //
-//   Libft                                      //
+//   Libft & other custom headers               //
 // +------------------------------------------+ //
+
 # include "../libft/libft.h"
+# include "structures.h"
+
 // +------------------------------------------+ //
 //   Define                                     //
 // +------------------------------------------+ //
@@ -43,40 +46,6 @@
 # define START_CHAR_ERR2	"your command.\n"
 # define TOO_MANY_ARG		"Error: minishell does not accept any argument.\n"
 # define BUFFER_SIZE 		25
-
-// +------------------------------------------+ //
-//   Type definition                            //
-// +------------------------------------------+ //
-
-
-// struct pour le pipe
-
-typedef struct s_pipe // retravailler la structure pour le parsing
-{
-	char	**path; //split du path
-	int		**end; // les different fd ouvert pour le multipipe
-	char	*infile; // permet de recup le fd de l ouverture du infile
-	char	*outfile; // 										outfile
-	int		i;
-	int		argc;
-}		t_pipe;
-
-typedef struct s_env
-{
-	int				is_env;
-	char			*var;
-	char			*value;
-	struct s_env	*next;
-}		t_env;
-
-// Idee de struct principale
-typedef struct s_data
-{
-	long long		exit_status;
-	struct s_pipe	*pipe;
-	struct s_cmd	*cmd;
-	struct s_env	*env_lst;
-}		t_data;
 
 // +------------------------------------------+ //
 //   Main                                       //
@@ -121,10 +90,11 @@ short	preliminary_checks(char **line, t_data *data, char **env);
 short	file_not_found(char *line);
 short	valid_start_end(char *line);
 short	consecutive_chevrons_o_pipes(char *line);
+void	deduplicate_spaces(char **line);
 // +------------------------------------------+ //
 //   Parsing                                    //
 // +------------------------------------------+ //
-void	build_cmd_list(&data, *line);
+void	parse_cmd_list(t_data *data, char *line);
 // +------------------------------------------+ //
 //   Environnement                               //
 // +------------------------------------------+ //

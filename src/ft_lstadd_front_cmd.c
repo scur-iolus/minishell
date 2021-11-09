@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstadd_front_cmd.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 15:48:51 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/07 11:59:42 by fmonbeig         ###   ########.fr       */
+/*   Created: 2021/05/06 23:13:03 by fmonbeig          #+#    #+#             */
+/*   Updated: 2021/11/09 14:55:18 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/minishell.h"
 
-void	ft_lstadd_back_cmd(t_cmd **alst, t_cmd *new)
+void	ft_lstadd_front(t_cmd **alst, t_cmd *new)
 {
-	t_cmd	*last;
+	t_cmd	*temp;
 
-	if (!*alst)
-		*alst = new;
-	else
-	{
-		last = ft_lstlast(*alst);
-		last->next = new;
-	}
+	temp = *alst;
+	*alst = new;
+	new->next = temp;
 }
