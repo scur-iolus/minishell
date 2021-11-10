@@ -1,22 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front_cmd.c                              :+:      :+:    :+:   */
+/*   free_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 23:13:03 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/09 14:55:18 by llalba           ###   ########.fr       */
+/*   Created: 2021/11/10 10:41:46 by llalba            #+#    #+#             */
+/*   Updated: 2021/11/10 10:44:44 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_lstadd_front(t_cmd **alst, t_cmd *new)
+static void	delete_one_env_var(t_env *lst)
 {
-	t_cmd	*temp;
+	if (lst)
+	{
+		if (lst->var)
+			free(lst->var);
+		if (lst->value)
+			free(lst->value);
+		free(lst);
+		lst = NULL;
+	}
+}
 
-	temp = *alst;
-	*alst = new;
-	new->next = temp;
+void	ft_lstclear_env(t_env *head)
+{
+	t_env	*tmp;
+
+	tmp = head;
+	while (tmp)
+	{
+		tmp = head->next;
+		delete_one_env_var(head);
+		head = tmp;
+	}
 }

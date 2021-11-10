@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/09 11:38:19 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/10 10:26:05 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,25 @@ void	ft_unset(t_data *data, char *line)
 		return ;
 	}
 	pop_out_list(data, line);
+}
+
+static t_env	*find_previous_var_env(t_data *data, char *var_name)
+{
+	t_env	*temp;
+	t_env	*previous;
+	int		i;
+
+	previous = NULL;
+	temp = data->env_lst;
+	i = -1;
+	while(temp)
+	{
+		if (!ft_strcmp(var_name, temp->var))
+			return (previous);
+		previous = temp;
+		temp = temp->next;
+	}
+	return(NULL);
 }
 
 void	pop_out_list_env(t_data *data, char *line) // a tester
@@ -48,23 +67,4 @@ void	pop_out_list_env(t_data *data, char *line) // a tester
 		previous->next = temp->next;
 		delete_one_env_list(temp);
 	}
-}
-
-t_env	*find_previous_var_env(t_data *data, char *var_name)
-{
-	t_env	*temp;
-	t_env	*previous;
-	int		i;
-
-	previous = NULL;
-	temp = data->env_lst;
-	i = -1;
-	while(temp)
-	{
-		if (!ft_strcmp(var_name, temp->var))
-			return (previous);
-		previous = temp;
-		temp = temp->next;
-	}
-	return(NULL);
 }

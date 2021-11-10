@@ -6,13 +6,13 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/14 16:32:58 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/10 14:57:52 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	env_add_front(t_env **head, t_env *new)
+void	env_add_front(t_env **head, t_env *new)//CHECKED
 {
 	t_env	*temp;
 
@@ -21,7 +21,11 @@ void	env_add_front(t_env **head, t_env *new)
 	new->next = temp;
 }
 
-char	*get_var_name(char *str)
+/*
+** Depuis init_env, sur la heap: line, data->env_lst
+*/
+
+char	*get_var_name(t_data *data, char *str)//CHECKED
 {
 	size_t	i;
 	char	*var_name;
@@ -31,7 +35,7 @@ char	*get_var_name(char *str)
 		i++;
 	var_name = (char *) ft_calloc(i, sizeof(char));
 	if (!var_name)
-		exit (1); // malloc fail, free et exit à coder proprement
+		err_free(0, data, 0, 0);
 	i = 0;
 	while (str[i] != '=')
 	{
@@ -41,7 +45,11 @@ char	*get_var_name(char *str)
 	return (var_name);
 }
 
-char	*get_var_value(char *str)
+/*
+** Depuis init_env, sur la heap: line, data->env_lst
+*/
+
+char	*get_var_value(t_data *data, char *str)//CHECKED
 {
 	size_t	i;
 	size_t	j;
@@ -53,7 +61,7 @@ char	*get_var_value(char *str)
 		i++;
 	var_value = (char *) ft_calloc(ft_strlen(str) - i, sizeof(char));
 	if (!var_value)
-		exit (1); // malloc fail, free et exit à coder proprement
+		err_free(0, data, 0, 0);
 	i++;
 	while (str[i])
 	{
@@ -64,7 +72,11 @@ char	*get_var_value(char *str)
 	return (var_value);
 }
 
-t_env	*init_env(char **env)
+/*
+** Sur la heap: line
+*/
+
+t_env	*init_env(t_data *data, char **env)//CHECKED
 {
 	size_t	i;
 	t_env	*head;
@@ -78,19 +90,26 @@ t_env	*init_env(char **env)
 	while (env[i])
 	{
 		equals_sign = ft_strchr(env[i], '=');
-		if (!equals_sign)
-			exit (1); // erreur à gérer, pas de signe égal dans env[i], c'est pas censé arriver
-		new = (t_env *) malloc(sizeof(t_env));
-		new->var = get_var_name(env[i]);
-		new->value = get_var_value(env[i]);
-		new->is_env = 1;
-		env_add_front(&head, new);
+		if (equals_sign)
+		{
+			new = (t_env *) malloc(sizeof(t_env));
+			if (!new)
+				err_free(0, data, 0, 0);
+			env_add_front(&head, new);
+			new->var = get_var_name(data, env[i]);
+			new->value = get_var_value(data, env[i]);
+			new->is_env = 1;
+		}
 		i++;
 	}
 	return (head);
 }
 
-t_env	*find_var_env(t_data *data, char *var_name)
+/*
+** Depuis add_var_value, sur la heap: line, data->env_lst, output, var_name
+*/
+
+t_env	*find_var_env(t_data *data, char *var_name)//CHECKED
 {
 	t_env *temp;
 

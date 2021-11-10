@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:09:25 by llalba            #+#    #+#             */
-/*   Updated: 2021/10/15 18:43:43 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/10 15:45:41 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,38 +37,56 @@ static int	get_highest_pow(long long n)
 	return (y - 1);
 }
 
-static	void	add_exit_stt(char **out, char *line, size_t *pos, t_data *data)
+static short	add_exit_stt(t_data *data, char **output, size_t *pos)
 {
 	char		c;
 	int			highest_pow;
 	long long	tmp;
+	short		success;
 
+	success = 1;
 	tmp = data->exit_status;
 	highest_pow = get_highest_pow(tmp);
 	if (!tmp)
-		add_one_char(out, line, pos, '0');
-	while (highest_pow + 1)
+		success = ft_str_insert_char(output, '0', ft_strlen(output)));
+	while (success && tmp && highest_pow + 1)
 	{
 		c = (tmp / power(10, (unsigned long) highest_pow)) + '0';
 		add_one_char(out, line, pos, c);
 		tmp -= (c - '0') * power(10, (unsigned long) highest_pow);
 		highest_pow--;
 	}
+	return (success);
 }
+//if (!ft_str_insert_char(output, '$', pos)) return (0); // MARQUE-PAGE
+// data->line // MARQUE-PAGE
 
-short	add_special_case(char **output, char *line, size_t *pos, t_data *data)
+/*
+** Sur la heap: line, data->env_lst, output
+**
+** $$ reste $$ (on ne doit pas gérer l'affichage du PID)
+** $. reste $.
+** $ESPACE reste $ESPACE
+** $? devient le dernier exit_status
+*/
+
+short	special_cases(t_data *data, char **output, size_t *pos)
 {
-	if (line[*pos] == '?')
-		add_exit_stt(output, line, pos, data);
-	else
-	{
-		add_one_char(output, line, pos, '$');
-		if (line[*pos] == '.')
-			add_one_char(output, line, pos, '.');
-		else if (line[*pos] == '$')
-			add_one_char(output, line, pos, '$');
-	}
-	if (line[*pos] == '.' || line[*pos] == '$' || line[*pos] == '?')
+	short	success;
+
+	if (data->line[*pos] == '?')
+		success = add_exit_stt(data, output, pos);
+	else if (data->line[*pos] == ' ')
+		success = ft_str_insert_str(output, "$ ", ft_strlen(output), 2);
+	else if (data->line[*pos] == '$')
+		success = ft_str_insert_str(output, "$$", ft_strlen(output), 2);
+	else if (data->line[*pos] == '.')
+		success = ft_str_insert_str(output, "$.", ft_strlen(output), 2);
+	if (!success)
+		err_free(0, data, *output, 0);
+	else if (data->line[*pos] == '.' || data->line[*pos] == '$' || \
+		data->line[*pos] == '?')
 		return (1);
-	return (0);
+	else
+		return (0);
 }

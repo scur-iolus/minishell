@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:26:32 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/09 16:23:58 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/10 14:35:04 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	remove_quotation_marks(char **line)
 	}
 }
 
-static short	line_is_valid(char *line)
+short	even_nb_of_quote_marks(char *line)// CHECKED
 {
 	long	apostrophes;
 	long	quote_marks;
@@ -81,60 +81,60 @@ static short	line_is_valid(char *line)
 		line++;
 	}
 	if (apostrophes % 2 == 1 || quote_marks % 2 == 1)
+	{
+		write(1, ODD_NB_APOSTROPHES, ft_strlen(ODD_NB_APOSTROPHES));
 		return (0);
+	}
 	return (1);
 }
 
-static void	remove_comment(char **line)
+/*
+** Sur la heap: line
+*/
+
+static void	copy_n_char(t_data *data, size_t len_without_0)// CHECKED
+{
+	char	*new;
+	size_t	i;
+
+	i = 0;
+	new = ft_calloc(len_without_0 + 1, sizeof(char));
+	if (!new)
+		err_free(0, data, 0, 0);
+	while (i < len_without_0)
+	{
+		new[i] = (data->line)[i];
+		i++;
+	}
+	free(data->line);
+	(data->line) = new;
+}
+
+/*
+** Sur la heap: line
+*/
+
+void	remove_comment(t_data *data)// CHECKED
 {
 	size_t	len;
-	char	*output;
-	short	btwn_apo;
+	short	is_between_apostrophes;
 
 	len = 0;
-	btwn_apo = 0;
-	while ((*line)[len] && ((*line)[0] != '#'))
+	is_between_apostrophes = 0;
+	if ((data->line)[0] != '#')
 	{
-		if ((*line)[len] == '\'')
-			btwn_apo = !btwn_apo;
-		if (len && (*line)[len] == '#' && (*line)[len - 1] == ' ' && !btwn_apo)
+		while ((data->line)[len])
 		{
-			len--;
-			break ;
+			if ((data->line)[len] == '\'')
+				is_between_apostrophes = !is_between_apostrophes;
+			if ((data->line)[len] == '#' && (data->line)[len - 1] == ' ' && \
+			!is_between_apostrophes)
+			{
+				len--;
+				break ;
+			}
+			len++;
 		}
-		len++;
 	}
-	output = calloc(len + 1, sizeof(char));
-	while (len)
-	{
-		output[len - 1] = (*line)[len - 1];
-		len--;
-	}
-	free(*line);
-	(*line) = output;
-}
-
-short	preliminary_checks(char **line, t_data *data, char **env)
-{
-	char	*tmp;
-
-	if (ft_strlen(*line) > 0 && ft_strchr(*line, (int) '#'))
-		remove_comment(line);
-	if (ft_strlen(*line) > 0 && !line_is_valid(*line))
-	{
-		write(1, INVALID_CHAR_ERR, ft_strlen(INVALID_CHAR_ERR));
-		return (0);
-	}
-	data->env_lst = init_env(env);
-	*line = convert_env_var(data, *line);
-	if (**line != '\0')
-		remove_quotation_marks(line);
-	tmp = *line;
-	*line = ft_strtrim(*line, " 	");
-	free(tmp);
-	if (!valid_start_end(*line) || consecutive_chevrons_o_pipes(*line))
-		return (0);
-	deduplicate_spaces(line);
-	space_before_after_chevron(line);
-	return (1);
+	copy_n_char(data, len);
 }

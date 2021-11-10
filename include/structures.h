@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/09 16:42:45 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/10 12:06:57 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_env
 
 typedef struct s_data
 {
+	char			*line;
 	long long		exit_status;
 	struct s_pipe	*pipe;
 	struct s_cmd	*cmd;

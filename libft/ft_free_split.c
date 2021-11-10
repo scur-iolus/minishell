@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_cmd.c                                   :+:      :+:    :+:   */
+/*   ft_free_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/09 14:55:26 by llalba           ###   ########.fr       */
+/*   Created: 2021/11/10 10:37:01 by llalba            #+#    #+#             */
+/*   Updated: 2021/11/10 10:38:20 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	ft_lstsize(t_cmd *lst)
+void	ft_free_split(char **ptr)
 {
 	int	i;
 
 	i = 0;
-	while (lst)
+	if (ptr == NULL)
+		return ;
+	while (ptr[i])
 	{
-		lst = lst->next;
+		free (ptr[i]);
 		i++;
 	}
-	return (i);
+	free(ptr);
 }

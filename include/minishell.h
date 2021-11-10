@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/09 16:23:45 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/10 15:45:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,14 @@
 //   Define                                     //
 // +------------------------------------------+ //
 
-# define INVALID_CHAR_ERR	"Error: invalid characters in your command.\n"
-# define END_CHAR_ERR		"Error: invalid char at the end of your command.\n"
-# define START_CHAR_ERR1	"Error: invalid char at the beginning of "
-# define START_CHAR_ERR2	"your command.\n"
-# define TOO_MANY_ARG		"Error: minishell does not accept any argument.\n"
+# define MALLOC_ERROR		"malloc failed"
+# define INVALID_CHAR_ERR	"invalid characters in your command"
+# define ODD_NB_APOSTROPHES	"odd number of \' or \""
+# define END_CHAR_ERR		"invalid char at the end of your command"
+# define START_CHAR_ERR		"invalid char at the beginning of your command"
+# define TOO_MANY_ARG		"minishell does not accept any argument"
 # define BUFFER_SIZE 		25
 
-// +------------------------------------------+ //
-//   Main                                       //
-// +------------------------------------------+ //
-void	reset_data(t_data *data);
 // +------------------------------------------+ //
 //   Utils                                      //
 // +------------------------------------------+ //
@@ -72,7 +69,8 @@ void	print_env_with_export_layout(t_data *data);
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
-void	free_all(t_data *data, int exit_value);
+void	err_free(char *msg, t_data *data, char *str1, char *str2);//CHECKED
+void	free_data(t_data *data);//CHECKED
 void	delete_one_env_list(t_env *env);
 void	ft_lstclear_env(t_env *lst);
 // +------------------------------------------+ //
@@ -86,7 +84,8 @@ void	ft_echo(t_data *data, char *line);
 // +------------------------------------------+ //
 //   Preliminary checks                         //
 // +------------------------------------------+ //
-short	preliminary_checks(char **line, t_data *data, char **env);
+void	remove_comment(t_data *data);//CHECKED
+short	even_nb_of_quote_marks(char *line);//CHECKED
 short	file_not_found(char *line);
 short	valid_start_end(char *line);
 short	consecutive_chevrons_o_pipes(char *line);
@@ -99,15 +98,14 @@ void	parse_cmd_list(t_data *data, char *line);
 // +------------------------------------------+ //
 //   Environnement                               //
 // +------------------------------------------+ //
+t_env	*init_env(t_data *data, char **env);//CHECKED
+char	*get_var_name(t_data *data, char *str);//CHECKED
+char	*get_var_value(t_data *data, char *str);//CHECKED
+char	*convert_env_var(t_data *data);//CHECKED
+short	special_cases(t_data *data, char **output, size_t *pos);//CHECKED
 void	env_add_front(t_env **head, t_env *new);
-t_env	*init_env(char **env);
 char	**list_to_env(t_env *env_lst);
 t_env	*find_var_env(t_data *data, char *var_name);
-char	*convert_env_var(t_data *data, char *line);
-char	*get_var_name(char *str);
-char	*get_var_value(char *str);
-void	add_one_char(char **old, char *line, size_t *position, int c);
-short	add_special_case(char **output, char *line, size_t *pos, t_data *data);
 // +------------------------------------------+ //
 //   Multipipe                                  //
 // +------------------------------------------+ //

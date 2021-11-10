@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:34:50 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/09 16:23:31 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/10 14:11:39 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	space_before_after_chevron(char **line)
 		if ((*ptr == '<' || *ptr == '>') && i && *(ptr - 1) != ' ' && \
 		*(ptr - 1) != '<' && *(ptr - 1) != '>')
 		{
-			ft_str_insert(line, ' ', i);
+			ft_str_insert_char(line, ' ', i); // TODO securiser les malloc
 		}
 		if ((*ptr == '<' || *ptr == '>') && *(ptr + 1) && \
 		*(ptr + 1) != ' ' && *(ptr + 1) != '<' && *(ptr + 1) != '>')
 		{
-			ft_str_insert(line, ' ', i + 1);
+			ft_str_insert_char(line, ' ', i + 1); // TODO securiser les malloc
 		}
 		i++;
 	}
