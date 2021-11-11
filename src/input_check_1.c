@@ -1,64 +1,76 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   preliminary_checks.c                               :+:      :+:    :+:   */
+/*   input_check_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:26:32 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/10 14:35:04 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/11 17:52:25 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	split_n_join(char **line)
+/*
+** On the heap: line, data->env_lst
+*/
+
+static void	split_n_join(t_data *data, char c)//CHECKED
 {
-	char	**line_split;
-	char	**tmp;
+	char	**l_split;
 	size_t	i;
 
-	line_split = ft_split(*line, '"');
-	if (!line_split)
-		exit(1); // TODO: malloc fail, free et exit à coder proprement
-	free(*line);
-	tmp = line_split;
-	i = 1;
-	while (line_split[0] && line_split[i])
+	l_split = ft_split(data->line, c);
+	if (!l_split)
+		err_free(0, data, 0, 0);
+	free(data->line);
+	i = 0;
+	data->line = (char *)ft_calloc(1, sizeof(char));
+	if (!data->line)
 	{
-		*line = ft_strjoin(line_split[0], line_split[i]);
-		if (!(*line))
-			exit(1); // TODO: malloc fail, free et exit à coder proprement
-		free(line_split[0]);
-		free(line_split[i]);
-		line_split[0] = *line;
+		ft_free_split(l_split);
+		err_free(0, data, 0, 0);
+	}
+	while (l_split[i])
+	{
+		if (!ft_str_insert_str(&(data->line), l_split[i], \
+			ft_strlen(data->line)))
+		{
+			ft_free_split(l_split);
+			err_free(0, data, 0, 0);
+		}
 		i++;
 	}
-	free(tmp);
+	ft_free_split(l_split);
 }
 
-static void	remove_quotation_marks(char **line)
+/*
+** On the heap: line, data->env_lst
+*/
+
+void	remove_quotation_marks(t_data *data)//CHECKED
 {
 	size_t	i;
 	long	apostrophes;
 
 	i = 0;
 	apostrophes = 0;
-	while ((*line)[i])
+	while ((data->line)[i])
 	{
-		if ((*line)[i] == '\'')
+		if ((data->line)[i] == '\'')
 			apostrophes++;
-		else if ((*line)[i] == '\"' && apostrophes % 1 == 0)
-			(*line)[i] = ';';
+		else if ((data->line)[i] == '\"' && apostrophes % 2 == 1)
+			(data->line)[i] = ';';
 		i++;
 	}
-	if (ft_strchr(*line, (int) '\"'))
-		split_n_join(line);
+	if (ft_strchr(data->line, (int) '\"'))
+		split_n_join(data, '\"');
 	i = 0;
-	while ((*line)[i])
+	while ((data->line)[i])
 	{
-		if ((*line)[i] == ';')
-			(*line)[i] = '\"';
+		if ((data->line)[i] == ';')
+			(data->line)[i] = '\"';
 		i++;
 	}
 }
@@ -89,7 +101,7 @@ short	even_nb_of_quote_marks(char *line)// CHECKED
 }
 
 /*
-** Sur la heap: line
+** On the heap: line
 */
 
 static void	copy_n_char(t_data *data, size_t len_without_0)// CHECKED
@@ -111,7 +123,7 @@ static void	copy_n_char(t_data *data, size_t len_without_0)// CHECKED
 }
 
 /*
-** Sur la heap: line
+** On the heap: line
 */
 
 void	remove_comment(t_data *data)// CHECKED

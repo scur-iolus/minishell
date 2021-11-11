@@ -1,41 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   secondary_checks.c                                 :+:      :+:    :+:   */
+/*   input_check_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:34:50 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/10 14:11:39 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/11 17:13:44 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	space_before_after_chevron(char **line)
+/*
+** On the heap: line, data->env_lst
+*/
+
+void	space_before_after_chevron(t_data *data)//CHECKED
 {
 	size_t	i;
 	char	*ptr;
 
 	i = 0;
-	while ((*line)[i])
+	while ((data->line)[i])
 	{
-		ptr = (*line) + i;
+		ptr = (data->line) + i;
 		if ((*ptr == '<' || *ptr == '>') && i && *(ptr - 1) != ' ' && \
 		*(ptr - 1) != '<' && *(ptr - 1) != '>')
 		{
-			ft_str_insert_char(line, ' ', i); // TODO securiser les malloc
+			if (!ft_str_insert_char(&data->line, ' ', i))
+				err_free(0, data, 0, 0);
 		}
 		if ((*ptr == '<' || *ptr == '>') && *(ptr + 1) && \
 		*(ptr + 1) != ' ' && *(ptr + 1) != '<' && *(ptr + 1) != '>')
 		{
-			ft_str_insert_char(line, ' ', i + 1); // TODO securiser les malloc
+			if (!ft_str_insert_char(&data->line, ' ', i + 1))
+				err_free(0, data, 0, 0);
 		}
 		i++;
 	}
 }
 
-static size_t	ft_strlen_wth_duplicates_spaces(char *str)
+static size_t	ft_strlen_wth_duplicates_sp(char *str)//CHECKED
 {
 	size_t	i;
 	short	was_space;
@@ -55,17 +61,21 @@ static size_t	ft_strlen_wth_duplicates_spaces(char *str)
 	return (i);
 }
 
-void	deduplicate_spaces(char **line)
+/*
+** On the heap: line, data->env_lst
+*/
+
+void	deduplicate_spaces(t_data *data)//CHECKED
 {
 	char	*new;
 	char	*str;
 	size_t	i;
 	short	was_space;
 
-	new = ft_calloc(ft_strlen_wth_duplicates_spaces(*line) + 1, sizeof(char));
+	new = ft_calloc(ft_strlen_wth_duplicates_sp(data->line) + 1, sizeof(char));
 	if (!new)
-		exit(1); // FIXME error de malloc a gerer proprement
-	str = *line;
+		err_free(0, data, 0, 0);
+	str = data->line;
 	i = 0;
 	was_space = 0;
 	while (*str)
@@ -78,30 +88,15 @@ void	deduplicate_spaces(char **line)
 			was_space = 0;
 		str++;
 	}
-	free(*line);
-	*line = new;
+	free(data->line);
+	data->line = new;
 }
 
-short	consecutive_chevrons_o_pipes(char *line)
-{
-	short	already_one;
+/*
+** On the heap: line, data->env_lst
+*/
 
-	already_one = 0;
-	while (*line)
-	{
-		if (!already_one && (*line == '<' || *line == '>' || *line == '|'))
-			already_one = !already_one;
-		if (already_one && *line != ' ' && *line != '<' || \
-		*line != '>' || *line != '|')
-			already_one = !already_one;
-		if (already_one && (*line == '<' || *line == '>' || *line == '|'))
-			return (1);
-		line++;
-	}
-	return (0);
-}
-
-short	valid_start_end(char *line)
+short	valid_start_end(char *line)//CHECKED
 {
 	char	last_char;
 
@@ -110,15 +105,14 @@ short	valid_start_end(char *line)
 	{
 		if (line[0] == '|')
 		{
-			write(2, START_CHAR_ERR1, ft_strlen(START_CHAR_ERR1));
-			write(2, START_CHAR_ERR2, ft_strlen(START_CHAR_ERR2));
+			write(2, START_CHAR_ERR, ft_strlen(START_CHAR_ERR));
 			return (0);
 		}
 		return (1);
 	}
 	else
 	{
-		write(2, INVALID_CHAR_ERR, ft_strlen(INVALID_CHAR_ERR));
+		write(2, END_CHAR_ERR, ft_strlen(END_CHAR_ERR));
 		return (0);
 	}
 }

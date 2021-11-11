@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/10 15:46:01 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/11 18:47:23 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static size_t	get_var_name_len(char *str)//CHECKED
 }
 
 /*
-** Sur la heap: line, data->env_lst, *output, var_name
+** On the heap: line, data->env_lst, *new, var_name
 */
 
-static void	add_var_value(char **output, char *var_name, t_data *data)//CHECKED
+static void	add_var_value(char **new, char *var_name, t_data *data)//CHECKED
 {
 	size_t	value_len;
 	size_t	insertion_position;
@@ -36,17 +36,16 @@ static void	add_var_value(char **output, char *var_name, t_data *data)//CHECKED
 	node = find_var_env(data, var_name);
 	if (!node)
 		return ;
-	value_len = ft_strlen(node->value);
-	insertion_position= ft_strlen(*output);
-	if (!ft_str_insert_str(output, node->value, insertion_position, value_len))
-		err_free(0, data, *output, var_name);
+	insertion_position= ft_strlen(*new);
+	if (!ft_str_insert_str(new, node->value, insertion_position))
+		err_free(0, data, *new, var_name);
 }
 
 /*
-** Sur la heap: line, data->env_lst, *output
+** On the heap: line, data->env_lst, *new
 */
 
-static void	replace_var(t_data *data, char **output, size_t *position)//CHECKED
+static void	replace_var(t_data *data, char **new, size_t *position)//CHECKED
 {
 	size_t	name_len;
 	char	*var_name;
@@ -55,28 +54,28 @@ static void	replace_var(t_data *data, char **output, size_t *position)//CHECKED
 	name_len = get_var_name_len(data->line + (*position));
 	if (name_len == 0)
 	{
-		(*position) += special_cases(data, output, position);
+		(*position) += special_cases(data, new, position);
 		return ;
 	}
 	var_name = (char *) ft_calloc(name_len + 1, sizeof(char));
 	if (!var_name)
-		err_free(0, data, *output, 0);
+		err_free(0, data, *new, 0);
 	i = 0;
 	while (i < name_len)
 	{
 		var_name[i] = *(data->line + (*position) + i);
 		i++;
 	}
-	add_var_value(output, var_name, data);
+	add_var_value(new, var_name, data);
 	(*position) += name_len;
 	free(var_name);
 }
 
 /*
-** Sur la heap: line, data->env_lst, *output
+** On the heap: line, data->env_lst, *new
 */
 
-static void	next(t_data *data, char **output, short *between, size_t *position)//CHECKED
+static void	next(t_data *data, char **new, short *between, size_t *position)//CHECKED
 {
 	char	c;
 
@@ -86,18 +85,18 @@ static void	next(t_data *data, char **output, short *between, size_t *position)/
 	if (c == '$' && !(*between))
 	{
 		(*position)++;
-		replace_var(data, output, position);
+		replace_var(data, new, position);
 	}
 	else
 	{
-		if (!ft_str_insert_char(output, c, position))
-			err_free(0, data, *output, 0);
+		if (!ft_str_insert_char(new, c, *position))
+			err_free(0, data, *new, 0);
 		(*position)++;
 	}
 }
 
 /*
-** Sur la heap: line, data->env_lst
+** On the heap: line, data->env_lst
 */
 
 char	*convert_env_var(t_data *data)//CHECKED
@@ -106,7 +105,7 @@ char	*convert_env_var(t_data *data)//CHECKED
 	size_t	position;
 	short	between_apostrophes;
 
-	new = (char *) malloc(0);
+	new = (char *) ft_calloc(1, sizeof(char));
 	if (!new)
 		err_free(0, data, 0, 0);
 	position = 0;

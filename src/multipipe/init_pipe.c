@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:18:10 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/11 18:08:55 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/11 18:16:41 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	init_pipe(int argc, t_data *data)
 	int	i;
 
 	i = -1;
-	data->end = malloc(sizeof(int *) * (argc - 2 - data->flag_hd));
+	data->end = ft_calloc(argc - 2 - data->flag_hd, sizeof(int *));
 	while (++i < (argc - 2 - data->flag_hd))
 	{
-		data->end[i] = malloc(sizeof(int) * 2);
+		data->end[i] = ft_calloc(2, sizeof(int));
 		pipe(data->end[i]);
 		if (pipe(data->end[i]) == -1)
 			error_pipe(data);

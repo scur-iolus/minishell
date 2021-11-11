@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/10 10:28:32 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/11 18:15:55 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,16 @@ int	ft_lstsize(t_cmd *lst)
 	return (i);
 }
 
-void	ft_lstadd_back_cmd(t_cmd **alst, t_cmd *new)
+t_cmd	*ft_lstlast(t_cmd *lst)//CHECKED
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	ft_lstadd_back_cmd(t_cmd **alst, t_cmd *new)//CHECKED
 {
 	t_cmd	*last;
 
@@ -38,11 +47,11 @@ void	ft_lstadd_back_cmd(t_cmd **alst, t_cmd *new)
 	}
 }
 
-t_cmd	*ft_lstnew_cmd(char *raw)
+t_cmd	*ft_lstnew_cmd(char *raw)//CHECKED
 {
 	t_cmd	*list;
 
-	list = malloc(sizeof(t_cmd *));
+	list = ft_calloc(1, sizeof(t_cmd *));
 	if (!list)
 		return (NULL);
 	list->raw = raw;
@@ -51,13 +60,4 @@ t_cmd	*ft_lstnew_cmd(char *raw)
 	list->content = NULL;
 	list->next = NULL;
 	return (list);
-}
-
-t_cmd	*ft_lstlast(t_cmd *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
 }

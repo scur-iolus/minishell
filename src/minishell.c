@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/10 14:22:14 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/11 18:53:26 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	init_data(t_data *data)// CHECKED
 {
+	data->line = 0;
 	data->exit_status = 0;
 	data->pipe = 0;
 	data->cmd = 0;
@@ -21,10 +22,10 @@ static void	init_data(t_data *data)// CHECKED
 }
 
 /*
-** Sur la heap: line
+** On the heap: line
 */
 
-static short	input_is_ok(t_data *data, char **env)
+static short	input_is_ok(t_data *data, char **env)//CHECKED
 {
 	char	*tmp;
 
@@ -35,14 +36,18 @@ static short	input_is_ok(t_data *data, char **env)
 	data->env_lst = init_env(data, env);
 	data->line = convert_env_var(data);
 	if (*(data->line) != '\0')
-		remove_quotation_marks(line);
+		remove_quotation_marks(data);
 	tmp = data->line;
 	data->line = ft_strtrim(data->line, " 	");
+	if (!(data->line))
+		err_free(0, data, 0, 0);
 	free(tmp);
-	if (!valid_start_end(data->line) || consecutive_chevrons_o_pipes(data->line))
+	if (!valid_start_end(data->line))
 		return (0);
-	deduplicate_spaces(line);
-	space_before_after_chevron(line);
+	deduplicate_spaces(data);
+	space_before_after_chevron(data);
+	if (too_many_chevrons_o_pipes(data))
+		return (0);
 	return (1);
 }
 
@@ -65,7 +70,8 @@ int	main(int argc, char **argv, char **env)// CHECKED
 		if (input_is_ok(&data, env))
 		{
 			printf("data.line vaut === %s$\n", data.line);
-			parse_cmd_list(&data, data.line);
+			parse_cmd_list(&data);
+			// TODO : "free_all" search, input vide, leaks, parse_cmd
 		}
 	}
 	write(2, TOO_MANY_ARG, ft_strlen(TOO_MANY_ARG));

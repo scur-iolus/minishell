@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:36:27 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/19 16:57:30 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/11 18:15:44 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_export(t_data *data, char *line) // faut il afficher la liste en ordre a
 	{
 		new = find_var_env(data, line);
 		if(!new)
-			new = (t_env *) malloc(sizeof(t_env));
+			new = (t_env *) ft_calloc(1, sizeof(t_env));
 		if(!new)
 			free_all_failure(data);
 		if (new)

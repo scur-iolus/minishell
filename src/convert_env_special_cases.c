@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:09:25 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/10 15:45:41 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/11 17:51:57 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ static int	get_highest_pow(long long n)
 	return (y - 1);
 }
 
+/*
+** On the heap: line, data->env_lst, output
+*/
+
 static short	add_exit_stt(t_data *data, char **output, size_t *pos)
 {
 	char		c;
@@ -48,21 +52,19 @@ static short	add_exit_stt(t_data *data, char **output, size_t *pos)
 	tmp = data->exit_status;
 	highest_pow = get_highest_pow(tmp);
 	if (!tmp)
-		success = ft_str_insert_char(output, '0', ft_strlen(output)));
+		success = ft_str_insert_char(output, '0', ft_strlen(*output));
 	while (success && tmp && highest_pow + 1)
 	{
 		c = (tmp / power(10, (unsigned long) highest_pow)) + '0';
-		add_one_char(out, line, pos, c);
+		success *= ft_str_insert_char(output, c, ft_strlen(*output));
 		tmp -= (c - '0') * power(10, (unsigned long) highest_pow);
 		highest_pow--;
 	}
 	return (success);
 }
-//if (!ft_str_insert_char(output, '$', pos)) return (0); // MARQUE-PAGE
-// data->line // MARQUE-PAGE
 
 /*
-** Sur la heap: line, data->env_lst, output
+** On the heap: line, data->env_lst, output
 **
 ** $$ reste $$ (on ne doit pas gérer l'affichage du PID)
 ** $. reste $.
@@ -77,11 +79,11 @@ short	special_cases(t_data *data, char **output, size_t *pos)
 	if (data->line[*pos] == '?')
 		success = add_exit_stt(data, output, pos);
 	else if (data->line[*pos] == ' ')
-		success = ft_str_insert_str(output, "$ ", ft_strlen(output), 2);
+		success = ft_str_insert_str(output, "$ ", ft_strlen(*output));
 	else if (data->line[*pos] == '$')
-		success = ft_str_insert_str(output, "$$", ft_strlen(output), 2);
+		success = ft_str_insert_str(output, "$$", ft_strlen(*output));
 	else if (data->line[*pos] == '.')
-		success = ft_str_insert_str(output, "$.", ft_strlen(output), 2);
+		success = ft_str_insert_str(output, "$.", ft_strlen(*output));
 	if (!success)
 		err_free(0, data, *output, 0);
 	else if (data->line[*pos] == '.' || data->line[*pos] == '$' || \

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/10 14:57:52 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/11 18:15:30 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	env_add_front(t_env **head, t_env *new)//CHECKED
 }
 
 /*
-** Depuis init_env, sur la heap: line, data->env_lst
+** Depuis init_env, On the heap: line, data->env_lst
 */
 
 char	*get_var_name(t_data *data, char *str)//CHECKED
@@ -46,7 +46,7 @@ char	*get_var_name(t_data *data, char *str)//CHECKED
 }
 
 /*
-** Depuis init_env, sur la heap: line, data->env_lst
+** Depuis init_env, On the heap: line, data->env_lst
 */
 
 char	*get_var_value(t_data *data, char *str)//CHECKED
@@ -73,7 +73,7 @@ char	*get_var_value(t_data *data, char *str)//CHECKED
 }
 
 /*
-** Sur la heap: line
+** On the heap: line
 */
 
 t_env	*init_env(t_data *data, char **env)//CHECKED
@@ -92,7 +92,7 @@ t_env	*init_env(t_data *data, char **env)//CHECKED
 		equals_sign = ft_strchr(env[i], '=');
 		if (equals_sign)
 		{
-			new = (t_env *) malloc(sizeof(t_env));
+			new = (t_env *) ft_calloc(1, sizeof(t_env));
 			if (!new)
 				err_free(0, data, 0, 0);
 			env_add_front(&head, new);
@@ -106,7 +106,7 @@ t_env	*init_env(t_data *data, char **env)//CHECKED
 }
 
 /*
-** Depuis add_var_value, sur la heap: line, data->env_lst, output, var_name
+** Depuis add_var_value, On the heap: line, data->env_lst, output, var_name
 */
 
 t_env	*find_var_env(t_data *data, char *var_name)//CHECKED

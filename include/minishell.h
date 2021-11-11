@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/10 15:45:12 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/11 17:11:35 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,11 @@ void	print_env_with_export_layout(t_data *data);
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
+void	ft_lstclear_pipe(t_pipe *this);//CHECKED
 void	err_free(char *msg, t_data *data, char *str1, char *str2);//CHECKED
 void	free_data(t_data *data);//CHECKED
 void	delete_one_env_list(t_env *env);
-void	ft_lstclear_env(t_env *lst);
+void	ft_lstclear_env(t_env *lst);//CHECKED
 // +------------------------------------------+ //
 //   Echo                                       //
 // +------------------------------------------+ //
@@ -82,19 +83,20 @@ void	ft_echo(t_data *data, char *line);
 // +------------------------------------------+ //
 
 // +------------------------------------------+ //
-//   Preliminary checks                         //
+//   Input checks                               //
 // +------------------------------------------+ //
 void	remove_comment(t_data *data);//CHECKED
 short	even_nb_of_quote_marks(char *line);//CHECKED
+void	remove_quotation_marks(t_data *data);//CHECKED
+void	deduplicate_spaces(t_data *data);//CHECKED
+void	space_before_after_chevron(t_data *data);//CHECKED
+short	too_many_chevrons_o_pipes(t_data *data);//CHECKED
 short	file_not_found(char *line);
 short	valid_start_end(char *line);
-short	consecutive_chevrons_o_pipes(char *line);
-void	deduplicate_spaces(char **line);
-void	space_before_after_chevron(char **line);
 // +------------------------------------------+ //
 //   Parsing                                    //
 // +------------------------------------------+ //
-void	parse_cmd_list(t_data *data, char *line);
+void	parse_cmd_list(t_data *data);//CHECKED
 // +------------------------------------------+ //
 //   Environnement                               //
 // +------------------------------------------+ //
