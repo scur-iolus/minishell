@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:26:32 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/11 17:52:25 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/12 15:39:53 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,21 @@ static void	split_n_join(t_data *data, char c)//CHECKED
 
 	l_split = ft_split(data->line, c);
 	if (!l_split)
-		err_free(0, data, 0, 0);
+		err_free(MALLOC_ERROR, data, 0, 0);
 	free(data->line);
 	i = 0;
 	data->line = (char *)ft_calloc(1, sizeof(char));
 	if (!data->line)
 	{
 		ft_free_split(l_split);
-		err_free(0, data, 0, 0);
+		err_free(MALLOC_ERROR, data, 0, 0);
 	}
 	while (l_split[i])
 	{
-		if (!ft_str_insert_str(&(data->line), l_split[i], \
-			ft_strlen(data->line)))
+		if (!ft_str_insert(&(data->line), l_split[i], ft_strlen(data->line)))
 		{
 			ft_free_split(l_split);
-			err_free(0, data, 0, 0);
+			err_free(MALLOC_ERROR, data, 0, 0);
 		}
 		i++;
 	}
@@ -85,7 +84,10 @@ short	even_nb_of_quote_marks(char *line)// CHECKED
 	while (*line)
 	{
 		if ((*line) == '\\' || (*line) == ';')
+		{
+			ft_error(INVALID_CHAR_ERR);
 			return (0);
+		}
 		else if ((*line) == '\'' && quote_marks % 2 == 0)
 			apostrophes++;
 		else if ((*line) == '\"' && apostrophes % 2 == 0)
@@ -94,7 +96,7 @@ short	even_nb_of_quote_marks(char *line)// CHECKED
 	}
 	if (apostrophes % 2 == 1 || quote_marks % 2 == 1)
 	{
-		write(1, ODD_NB_APOSTROPHES, ft_strlen(ODD_NB_APOSTROPHES));
+		ft_error(ODD_NB_APOSTROPHES);
 		return (0);
 	}
 	return (1);
@@ -112,7 +114,7 @@ static void	copy_n_char(t_data *data, size_t len_without_0)// CHECKED
 	i = 0;
 	new = ft_calloc(len_without_0 + 1, sizeof(char));
 	if (!new)
-		err_free(0, data, 0, 0);
+		err_free(MALLOC_ERROR, data, 0, 0);
 	while (i < len_without_0)
 	{
 		new[i] = (data->line)[i];

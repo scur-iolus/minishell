@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/11 17:11:35 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/12 13:32:57 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,8 @@ void	print_env_with_export_layout(t_data *data);
 //   Free                                       //
 // +------------------------------------------+ //
 void	ft_lstclear_pipe(t_pipe *this);//CHECKED
-void	err_free(char *msg, t_data *data, char *str1, char *str2);//CHECKED
 void	free_data(t_data *data);//CHECKED
-void	delete_one_env_list(t_env *env);
+void	delete_one_env_var(t_env *env);//CHECKED
 void	ft_lstclear_env(t_env *lst);//CHECKED
 // +------------------------------------------+ //
 //   Echo                                       //
@@ -81,7 +80,8 @@ void	ft_echo(t_data *data, char *line);
 // +------------------------------------------+ //
 //   Error                                      //
 // +------------------------------------------+ //
-
+void	ft_error(char *str);//CHECKED
+void	err_free(char *msg, t_data *data, char *str1, char *str2);//CHECKED
 // +------------------------------------------+ //
 //   Input checks                               //
 // +------------------------------------------+ //
@@ -91,6 +91,7 @@ void	remove_quotation_marks(t_data *data);//CHECKED
 void	deduplicate_spaces(t_data *data);//CHECKED
 void	space_before_after_chevron(t_data *data);//CHECKED
 short	too_many_chevrons_o_pipes(t_data *data);//CHECKED
+short	invalid_suite(t_data *data);//CHECKED
 short	file_not_found(char *line);
 short	valid_start_end(char *line);
 // +------------------------------------------+ //
@@ -101,13 +102,14 @@ void	parse_cmd_list(t_data *data);//CHECKED
 //   Environnement                               //
 // +------------------------------------------+ //
 t_env	*init_env(t_data *data, char **env);//CHECKED
+t_env	*ft_lstnew_env(void);//CHECKED
 char	*get_var_name(t_data *data, char *str);//CHECKED
 char	*get_var_value(t_data *data, char *str);//CHECKED
 char	*convert_env_var(t_data *data);//CHECKED
 short	special_cases(t_data *data, char **output, size_t *pos);//CHECKED
-void	env_add_front(t_env **head, t_env *new);
+t_env	*find_var_env(t_data *data, char *var_name);//CHECKED
+void	env_add_front(t_env **head, t_env *new);//CHECKED
 char	**list_to_env(t_env *env_lst);
-t_env	*find_var_env(t_data *data, char *var_name);
 // +------------------------------------------+ //
 //   Multipipe                                  //
 // +------------------------------------------+ //

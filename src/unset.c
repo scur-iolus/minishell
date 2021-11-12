@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/10 10:26:05 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/12 11:08:02 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ void	pop_out_list_env(t_data *data, char *line) // a tester
 	if (!temp)
 		return ;
 	else if (!previous && !temp->next) //cas ou il est seul dans la liste
-		delete_one_env_list(temp); //free temp --> du coup la list chaines sera a null
+		delete_one_env_var(temp); //free temp --> du coup la list chaines sera a null
 	else if (!previous && temp->next) // cas ou c est le premier
 	{
 		data->env_lst = temp->next;
-		delete_one_env_list(temp);
+		delete_one_env_var(temp);
 	}
 	else if (previous && !temp->next)
-		delete_one_env_list(temp);
+		delete_one_env_var(temp);
 	else if (previous && temp->next)
 	{
 		previous->next = temp->next;
-		delete_one_env_list(temp);
+		delete_one_env_var(temp);
 	}
 }

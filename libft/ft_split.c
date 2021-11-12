@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:07:53 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/07 14:52:57 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/12 15:33:35 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	**ft_split(char const *s, char c)
 	char	**ptr;
 	int		words;
 
-	if (!s || !(*s))
+	if (!s)
 		return (NULL);
 	words = wordcount(s, c);
 	ptr = malloc(sizeof(char *) * (words + 1));

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_insert_str.c                                :+:      :+:    :+:   */
+/*   ft_str_insert.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:40:26 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/11 18:29:41 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/12 15:58:52 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void ft_proceed(char *str1, char *str2, char **new, size_t position)
 
 	str1_i = 0;
 	new_i = 0;
-	while (str1[str1_i] || str1_i <= position)
+	while (str1[str1_i] || *str2)
 	{
-		if (str1_i == new_i && str1_i == position)
+		if (*str2 && str1_i == position)
 		{
 			while (*str2)
 			{
@@ -39,13 +39,13 @@ static void ft_proceed(char *str1, char *str2, char **new, size_t position)
 	}
 }
 
-short	ft_str_insert_str(char **str1, char *str2, size_t position)
+short	ft_str_insert(char **str1, char *str2, size_t position)
 {
 	size_t	len_str1;
 	size_t	len_str2;
 	char	*new_str;
 
-	if (!(*str1))
+	if (!(*str1) || !(*str2))
 		return (0);
 	len_str2 = ft_strlen(str2);
 	if (!len_str2)

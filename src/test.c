@@ -11,12 +11,12 @@ int	main(int argc, char **argv)
 	if (argc >= 1)
 	{
 		test = (char *)ft_calloc(1, sizeof(char));
-		success = ft_str_insert_char(&test, '1', ft_strlen(test));
-		success = ft_str_insert_char(&test, '2', ft_strlen(test));
-		success = ft_str_insert_char(&test, '3', 0);
-		success = ft_str_insert_char(&test, '4', ft_strlen(test));
-		success = ft_str_insert_char(&test, '5', 2);
-		success = ft_str_insert_str(&test, "h", 5);
+		success = ft_str_insert(&test, "1", ft_strlen(test));
+		success = ft_str_insert(&test, "2", ft_strlen(test));
+		success = ft_str_insert(&test, "3", 0);
+		success = ft_str_insert(&test, "4", ft_strlen(test));
+		success = ft_str_insert(&test, "5", 2);
+		success = ft_str_insert(&test, "h", 5);
 		printf("%i : %s\n", success, test);
 		free(test);
 	}

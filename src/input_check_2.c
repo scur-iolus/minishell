@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:34:50 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/11 17:13:44 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/12 15:07:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	space_before_after_chevron(t_data *data)//CHECKED
 		if ((*ptr == '<' || *ptr == '>') && i && *(ptr - 1) != ' ' && \
 		*(ptr - 1) != '<' && *(ptr - 1) != '>')
 		{
-			if (!ft_str_insert_char(&data->line, ' ', i))
-				err_free(0, data, 0, 0);
+			if (!ft_str_insert(&data->line, " ", i))
+				err_free(MALLOC_ERROR, data, 0, 0);
 		}
 		if ((*ptr == '<' || *ptr == '>') && *(ptr + 1) && \
 		*(ptr + 1) != ' ' && *(ptr + 1) != '<' && *(ptr + 1) != '>')
 		{
-			if (!ft_str_insert_char(&data->line, ' ', i + 1))
-				err_free(0, data, 0, 0);
+			if (!ft_str_insert(&data->line, " ", i + 1))
+				err_free(MALLOC_ERROR, data, 0, 0);
 		}
 		i++;
 	}
@@ -74,7 +74,7 @@ void	deduplicate_spaces(t_data *data)//CHECKED
 
 	new = ft_calloc(ft_strlen_wth_duplicates_sp(data->line) + 1, sizeof(char));
 	if (!new)
-		err_free(0, data, 0, 0);
+		err_free(MALLOC_ERROR, data, 0, 0);
 	str = data->line;
 	i = 0;
 	was_space = 0;
@@ -100,19 +100,21 @@ short	valid_start_end(char *line)//CHECKED
 {
 	char	last_char;
 
+	if (*line == 0)
+		return (1);
 	last_char = line[ft_strlen(line) - 1];
 	if (last_char != '<' && last_char != '>' && last_char != '|')
 	{
 		if (line[0] == '|')
 		{
-			write(2, START_CHAR_ERR, ft_strlen(START_CHAR_ERR));
+			ft_error(START_CHAR_ERR);
 			return (0);
 		}
 		return (1);
 	}
 	else
 	{
-		write(2, END_CHAR_ERR, ft_strlen(END_CHAR_ERR));
+		ft_error(END_CHAR_ERR);
 		return (0);
 	}
 }

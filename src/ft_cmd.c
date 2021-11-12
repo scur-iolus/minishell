@@ -6,13 +6,13 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/11 18:15:55 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/12 15:21:00 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_lstsize(t_cmd *lst)
+int	ft_lstsize(t_cmd *lst)//CHECKED
 {
 	int	i;
 
@@ -38,7 +38,7 @@ void	ft_lstadd_back_cmd(t_cmd **alst, t_cmd *new)//CHECKED
 {
 	t_cmd	*last;
 
-	if (!*alst)
+	if (!(*alst))
 		*alst = new;
 	else
 	{
@@ -49,15 +49,15 @@ void	ft_lstadd_back_cmd(t_cmd **alst, t_cmd *new)//CHECKED
 
 t_cmd	*ft_lstnew_cmd(char *raw)//CHECKED
 {
-	t_cmd	*list;
+	t_cmd	*new;
 
-	list = ft_calloc(1, sizeof(t_cmd *));
-	if (!list)
+	new = (t_cmd *)malloc(sizeof(t_cmd));
+	if (!new)
 		return (NULL);
-	list->raw = raw;
-	list->cmd_path = NULL;
-	list->cmd = NULL;
-	list->content = NULL;
-	list->next = NULL;
-	return (list);
+	new->raw = raw;
+	new->cmd_path = NULL;
+	new->cmd = NULL;
+	new->content = NULL;
+	new->next = NULL;
+	return (new);
 }
