@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cmd.c                                           :+:      :+:    :+:   */
+/*   ft_content.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/15 18:02:33 by llalba           ###   ########.fr       */
+/*   Created: 2021/11/15 17:36:16 by llalba            #+#    #+#             */
+/*   Updated: 2021/11/15 18:10:21 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_lstsize(t_cmd *lst)//CHECKED
+t_content	*ft_lstnew_content(void)//CHECKED
 {
-	int	i;
+	t_content	*new;
 
-	i = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i);
+	new = (t_content *) malloc(sizeof(t_content));
+	if (!new)
+		return (0);
+	new->str = 0;
+	new->in = 0;
+	new->out = 0;
+	new->pos = 0;
+	new->next = 0;
+	return (new);
 }
 
-static t_cmd	*ft_lstlast(t_cmd *lst)//CHECKED
+static t_content	*ft_lstlast(t_content *lst)//CHECKED
 {
 	if (!lst)
 		return (NULL);
@@ -34,9 +36,9 @@ static t_cmd	*ft_lstlast(t_cmd *lst)//CHECKED
 	return (lst);
 }
 
-void	cmd_add_back(t_cmd **alst, t_cmd *new)//CHECKED
+void	content_add_back(t_content **alst, t_content *new)//CHECKED
 {
-	t_cmd	*last;
+	t_content	*last;
 
 	if (!(*alst))
 		*alst = new;
@@ -47,17 +49,11 @@ void	cmd_add_back(t_cmd **alst, t_cmd *new)//CHECKED
 	}
 }
 
-t_cmd	*ft_lstnew_cmd(char *raw)//CHECKED
+void	content_add_front(t_content **head, t_content *new)//CHECKED
 {
-	t_cmd	*new;
+	t_content	*temp;
 
-	new = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!new)
-		return (NULL);
-	new->raw = raw;
-	new->cmd_path = NULL;
-	new->cmd = NULL;
-	new->content = NULL;
-	new->next = NULL;
-	return (new);
+	temp = *head;
+	*head = new;
+	new->next = temp;
 }

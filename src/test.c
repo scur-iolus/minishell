@@ -4,21 +4,22 @@
 
 int	main(int argc, char **argv)
 {
-	short success;
-	char *test;
+	long bytes;
+	long i;
 
-	(void)argv;
-	if (argc >= 1)
+	if (argc ==2)
 	{
-		test = (char *)ft_calloc(1, sizeof(char));
-		success = ft_str_insert(&test, "1", ft_strlen(test));
-		success = ft_str_insert(&test, "2", ft_strlen(test));
-		success = ft_str_insert(&test, "3", 0);
-		success = ft_str_insert(&test, "4", ft_strlen(test));
-		success = ft_str_insert(&test, "5", 2);
-		success = ft_str_insert(&test, "h", 5);
-		printf("%i : %s\n", success, test);
-		free(test);
+		bytes = 0;
+		i = 0;
+		while (argv[1][i])
+		{
+			bytes += sizeof(argv[1][i]);
+			i++;
+		}
+		printf("bytes sans \'0\': %ld\n", bytes);
+		bytes += sizeof(0);
+		printf("bytes avec \'0\': %ld\n", bytes);
+
 	}
 	return (0);
 }

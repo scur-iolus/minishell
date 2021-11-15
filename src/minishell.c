@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/12 16:52:51 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/15 18:50:14 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	init_data(t_data *data)// CHECKED
 ** free_data does not free(data) because it's on the stack (not on the heap).
 */
 
-void	free_data(t_data *data)
+void	free_data(t_data *data)//CHECKED
 {
 	if (data->line)
 		free(data->line);
@@ -45,10 +45,33 @@ void	free_data(t_data *data)
 ** On the heap: line
 */
 
+static short	line_too_long(char *line)
+{
+	unsigned long long	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (i > 2147483646)
+		{
+			ft_error(LINE_TOO_LONG);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+/*
+** On the heap: line
+*/
+
 static short	input_is_ok(t_data *data, char **env)//CHECKED
 {
 	char	*tmp;
 
+	if (line_too_long(data->line));
+		return (0);
 	if (ft_strlen(data->line) > 0 && ft_strchr(data->line, (int) '#'))
 		remove_comment(data);
 	if (ft_strlen(data->line) > 0 && !even_nb_of_quote_marks(data->line))
@@ -91,7 +114,6 @@ int	main(int argc, char **argv, char **env)// CHECKED
 		{
 			printf("data.line vaut === %s$\n", data.line);
 			parse_cmd_list(&data);
-			// FIXME get_var_value
 			// TODO : "utils_multipipe", parse_cmd, $? | $? | $. | $
 		}
 	}

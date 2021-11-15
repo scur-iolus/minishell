@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/10 12:06:57 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/15 18:02:09 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ typedef struct s_data
 /*
 ** Structure s_content : un noeud par fichier/texte
 ** La liste chainee qui en resulte est contenus dns un s_cmd
-** str -> soit utilisée comme infile comme pour la commande "cat infile",
+** str ->	soit utilisée comme infile comme pour la commande "cat infile",
 ** soit comme une str classique pour "echo infile" par exemple.
-** in -> no < = 0 , < = 1 , << = 2
-** out -> no > = 0 , > = 1 , >> = 2
-** pos -> position par rapport a la commande (0: avant, 1: apres la commande)
+** in ->	aucun < = 0 , < = 1 , << = 2
+** out ->	aucun > = 0 , > = 1 , >> = 2
+** pos ->	position par rapport a la commande (0: avant, 1: apres la commande)
 */
 
 typedef struct s_content
@@ -82,11 +82,12 @@ typedef struct s_cmd
 	struct s_cmd		*next;
 }	t_cmd;
 
-t_cmd	*ft_lstnew_cmd(char *raw);
-void	ft_lstadd_back_cmd(t_cmd **alst, t_cmd *new);
-void	ft_lstadd_front_cmd(t_cmd **alst, t_cmd *new);
-int		ft_lstsize(t_cmd *lst);
-t_cmd	*ft_lstlast(t_cmd *lst);
-void	ft_lstclear_cmd(t_cmd *lst);
+t_cmd		*ft_lstnew_cmd(char *raw);
+void		cmd_add_back(t_cmd **alst, t_cmd *new);
+int			ft_lstsize(t_cmd *lst);
+void		ft_lstclear_cmd(t_cmd *lst);
+t_content	*ft_lstnew_content(void);
+void		content_add_back(t_content **alst, t_content *new);
+void		content_add_front(t_content **head, t_content *new);
 
 #endif

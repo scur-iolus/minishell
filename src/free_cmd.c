@@ -6,13 +6,13 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 10:41:36 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/10 10:56:04 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/15 17:36:00 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	ft_lstclear_content(t_content *head)
+static void	ft_lstclear_content(t_content *head)//CHECKED
 {
 	t_content	*tmp;
 
@@ -27,7 +27,7 @@ static void	ft_lstclear_content(t_content *head)
 	}
 }
 
-void	ft_lstclear_cmd(t_cmd *head)
+void	ft_lstclear_cmd(t_cmd *head)//CHECKED
 {
 	t_cmd	*tmp;
 

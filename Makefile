@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/12 13:40:24 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/15 17:54:38 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC			= \
 			$(SRC_PATH)env_to_list.c \
 			$(SRC_PATH)convert_env_var.c \
 			$(SRC_PATH)convert_env_special_cases.c \
+			$(SRC_PATH)ft_content.c \
 			$(SRC_PATH)ft_cmd.c \
 			$(SRC_PATH)ft_env.c \
 			$(SRC_PATH)ft_pipe.c \
