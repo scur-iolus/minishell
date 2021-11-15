@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/12 13:32:57 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/15 18:49:58 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define END_CHAR_ERR		"invalid char at the end of your command"
 # define START_CHAR_ERR		"invalid char at the beginning of your command"
 # define TOO_MANY_ARG		"minishell does not accept any argument"
+# define LINE_TOO_LONG		"this command is too long, please try to split it"
 # define BUFFER_SIZE 		25
 
 // +------------------------------------------+ //
