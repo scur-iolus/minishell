@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/12 11:19:53 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 11:54:37 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	ft_error(char *str)
 ** and exits the program with exit_status 1.
 */
 
-void	err_free(char *msg, t_data *data, char *str1, char *str2)
+void	err_free(char *msg, t_data *data, char *str, char **split)
 {
-	if (str1)
-		free(str1);
-	if (str2)
-		free(str2);
+	if (str)
+		free(str);
+	if (split)
+		ft_free_split(split);
 	free_data(data);
 	if (msg && *msg)
 		ft_error(msg);

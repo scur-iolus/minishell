@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/12 16:13:59 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 11:57:09 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ static void	add_var_value(char **new, char *var_name, t_data *data)//CHECKED
 		return ;
 	insertion_position= ft_strlen(*new);
 	if (!ft_str_insert(new, node->value, insertion_position))
-		err_free(MALLOC_ERROR, data, *new, var_name);
+	{
+		free(var_name);
+		err_free(MALLOC_ERROR, data, *new, 0);
+	}
 }
 
 /*

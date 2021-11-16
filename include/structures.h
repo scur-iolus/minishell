@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/15 18:02:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 11:44:28 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_data
 ** soit comme une str classique pour "echo infile" par exemple.
 ** in ->	aucun < = 0 , < = 1 , << = 2
 ** out ->	aucun > = 0 , > = 1 , >> = 2
-** pos ->	position par rapport a la commande (0: avant, 1: apres la commande)
+** pos ->	position par rapport a la commande (1: avant, 2: apres la commande)
 */
 
 typedef struct s_content

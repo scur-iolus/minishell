@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/15 18:47:27 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 12:08:06 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,34 @@
 
 /*
 ** On the heap: line, data->env_lst, cmd_split, data->cmd->content
+** The following function returns 0 if a MALLOC_ERROR happened,
+** else 1in case of success.
 */
 
-static	fill_in_content(t_data *data, char **split, t_content *new, size_t *i)
+static short	fill_in_content(t_cmd *head, char ***split, t_content *new)
 {
-	//short	was_left_chevron;
-	//short	was_right_chevron;
+	while (**split)
+	{
+		if (!(new->in) && ft_strcmp(**split, "<") == 0)
+			new->in = 1;
+		else if (!(new->in) && ft_strcmp(**split, "<<") == 0)
+			new->in = 2;
+		else if (!(new->out) && ft_strcmp(**split, ">") == 0)
+			new->out = 1;
+		else if (!(new->out) && ft_strcmp(**split, ">>") == 0)
+			new->out = 2;
+		else if (!(head->cmd) && is_cmd(**split) && !save_cmd(head, **split))
+			return (0);
+		else if (head->cmd && ***split == '-' && !add_flag(head, **split))
+			return (0);
+		else if (!(new->str))
 
-	// incrémenter i autant que nécessaire
+		else
+			break ;
+		(*split)++;
+	}
+	return (1);
 	//printf("head->raw : >>%s<<\n", head->raw); // FIXME ===================
-	// MARQUE-PAGE															-
 }
 
 /*
@@ -32,21 +50,24 @@ static	fill_in_content(t_data *data, char **split, t_content *new, size_t *i)
 
 static void	parse_cmd_content(t_data *data, t_cmd *head)
 {
-	size_t		i;
 	t_content	*new;
 	char		**cmd_split;
+	char		**tmp;
 
 	cmd_split = ft_split(head->raw, ' ');
 	if (!cmd_split)
 		err_free(0, data, 0, 0);
-	i = 0;
-	while (cmd_split[i])
+	tmp = cmd_split;
+	while (*cmd_split)
 	{
 		new = ft_lstnew_content();
+		if (!new)
+			err_free(0, data, 0, tmp);
 		content_add_back(&(head->content), new);
-		fill_in_content(data, cmd_split, new, &i);
+		if (!fill_in_content(head, &cmd_split, new))
+			err_free(0, data, 0, tmp);
 	}
-	ft_free_split(cmd_split);
+	ft_free_split(tmp);
 }
 
 /*

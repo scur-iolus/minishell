@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/15 18:49:58 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 11:57:00 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_echo(t_data *data, char *line);
 //   Error                                      //
 // +------------------------------------------+ //
 void	ft_error(char *str);//CHECKED
-void	err_free(char *msg, t_data *data, char *str1, char *str2);//CHECKED
+void	err_free(char *msg, t_data *data, char *str, char **split);//CHECKED
 // +------------------------------------------+ //
 //   Input checks                               //
 // +------------------------------------------+ //
