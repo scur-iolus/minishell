@@ -298,7 +298,5 @@ https://githubmemory.com/repo/maxime-42/minishell
 
 
 head -1 fichier >       head -1     | head -1
-_________________       _______
-s_content1              s_content2
 __________________________________   _______
 s_cmd                                s_cmd

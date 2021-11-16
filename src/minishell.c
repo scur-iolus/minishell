@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/16 14:21:29 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 16:05:39 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,24 @@ static void	init_data(t_data *data)// CHECKED
 }
 
 /*
-** free_data does not free(data) because it's on the stack (not on the heap).
+** Basically prints an error message on fd 2
 */
 
-void	free_data(t_data *data)//CHECKED
+void	ft_error(char *str)//CHECKED
 {
-	if (data->line)
-		free(data->line);
-	if (data->pipe)
-		ft_lstclear_pipe(data->pipe);
-	if (data->cmd)
-		ft_lstclear_cmd(data->cmd);
-	if (data->env_lst)
-		ft_lstclear_env(data->env_lst);
-	data->line = 0;
-	data->pipe = 0;
-	data->cmd = 0;
-	data->env_lst = 0;
+	write(2, EMOJI_X, ft_strlen(EMOJI_X));
+	write(2, "Error: ", 7);
+	write(2, str, ft_strlen(str));
+	write(2, "\n", 1);
 }
 
 /*
 ** On the heap: line
 */
 
-static short	line_too_long(char *line)//CHECKED
+static short	is_too_long(char *line)//CHECKED
 {
-	unsigned long long	i;
+	long long	i;
 
 	i = 0;
 	while (line[i])
@@ -70,7 +62,7 @@ static short	input_is_ok(t_data *data, char **env)//CHECKED
 {
 	char	*tmp;
 
-	if (line_too_long(data->line));
+	if (is_too_long(data->line))
 		return (0);
 	if (ft_strlen(data->line) > 0 && ft_strchr(data->line, (int) '#'))
 		remove_comment(data);

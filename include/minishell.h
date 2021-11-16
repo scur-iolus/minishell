@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/16 14:08:00 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 15:47:53 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define START_CHAR_ERR		"invalid char at the beginning of your command"
 # define TOO_MANY_ARG		"minishell does not accept any argument"
 # define LINE_TOO_LONG		"this command is too long, please try to split it"
+# define INVALID_STATUS		"this exit status is not an int"
 # define BUFFER_SIZE 		25
 # define EMOJI_OK			"\033[32m[\xE2\x9C\x94]\033[0m "
 # define EMOJI_X			"\033[31m[\xE2\x9C\x96]\033[0m "
@@ -60,7 +61,7 @@
 // +------------------------------------------+ //
 void	ft_pwd(t_data *data);
 void	ft_env(t_data *data);
-void	ft_exit(t_data *data, int n);
+void	ft_exit(t_data *data, char *str, char **split, long long exit_status);
 // +------------------------------------------+ //
 //   Export                                     //
 // +------------------------------------------+ //
@@ -101,9 +102,6 @@ short	valid_start_end(char *line);
 //   Parsing                                    //
 // +------------------------------------------+ //
 void	parse_cmd_list(t_data *data);//CHECKED
-short	add_str_content(t_cmd *head, char *str_content);//CHECKED
-short	add_flag(t_cmd *head, char *str);//CHECKED
-short	save_cmd(t_cmd *head, char *str);//CHECKED
 // +------------------------------------------+ //
 //   Environnement                               //
 // +------------------------------------------+ //
@@ -121,6 +119,6 @@ char	**list_to_env(t_env *env_lst);
 // +------------------------------------------+ //
 void	take_path(t_data *data);
 void	parse_cmd(t_data *data, char *cmd_line);
-void	find_command_path(t_data *data, t_cmd *new, char *cmd_line);
+//void	error_var_name(t_data *data, t_cmd *new, char *cmd_line);
 
 #endif

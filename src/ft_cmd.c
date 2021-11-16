@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/16 14:21:54 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 15:23:48 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,25 @@ t_cmd	*ft_lstnew_cmd(char *raw)//CHECKED
 	new->raw = raw;
 	new->cmd_path = NULL;
 	new->cmd = NULL;
-	new->content = NULL;
 	new->next = NULL;
 	return (new);
 }
 
-/*
-** On the heap: line, data->env_lst, cmd_split, data->cmd->contentS
-*/
-
-short	save_cmd(t_cmd *head, char *str)
+void	ft_lstclear_cmd(t_cmd *head)//CHECKED
 {
-	head->
-	return (1);
-}
+	t_cmd	*tmp;
 
-/*
-** On the heap: line, data->env_lst, cmd_split, data->cmd->contentS
-*/
-
-short	add_flag(t_cmd *head, char *str)
-{
-
-	return (1);
+	tmp = head;
+	while (tmp)
+	{
+		tmp = head->next;
+		if (head->raw)
+			free(head->raw);
+		if (head->cmd)
+			ft_free_split(head->cmd);
+		if (head->cmd_path)
+			free(head->cmd_path);
+		free(head);
+		head = tmp;
+	}
 }

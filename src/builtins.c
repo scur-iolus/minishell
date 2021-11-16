@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 16:01:58 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/15 17:43:33 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:39:13 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,19 @@ void	ft_env(t_data *data)
 	}
 }
 
-void	ft_exit(t_data *data, int n)
+/*
+** S' il y a une commande apres le exit alors exit ne renvoie rien dans le stdin
+*/
+
+void	ft_exit(t_data *data, char *str, char **split, long long exit_status)
 {
-	data->exit_status = 0;
-	// s' il y a une commande apres le exit alors exit ne renvoie rien dans le stdin
-	ft_putstr_fd("exit", 1);
-	free_all_sucess(data); // faire un free all success special avec un exit n
-	exit(n);
+	if (exit_status < 0 || exit_status > 2147483646)
+	{
+		ft_error(INVALID_STATUS);
+		return ;
+	}
+	if (data->cmd->next == 0)
+		ft_putstr_fd("exit", 1);
+	free_everything(data, str, split);
+	exit((int)exit_status);
 }
