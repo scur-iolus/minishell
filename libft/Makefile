@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/21 11:04:04 by fmonbeig          #+#    #+#              #
-#    Updated: 2021/11/12 10:51:00 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/16 17:15:25 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ ft_putnbr_unsigned_int.c \
 ft_countnbr_unsigned_int.c \
 ft_countnbr_base_pointer.c \
 ft_str_insert.c \
-ft_free_split.c
+ft_free_split.c \
+ft_strlen_split.c
 
 OBJ = $(SRC:.c=.o)
 

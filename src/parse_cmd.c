@@ -6,11 +6,38 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/16 16:09:26 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 17:33:44 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+/*
+** On the heap: line, data->env_lst, cmd_split
+*/
+
+static void	add_str_to_cmd(t_data *data, t_cmd *head, char *str, char **split)//CHECKED
+{
+	char	*to_add;
+	char	**new_split;
+	size_t	len;
+
+	to_add = ft_strdup(str);
+	if (!to_add)
+		err_free(0, data, 0, split);
+	len = ft_strlen_split(head->cmd);
+	new_split = (char **)ft_calloc(len + 2, sizeof(char *));
+	if (!new_split)
+		err_free(0, data, to_add, split);
+	new_split[len] = to_add;
+	while (len)
+	{
+		new_split[len - 1] = (head->cmd)[len - 1];
+		len--;
+	}
+	free(head->cmd);
+	head->cmd = new_split;
+}
 
 /*
 ** On the heap: line, data->env_lst
@@ -27,12 +54,21 @@ static void	parse_cmd_content(t_data *data, t_cmd *head)
 	tmp = cmd_split;
 	while (*cmd_split)
 	{
-		printf("🔸%s", *cmd_split); // FIXME ===============
-		// TODO ici
+		//MARQUE-PAGE if ....
+		add_str_to_cmd(data, head, *cmd_split, tmp);
 		cmd_split++;
 	}
-	printf("🔸"); // FIXME ===============
+
+	// FIXME ===============
+	char	**hop;
+	hop = head->cmd;
+	while (*hop)
+	{
+		printf("🔸%s🔸\n", *hop); // FIXME ===============
+		hop++;
+	}
 	ft_free_split(tmp);
+	ft_exit(data, 0, 0, 0); //FIXME
 }
 
 /*
@@ -63,6 +99,7 @@ static void	pipes_split_raw(t_data *data, t_cmd **head)//CHECKED
 		data->cmd = *head;
 		i++;
 	}
+	free(ptr);
 	data->cmd = *head;
 }
 

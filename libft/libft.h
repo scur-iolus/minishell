@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 11:03:52 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/12 10:50:50 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 17:15:32 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int		ft_countnbr_unsigned_int(unsigned int n);
 int		ft_countnbr_base_pointer(unsigned long int nbr, char *base);
 short	ft_str_insert(char **str1, char *str2, size_t position);
 void	ft_free_split(char **ptr);
+size_t	ft_strlen_split(char **s);
 
 #endif
