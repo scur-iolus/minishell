@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/16 11:57:00 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 14:08:00 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define TOO_MANY_ARG		"minishell does not accept any argument"
 # define LINE_TOO_LONG		"this command is too long, please try to split it"
 # define BUFFER_SIZE 		25
+# define EMOJI_OK			"\033[32m[\xE2\x9C\x94]\033[0m "
+# define EMOJI_X			"\033[31m[\xE2\x9C\x96]\033[0m "
 
 // +------------------------------------------+ //
 //   Utils                                      //
@@ -99,6 +101,9 @@ short	valid_start_end(char *line);
 //   Parsing                                    //
 // +------------------------------------------+ //
 void	parse_cmd_list(t_data *data);//CHECKED
+short	add_str_content(t_cmd *head, char *str_content);//CHECKED
+short	add_flag(t_cmd *head, char *str);//CHECKED
+short	save_cmd(t_cmd *head, char *str);//CHECKED
 // +------------------------------------------+ //
 //   Environnement                               //
 // +------------------------------------------+ //

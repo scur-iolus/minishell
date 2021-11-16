@@ -6,19 +6,19 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/16 12:08:06 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 14:30:09 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /*
-** On the heap: line, data->env_lst, cmd_split, data->cmd->content
+** On the heap: line, data->env_lst, cmd_split, data->cmd->contentS
 ** The following function returns 0 if a MALLOC_ERROR happened,
-** else 1in case of success.
+** else 1 in case of success.
 */
 
-static short	fill_in_content(t_cmd *head, char ***split, t_content *new)
+/*static short	fill_in_content(t_cmd *head, char ***split, t_content *new)
 {
 	while (**split)
 	{
@@ -34,15 +34,15 @@ static short	fill_in_content(t_cmd *head, char ***split, t_content *new)
 			return (0);
 		else if (head->cmd && ***split == '-' && !add_flag(head, **split))
 			return (0);
-		else if (!(new->str))
-
+		else if (!(new->str) && !add_str_content(head, **split))
+			return (0);
 		else
 			break ;
 		(*split)++;
+		//TODO cat -e < test.c .gitignore
 	}
 	return (1);
-	//printf("head->raw : >>%s<<\n", head->raw); // FIXME ===================
-}
+}*/
 
 /*
 ** On the heap: line, data->env_lst
@@ -64,14 +64,15 @@ static void	parse_cmd_content(t_data *data, t_cmd *head)
 		if (!new)
 			err_free(0, data, 0, tmp);
 		content_add_back(&(head->content), new);
-		if (!fill_in_content(head, &cmd_split, new))
-			err_free(0, data, 0, tmp);
+		//if (!fill_in_content(head, &cmd_split, new))
+		//	err_free(0, data, 0, tmp);
 	}
 	ft_free_split(tmp);
+	//printf("head->raw : >>%s<<\n", head->raw); // FIXME ===================
 }
 
 /*
-** On the heap: line, data->env_lst and the linked list starting at *head
+** On the heap: line, data->env_lst, and progressively data->cmd
 */
 
 static void	pipes_split_raw(t_data *data, t_cmd **head)//CHECKED

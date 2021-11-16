@@ -294,3 +294,11 @@ http://i.paysdu42.fr/?page=minishell.c
 https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
 https://github.55860.com/topics/minishell
 https://githubmemory.com/repo/maxime-42/minishell
+
+
+
+head -1 fichier >       head -1     | head -1
+_________________       _______
+s_content1              s_content2
+__________________________________   _______
+s_cmd                                s_cmd

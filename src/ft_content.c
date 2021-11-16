@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 17:36:16 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/15 18:10:21 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/16 14:08:45 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,13 @@ void	content_add_front(t_content **head, t_content *new)//CHECKED
 	temp = *head;
 	*head = new;
 	new->next = temp;
+}
+
+/*
+** On the heap: line, data->env_lst, cmd_split, data->cmd->contentS
+*/
+
+short	add_str_content(t_cmd *head, char *str_content)
+{
+	return (1);
 }
