@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
+#    By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/16 15:48:31 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/17 15:21:18 by fmonbeig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,13 +40,15 @@ SRC			= \
 			$(SRC_PATH)convert_env_var.c \
 			$(SRC_PATH)convert_env_special_cases.c \
 			$(SRC_PATH)ft_cmd.c \
-			$(SRC_PATH)ft_env.c \
+			$(SRC_PATH)ft_list_env.c \
 			$(SRC_PATH)ft_pipe.c \
 			$(SRC_PATH)free.c \
 			$(SRC_PATH)parse_cmd.c \
 			$(SRC_PATH)list_to_env.c \
+			#$(SRC_PATH)env.c \
 			#$(SRC_PATH)error_var_name.c \
 			#$(SRC_PATH)export.c \
+			#$(SRC_PATH)print_export.c \
 			#$(SRC_PATH)unset.c \
 			#$(SRC_PATH)builtins.c \
 			#$(SRC_PATH)multipipe/init_pipe.c \

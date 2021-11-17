@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/16 15:47:53 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/17 17:26:27 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,36 @@
 // +------------------------------------------+ //
 //   Builtins                                   //
 // +------------------------------------------+ //
-void	ft_pwd(t_data *data);
-void	ft_env(t_data *data);
+int		ft_pwd(t_data *data);
 void	ft_exit(t_data *data, char *str, char **split, long long exit_status);
 // +------------------------------------------+ //
 //   Export                                     //
 // +------------------------------------------+ //
-void	ft_export(t_data *data, char *line);
+int		ft_export(t_data *data, char **cmd);
+void	put_in_env_export(t_data *data, char **cmd, int i);
 int		check_is_env(char *line);
 int		error_var_name(char *line);
 void	print_export(t_data *data);
 void	print_env_with_export_layout(t_data *data);
+// +------------------------------------------+ //
+//   Env                                     //
+// +------------------------------------------+ //
+int		ft_env(t_data *data, char **cmd);
+int		check_argument_ft_env(char **cmd);
+// +------------------------------------------+ //
+//   Cd                                     //
+// +------------------------------------------+ //
+void	ft_cd(t_data *data, char **cmd);
+int		error_ft_cd(char **cmd);
+short	switch_old_pwd(t_data *data, char * line);
+short	switch_pwd(t_data *data, char * line, char *temp);
+// +------------------------------------------+ //
+//   Unset                                     //
+// +------------------------------------------+ //
+int				ft_unset(t_data *data, char **cmd);
+static t_env	*find_previous_var_env(t_data *data, char *var_name);
+void			pop_out_list_env(t_data *data, char *line);
+
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
@@ -80,7 +99,8 @@ void	ft_lstclear_env(t_env *lst);//CHECKED
 // +------------------------------------------+ //
 //   Echo                                       //
 // +------------------------------------------+ //
-void	ft_echo(t_data *data, char *line);
+void	ft_echo(t_data *data, char **cmd);
+int		echo_argument_n(char *str);
 // +------------------------------------------+ //
 //   Error                                      //
 // +------------------------------------------+ //

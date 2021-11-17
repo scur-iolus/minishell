@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/25 10:58:23 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/17 12:26:45 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	take_path(t_data *data)
 {
 	t_env *temp;
 
-	temp = find_var_env(data, "PATH"); // si temp->value est equale a zero qu est ce qu il se passe ??
+	temp = find_var_env(data, "PATH"); // si temp->value est egale a zero qu est ce qu il se passe ??
 										// est ce qu on doit le protect ?
 	data->pipe->path = ft_split(temp->value, ':');
 }

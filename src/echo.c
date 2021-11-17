@@ -6,21 +6,60 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:59:53 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/15 16:50:42 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/16 17:33:41 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_echo(t_data *data, char *line) // envoyer la commande pour savoir s'il y a le flag
+
+void	ft_echo(t_data *data, char **cmd)
 {
+	int i;
 
+	i = 1;
 	data->exit_status = 0;
-	//fonction qui trime le debut et la fin de la line au niveau des non espace + non printable voir Fonction de Louis
-	ft_putstr_fd(line, 1); // en vrai il faut echo le nombre de nom de cmd (voir parsing)
+	while (!echo_argument_n(cmd[i]))  // si argument est bien un -n ou un -nnn alors i++ on passe les arguments
+		i++;
+	if (i > 1) // si -n on print sans le /n a la fin
+	{
+		while (cmd[i])
+		{
+			ft_putstr_fd(cmd[i], 1);
+			ft_putstr_fd(" ", 1);
+			i++;
+		}
+		ft_putstr_fd("\n", 1);
+	}
+	else
+	{
+		while (cmd[++i])
+		{
+			ft_putstr_fd(cmd[i], 1);
+			ft_putstr_fd(" ", 1);
+		}
+	}
+}
 
-	//if il y a un pipe et qu il n y a aucune info dans le pipe alors error.
+int		echo_argument_n(char *str)
+{
+	int i;
 
-	if (ft_strcmp("-n", line)) // normalement il y a -n dans le parsing
-	ft_putstr_fd(line, 1);
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	else
+		return (1);
+	if (str[i] == 'n')
+		i++;
+	else
+		return (1);
+	while (str[i])
+	{
+		if (str[i] == 'n')
+			i++;
+		else
+			return (1);
+	}
+	return (0);
 }

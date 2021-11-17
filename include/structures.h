@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/16 15:04:43 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/17 14:16:38 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_pipe
 typedef struct s_env
 {
 	int				is_env;
+	int				equal_sign;
 	char			*var;
 	char			*value;
 	struct s_env	*next;
@@ -56,7 +57,7 @@ typedef struct s_data
 ** cmd_path -> /usr/bin/head ou autre du PATH
 */
 
-typedef struct s_cmd
+typedef struct s_cmd   //FIXME : rajouter les in et out pour les redirections vers des fichiers
 {
 	char				*raw;
 	char				**cmd;

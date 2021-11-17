@@ -6,34 +6,43 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:32:59 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/10/18 14:46:54 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/17 17:40:08 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_cd(t_data *data, char *line)
+void	ft_cd(t_data *data, char **cmd)
 {
 	char line[PATH_MAX];
 	char *temp;
 
+	if (error_ft_cd(cmd))
+		return (1);
 	getcwd(line, PATH_MAX);
-	data->exit_status = 0;
-	if (chdir(Nom du dir dans l_cmd)) //FIXME 
+	if (chdir(cmd[1]))
 	{
-		if(!(temp = switch_old_pwd(data, line)));
-		{
-			data->exit_status = 1;
-			return ;
-		}
-		if(!switch_pwd(data, line, temp));
-		{
-			data->exit_status = 1;
-			return ;
-		}
+		if(switch_old_pwd(data, line));
+			return(1);
+		if(switch_pwd(data, line, temp));
+			return(1);
 	}
 	else
-		data->exit_status = 1;
+		return(1);
+	return (0);
+}
+
+int	error_ft_cd(char **cmd)
+{
+	int i;
+
+	i = 0;
+	while (cmd[i])
+		i++;
+	if (i > 1)
+		return (1);
+	else
+		return (0);
 }
 
 short	switch_old_pwd(t_data *data, char * line)
@@ -50,9 +59,9 @@ short	switch_old_pwd(t_data *data, char * line)
 		chdir(env->value);
 		free(temp);
 		temp = NULL;
-		return(temp);
+		return(1);
 	}
-	return (temp);
+	return (0);
 }
 
 short	switch_pwd(t_data *data, char * line, char *temp)
@@ -70,8 +79,8 @@ short	switch_pwd(t_data *data, char * line, char *temp)
 		env->value = temp;
 		chdir(temp);
 		free(temp);
-		return (0);
+		return (1);
 	}
 	free(temp);
-	return (1);
+	return (0);
 }
