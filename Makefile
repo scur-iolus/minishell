@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/16 17:11:28 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/17 17:35:42 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ SRC			= \
 			$(SRC_PATH)ft_env.c \
 			$(SRC_PATH)ft_pipe.c \
 			$(SRC_PATH)free.c \
-			$(SRC_PATH)parse_cmd.c \
+			$(SRC_PATH)cmd_parsing.c \
+			$(SRC_PATH)cmd_split_check.c \
 			$(SRC_PATH)list_to_env.c \
 			$(SRC_PATH)builtins.c \
 			#$(SRC_PATH)error_var_name.c \

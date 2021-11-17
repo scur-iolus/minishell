@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/16 15:04:43 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/17 18:01:02 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ typedef struct s_pipe
 {
 	char	**path;
 	int		**end;
-	char	*infile;
-	char	*outfile;
 	int		i;
 	int		argc;
 }	t_pipe;
@@ -59,6 +57,8 @@ typedef struct s_data
 typedef struct s_cmd
 {
 	char				*raw;
+	int					infile;
+	int					outfile;
 	char				**cmd;
 	char				*cmd_path;
 	struct s_cmd		*next;

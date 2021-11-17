@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/16 17:12:10 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/17 17:35:18 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -48,6 +49,7 @@
 # define TOO_MANY_ARG		"minishell does not accept any argument"
 # define LINE_TOO_LONG		"this command is too long, please try to split it"
 # define INVALID_STATUS		"this exit status is not an int"
+# define NOT_FOUND			"no such file or directory"
 # define BUFFER_SIZE 		25
 # define EMOJI_OK			"\033[32m[\xE2\x9C\x94]\033[0m "
 # define EMOJI_X			"\033[31m[\xE2\x9C\x96]\033[0m "
@@ -102,7 +104,9 @@ short	valid_start_end(char *line);
 // +------------------------------------------+ //
 //   Parsing                                    //
 // +------------------------------------------+ //
-void	parse_cmd_list(t_data *data);//CHECKED
+short	parse_cmd(t_data *data);//CHECKED
+short	parse_cmd_content(t_data *data, t_cmd *head);//CHECKED
+short	file_can_be_opened(char *file);
 // +------------------------------------------+ //
 //   Environnement                               //
 // +------------------------------------------+ //
@@ -119,7 +123,6 @@ char	**list_to_env(t_env *env_lst);
 //   Multipipe                                  //
 // +------------------------------------------+ //
 void	take_path(t_data *data);
-void	parse_cmd(t_data *data, char *cmd_line);
 //void	error_var_name(t_data *data, t_cmd *new, char *cmd_line);
 
 #endif
