@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/16 15:39:05 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/18 19:03:02 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,27 @@
 ** free_data does not free(data) because it's on the stack (not on the heap).
 */
 
+void	reset_data(t_data *data)
+{
+	if (data->env)
+		ft_free_split(data->env);
+	if (data->line)
+		free(data->line);
+	if (data->pipe)
+		ft_lstclear_pipe(data->pipe);
+	if (data->cmd)
+		ft_lstclear_cmd(data->cmd);
+	data->line = 0;
+	data->cmd = 0;
+	data->pipe = 0;
+	data->env = list_to_env(data->env_lst);
+	take_path(data);
+}
+
 void	free_data(t_data *data)//CHECKED
 {
+	if (data->env)
+		free(data->env);
 	if (data->line)
 		free(data->line);
 	if (data->pipe)

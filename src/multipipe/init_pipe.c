@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:18:10 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/17 12:28:33 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:10:05 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	init_struct(t_pipe *pipe)
 {
-	pipe->path = NULL; //split du path
+	pipe->path = NULL; //split du path  //NOTA BENE Je pense qu il faut split le path avant
 	pipe->end = NULL;
-	pipe->infile = NULL; // permet de recup le fd de l ouverture du infile //FIXME pas utile je pense
-	pipe->outfile = NULL; // 										outfile // FIXME idem
 	pipe->i = NULL;
 	pipe->argc = NULL;
 }

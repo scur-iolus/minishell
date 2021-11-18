@@ -6,7 +6,7 @@
 #    By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/17 15:21:18 by fmonbeig         ###   ########.fr        #
+#    Updated: 2021/11/18 17:44:08 by fmonbeig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC			= \
 			$(SRC_PATH)free.c \
 			$(SRC_PATH)parse_cmd.c \
 			$(SRC_PATH)list_to_env.c \
+			$(SRC_PATH)execute.c \
 			#$(SRC_PATH)env.c \
 			#$(SRC_PATH)error_var_name.c \
 			#$(SRC_PATH)export.c \

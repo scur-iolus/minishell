@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/17 12:26:45 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/18 19:02:21 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	take_path(t_data *data)
 
 	temp = find_var_env(data, "PATH"); // si temp->value est egale a zero qu est ce qu il se passe ??
 										// est ce qu on doit le protect ?
-	data->pipe->path = ft_split(temp->value, ':');
+	data->path = ft_split(temp->value, ':');
 }
 
 void	parse_cmd(t_data *data, char *cmd_line) // ici la fonction va créer la nouvelle liste cmd en remplissant cmd et cmd_path
@@ -41,9 +41,9 @@ void	find_command_path(t_data *data, t_cmd *new, char *cmd_line) // Comment on p
 	char	*tmp;
 
 	i = -1;
-	while (data->pipe->path[++i])
+	while (data->path[++i])
 	{
-		tmp = ft_strjoin(data->pipe->path[i], "/");
+		tmp = ft_strjoin(data->path[i], "/");
 		new->cmd_path = ft_strjoin(tmp, new->cmd[0]);
 		free(tmp);
 		h = access(new->cmd_path, F_OK);

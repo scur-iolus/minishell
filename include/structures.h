@@ -6,24 +6,23 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/17 14:16:38 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/18 19:00:09 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-/*
-** Structure s_pipe
-** path -> split du path
-** end -> les differents fd ouverts pour le multipipe
-** infile -> permet de recup le fd de l ouverture du infile
-** outfile -> permet de recup le fd de l ouverture du outfile
-*/
+// /*
+// ** Structure s_pipe
+// ** path -> split du path
+// ** end -> les differents fd ouverts pour le multipipe
+// ** infile -> permet de recup le fd de l ouverture du infile
+// ** outfile -> permet de recup le fd de l ouverture du outfile
+// */
 
 typedef struct s_pipe
 {
-	char	**path;
 	int		**end;
 	char	*infile;
 	char	*outfile;
@@ -42,6 +41,8 @@ typedef struct s_env
 
 typedef struct s_data
 {
+	char			**env;
+	char			**path;
 	char			*line;
 	long long		exit_status;
 	struct s_pipe	*pipe;

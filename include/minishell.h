@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/17 17:26:27 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/18 18:43:53 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void			pop_out_list_env(t_data *data, char *line);
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
+void	reset_data(t_data *data);
 void	ft_lstclear_pipe(t_pipe *this);//CHECKED
 void	free_data(t_data *data);//CHECKED
 void	delete_one_env_var(t_env *env);//CHECKED
@@ -134,11 +135,36 @@ short	special_cases(t_data *data, char **output, size_t *pos);//CHECKED
 t_env	*find_var_env(t_data *data, char *var_name);//CHECKED
 void	env_add_front(t_env **head, t_env *new);//CHECKED
 char	**list_to_env(t_env *env_lst);
+
+// +------------------------------------------+ //
+//   Execute                                  //
+// +------------------------------------------+ //
+void	execute(t_data *data);
+void	make_one_cmd(t_data *data);
 // +------------------------------------------+ //
 //   Multipipe                                  //
 // +------------------------------------------+ //
 void	take_path(t_data *data);
 void	parse_cmd(t_data *data, char *cmd_line);
 //void	error_var_name(t_data *data, t_cmd *new, char *cmd_line);
+// +------------------------------------------+ //
+//   Fonction list CMD                          //
+// +------------------------------------------+ //
+static t_cmd	*ft_lstlast(t_cmd *lst);//CHECKED
+void			cmd_add_back(t_cmd **alst, t_cmd *new);//CHECKED
+t_cmd			*ft_lstnew_cmd(char *raw);//CHECKED
+void			ft_lstclear_cmd(t_cmd *head);//CHECKED
+int				ft_lstsize(t_cmd *lst);//CHECKED
+// +------------------------------------------+ //
+//   Fonction list CMD                          //
+// +------------------------------------------+ //
+t_env			*find_var_env(t_data *data, char *var_name);//CHECKED
+void			env_add_front(t_env **head, t_env *new);//CHECKED
+t_env			*ft_lstnew_env(void);//CHECKED
+void			delete_one_env_var(t_env *lst);//CHECKED
+void			ft_lstclear_env(t_env *head);//CHECKED
 
 #endif
+
+
+

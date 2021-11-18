@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/16 15:23:48 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/18 17:53:26 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,17 @@ void	ft_lstclear_cmd(t_cmd *head)//CHECKED
 		head = tmp;
 	}
 }
+
+int	ft_lstsize(t_cmd *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/16 16:05:39 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/18 19:05:58 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ int	main(int argc, char **argv, char **env)// CHECKED
 	t_data	data;
 
 	(void)argv;
-	init_data(&data);
+	init_data(&data); // FIXME Mettre dans init data la transformation de char env en list afin de pouvoir faire le takepath dans reset data
 	while (argc == 1)
 	{
-		free_data(&data);
+		reset_data(&data);
 		data.line = readline("Mishell c'est le Brésil >");
 		if (ft_strlen(data.line) > 0)
 			add_history(data.line);
@@ -106,6 +106,7 @@ int	main(int argc, char **argv, char **env)// CHECKED
 		{
 			printf("data.line contient 🔹%s🔹\n", data.line);
 			parse_cmd_list(&data);
+			execute(&data);
 		}
 	}
 	ft_error(TOO_MANY_ARG);
