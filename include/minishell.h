@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/17 17:35:18 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/18 17:30:18 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ short	valid_start_end(char *line);
 // +------------------------------------------+ //
 short	parse_cmd(t_data *data);//CHECKED
 short	parse_cmd_content(t_data *data, t_cmd *head);//CHECKED
-short	file_can_be_opened(char *file);
+short	open_file(t_data *data, char *file, short opening)
 // +------------------------------------------+ //
 //   Environnement                               //
 // +------------------------------------------+ //

@@ -6,22 +6,37 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/17 17:35:03 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/18 16:28:49 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-short	file_can_be_opened(char *file)//CHECKED
+/*
+** > : opening = 1
+** >> : opening = 2
+** < : opening = 3
+*/
+
+short	open_file(t_cmd *head, char *file, short opening)
 {
 	int	fd;
-	int	success;
+	int	closed;
 
-	fd = open (file, O_RDONLY | O_CREAT);
+	if (opening == 1)
+		fd = open (file, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	else if (opening == 2)
+		fd = open (file, O_CREAT | O_RDWR | O_APPEND, 0644);
+	else if (opening == 3)
+		fd = open (file, O_RDONLY);
 	if (fd == -1)
 		return (0);
-	success = close(fd);
-	if (success == -1)
+	closed = 0;
+	if (head->infile && opening == 3)
+		closed = close(head->infile);
+	else if (head->outfile && (opening == 1 || opening == 2))
+		closed = close(head->outfile);
+	if (closed == -1)
 		return (0);
 	return (1);
 }

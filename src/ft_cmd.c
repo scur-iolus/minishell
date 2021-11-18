@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/17 18:04:38 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/18 17:40:29 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_cmd	*ft_lstnew_cmd(char *raw)//CHECKED
 	new->cmd = NULL;
 	new->infile = NULL;
 	new->outfile = NULL;
+	new->heredoc = NULL;
 	new->next = NULL;
 	return (new);
 }

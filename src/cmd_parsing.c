@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/17 18:10:08 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/18 17:39:01 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,30 +60,48 @@ data->outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_APPEND, 0644);
 Pour un < :
 data->infile = open(argv[1], O_RDONLY);
 Pour un << :
-data->here_doc = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+data->here_doc = open("here_doc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 
+static int	check_next()
+{
 
+}
 
+static int	check_previous()
+{
 
+}
+
+** > : opening = 1
+** >> : opening = 2
+** < : opening = 3
+** << : opening = 4
+** sinon 0
 */
 
 static int	categorize(char **split, char *current)
 {
-	int				status;
-	static short	was_left_chevron = 0;
-	// TODO static short	next_is_right_chevron = 0;
+	short	chevron;
+	// TODO en amont ajouter des espaces au retour d'un retour a la ligne dans la commande si << heredoc
 
-	status = 0;
+	chevron = 0;
 	while (*split && *split != current)
 	{
-		if (!ft_strcmp("<", *split))
-			was_left_chevron = !was_left_chevron;
-
+		if (!ft_strcmp(">", *split))
+			chevron = 1;
+		else if (!ft_strcmp(">>", *split))
+			chevron = 2;
+		else if (!ft_strcmp("<", *split))
+			chevron = 3;
+		else if (!ft_strcmp("<<", *split))
+			chevron = 4;
+		else
+			chevron = 0;
 		*split = split++;
 	}
 	if (was_left_chevron)
 	{
-		if (!file_can_be_opened(*split))
+		if (!open_file(*split))
 			return (1);
 		return (2);
 	}
