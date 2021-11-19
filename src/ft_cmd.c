@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/18 17:40:29 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/19 14:53:42 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_cmd	*ft_lstnew_cmd(char *raw)//CHECKED
 	if (!new)
 		return (NULL);
 	new->raw = raw;
+	new->split = NULL;
 	new->cmd_path = NULL;
 	new->cmd = NULL;
 	new->infile = NULL;
@@ -49,6 +50,19 @@ t_cmd	*ft_lstnew_cmd(char *raw)//CHECKED
 	new->heredoc = NULL;
 	new->next = NULL;
 	return (new);
+}
+
+static void	close_fd(t_cmd *head)//CHECKED
+{
+	short	fail;
+
+	fail = 0;
+	if (head->infile)
+		fail -= close(head->infile);
+	if (head->outfile)
+		fail -= close(head->outfile);
+	if (fail)
+		ft_error(FAILED_TO_CLOSE);
 }
 
 void	ft_lstclear_cmd(t_cmd *head)//CHECKED
@@ -61,10 +75,15 @@ void	ft_lstclear_cmd(t_cmd *head)//CHECKED
 		tmp = head->next;
 		if (head->raw)
 			free(head->raw);
+		if (head->split)
+			ft_free_split(head->split);
+		if (head->heredoc)
+			free(head->heredoc);
 		if (head->cmd)
 			ft_free_split(head->cmd);
 		if (head->cmd_path)
 			free(head->cmd_path);
+		close_fd(head);
 		free(head);
 		head = tmp;
 	}

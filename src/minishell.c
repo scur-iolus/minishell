@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/17 17:04:30 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:05:59 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static short	input_is_ok(t_data *data, char **env)//CHECKED
 	tmp = data->line;
 	data->line = ft_strtrim(data->line, " 	");
 	if (!(data->line))
-		err_free(MALLOC_ERROR, data, 0, 0);
+		err_free(MALLOC_ERROR, data, 0);
 	free(tmp);
 	if (!valid_start_end(data->line))
 		return (0);

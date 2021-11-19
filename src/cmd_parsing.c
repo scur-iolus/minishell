@@ -6,29 +6,29 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/18 17:39:01 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:08:01 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /*
-** On the heap: line, data->env_lst, cmd_split
+** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
 */
 
-static void	add_str_to_cmd(t_data *data, t_cmd *head, char *str, char **split)//CHECKED
+static void	add_str_to_cmd(t_data *data, t_cmd *head, size_t i)//CHECKED
 {
 	char	*to_add;
 	char	**new_split;
 	size_t	len;
 
-	to_add = ft_strdup(str);
+	to_add = ft_strdup((head->split)[i]);
 	if (!to_add)
-		err_free(0, data, 0, split);
+		err_free(MALLOC_ERROR, data, 0);
 	len = ft_strlen_split(head->cmd);
 	new_split = (char **)ft_calloc(len + 2, sizeof(char *));
 	if (!new_split)
-		err_free(0, data, to_add, split);
+		err_free(MALLOC_ERROR, data, to_add);
 	new_split[len] = to_add;
 	while (len)
 	{
@@ -72,71 +72,92 @@ static int	check_previous()
 
 }
 
-** > : opening = 1
-** >> : opening = 2
-** < : opening = 3
-** << : opening = 4
-** sinon 0
 */
 
-static int	categorize(char **split, char *current)
-{
-	short	chevron;
-	// TODO en amont ajouter des espaces au retour d'un retour a la ligne dans la commande si << heredoc
+/*
+** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
+** update_data() and categorize() have 3 possible outputs:
+**			0, the "word" belongs to the command itself
+**			1, this file could not be opened
+**			2, openable and possibly already closed, if not, added to data
+*/
 
-	chevron = 0;
-	while (*split && *split != current)
+static int	update_data(t_data *data, t_cmd *head, size_t i, short category)
+{
+	int closed;
+
+	if (category == ONE_RIGHT || category == TWO_RIGHT || category == ONE_LEFT)
 	{
-		if (!ft_strcmp(">", *split))
-			chevron = 1;
-		else if (!ft_strcmp(">>", *split))
-			chevron = 2;
-		else if (!ft_strcmp("<", *split))
-			chevron = 3;
-		else if (!ft_strcmp("<<", *split))
-			chevron = 4;
-		else
-			chevron = 0;
-		*split = split++;
-	}
-	if (was_left_chevron)
-	{
-		if (!open_file(*split))
+		if (!open_file(data, (head->split)[i], category))
 			return (1);
 		return (2);
 	}
-
-
-	return (status);
+	closed = 0;
+	if (category == TWO_LEFT && head->infile > 0)
+	{
+		closed = close(head->infile);
+		if (closed == -1)
+			ft_error(FAILED_TO_CLOSE);
+	}
+	if (category == TWO_LEFT)
+		head->infile = -1;
+	add_str_to_cmd(data, head, i);
 }
 
 /*
-** On the heap: line, data->env_lst
+** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
+** update_data() and categorize() have 3 possible outputs:
+**			0, the "word" belongs to the command itself
+**			1, this file could not be opened
+**			2, openable and possibly already closed, if not, added to data
+*/
+
+static int	categorize(t_data *data, t_cmd *head, size_t i)
+{
+	short	category;
+	char	**tmp;
+
+	category = 0;
+	tmp = head->split;
+	while (*tmp && *tmp != (head->split)[i])
+	{
+		if (!ft_strcmp(">", *tmp))
+			category = ONE_RIGHT;
+		else if (!ft_strcmp(">>", *tmp))
+			category = TWO_RIGHT;
+		else if (!ft_strcmp("<", *tmp))
+			category = ONE_LEFT;
+		else if (!ft_strcmp("<<", *tmp))
+			category = TWO_LEFT;
+		else
+			category = 0;
+		*tmp = tmp++;
+	}
+	return update_data(data, head, i, category);
+}
+
+/*
+** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
 */
 
 short	parse_cmd_content(t_data *data, t_cmd *head)
 {
-	char	**cmd_split;
-	char	**tmp;
+	size_t	i;
 	int		status;
 
-	cmd_split = ft_split(head->raw, ' ');
-	if (!cmd_split)
-		err_free(0, data, 0, 0);
-	tmp = cmd_split;
+	i = 0;
 	status = 0;
-	while (*cmd_split)
+	while ((head->split)[i])
 	{
-		status = categorize(tmp, *cmd_split);
+		status = categorize(data, head, i);
 		if (status == 0)
-			add_str_to_cmd(data, head, *cmd_split, tmp);
+			add_str_to_cmd(data, head, i);
 		else if (status == 1)
 		{
 			ft_error(NOT_FOUND);
-			ft_free_split(tmp);
 			return (0);
 		}
-		cmd_split++;
+		i++;
 	}
 
 	// FIXME ===============

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/18 17:30:18 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:49:23 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,17 @@
 # define LINE_TOO_LONG		"this command is too long, please try to split it"
 # define INVALID_STATUS		"this exit status is not an int"
 # define NOT_FOUND			"no such file or directory"
-# define BUFFER_SIZE 		25
+# define FAILED_TO_CLOSE	"failed to close one or more file descriptor(s)"
+# define GNL_ERROR			"failed to malloc or to read standard input"
+# define BUFFER_SIZE 		10
 # define EMOJI_OK			"\033[32m[\xE2\x9C\x94]\033[0m "
 # define EMOJI_X			"\033[31m[\xE2\x9C\x96]\033[0m "
+# define ONE_RIGHT			1
+# define TWO_RIGHT			2
+# define ONE_LEFT			3
+# define TWO_LEFT			4
+# define HEREDOC_NOT_FOUND	0
+# define HEREDOC_FOUND		1
 
 // +------------------------------------------+ //
 //   Utils                                      //
@@ -88,7 +96,7 @@ void	ft_echo(t_data *data, char *line);
 //   Error                                      //
 // +------------------------------------------+ //
 void	ft_error(char *str);//CHECKED
-void	err_free(char *msg, t_data *data, char *str, char **split);//CHECKED
+void	err_free(char *msg, t_data *data, char *str);//CHECKED
 // +------------------------------------------+ //
 //   Input checks                               //
 // +------------------------------------------+ //
@@ -104,9 +112,10 @@ short	valid_start_end(char *line);
 // +------------------------------------------+ //
 //   Parsing                                    //
 // +------------------------------------------+ //
+void	load_heredoc(t_data *data);//CHECKED
 short	parse_cmd(t_data *data);//CHECKED
 short	parse_cmd_content(t_data *data, t_cmd *head);//CHECKED
-short	open_file(t_data *data, char *file, short opening)
+short	open_file(t_cmd *head, char *file, short opening);//CHECKED
 // +------------------------------------------+ //
 //   Environnement                               //
 // +------------------------------------------+ //

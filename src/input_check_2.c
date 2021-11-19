@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:34:50 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/12 15:07:12 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:06:14 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	space_before_after_chevron(t_data *data)//CHECKED
 		*(ptr - 1) != '<' && *(ptr - 1) != '>')
 		{
 			if (!ft_str_insert(&data->line, " ", i))
-				err_free(MALLOC_ERROR, data, 0, 0);
+				err_free(MALLOC_ERROR, data, 0);
 		}
 		if ((*ptr == '<' || *ptr == '>') && *(ptr + 1) && \
 		*(ptr + 1) != ' ' && *(ptr + 1) != '<' && *(ptr + 1) != '>')
 		{
 			if (!ft_str_insert(&data->line, " ", i + 1))
-				err_free(MALLOC_ERROR, data, 0, 0);
+				err_free(MALLOC_ERROR, data, 0);
 		}
 		i++;
 	}
@@ -74,7 +74,7 @@ void	deduplicate_spaces(t_data *data)//CHECKED
 
 	new = ft_calloc(ft_strlen_wth_duplicates_sp(data->line) + 1, sizeof(char));
 	if (!new)
-		err_free(MALLOC_ERROR, data, 0, 0);
+		err_free(MALLOC_ERROR, data, 0);
 	str = data->line;
 	i = 0;
 	was_space = 0;

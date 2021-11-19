@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/16 15:39:05 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:07:04 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,11 @@ void	free_data(t_data *data)//CHECKED
 	data->env_lst = 0;
 }
 
-void	free_everything(t_data *data, char *str, char **split)//CHECKED
+void	free_everything(t_data *data, char *str)//CHECKED
 {
 	rl_clear_history();
 	if (str)
 		free(str);
-	if (split)
-		ft_free_split(split);
 	free_data(data);
 }
 
@@ -47,9 +45,9 @@ void	free_everything(t_data *data, char *str, char **split)//CHECKED
 ** and exits the program with exit_status 1.
 */
 
-void	err_free(char *msg, t_data *data, char *str, char **split)//CHECKED
+void	err_free(char *msg, t_data *data, char *str)//CHECKED
 {
-	free_everything(data, str, split);
+	free_everything(data, str);
 	if (msg && *msg)
 		ft_error(msg);
 	else

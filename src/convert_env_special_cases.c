@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:09:25 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/12 16:08:28 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:07:43 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ short	special_cases(t_data *data, char **output, size_t *pos)//CHECKED
 	else if (data->line[*pos] == '\0')
 		success = ft_str_insert(output, "$", ft_strlen(*output));
 	if (!success)
-		err_free(MALLOC_ERROR, data, *output, 0);
+		err_free(MALLOC_ERROR, data, *output);
 	else if (data->line[*pos] == '.' || data->line[*pos] == '$' || \
 		data->line[*pos] == '?')
 		return (1);

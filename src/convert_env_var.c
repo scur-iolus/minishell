@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/16 11:57:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:07:36 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	add_var_value(char **new, char *var_name, t_data *data)//CHECKED
 	if (!ft_str_insert(new, node->value, insertion_position))
 	{
 		free(var_name);
-		err_free(MALLOC_ERROR, data, *new, 0);
+		err_free(MALLOC_ERROR, data, *new);
 	}
 }
 
@@ -62,7 +62,7 @@ static void	replace_var(t_data *data, char **new, size_t *position)//CHECKED
 	}
 	var_name = (char *) ft_calloc(name_len + 1, sizeof(char));
 	if (!var_name)
-		err_free(MALLOC_ERROR, data, *new, 0);
+		err_free(MALLOC_ERROR, data, *new);
 	i = 0;
 	while (i < name_len)
 	{
@@ -93,7 +93,7 @@ static void	next(t_data *data, char **new, short *between, size_t *position)//CH
 	else
 	{
 		if (!ft_str_insert(new, &c, ft_strlen(*new)))
-			err_free(MALLOC_ERROR, data, *new, 0);
+			err_free(MALLOC_ERROR, data, *new);
 		(*position)++;
 	}
 }
@@ -110,7 +110,7 @@ char	*convert_env_var(t_data *data)//CHECKED
 
 	new = (char *) ft_calloc(1, sizeof(char));
 	if (!new)
-		err_free(MALLOC_ERROR, data, 0, 0);
+		err_free(MALLOC_ERROR, data, 0);
 	position = 0;
 	between_apostrophes = 0;
 	while (data->line[position])

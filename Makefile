@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/17 17:35:42 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/19 15:46:10 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC			= \
 			$(SRC_PATH)ft_env.c \
 			$(SRC_PATH)ft_pipe.c \
 			$(SRC_PATH)free.c \
+			$(SRC_PATH)heredoc.c \
 			$(SRC_PATH)cmd_parsing.c \
 			$(SRC_PATH)cmd_split_check.c \
 			$(SRC_PATH)list_to_env.c \

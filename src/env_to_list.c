@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/15 15:21:03 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:07:18 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_var_name(t_data *data, char *str)//CHECKED
 		i++;
 	var_name = (char *) ft_calloc(i + 1, sizeof(char));
 	if (!var_name)
-		err_free(MALLOC_ERROR, data, 0, 0);
+		err_free(MALLOC_ERROR, data, 0);
 	i = 0;
 	while (str[i] != '=')
 	{
@@ -52,7 +52,7 @@ char	*get_var_value(t_data *data, char *str)//CHECKED
 	else
 		var_value = (char *)ft_calloc(1, sizeof(char));
 	if (!var_value)
-		err_free(MALLOC_ERROR, data, 0, 0);
+		err_free(MALLOC_ERROR, data, 0);
 	if (str && *str)
 		str++;
 	j = 0;
@@ -87,7 +87,7 @@ t_env	*init_env(t_data *data, char **env)//CHECKED
 		{
 			new = ft_lstnew_env();
 			if (!new)
-				err_free(MALLOC_ERROR, data, 0, 0);
+				err_free(MALLOC_ERROR, data, 0);
 			env_add_front(&head, new);
 			new->var = get_var_name(data, env[i]);
 			new->value = get_var_value(data, env[i]);
