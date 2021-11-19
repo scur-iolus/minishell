@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/18 18:43:53 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/19 18:22:21 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void			pop_out_list_env(t_data *data, char *line);
 //   Free                                       //
 // +------------------------------------------+ //
 void	reset_data(t_data *data);
-void	ft_lstclear_pipe(t_pipe *this);//CHECKED
+void	ft_lstclear_pipe(t_pipe *this, t_data *data);//CHECKED
 void	free_data(t_data *data);//CHECKED
 void	delete_one_env_var(t_env *env);//CHECKED
 void	ft_lstclear_env(t_env *lst);//CHECKED
@@ -140,7 +140,9 @@ char	**list_to_env(t_env *env_lst);
 //   Execute                                  //
 // +------------------------------------------+ //
 void	execute(t_data *data);
+int		is_built_in(t_data *data);
 void	make_one_cmd(t_data *data);
+void	make_one_built_in(t_data *data);
 // +------------------------------------------+ //
 //   Multipipe                                  //
 // +------------------------------------------+ //

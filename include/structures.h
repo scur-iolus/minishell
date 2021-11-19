@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/18 19:00:09 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/19 18:29:18 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@
 typedef struct s_pipe
 {
 	int		**end;
-	char	*infile;
-	char	*outfile;
-	int		i;
-	int		argc;
+	int		nb_pipe;
 }	t_pipe;
 
 typedef struct s_env
@@ -58,7 +55,7 @@ typedef struct s_data
 ** cmd_path -> /usr/bin/head ou autre du PATH
 */
 
-typedef struct s_cmd   //FIXME : rajouter les in et out pour les redirections vers des fichiers
+typedef struct s_cmd
 {
 	char				*raw;
 	char				**cmd;

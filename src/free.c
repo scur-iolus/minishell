@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/18 19:03:02 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/19 18:23:30 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	reset_data(t_data *data)
 	if (data->line)
 		free(data->line);
 	if (data->pipe)
-		ft_lstclear_pipe(data->pipe);
+		ft_lstclear_pipe(data->pipe, data);
 	if (data->cmd)
 		ft_lstclear_cmd(data->cmd);
 	data->line = 0;
@@ -40,7 +40,7 @@ void	free_data(t_data *data)//CHECKED
 	if (data->line)
 		free(data->line);
 	if (data->pipe)
-		ft_lstclear_pipe(data->pipe);
+		ft_lstclear_pipe(data->pipe, data);
 	if (data->cmd)
 		ft_lstclear_cmd(data->cmd);
 	if (data->env_lst)
