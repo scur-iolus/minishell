@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/19 18:22:21 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/22 14:35:14 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,17 @@ void	make_one_built_in(t_data *data);
 // +------------------------------------------+ //
 void	take_path(t_data *data);
 void	parse_cmd(t_data *data, char *cmd_line);
-//void	error_var_name(t_data *data, t_cmd *new, char *cmd_line);
+int		init_pipe(int nb_pipe, t_data *data);
+int		init_pipe_struct(t_pipe *pipe, t_data *data);
+void	multi_pipe(t_data *data);
+int		len_before_redirection(t_cmd *cmd);
+// +------------------------------------------+ //
+//   Multipipe Process                          //
+// +------------------------------------------+ //
+void	first_process(t_data *data, t_pipe *pipe, t_cmd *cmd);
+void	middle_process(t_data *data, t_pipe *pipe, t_cmd *cmd);
+void	last_process(t_data *data, t_pipe *pipe, t_cmd *cmd);
+
 // +------------------------------------------+ //
 //   Fonction list CMD                          //
 // +------------------------------------------+ //

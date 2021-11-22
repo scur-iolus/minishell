@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/19 18:23:30 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/22 13:57:25 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	reset_data(t_data *data)
 		ft_lstclear_cmd(data->cmd);
 	data->line = 0;
 	data->cmd = 0;
-	data->pipe = 0;
 	data->env = list_to_env(data->env_lst);
 	take_path(data);
 }
@@ -39,8 +38,6 @@ void	free_data(t_data *data)//CHECKED
 		free(data->env);
 	if (data->line)
 		free(data->line);
-	if (data->pipe)
-		ft_lstclear_pipe(data->pipe, data);
 	if (data->cmd)
 		ft_lstclear_cmd(data->cmd);
 	if (data->env_lst)

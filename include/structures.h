@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/19 18:29:18 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/22 14:17:29 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ typedef struct s_pipe
 {
 	int		**end;
 	int		nb_pipe;
+	int		cmd_nb;
+	int		cmd_len;
+	int		i; // pour savoir ou on en est dans les pipes
 }	t_pipe;
 
 typedef struct s_env
@@ -42,7 +45,6 @@ typedef struct s_data
 	char			**path;
 	char			*line;
 	long long		exit_status;
-	struct s_pipe	*pipe;
 	struct s_cmd	*cmd;
 	struct s_env	*env_lst;
 }	t_data;
