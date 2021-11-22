@@ -6,26 +6,54 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:31:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/19 17:48:20 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/22 20:05:53 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	get_next_line(char **line, short done)
+static short	continue_reading(int *ret, char **save)//CHECKED
 {
-	static char	*remainder = 0;
+	char	buff[BUFFER_SIZE + 1];
 
-	if (done && remainder)
+	*ret = read(0, buff, BUFFER_SIZE);
+	if (*ret == -1)
+		return (0);
+	buff[*ret] = '\0';
+	if (!(*save))
+		*save = ft_strdup(buff);
+	else
+		ft_str_insert(save, buff, ft_strlen(*save));
+	if (!(*save))
+		return (0);
+	return (1);
+}
+
+/*
+** Customized GNL with free(line) when ret == 0, and a flag to free(save)
+*/
+
+static int	get_next_line(char **line, short flag)//CHECKED
+{
+	static char	*save = 0;
+	int			ret;
+
+	if (flag)
 	{
-		free(remainder);
-		remainder = 0;
-		//MARQUE-PAGE https://github.com/fmonbeig/42-school/blob/master/pipex/pipex_bonus/get_next_line/get_next_line.c
+		if (save)
+			free(save);
+		save = 0;
+		return (42);
 	}
-	if (!remainder)
-		remainder = (char *)ft_calloc(BUFFER_SIZE, sizeof(char));
-
-	return (0);
+	if (!line || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
+		return (-1);
+	ret = 1;
+	while (!contains_new_line(save) && ret > 0)
+	{
+		if (!continue_reading(&ret, &save))
+			return (-1);
+	}
+	return (gnl_result(ret, line, &save));
 }
 
 /*
@@ -33,29 +61,33 @@ static int	get_next_line(char **line, short done)
 ** and progressively data->cmd->split
 */
 
-static void	heredoc_input(t_data *data, t_cmd *head, char *str)
+static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)//CHECKED
 {
 	char	*line;
 	int		status;
 
 	line = 0;
 	head->heredoc = (char *)ft_calloc(1, sizeof(char));
-	if (head->heredoc)
+	if (!(head->heredoc))
 		err_free(MALLOC_ERROR, data, 0);
-	status = get_next_line(&line, HEREDOC_NOT_FOUND);
-	while (status > 0 && ft_strcmp(str, line) != 0)
+	write(1, ">", 1);
+	status = get_next_line(&line, HEREDOC_CONTINUE);
+	while (status > 0 && ft_strcmp(heredoc_delimiter, line) != 0)
 	{
 		ft_str_insert(&(head->heredoc), line, ft_strlen(head->heredoc));
 		ft_str_insert(&(head->heredoc), "\n", ft_strlen(head->heredoc));
+		free(line);
+		line = 0;
 		write(1, ">", 1);
-		status = get_next_line(&line, HEREDOC_NOT_FOUND);
+		status = get_next_line(&line, HEREDOC_CONTINUE);
 	}
+	(void)get_next_line(0, HEREDOC_END);
 	if (line)
 		free(line);
 	if (status == -1)
 		err_free(GNL_ERROR, data, 0);
-	if (ft_strcmp(str, line) == 0)
-		(void)get_next_line(0, HEREDOC_FOUND);
+	else if (status == 0)
+		write(1, HEREDOC_EOF, ft_strlen(HEREDOC_EOF));
 }
 
 /*
@@ -63,7 +95,7 @@ static void	heredoc_input(t_data *data, t_cmd *head, char *str)
 ** and progressively data->cmd->split
 */
 
-static void	spot_heredoc(t_data *data, t_cmd *head)
+static void	spot_heredoc(t_data *data, t_cmd *head)//CHECKED
 {
 	size_t	i;
 	short	sentinel;
@@ -92,7 +124,7 @@ static void	spot_heredoc(t_data *data, t_cmd *head)
 ** and progressively data->cmd->split
 */
 
-void	load_heredoc(t_data *data)
+void	load_heredoc(t_data *data)//CHECKED
 {
 	size_t	i;
 	t_cmd	*tmp;

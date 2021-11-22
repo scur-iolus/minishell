@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/19 17:49:23 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/22 20:07:55 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,22 @@
 # define NOT_FOUND			"no such file or directory"
 # define FAILED_TO_CLOSE	"failed to close one or more file descriptor(s)"
 # define GNL_ERROR			"failed to malloc or to read standard input"
-# define BUFFER_SIZE 		10
+# define HEREDOC_EOF		"Warning: here-document delimited by EOF.\n"
+# define BUFFER_SIZE 		254
 # define EMOJI_OK			"\033[32m[\xE2\x9C\x94]\033[0m "
 # define EMOJI_X			"\033[31m[\xE2\x9C\x96]\033[0m "
 # define ONE_RIGHT			1
 # define TWO_RIGHT			2
 # define ONE_LEFT			3
 # define TWO_LEFT			4
-# define HEREDOC_NOT_FOUND	0
-# define HEREDOC_FOUND		1
+# define HEREDOC_CONTINUE	0
+# define HEREDOC_END		1
 
 // +------------------------------------------+ //
 //   Utils                                      //
 // +------------------------------------------+ //
-
+int		gnl_result(int ret, char **line, char **save);//CHECKED
+short	contains_new_line(char *str);//CHECKED
 // +------------------------------------------+ //
 //   Builtins                                   //
 // +------------------------------------------+ //

@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/19 15:46:10 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/22 15:12:43 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ HEADERS		= include/
 SRC_PATH	= src/
 
 SRC			= \
+			$(SRC_PATH)get_next_line.c \
 			$(SRC_PATH)minishell.c \
 			$(SRC_PATH)input_check_1.c \
 			$(SRC_PATH)input_check_2.c \
