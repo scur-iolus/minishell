@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:31:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/22 20:05:53 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/22 22:25:59 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static void	spot_heredoc(t_data *data, t_cmd *head)//CHECKED
 		}
 		if (sentinel)
 			heredoc_input(data, head, (head->split)[i]);
-		if (ft_strcmp("<<", (head->split)[i]))
+		if (!ft_strcmp("<<", (head->split)[i]))
 			sentinel = 1;
 		else
 			sentinel = 0;
@@ -132,9 +132,6 @@ void	load_heredoc(t_data *data)//CHECKED
 	tmp = data->cmd;
 	while (tmp)
 	{
-		tmp->split = ft_split(tmp->raw, ' ');
-		if (!(tmp->split))
-			err_free(MALLOC_ERROR, data, 0);
 		spot_heredoc(data, tmp);
 		tmp = tmp->next;
 	}

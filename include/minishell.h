@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/22 20:07:55 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/22 20:20:11 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	print_env_with_export_layout(t_data *data);
 // +------------------------------------------+ //
 void	ft_lstclear_pipe(t_pipe *this);//CHECKED
 void	free_data(t_data *data);//CHECKED
-void	free_everything(t_data *data, char *str, char **split);//CHECKED
+void	free_everything(t_data *data, char *str);//CHECKED
 void	delete_one_env_var(t_env *env);//CHECKED
 void	ft_lstclear_env(t_env *lst);//CHECKED
 // +------------------------------------------+ //

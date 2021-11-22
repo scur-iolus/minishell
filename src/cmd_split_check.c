@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/19 17:07:51 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/22 22:26:20 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,28 +70,51 @@ static void	pipes_split(t_data *data, t_cmd **head)//CHECKED
 }
 
 /*
-** On the heap: line, data->env_lst, data->cmd, data->cmd->raw
+** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
 */
 
 static short	is_syntax_error(t_data *data)//CHECKED
 {
 	t_cmd	*tmp;
-	int		s;
+	char	*str;
+	char	*next;
+	size_t	i;
 
-	s = 0;
 	tmp = data->cmd;
 	while (tmp)
 	{
-		if (s != 1 && ((ft_strchr(data->line, '|') && *(tmp->raw) == '\0') \
-			|| (ft_strchr(tmp->raw, '>') && ft_strchr(tmp->next->raw, '>'))\
-			|| (ft_strchr(tmp->raw, '>') && ft_strchr(tmp->next->raw, '<'))\
-			|| (ft_strchr(tmp->raw, '<') && ft_strchr(tmp->next->raw, '>'))\
-			|| (ft_strchr(tmp->raw, '<') && ft_strchr(tmp->next->raw, '<'))\
-			))
-			s = 1;
+		str = *(tmp->split);
+		while (*str && *(str + 1))
+		{
+			if ((ft_strchr(str, '>') && ft_strchr(str + 1, '>')) \
+			|| (ft_strchr(str, '>') && ft_strchr(str + 1, '<')) \
+			|| (ft_strchr(str, '<') && ft_strchr(str + 1, '>')) \
+			|| (ft_strchr(str, '<') && ft_strchr(str + 1, '<')))
+				return (1);
+			str++;
+		}
 		tmp = tmp->next;
 	}
-	return s;
+	return (0);
+}
+
+/*
+** On the heap: line, data->env_lst, data->cmd, data->cmd->raw
+** and progressively data->cmd->split
+*/
+
+static void	cmds_split(t_data *data)//CHECKED
+{
+	t_cmd	*tmp;
+
+	tmp = data->cmd;
+	while (tmp)
+	{
+		tmp->split = ft_split(tmp->raw, ' ');
+		if (!(tmp->split))
+			err_free(MALLOC_ERROR, data, 0);
+		tmp = tmp->next;
+	}
 }
 
 /*
@@ -104,10 +127,11 @@ short	parse_cmd(t_data *data)
 
 	head = 0;
 	pipes_split(data, &head);
+	cmds_split(data);
 	if (is_syntax_error(data) == 1)
 	{
 		ft_error(INVALID_CHAR_ERR);
-		return ;
+		return (0);
 	}
 	load_heredoc(data);
 	head = data->cmd;
@@ -115,6 +139,8 @@ short	parse_cmd(t_data *data)
 	{
 		//if (!parse_cmd_content(data, head))
 		//	return (0);
+		if (head->heredoc)
+			printf("🌞%s🌞\n", head->heredoc); //FIXME
 		head = head->next;
 		printf("\n");//FIXME
 	}

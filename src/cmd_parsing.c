@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/19 17:08:01 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/22 20:23:07 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ static int	check_previous()
 
 static int	update_data(t_data *data, t_cmd *head, size_t i, short category)
 {
-	int closed;
+	int	closed;
 
 	if (category == ONE_RIGHT || category == TWO_RIGHT || category == ONE_LEFT)
 	{
-		if (!open_file(data, (head->split)[i], category))
+		if (!open_file(head, (head->split)[i], category))
 			return (1);
 		return (2);
 	}
@@ -131,9 +131,9 @@ static int	categorize(t_data *data, t_cmd *head, size_t i)
 			category = TWO_LEFT;
 		else
 			category = 0;
-		*tmp = tmp++;
+		tmp++;
 	}
-	return update_data(data, head, i, category);
+	return (update_data(data, head, i, category));
 }
 
 /*
@@ -168,7 +168,6 @@ short	parse_cmd_content(t_data *data, t_cmd *head)
 		printf("🔸%s🔸\n", *hop); // FIXME ===============
 		hop++;//FIXME
 	}//FIXME
-	ft_free_split(tmp);//CHECKED
 	ft_exit(data, 0, 0, 0); //FIXME
 	return (1);//CHECKED
 }
