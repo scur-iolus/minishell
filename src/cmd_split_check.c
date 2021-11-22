@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/22 22:26:20 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/22 22:30:42 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ static void	cmds_split(t_data *data)//CHECKED
 
 short	parse_cmd(t_data *data)
 {
-	t_cmd			*head;
+	t_cmd	*head;
 
 	head = 0;
 	pipes_split(data, &head);
@@ -137,10 +137,8 @@ short	parse_cmd(t_data *data)
 	head = data->cmd;
 	while (head)
 	{
-		//if (!parse_cmd_content(data, head))
-		//	return (0);
-		if (head->heredoc)
-			printf("🌞%s🌞\n", head->heredoc); //FIXME
+		if (!parse_cmd_content(data, head))
+			return (0);
 		head = head->next;
 		printf("\n");//FIXME
 	}

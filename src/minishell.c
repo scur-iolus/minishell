@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/19 17:05:59 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/22 22:31:28 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(int argc, char **argv, char **env)// CHECKED
 	while (argc == 1)
 	{
 		free_data(&data);
-		data.line = readline("Mishell c'est le Brésil >");
+		data.line = readline("🌞 Mishell c'est le Brésil >");
 		if (ft_strlen(data.line) > 0)
 			add_history(data.line);
 		if (input_is_ok(&data, env) && parse_cmd(&data))
