@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/23 14:38:27 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/23 15:02:00 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,17 @@
 
 void	take_path(t_data *data)
 {
-	t_env *temp;
+	t_env	*tmp;
 
-	temp = find_var_env(data, "PATH"); // si temp->value est equale a zero qu est ce qu il se passe ??
-										// est ce qu on doit le protect ?
-	data->pipe->path = ft_split(temp->value, ':');
+	tmp = find_var_env(data, "PATH");
+	if (!tmp)
+	{
+		data->pipe->path = 0;
+		return ;
+	}
+	data->pipe->path = ft_split(tmp->value, ':');
+	if (!(data->pipe->path))
+		err_free(MALLOC_ERROR, data, 0);
 }
 
 void	find_command_path(t_data *data, t_cmd *head)
@@ -27,7 +33,7 @@ void	find_command_path(t_data *data, t_cmd *head)
 	char	*tmp;
 
 	i = 0;
-	while (data->pipe->path[i])
+	while (data->pipe->path && data->pipe->path[i])
 	{
 		tmp = ft_strjoin(data->pipe->path[i], "/");
 		if (!tmp)
