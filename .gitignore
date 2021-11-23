@@ -42,3 +42,4 @@
 
 minishell
 valgrind-trace.txt
+valgrind-out.txt

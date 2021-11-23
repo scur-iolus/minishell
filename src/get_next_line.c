@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 15:01:40 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/22 20:08:38 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/23 14:46:54 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,6 @@ static char	*save_remainder(char *save)//CHECKED
 	return (ret);
 }
 
-short	contains_new_line(char *str)//CHECKED
-{
-	int	i;
-
-	i = -1;
-	if (!str)
-		return (0);
-	while (str[++i])
-	{
-		if (str[i] == '\n')
-			return (1);
-	}
-	return (0);
-}
-
 /*
 ** 3 possibles return values for gnl_result:
 ** -> 0 if the user pressed Ctrl D or entered a '\0' somehow (end of stdin)
@@ -73,7 +58,7 @@ short	contains_new_line(char *str)//CHECKED
 
 int	gnl_result(int ret, char **line, char **save)//CHECKED
 {
-	char *tmp;
+	char	*tmp;
 
 	if (ret < 0)
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/17 16:55:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/23 14:38:27 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,30 @@ void	take_path(t_data *data)
 	data->pipe->path = ft_split(temp->value, ':');
 }
 
-void	find_command_path(t_data *data, t_cmd *new, char *cmd_line) // Comment on passe les infos ici et comment on crée la liste chaînées
+void	find_command_path(t_data *data, t_cmd *head)
 {
 	int		i;
-	int		h;
 	char	*tmp;
 
-	i = -1;
-	while (data->pipe->path[++i])
+	i = 0;
+	while (data->pipe->path[i])
 	{
 		tmp = ft_strjoin(data->pipe->path[i], "/");
-		new->cmd_path = ft_strjoin(tmp, new->cmd[0]);
+		if (!tmp)
+			err_free(MALLOC_ERROR, data, 0);
+		head->cmd_path = ft_strjoin(tmp, (head->cmd)[0]);
 		free(tmp);
-		h = access(new->cmd_path, F_OK);
-		if (!h)
+		if (!head->cmd_path)
+			err_free(MALLOC_ERROR, data, 0);
+		if (!access(head->cmd_path, X_OK))
 			break ;
-		else
-		{
-			free(new->cmd_path);
-			new->cmd_path = NULL;
-		}
+		free(head->cmd_path);
+		head->cmd_path = 0;
+		i++;
+	}
+	if (!head->cmd_path)
+	{
+		write(2, (head->cmd)[0], ft_strlen((head->cmd)[0]));
+		write(2, CMD_NOT_FOUND, ft_strlen(CMD_NOT_FOUND));
 	}
 }

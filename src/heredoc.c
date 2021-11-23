@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:31:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/22 22:25:59 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/23 14:44:58 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	get_next_line(char **line, short flag)//CHECKED
 	if (!line || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
 		return (-1);
 	ret = 1;
-	while (!contains_new_line(save) && ret > 0)
+	while (!ft_strrchr(save, '\n') && ret > 0)
 	{
 		if (!continue_reading(&ret, &save))
 			return (-1);

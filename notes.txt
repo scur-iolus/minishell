@@ -300,3 +300,6 @@ https://githubmemory.com/repo/maxime-42/minishell
 head -1 fichier >       head -1     | head -1
 __________________________________   _______
 s_cmd                                s_cmd
+
+
+([,1-9]*) byte([\s\S]*)

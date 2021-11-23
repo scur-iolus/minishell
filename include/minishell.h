@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/22 20:20:11 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/23 14:45:11 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,11 @@
 # define TOO_MANY_ARG		"minishell does not accept any argument"
 # define LINE_TOO_LONG		"this command is too long, please try to split it"
 # define INVALID_STATUS		"this exit status is not an int"
-# define NOT_FOUND			"no such file or directory"
+# define FILE_NOT_FOUND		"no such file or directory"
 # define FAILED_TO_CLOSE	"failed to close one or more file descriptor(s)"
 # define GNL_ERROR			"failed to malloc or to read standard input"
 # define HEREDOC_EOF		"Warning: here-document delimited by EOF.\n"
+# define CMD_NOT_FOUND		": command not found"
 # define BUFFER_SIZE 		254
 # define EMOJI_OK			"\033[32m[\xE2\x9C\x94]\033[0m "
 # define EMOJI_X			"\033[31m[\xE2\x9C\x96]\033[0m "
@@ -67,7 +68,6 @@
 //   Utils                                      //
 // +------------------------------------------+ //
 int		gnl_result(int ret, char **line, char **save);//CHECKED
-short	contains_new_line(char *str);//CHECKED
 // +------------------------------------------+ //
 //   Builtins                                   //
 // +------------------------------------------+ //
@@ -134,6 +134,7 @@ char	**list_to_env(t_env *env_lst);
 //   Multipipe                                  //
 // +------------------------------------------+ //
 void	take_path(t_data *data);
+void	find_command_path(t_data *data, t_cmd *head);
 //void	error_var_name(t_data *data, t_cmd *new, char *cmd_line);
 
 #endif

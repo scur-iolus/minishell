@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/22 15:12:43 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/23 14:44:11 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,12 +49,12 @@ SRC			= \
 			$(SRC_PATH)cmd_split_check.c \
 			$(SRC_PATH)list_to_env.c \
 			$(SRC_PATH)builtins.c \
+			$(SRC_PATH)multipipe/utils_multipipe.c \
 			#$(SRC_PATH)error_var_name.c \
 			#$(SRC_PATH)export.c \
 			#$(SRC_PATH)unset.c \
 			#$(SRC_PATH)multipipe/init_pipe.c \
-			#$(SRC_PATH)multipipe/multipipe.c \
-			#$(SRC_PATH)multipipe/utils_multipipe.c
+			#$(SRC_PATH)multipipe/multipipe.c
 
 OBJS		= $(SRC:.c=.o)
 

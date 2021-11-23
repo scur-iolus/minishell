@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/22 22:33:40 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/23 14:40:49 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,80 +39,67 @@ static void	add_str_to_cmd(t_data *data, t_cmd *head, size_t i)//CHECKED
 	head->cmd = new_split;
 }
 
-/*
-void	parse_cmd(t_data *data, char *cmd_line) // ici la fonction va créer la nouvelle liste cmd en remplissant cmd et cmd_path
+static short	heredoc_is_last(t_cmd *head)//CHECKED
 {
-	//cmd_line = string de la commande avec ses arguments. ex : cat -e  ou head -1
-	int		i;
-	t_cmd	*new;
+	size_t	i;
+	int		closed;
 
-	new->cmd = ft_split(cmd_line, ' ');
-	if (!new->cmd)
-		free_all(data, 1);
-	find_command_path(data, new, cmd_line);
-	ft_lstadd_back(data->cmd, new);
-}
-
-Pour un > :
-data->outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
-Pour un >> :
-data->outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_APPEND, 0644);
-Pour un < :
-data->infile = open(argv[1], O_RDONLY);
-Pour un << :
-data->here_doc = open("here_doc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-
-static int	check_next()
-{
-
-}
-
-static int	check_previous()
-{
-
-}
-
-*/
-
-/*
-** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
-** update_data() and categorize() have 3 possible outputs:
-**			0, the "word" belongs to the command itself
-**			1, this file could not be opened
-**			2, openable and possibly already closed, if not, added to data
-*/
-
-static int	update_data(t_data *data, t_cmd *head, size_t i, short category)
-{
-	int	closed;
-
-	if (category == ONE_RIGHT || category == TWO_RIGHT || category == ONE_LEFT)
-	{
-		if (!open_file(head, (head->split)[i], category))
-			return (1);
-		return (2);
-	}
+	if (*(head->split) == 0)
+		return (1);
+	i = ft_strlen_split(head->split) - 1;
 	closed = 0;
-	if (category == TWO_LEFT && head->infile > 0)
+	while (i && !ft_strrchr((head->split)[i], '<'))
+		i--;
+	if (!ft_strcmp((head->split)[i], "<<") && head->infile)
 	{
 		closed = close(head->infile);
 		if (closed == -1)
+		{
 			ft_error(FAILED_TO_CLOSE);
+			return (0);
+		}
 	}
-	if (category == TWO_LEFT)
-		head->infile = -1;
-	add_str_to_cmd(data, head, i);
+	else if (!ft_strcmp((head->split)[i], "<") && head->heredoc)
+	{
+		free(head->heredoc);
+		head->heredoc = 0;
+	}
+	return (1);
 }
 
 /*
 ** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
 ** update_data() and categorize() have 3 possible outputs:
-**			0, the "word" belongs to the command itself
+**			0, the "word" belongs to the command itself (head, cat, -e, -1)
 **			1, this file could not be opened
 **			2, openable and possibly already closed, if not, added to data
 */
 
-static int	categorize(t_data *data, t_cmd *head, size_t i)
+static int	ret_categorize(t_data *data, t_cmd *head, size_t i, short category)//CHECKED
+{
+	char	*str;
+
+	str = (head->split)[i];
+	if (category == ONE_RIGHT || category == TWO_RIGHT || category == ONE_LEFT)
+	{
+		if (!open_file(head, str, category))
+			return (1);
+		return (2);
+	}
+	if (!category && !ft_strrchr(str, '<') && !ft_strrchr(str, '>'))
+		return (0);
+	return (2);
+}
+
+/*
+** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
+** update_data() and categorize() have 3 possible outputs:
+**			0, the "word" belongs to the command itself (head, cat, -e, -1)
+**			1, this file could not be opened
+**			2, openable and possibly already closed, if not, added to data
+*/
+
+static int	categorize(t_data *data, t_cmd *head, size_t i)//CHECKED
 {
 	short	category;
 	char	**tmp;
@@ -133,14 +120,14 @@ static int	categorize(t_data *data, t_cmd *head, size_t i)
 			category = 0;
 		tmp++;
 	}
-	return (update_data(data, head, i, category));
+	return (ret_categorize(data, head, i, category));
 }
 
 /*
 ** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
 */
 
-short	parse_cmd_content(t_data *data, t_cmd *head)
+short	parse_cmd_content(t_data *data, t_cmd *head)//CHECKED
 {
 	size_t	i;
 	int		status;
@@ -153,13 +140,15 @@ short	parse_cmd_content(t_data *data, t_cmd *head)
 		if (status == 0)
 			add_str_to_cmd(data, head, i);
 		else if (status == 1)
-		{
-			ft_error(NOT_FOUND);
 			return (0);
-		}
 		i++;
 	}
-
+	if (head->cmd)
+	{
+		find_command_path(data, head);
+		if (!head->cmd_path)
+			return (0);
+	}
 	// FIXME ===============
 	char	**hop;//FIXME
 	hop = head->cmd;//FIXME
@@ -168,6 +157,9 @@ short	parse_cmd_content(t_data *data, t_cmd *head)
 		printf("🔸%s🔸\n", *hop); // FIXME ===============
 		hop++;//FIXME
 	}//FIXME
-	ft_exit(data, 0, 0, 0); //FIXME
-	return (1);//CHECKED
+	printf("💫 fd infile : %d\n", head->infile); // FIXME ===============
+	printf("💫 fd outfile : %d\n", head->outfile); // FIXME ===============
+	printf("💫 cmd_path : %s\n", head->cmd_path); // FIXME ===============
+	printf("💫 [heredoc] : [%s]\n", head->heredoc); // FIXME ===============
+	return (heredoc_is_last(head));
 }

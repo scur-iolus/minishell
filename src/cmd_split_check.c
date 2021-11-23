@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/22 22:30:42 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/23 14:33:23 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,20 @@ short	open_file(t_cmd *head, char *file, short opening)//CHECKED
 	else if (opening == ONE_LEFT)
 		fd = open (file, O_RDONLY);
 	if (fd == -1)
+	{
+		ft_error(FILE_NOT_FOUND);
 		return (0);
+	}
 	closed = 0;
-	if (head->infile && opening == ONE_LEFT)
+	if (head->infile && (opening == ONE_LEFT))
 		closed = close(head->infile);
-	else if (head->outfile && \
-	(opening == ONE_RIGHT || opening == TWO_RIGHT))
+	else if (head->outfile && (opening == ONE_RIGHT || opening == TWO_RIGHT))
 		closed = close(head->outfile);
 	if (closed == -1)
+	{
+		ft_error(FAILED_TO_CLOSE);
 		return (0);
+	}
 	return (1);
 }
 
@@ -121,7 +126,7 @@ static void	cmds_split(t_data *data)//CHECKED
 ** On the heap: line, data->env_lst
 */
 
-short	parse_cmd(t_data *data)
+short	parse_cmd(t_data *data)//CHECKED
 {
 	t_cmd	*head;
 
@@ -137,10 +142,11 @@ short	parse_cmd(t_data *data)
 	head = data->cmd;
 	while (head)
 	{
+		printf("✅ s_cmd->cmd contient :\n");//FIXME
 		if (!parse_cmd_content(data, head))
 			return (0);
 		head = head->next;
-		printf("\n");//FIXME
 	}
+	ft_exit(data, 0, 0, 0); //FIXME
 	return (1);
 }

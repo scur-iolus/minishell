@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/22 22:31:28 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/23 13:19:27 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static short	input_is_ok(t_data *data, char **env)//CHECKED
 	space_before_after_chevron(data);
 	if (too_many_chevrons_o_pipes(data) || invalid_suite(data))
 		return (0);
-	printf("data->line contient 🔹%s🔹\n", data->line); //FIXME
+	printf("✅ data->line contient 🔹%s🔹\n", data->line); //FIXME
 	return (1);
 }
 
