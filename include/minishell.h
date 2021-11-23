@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/22 14:35:14 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/23 14:46:06 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	ft_lstclear_pipe(t_pipe *this, t_data *data);//CHECKED
 void	free_data(t_data *data);//CHECKED
 void	delete_one_env_var(t_env *env);//CHECKED
 void	ft_lstclear_env(t_env *lst);//CHECKED
+void	free_pipe(t_data *data, t_pipe *pipe);
 // +------------------------------------------+ //
 //   Echo                                       //
 // +------------------------------------------+ //
@@ -148,17 +149,30 @@ void	make_one_built_in(t_data *data);
 // +------------------------------------------+ //
 void	take_path(t_data *data);
 void	parse_cmd(t_data *data, char *cmd_line);
-int		init_pipe(int nb_pipe, t_data *data);
+int		init_pipe(int nb_pipe, t_data *data, t_pipe *pipes);
 int		init_pipe_struct(t_pipe *pipe, t_data *data);
 void	multi_pipe(t_data *data);
 int		len_before_redirection(t_cmd *cmd);
+void	fork_creation(t_pipe *pipe, t_data *data);
+void	command_failed(t_data *data, t_pipe *pipe, t_cmd *cmd);
 // +------------------------------------------+ //
 //   Multipipe Process                          //
 // +------------------------------------------+ //
 void	first_process(t_data *data, t_pipe *pipe, t_cmd *cmd);
 void	middle_process(t_data *data, t_pipe *pipe, t_cmd *cmd);
 void	last_process(t_data *data, t_pipe *pipe, t_cmd *cmd);
-
+// +------------------------------------------+ //
+//   Close_FD                                   //
+// +------------------------------------------+ //
+void		close_all_fd(t_pipe *pipe);
+void		close_fd_first_process(t_pipe *pipe);
+void		close_fd_middle_process(t_pipe *pipe);
+void		close_fd_last_process(t_pipe *pipe);
+// +------------------------------------------+ //
+//   Dup                                   //
+// +------------------------------------------+ //
+void		open_infile_and_heredoc(t_data *data, t_pipe *pipe, t_cmd *cmd);
+void		 dup_outfile(t_cmd *cmd);
 // +------------------------------------------+ //
 //   Fonction list CMD                          //
 // +------------------------------------------+ //

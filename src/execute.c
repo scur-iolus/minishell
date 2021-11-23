@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/19 18:10:17 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:03:00 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	execute(t_data *data)
 	i = ft_lstsize(data->cmd);
 	if (i == 1 && is_built_in(data))
 		make_one_built_in(data);
-	//else
-		//multi_pipe(data);
+	// else
+	// 	multi_pipe(data);
 }
 
 
@@ -43,7 +43,6 @@ int		is_built_in(t_data *data)
 	else
 		return(0);
 }
-
 
 void	make_one_built_in(t_data *data)
 {

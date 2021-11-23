@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/22 13:57:25 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/23 14:44:30 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	reset_data(t_data *data)
 		ft_free_split(data->env);
 	if (data->line)
 		free(data->line);
-	if (data->pipe)
-		ft_lstclear_pipe(data->pipe, data);
 	if (data->cmd)
 		ft_lstclear_cmd(data->cmd);
 	data->line = 0;
@@ -43,7 +41,6 @@ void	free_data(t_data *data)//CHECKED
 	if (data->env_lst)
 		ft_lstclear_env(data->env_lst);
 	data->line = 0;
-	data->pipe = 0;
 	data->cmd = 0;
 	data->env_lst = 0;
 }
@@ -71,4 +68,12 @@ void	err_free(char *msg, t_data *data, char *str, char **split)//CHECKED
 	else
 		ft_error(MALLOC_ERROR);
 	exit(EXIT_FAILURE);
+}
+
+void	free_pipe(t_data *data, t_pipe *pipe)
+{
+	if (pipe->end)
+		ft_lstclear_pipe(pipe->end, data);
+	close_all_fd(pipe);
+	free(pipe);
 }

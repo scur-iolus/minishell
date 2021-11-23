@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/22 14:17:29 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:12:30 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_data
 	char			*line;
 	long long		exit_status;
 	struct s_cmd	*cmd;
+	struct s_pipe	*pipe;
 	struct s_env	*env_lst;
 }	t_data;
 
