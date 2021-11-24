@@ -3,36 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   init_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:18:10 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/11 18:16:41 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/23 14:46:09 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	init_struct(t_pipe *pipe)
-{
-	pipe->path = NULL; //split du path
-	pipe->end = NULL;
-	pipe->infile = NULL; // permet de recup le fd de l ouverture du infile
-	pipe->outfile = NULL; // 										outfile
-	pipe->i = NULL;
-	pipe->argc = NULL;
-}
-
-void	init_pipe(int argc, t_data *data)
+int	init_pipe(int nb_pipe, t_data *data, t_pipe *pipes)
 {
 	int	i;
 
 	i = -1;
-	data->end = ft_calloc(argc - 2 - data->flag_hd, sizeof(int *));
-	while (++i < (argc - 2 - data->flag_hd))
+	pipes->end = ft_calloc(nb_pipe, sizeof(int *));
+	if (!pipes->end)
 	{
-		data->end[i] = ft_calloc(2, sizeof(int));
-		pipe(data->end[i]);
-		if (pipe(data->end[i]) == -1)
-			error_pipe(data);
+		ft_putstr_fd("ERROR: Malloc Failed", 2);
+		return (1);   //FIXME : est ce qu on doit tout fermer ?? Je pense qu il faut aller au prochain readline
 	}
+	while (++i < nb_pipe)
+	{
+		pipes->end[i] = ft_calloc(2, sizeof(int));
+		if (!pipes->end[i])
+		{
+			ft_putstr_fd("ERROR: Malloc Failed", 2);
+			return (1);   //FIXME : est ce qu on doit tout fermer ??
+		}
+		pipe(pipes->end[i]);
+		if (pipe(pipes->end[i]) == -1)
+		{
+			ft_putstr_fd("ERROR: Pipe Failed", 2);
+			return (1);   //FIXME : est ce qu on doit tout fermer ??
+		}
+	}
+	return(0);
 }
+
+int	init_pipe_struct(t_data *data)
+{
+	data->pipe = malloc(sizeof(t_pipe));
+	data->pipe->end = NULL;
+	data->pipe->cmd_nb = 0;
+	data->pipe->cmd_len = 0;
+	data->pipe->i = 0;
+	data->pipe-> nb_pipe = ft_lstsize(data->cmd) + 1;
+	if (init_pipe(data->pipe->nb_pipe, data, data->pipe))
+		return (1);
+	return (0);

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/19 17:07:18 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/24 11:20:47 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*get_var_name(t_data *data, char *str)//CHECKED
 		var_name[i] = str[i];
 		i++;
 	}
+	str[i] = '\0';  // Petit rajout
 	return (var_name);
 }
 
@@ -48,7 +49,7 @@ char	*get_var_value(t_data *data, char *str)//CHECKED
 	while (str && *str && *str != '=')
 		str++;
 	if (str && *str == '=')
-		var_value = (char *)ft_calloc(ft_strlen(str), sizeof(char));
+		var_value = (char *)ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	else
 		var_value = (char *)ft_calloc(1, sizeof(char));
 	if (!var_value)
@@ -62,6 +63,7 @@ char	*get_var_value(t_data *data, char *str)//CHECKED
 		str++;
 		j++;
 	}
+	str[j] = '\0';
 	return (var_value);
 }
 

@@ -6,19 +6,21 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/23 13:19:27 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/24 11:07:48 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	init_data(t_data *data)// CHECKED
+static void	init_data(t_data *data)
 {
+	data->env = 0;
+	data->path = 0;
 	data->line = 0;
 	data->exit_status = 0;
-	data->pipe = 0;
 	data->cmd = 0;
-	data->env_lst = 0;
+	data->pipe = 0;
+	data->env_lst = init_env(data, env);
 }
 
 /*
@@ -68,7 +70,6 @@ static short	input_is_ok(t_data *data, char **env)//CHECKED
 		remove_comment(data);
 	if (ft_strlen(data->line) > 0 && !even_nb_of_quote_marks(data->line))
 		return (0);
-	data->env_lst = init_env(data, env);
 	data->line = convert_env_var(data);
 	if (*(data->line) != '\0')
 		remove_quotation_marks(data);
@@ -99,13 +100,13 @@ int	main(int argc, char **argv, char **env)// CHECKED
 	init_data(&data);
 	while (argc == 1)
 	{
-		free_data(&data);
+		reset_data(&data);
 		data.line = readline("🌞 Mishell c'est le Brésil >");
 		if (ft_strlen(data.line) > 0)
 			add_history(data.line);
 		if (input_is_ok(&data, env) && parse_cmd(&data))
 		{
-			;
+			execute(&data);
 		}
 	}
 	ft_error(TOO_MANY_ARG);

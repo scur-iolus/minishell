@@ -3,26 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/12 11:08:02 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/17 17:15:34 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_unset(t_data *data, char *line)
+int	ft_unset(t_data *data, char **cmd)
 {
-	if (error_var_name(line))
+	int i;
+
+	i = 0;
+	while (cmd[++i])
 	{
-		ft_putstr_fd("unset: ", 1);
-		ft_putstr_fd(line, 1);
-		ft_putstr_fd(": invalid parameter name\n", 1);
-		data->exit_status = 1; // exit status = 127 ?
-		return ;
+		if (cmd[i][0] == '-')
+		{
+			ft_putstr_fd("unset: -", 1);
+			ft_putstr_fd(cmd[i][1], 1);
+			ft_putstr_fd("': invalid option\n", 1);
+			return (2);
+		}
+		if (error_var_name(cmd[i]))
+		{
+			ft_putstr_fd("unset: ", 1);
+			ft_putstr_fd(cmd[i], 1);
+			ft_putstr_fd(": not a valid identifier\n", 1);
+			return (127);
+		}
 	}
-	pop_out_list(data, line);
+	i = 0;
+	while (cmd[++i])
+		pop_out_list(data, cmd[i]);
+	return (0);
 }
 
 static t_env	*find_previous_var_env(t_data *data, char *var_name)

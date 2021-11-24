@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/23 14:44:11 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/24 11:15:20 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,7 @@ SRC			= \
 			$(SRC_PATH)convert_env_var.c \
 			$(SRC_PATH)convert_env_special_cases.c \
 			$(SRC_PATH)ft_cmd.c \
-			$(SRC_PATH)ft_env.c \
-			$(SRC_PATH)ft_pipe.c \
+			$(SRC_PATH)ft_list_env.c \
 			$(SRC_PATH)free.c \
 			$(SRC_PATH)heredoc.c \
 			$(SRC_PATH)cmd_parsing.c \
@@ -50,8 +49,11 @@ SRC			= \
 			$(SRC_PATH)list_to_env.c \
 			$(SRC_PATH)builtins.c \
 			$(SRC_PATH)multipipe/utils_multipipe.c \
+			$(SRC_PATH)execute.c \
+			#$(SRC_PATH)env.c \
 			#$(SRC_PATH)error_var_name.c \
 			#$(SRC_PATH)export.c \
+			#$(SRC_PATH)print_export.c \
 			#$(SRC_PATH)unset.c \
 			#$(SRC_PATH)multipipe/init_pipe.c \
 			#$(SRC_PATH)multipipe/multipipe.c

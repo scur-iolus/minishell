@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/23 14:45:11 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/24 11:24:08 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,51 @@ int		gnl_result(int ret, char **line, char **save);//CHECKED
 // +------------------------------------------+ //
 //   Builtins                                   //
 // +------------------------------------------+ //
-void	ft_pwd(t_data *data);
-void	ft_env(t_data *data);
+int		ft_pwd(t_data *data);
 void	ft_exit(t_data *data, char *str, char **split, long long exit_status);
 // +------------------------------------------+ //
 //   Export                                     //
 // +------------------------------------------+ //
-void	ft_export(t_data *data, char *line);
+int		ft_export(t_data *data, char **cmd);
+void	put_in_env_export(t_data *data, char **cmd, int i);
 int		check_is_env(char *line);
 int		error_var_name(char *line);
 void	print_export(t_data *data);
 void	print_env_with_export_layout(t_data *data);
 // +------------------------------------------+ //
+//   Env                                     //
+// +------------------------------------------+ //
+int		ft_env(t_data *data, char **cmd);
+int		check_argument_ft_env(char **cmd);
+// +------------------------------------------+ //
+//   Cd                                     //
+// +------------------------------------------+ //
+void	ft_cd(t_data *data, char **cmd);
+int		error_ft_cd(char **cmd);
+short	switch_old_pwd(t_data *data, char * line);
+short	switch_pwd(t_data *data, char * line, char *temp);
+// +------------------------------------------+ //
+//   Unset                                     //
+// +------------------------------------------+ //
+int				ft_unset(t_data *data, char **cmd);
+static t_env	*find_previous_var_env(t_data *data, char *var_name);
+void			pop_out_list_env(t_data *data, char *line);
+
+// +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
-void	ft_lstclear_pipe(t_pipe *this);//CHECKED
+void	reset_data(t_data *data);
+void	ft_lstclear_pipe(t_pipe *this, t_data *data);//CHECKED
 void	free_data(t_data *data);//CHECKED
 void	free_everything(t_data *data, char *str);//CHECKED
 void	delete_one_env_var(t_env *env);//CHECKED
 void	ft_lstclear_env(t_env *lst);//CHECKED
+void	free_pipe(t_data *data, t_pipe *pipe);
 // +------------------------------------------+ //
 //   Echo                                       //
 // +------------------------------------------+ //
-void	ft_echo(t_data *data, char *line);
+void	ft_echo(t_data *data, char **cmd);
+int		echo_argument_n(char *str);
 // +------------------------------------------+ //
 //   Error                                      //
 // +------------------------------------------+ //
@@ -119,8 +141,10 @@ short	parse_cmd(t_data *data);//CHECKED
 short	parse_cmd_content(t_data *data, t_cmd *head);//CHECKED
 short	open_file(t_cmd *head, char *file, short opening);//CHECKED
 // +------------------------------------------+ //
-//   Environnement                               //
+//   Environnement                              //
 // +------------------------------------------+ //
+void			delete_one_env_var(t_env *lst);//CHECKED
+void			ft_lstclear_env(t_env *head);//CHECKED
 t_env	*init_env(t_data *data, char **env);//CHECKED
 t_env	*ft_lstnew_env(void);//CHECKED
 char	*get_var_name(t_data *data, char *str);//CHECKED
@@ -130,11 +154,52 @@ short	special_cases(t_data *data, char **output, size_t *pos);//CHECKED
 t_env	*find_var_env(t_data *data, char *var_name);//CHECKED
 void	env_add_front(t_env **head, t_env *new);//CHECKED
 char	**list_to_env(t_env *env_lst);
+
+// +------------------------------------------+ //
+//   Execute                                  //
+// +------------------------------------------+ //
+void	execute(t_data *data);
+int		is_built_in(t_data *data);
+void	make_one_cmd(t_data *data);
+void	make_one_built_in(t_data *data);
 // +------------------------------------------+ //
 //   Multipipe                                  //
 // +------------------------------------------+ //
 void	take_path(t_data *data);
 void	find_command_path(t_data *data, t_cmd *head);
 //void	error_var_name(t_data *data, t_cmd *new, char *cmd_line);
+void	parse_cmd(t_data *data, char *cmd_line);
+int		init_pipe(int nb_pipe, t_data *data, t_pipe *pipes);
+int		init_pipe_struct(t_pipe *pipe, t_data *data);
+void	multi_pipe(t_data *data);
+int		len_before_redirection(t_cmd *cmd);
+void	fork_creation(t_pipe *pipe, t_data *data);
+void	command_failed(t_data *data, t_pipe *pipe, t_cmd *cmd);
+// +------------------------------------------+ //
+//   Multipipe Process                          //
+// +------------------------------------------+ //
+void	first_process(t_data *data, t_pipe *pipe, t_cmd *cmd);
+void	middle_process(t_data *data, t_pipe *pipe, t_cmd *cmd);
+void	last_process(t_data *data, t_pipe *pipe, t_cmd *cmd);
+// +------------------------------------------+ //
+//   Close_FD                                   //
+// +------------------------------------------+ //
+void		close_all_fd(t_pipe *pipe);
+void		close_fd_first_process(t_pipe *pipe);
+void		close_fd_middle_process(t_pipe *pipe);
+void		close_fd_last_process(t_pipe *pipe);
+// +------------------------------------------+ //
+//   Dup                                   //
+// +------------------------------------------+ //
+void		open_infile_and_heredoc(t_data *data, t_pipe *pipe, t_cmd *cmd);
+void		 dup_outfile(t_cmd *cmd);
+// +------------------------------------------+ //
+//   Fonction list CMD                          //
+// +------------------------------------------+ //
+static t_cmd	*ft_lstlast(t_cmd *lst);//CHECKED
+void			cmd_add_back(t_cmd **alst, t_cmd *new);//CHECKED
+t_cmd			*ft_lstnew_cmd(char *raw);//CHECKED
+void			ft_lstclear_cmd(t_cmd *head);//CHECKED
+int				ft_lstsize(t_cmd *lst);//CHECKED
 
 #endif
