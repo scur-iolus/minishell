@@ -6,20 +6,24 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 11:07:48 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/24 12:05:23 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	init_data(t_data *data)
+static void	init_data(t_data *data, char **env)
 {
 	data->env = 0;
 	data->path = 0;
 	data->line = 0;
 	data->exit_status = 0;
 	data->cmd = 0;
-	data->pipe = 0;
+	data->pipe.end = 0;
+	data->pipe.nb_pipe = 0;
+	data->pipe.cmd_nb = 0;
+	data->pipe.cmd_len = 0;
+	data->pipe.i = 0;
 	data->env_lst = init_env(data, env);
 }
 
@@ -60,7 +64,7 @@ static short	is_too_long(char *line)//CHECKED
 ** On the heap: line
 */
 
-static short	input_is_ok(t_data *data, char **env)//CHECKED
+static short	input_is_ok(t_data *data)//CHECKED
 {
 	char	*tmp;
 
@@ -97,16 +101,16 @@ int	main(int argc, char **argv, char **env)// CHECKED
 	t_data	data;
 
 	(void)argv;
-	init_data(&data);
+	init_data(&data, env);
 	while (argc == 1)
 	{
 		reset_data(&data);
 		data.line = readline("🌞 Mishell c'est le Brésil >");
 		if (ft_strlen(data.line) > 0)
 			add_history(data.line);
-		if (input_is_ok(&data, env) && parse_cmd(&data))
+		if (input_is_ok(&data) && parse_cmd(&data) && data.cmd)
 		{
-			execute(&data);
+			//execute(&data);
 		}
 	}
 	ft_error(TOO_MANY_ARG);

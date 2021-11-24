@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 11:24:08 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/24 12:08:31 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define FAILED_TO_CLOSE	"failed to close one or more file descriptor(s)"
 # define GNL_ERROR			"failed to malloc or to read standard input"
 # define HEREDOC_EOF		"Warning: here-document delimited by EOF.\n"
-# define CMD_NOT_FOUND		": command not found"
+# define CMD_NOT_FOUND		": command not found\n"
 # define BUFFER_SIZE 		254
 # define EMOJI_OK			"\033[32m[\xE2\x9C\x94]\033[0m "
 # define EMOJI_X			"\033[31m[\xE2\x9C\x96]\033[0m "
@@ -90,7 +90,7 @@ int		check_argument_ft_env(char **cmd);
 // +------------------------------------------+ //
 //   Cd                                     //
 // +------------------------------------------+ //
-void	ft_cd(t_data *data, char **cmd);
+short	ft_cd(t_data *data, char **cmd);
 int		error_ft_cd(char **cmd);
 short	switch_old_pwd(t_data *data, char * line);
 short	switch_pwd(t_data *data, char * line, char *temp);
@@ -105,7 +105,6 @@ void			pop_out_list_env(t_data *data, char *line);
 //   Free                                       //
 // +------------------------------------------+ //
 void	reset_data(t_data *data);
-void	ft_lstclear_pipe(t_pipe *this, t_data *data);//CHECKED
 void	free_data(t_data *data);//CHECKED
 void	free_everything(t_data *data, char *str);//CHECKED
 void	delete_one_env_var(t_env *env);//CHECKED
@@ -168,7 +167,6 @@ void	make_one_built_in(t_data *data);
 void	take_path(t_data *data);
 void	find_command_path(t_data *data, t_cmd *head);
 //void	error_var_name(t_data *data, t_cmd *new, char *cmd_line);
-void	parse_cmd(t_data *data, char *cmd_line);
 int		init_pipe(int nb_pipe, t_data *data, t_pipe *pipes);
 int		init_pipe_struct(t_pipe *pipe, t_data *data);
 void	multi_pipe(t_data *data);

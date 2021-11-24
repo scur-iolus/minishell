@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 10:51:30 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/24 11:28:52 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	take_path(t_data *data)
 	tmp = find_var_env(data, "PATH");
 	if (!tmp)
 	{
-		data->pipe->path = 0;
+		data->path = 0;
 		return ;
 	}
-	data->pipe->path = ft_split(tmp->value, ':');
-	if (!(data->pipe->path))
+	data->path = ft_split(tmp->value, ':');
+	if (!(data->path))
 		err_free(MALLOC_ERROR, data, 0);
 }
 
@@ -33,9 +33,9 @@ void	find_command_path(t_data *data, t_cmd *head)
 	char	*tmp;
 
 	i = 0;
-	while (data->pipe->path && data->pipe->path[i])
+	while (data->path && data->path[i])
 	{
-		tmp = ft_strjoin(data->pipe->path[i], "/");
+		tmp = ft_strjoin(data->path[i], "/");
 		if (!tmp)
 			err_free(MALLOC_ERROR, data, 0);
 		head->cmd_path = ft_strjoin(tmp, (head->cmd)[0]);

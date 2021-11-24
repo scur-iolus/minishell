@@ -3,11 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/23 14:44:30 by fmonbeig         ###   ########.fr       */
-s/*                                                                            */
+/*   Updated: 2021/11/24 12:07:19 by llalba           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
@@ -22,7 +22,7 @@ static void	ft_lstclear_pipe(t_pipe *this, t_data *data)
 	j = ft_lstsize(data->cmd) + 1;
 	if (this->end)
 	{
-		while (this->end[++i] < j)
+		while (++i < j)
 				free(this->end[i]);
 		free(this->end);
 	}
@@ -33,8 +33,8 @@ void	free_pipe(t_data *data, t_pipe *pipe)
 {
 	if (pipe->end)
 	{
-		close_all_fd(pipe);
-		ft_lstclear_pipe(pipe->end, data);
+		//close_all_fd(pipe); //FIXME ------------
+		ft_lstclear_pipe(pipe, data);
 	}
 	free(pipe);
 }
