@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:18:10 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/23 14:46:09 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/24 13:54:22 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,11 @@ int	init_pipe(int nb_pipe, t_data *data, t_pipe *pipes)
 
 int	init_pipe_struct(t_data *data)
 {
-	data->pipe = malloc(sizeof(t_pipe));
-	data->pipe->end = NULL;
-	data->pipe->cmd_nb = 0;
-	data->pipe->cmd_len = 0;
-	data->pipe->i = 0;
-	data->pipe-> nb_pipe = ft_lstsize(data->cmd) + 1;
-	if (init_pipe(data->pipe->nb_pipe, data, data->pipe))
+	data->pipe.end = NULL;
+	data->pipe.cmd_nb = 0;
+	data->pipe.cmd_len = 0;
+	data->pipe.i = 0;
+	data->pipe.nb_pipe = ft_lstsize(data->cmd) + 1;
+	if (init_pipe(data->pipe.nb_pipe, data, &data->pipe))
 		return (1);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 12:08:31 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/24 14:04:04 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,6 @@ short	special_cases(t_data *data, char **output, size_t *pos);//CHECKED
 t_env	*find_var_env(t_data *data, char *var_name);//CHECKED
 void	env_add_front(t_env **head, t_env *new);//CHECKED
 char	**list_to_env(t_env *env_lst);
-
 // +------------------------------------------+ //
 //   Execute                                  //
 // +------------------------------------------+ //
@@ -168,8 +167,7 @@ void	take_path(t_data *data);
 void	find_command_path(t_data *data, t_cmd *head);
 //void	error_var_name(t_data *data, t_cmd *new, char *cmd_line);
 int		init_pipe(int nb_pipe, t_data *data, t_pipe *pipes);
-int		init_pipe_struct(t_pipe *pipe, t_data *data);
-void	multi_pipe(t_data *data);
+int		init_pipe_struct(t_data *data;
 int		len_before_redirection(t_cmd *cmd);
 void	fork_creation(t_pipe *pipe, t_data *data);
 void	command_failed(t_data *data, t_pipe *pipe, t_cmd *cmd);
@@ -193,8 +191,7 @@ void		open_infile_and_heredoc(t_data *data, t_pipe *pipe, t_cmd *cmd);
 void		 dup_outfile(t_cmd *cmd);
 // +------------------------------------------+ //
 //   Fonction list CMD                          //
-// +------------------------------------------+ //
-static t_cmd	*ft_lstlast(t_cmd *lst);//CHECKED
+// +--------------------------------a----------+ //
 void			cmd_add_back(t_cmd **alst, t_cmd *new);//CHECKED
 t_cmd			*ft_lstnew_cmd(char *raw);//CHECKED
 void			ft_lstclear_cmd(t_cmd *head);//CHECKED

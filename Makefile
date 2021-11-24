@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
+#    By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/24 12:06:38 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/24 13:47:11 by fmonbeig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRC			= \
 			$(SRC_PATH)list_to_env.c \
 			$(SRC_PATH)multipipe/utils_multipipe.c \
 			$(SRC_PATH)builtins.c \
-			#$(SRC_PATH)execute.c \
+			$(SRC_PATH)execute.c \
 			#$(SRC_PATH)cd.c \
 			#$(SRC_PATH)env.c \
 			#$(SRC_PATH)unset.c \
