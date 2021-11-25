@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/24 11:20:47 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/25 10:06:02 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*get_var_name(t_data *data, char *str)//CHECKED
 		var_name[i] = str[i];
 		i++;
 	}
-	str[i] = '\0';  // Petit rajout
 	return (var_name);
 }
 
@@ -63,7 +62,6 @@ char	*get_var_value(t_data *data, char *str)//CHECKED
 		str++;
 		j++;
 	}
-	str[j] = '\0';
 	return (var_value);
 }
 

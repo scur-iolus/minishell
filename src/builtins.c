@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 16:01:58 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 11:21:18 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/25 09:54:40 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int	ft_pwd(t_data *data)
 
 void	ft_exit(t_data *data, char *str, char **split, long long exit_status)
 {
-	if (exit_status < 0 || exit_status > 2147483646)
+	if (exit_status < -2147483646 || exit_status > 2147483646)
 	{
 		ft_error(INVALID_STATUS);
 		return ;
 	}
-	if (data->cmd->next == 0)
-		ft_putstr_fd("exit", 1);
-	ft_free_split(split);
+	ft_putstr_fd("exit\n", 1);
+	if (split)
+		ft_free_split(split);
 	free_everything(data, str);
 	exit((int)exit_status);
 }
