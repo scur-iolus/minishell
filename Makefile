@@ -6,7 +6,7 @@
 #    By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/24 15:46:23 by fmonbeig         ###   ########.fr        #
+#    Updated: 2021/11/25 11:42:43 by fmonbeig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC			= \
 			$(SRC_PATH)unset.c \
 			$(SRC_PATH)export.c \
 			$(SRC_PATH)print_export.c \
+			$(SRC_PATH)multipipe/dup.c \
 			#$(SRC_PATH)error_var_name.c \
 			#$(SRC_PATH)print_export.c \
 			#$(SRC_PATH)multipipe/init_pipe.c \
