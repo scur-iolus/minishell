@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 17:16:03 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/25 10:35:02 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ int	main(int argc, char **argv, char **env)// CHECKED
 			add_history(data.line);
 		if (input_is_ok(&data) && parse_cmd(&data) && data.cmd)
 		{
-			printf("bonjour ca marche\n");
 			execute(&data);
 		}
 	}
