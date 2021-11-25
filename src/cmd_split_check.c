@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/25 12:18:03 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/25 13:50:32 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,6 @@ short	parse_cmd(t_data *data)//CHECKED
 			return (0);
 		head = head->next;
 	}
-	ft_exit(data, 0, 0, 0); //FIXME
+	//ft_exit(data, 0, 0, 0); //FIXME
 	return (1);
 }

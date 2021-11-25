@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_multipipe.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/25 11:50:55 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:57:54 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,5 @@ void	find_command_path(t_data *data, t_cmd *head)
 		free(head->cmd_path);
 		head->cmd_path = 0;
 		i++;
-	}
-	if (!head->cmd_path) // FIXME -> a supprimer
-	{
-		write(2, (head->cmd)[0], ft_strlen((head->cmd)[0]));
-		write(2, CMD_NOT_FOUND, ft_strlen(CMD_NOT_FOUND));
 	}
 }
