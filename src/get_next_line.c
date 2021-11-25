@@ -6,9 +6,11 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:09:22 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 14:14:14 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/24 15:28:20 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../include/minishell.h"
 
 static char *save_line(char *str)
 {

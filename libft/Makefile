@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
+#    By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/21 11:04:04 by fmonbeig          #+#    #+#              #
-#    Updated: 2021/11/16 17:15:25 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/24 15:45:24 by fmonbeig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ bonus:		$(OBJ) $(OBJ_BONUS)
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAG) -I includes -o $@ -c $<
+	@$(CC) $(CFLAG) -I includes -o $@ -c $<
 
 clean:
 	rm -f $(OBJ) $(OBJ_BONUS)

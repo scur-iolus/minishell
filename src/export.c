@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:36:27 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/17 17:08:35 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/24 15:25:18 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	put_in_env_export(t_data *data, char **cmd, int i)
 	if(!new)
 		new = (t_env *) ft_calloc(1, sizeof(t_env));
 	if(!new)
-		free_all_failure(data);
+		ft_error(MALLOC_ERROR);
 	if (new)
 	{
 		free(new->var);
@@ -53,7 +53,7 @@ void	put_in_env_export(t_data *data, char **cmd, int i)
 	new->var = get_var_name(data, cmd[i]);
 	new->value = get_var_value(data, cmd[i]);
 	new->is_env = check_is_env(cmd[i]);
-	env_add_front(data->env_lst, new);
+	env_add_front(&data->env_lst, new);
 }
 
 int	check_equal_sign(char *str)

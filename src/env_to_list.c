@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/24 11:20:47 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/25 10:14:31 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*get_var_value(t_data *data, char *str)//CHECKED
 	size_t	j;
 	char	*var_value;
 
-	while (str && *str && *str != '=')
+	while (str && *str != '=')
 		str++;
 	if (str && *str == '=')
 		var_value = (char *)ft_calloc(ft_strlen(str) + 1, sizeof(char));

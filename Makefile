@@ -6,7 +6,7 @@
 #    By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/24 13:47:11 by fmonbeig         ###   ########.fr        #
+#    Updated: 2021/11/24 15:46:23 by fmonbeig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,10 +50,12 @@ SRC			= \
 			$(SRC_PATH)multipipe/utils_multipipe.c \
 			$(SRC_PATH)builtins.c \
 			$(SRC_PATH)execute.c \
-			#$(SRC_PATH)cd.c \
-			#$(SRC_PATH)env.c \
-			#$(SRC_PATH)unset.c \
-			#$(SRC_PATH)export.c \
+			$(SRC_PATH)cd.c \
+			$(SRC_PATH)echo.c \
+			$(SRC_PATH)env.c \
+			$(SRC_PATH)unset.c \
+			$(SRC_PATH)export.c \
+			$(SRC_PATH)print_export.c \
 			#$(SRC_PATH)error_var_name.c \
 			#$(SRC_PATH)print_export.c \
 			#$(SRC_PATH)multipipe/init_pipe.c \
@@ -62,8 +64,8 @@ SRC			= \
 OBJS		= $(SRC:.c=.o)
 
 $(NAME):	$(OBJS)
-			make -C $(LIBFT_DIR)
-			$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(ADDONS)
+			@make -C $(LIBFT_DIR)
+			@$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(ADDONS)
 
 all:		$(NAME)
 
@@ -73,7 +75,7 @@ clean:
 
 fclean:		clean
 			make fclean -C $(LIBFT_DIR)
-			@rm -f $(CLIENT_NAME)
+			@rm -f $(NAME)
 
 re:			fclean all
 

@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/17 17:15:34 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/24 15:19:41 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_unset(t_data *data, char **cmd)
 		if (cmd[i][0] == '-')
 		{
 			ft_putstr_fd("unset: -", 1);
-			ft_putstr_fd(cmd[i][1], 1);
+			ft_putchar_fd(cmd[i][1], 1);
 			ft_putstr_fd("': invalid option\n", 1);
 			return (2);
 		}
@@ -36,7 +36,7 @@ int	ft_unset(t_data *data, char **cmd)
 	}
 	i = 0;
 	while (cmd[++i])
-		pop_out_list(data, cmd[i]);
+		pop_out_list_env(data, cmd[i]);
 	return (0);
 }
 

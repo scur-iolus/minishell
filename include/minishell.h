@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 14:04:04 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/24 14:53:24 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	ft_exit(t_data *data, char *str, char **split, long long exit_status);
 int		ft_export(t_data *data, char **cmd);
 void	put_in_env_export(t_data *data, char **cmd, int i);
 int		check_is_env(char *line);
+int		check_equal_sign(char *str);
 int		error_var_name(char *line);
 void	print_export(t_data *data);
 void	print_env_with_export_layout(t_data *data);
@@ -167,7 +168,7 @@ void	take_path(t_data *data);
 void	find_command_path(t_data *data, t_cmd *head);
 //void	error_var_name(t_data *data, t_cmd *new, char *cmd_line);
 int		init_pipe(int nb_pipe, t_data *data, t_pipe *pipes);
-int		init_pipe_struct(t_data *data;
+int		init_pipe_struct(t_data *data);
 int		len_before_redirection(t_cmd *cmd);
 void	fork_creation(t_pipe *pipe, t_data *data);
 void	command_failed(t_data *data, t_pipe *pipe, t_cmd *cmd);
