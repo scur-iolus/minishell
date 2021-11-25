@@ -3,43 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_split_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/25 10:18:08 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/25 12:18:03 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-short	open_file(t_cmd *head, char *file, short opening)//CHECKED
-{
-	int	fd;
-	int	closed;
-
-	if (opening == ONE_RIGHT)
-		fd = open (file, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	else if (opening == TWO_RIGHT)
-		fd = open (file, O_CREAT | O_RDWR | O_APPEND, 0644);
-	else if (opening == ONE_LEFT)
-		fd = open (file, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_error(FILE_NOT_FOUND);
-		return (0);
-	}
-	closed = 0;
-	if (head->infile && (opening == ONE_LEFT))
-		closed = close(head->infile);
-	else if (head->outfile && (opening == ONE_RIGHT || opening == TWO_RIGHT))
-		closed = close(head->outfile);
-	if (closed == -1)
-	{
-		ft_error(FAILED_TO_CLOSE);
-		return (0);
-	}
-	return (1);
-}
 
 /*
 ** On the heap: line, data->env_lst,
@@ -147,5 +118,6 @@ short	parse_cmd(t_data *data)//CHECKED
 			return (0);
 		head = head->next;
 	}
+	ft_exit(data, 0, 0, 0); //FIXME
 	return (1);
 }

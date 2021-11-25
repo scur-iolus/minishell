@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/23 14:40:49 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/25 12:09:49 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void	add_str_to_cmd(t_data *data, t_cmd *head, size_t i)//CHECKED
 		new_split[len - 1] = (head->cmd)[len - 1];
 		len--;
 	}
-	free(head->cmd);
+	if (head->cmd)
+		free(head->cmd);
 	head->cmd = new_split;
 }
 
@@ -152,7 +153,7 @@ short	parse_cmd_content(t_data *data, t_cmd *head)//CHECKED
 	// FIXME ===============
 	char	**hop;//FIXME
 	hop = head->cmd;//FIXME
-	while (*hop)//FIXME
+	while (hop && *hop)//FIXME
 	{//FIXME
 		printf("🔸%s🔸\n", *hop); // FIXME ===============
 		hop++;//FIXME
