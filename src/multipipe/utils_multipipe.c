@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_multipipe.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 11:28:52 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/24 16:54:29 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ void	take_path(t_data *data)
 	t_env	*tmp;
 
 	tmp = find_var_env(data, "PATH");
+	printf("\n Temp var : %s\n", tmp->var); // NOTA BENE
+	printf("\n Temp value : %s\n", tmp->value); // NOTA BENE
 	if (!tmp)
 	{
 		data->path = 0;
 		return ;
 	}
 	data->path = ft_split(tmp->value, ':');
+	printf("\n RESULTAT DE DATA->PATH : %s\n", data->path[0]); // NOTA BENE
+
 	if (!(data->path))
 		err_free(MALLOC_ERROR, data, 0);
 }
@@ -33,6 +37,8 @@ void	find_command_path(t_data *data, t_cmd *head)
 	char	*tmp;
 
 	i = 0;
+	printf("\n%s\n", head->cmd[0]); // NOTA BENE
+	printf("\n%s\n", data->path[0]); // NOTA BENE
 	while (data->path && data->path[i])
 	{
 		tmp = ft_strjoin(data->path[i], "/");
@@ -42,6 +48,7 @@ void	find_command_path(t_data *data, t_cmd *head)
 		free(tmp);
 		if (!head->cmd_path)
 			err_free(MALLOC_ERROR, data, 0);
+		printf("\n%s\n", head->cmd_path);
 		if (!access(head->cmd_path, X_OK))
 			break ;
 		free(head->cmd_path);

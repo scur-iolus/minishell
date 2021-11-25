@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 15:01:40 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/23 14:46:54 by llalba           ###   ########.fr       */
+/*   Created: 2021/11/24 14:09:22 by fmonbeig          #+#    #+#             */
+/*   Updated: 2021/11/24 15:28:20 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static char	*save_line(char *str)//CHECKED
+static char *save_line(char *str)
 {
 	int		i;
 	char	*line;

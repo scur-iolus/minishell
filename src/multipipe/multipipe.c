@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:53:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 11:05:14 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/24 16:32:27 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	multi_pipe(t_data *data)
-{
-	if (!init_pipe_struct(&pipe, data))
-		fork_creation(&pipe, data);
-	free_pipe(data, &pipe);
-	close_all_fd(&pipe);
-}
 
 void	fork_creation(t_pipe *pipe, t_data *data)
 {

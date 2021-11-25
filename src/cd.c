@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:32:59 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 12:02:41 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/24 15:38:36 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ short	switch_old_pwd(t_data *data, char * line)
 	t_env	*env;
 	char	*temp;
 
-	env = getenv("OLDPWD");
+	env = find_var_env(data, "OLDPWD");
 	temp = env->value;
 	env->value = ft_strdup(line);
 	if(!env->value)
 	{
-		env = getenv("PWD");
+		env = find_var_env(data, "PWD");
 		chdir(env->value);
 		free(temp);
 		temp = NULL;
@@ -69,12 +69,12 @@ short	switch_pwd(t_data *data, char * line, char *temp)
 	t_env *env;
 
 	getcwd(line, PATH_MAX);
-	env = getenv("PWD");
+	env = find_var_env(data, "PWD");
 	free(env->value);
 	env->value = ft_strdup(line);
 	if(!env->value)
 	{
-		env = getenv("OLDPWD");
+		env = find_var_env(data, "OLDPWD");
 		free(env->value);
 		env->value = temp;
 		chdir(temp);

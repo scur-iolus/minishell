@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_split_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/25 10:13:26 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/25 10:18:08 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,5 @@ short	parse_cmd(t_data *data)//CHECKED
 			return (0);
 		head = head->next;
 	}
-	ft_exit(data, 0, 0, 0); //FIXME
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 12:05:23 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/24 17:16:03 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static short	input_is_ok(t_data *data)//CHECKED
 	if (*(data->line) != '\0')
 		remove_quotation_marks(data);
 	tmp = data->line;
-	data->line = ft_strtrim(data->line, " 	");
+	data->line = ft_strtrim(data->line, "  ");
 	if (!(data->line))
 		err_free(MALLOC_ERROR, data, 0);
 	free(tmp);
@@ -110,7 +110,8 @@ int	main(int argc, char **argv, char **env)// CHECKED
 			add_history(data.line);
 		if (input_is_ok(&data) && parse_cmd(&data) && data.cmd)
 		{
-			//execute(&data);
+			printf("bonjour ca marche\n");
+			execute(&data);
 		}
 	}
 	ft_error(TOO_MANY_ARG);

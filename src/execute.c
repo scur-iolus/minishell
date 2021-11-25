@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 11:58:56 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/24 13:50:24 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	execute(t_data *data)
 	if (i == 1 && is_built_in(data))
 		make_one_built_in(data);
 	// else
-	// 	multi_pipe(data);
+	// {
+	// 	if (!init_pipe_struct(&data->pipe, data))
+	// 		fork_creation(&data->pipe, data);
+	// }
 }
 
 
