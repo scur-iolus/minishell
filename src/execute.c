@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/25 12:17:32 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:17:54 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	execute(t_data *data)
 {
 	int i;
-
+	
 	i = ft_lstsize(data->cmd);
 	if (i == 1 && is_built_in(data))
 		make_one_built_in(data);
@@ -71,5 +71,6 @@ void	make_one_built_in(t_data *data)
 		ft_unset(data, data->cmd->cmd);
 	else if (!ft_strcmp("env", data->cmd->cmd[0])) //FONCTION OK
 		ft_env(data, data->cmd->cmd);
-	//rajouter exit
+	else if (!ft_strcmp("exit", data->cmd->cmd[0])) //NOTA BENE : ok mais a tester
+		ft_exit(data, 0, 0, 0);
 }
