@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/25 10:53:56 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/25 12:17:32 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	execute(t_data *data)
 	// 		fork_creation(&data->pipe, data);
 	// }
 }
-
 
 int		is_built_in(t_data *data)
 {
@@ -54,7 +53,8 @@ int		is_built_in(t_data *data)
 void	make_one_built_in(t_data *data)
 {
 	printf("bonjour tu veux quoi comme commande ?\n"); // NOTA BENE
-	if (data->cmd->outfile)
+	open_infile_and_heredoc(data->cmd);
+	if (data->cmd->outfile) // si outfile
 	{
 		dup2(data->cmd->outfile, STDOUT_FILENO);
 		close(data->cmd->outfile);
@@ -63,13 +63,13 @@ void	make_one_built_in(t_data *data)
 		ft_echo(data, data->cmd->cmd);
 	else if (!ft_strcmp("cd", data->cmd->cmd[0])) //NOTA BENE : ok mais a tester
 		ft_cd(data, data->cmd->cmd);
-	else if (!ft_strcmp("pwd", data->cmd->cmd[0])) //NOTA BENE : ok mais a tester
+	else if (!ft_strcmp("pwd", data->cmd->cmd[0])) //FONCTION OK
 		ft_pwd(data);
 	else if (!ft_strcmp("export", data->cmd->cmd[0])) //NOTA BENE : ok mais a tester
 		ft_export(data, data->cmd->cmd);
 	else if (!ft_strcmp("unset", data->cmd->cmd[0])) //NOTA BENE : ok mais a tester
 		ft_unset(data, data->cmd->cmd);
-	else if (!ft_strcmp("env", data->cmd->cmd[0])) //NOTA BENE : ok mais a tester
+	else if (!ft_strcmp("env", data->cmd->cmd[0])) //FONCTION OK
 		ft_env(data, data->cmd->cmd);
 	//rajouter exit
 }

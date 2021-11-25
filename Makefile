@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/25 12:18:38 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/25 13:40:16 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC			= \
 			$(SRC_PATH)export.c \
 			$(SRC_PATH)print_export.c \
 			$(SRC_PATH)open_file.c \
+			$(SRC_PATH)multipipe/dup.c \
 			#$(SRC_PATH)error_var_name.c \
 			#$(SRC_PATH)print_export.c \
 			#$(SRC_PATH)multipipe/init_pipe.c \
