@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_multipipe.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/25 13:57:54 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/26 12:03:19 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	find_command_path(t_data *data, t_cmd *head)
 		free(tmp);
 		if (!head->cmd_path)
 			err_free(MALLOC_ERROR, data, 0);
-		printf("\n%s\n", head->cmd_path);
 		if (!access(head->cmd_path, X_OK))
 			break ;
 		free(head->cmd_path);

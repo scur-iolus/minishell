@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/25 14:20:43 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:05:36 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static short	input_is_ok(t_data *data)//CHECKED
 	space_before_after_chevron(data);
 	if (too_many_chevrons_o_pipes(data) || invalid_suite(data))
 		return (0);
-	printf("✅ data->line contient 🔹%s🔹\n", data->line); //FIXME
+	//printf("✅ data->line contient 🔹%s🔹\n", data->line); //FIXME
 	return (1);
 }
 
@@ -105,7 +105,7 @@ int	main(int argc, char **argv, char **env)// CHECKED
 	while (argc == 1)
 	{
 		reset_data(&data);
-		data.line = readline("🌞 Mishell c'est le Brésil >");
+		data.line = readline("🌞 Mishell c'est le Brésil> ");
 		if (ft_strlen(data.line) > 0)
 			add_history(data.line);
 		if (input_is_ok(&data) && parse_cmd(&data) && data.cmd)
@@ -116,3 +116,5 @@ int	main(int argc, char **argv, char **env)// CHECKED
 	ft_error(TOO_MANY_ARG);
 	return (1);
 }
+
+//FIXME : trouver pourquoi

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/24 12:07:19 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/25 17:58:12 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	reset_data(t_data *data)
 	data->line = 0;
 	data->cmd = 0;
 	data->env = list_to_env(data->env_lst);
+	dup2(0, 0);
 	take_path(data);
 }
 

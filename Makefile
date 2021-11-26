@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
+#    By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/25 13:40:16 by llalba           ###   ########.fr        #
+#    Updated: 2021/11/26 19:21:40 by fmonbeig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,9 @@ SRC			= \
 			$(SRC_PATH)cmd_split_check.c \
 			$(SRC_PATH)list_to_env.c \
 			$(SRC_PATH)multipipe/utils_multipipe.c \
-			$(SRC_PATH)builtins.c \
 			$(SRC_PATH)execute.c \
+			$(SRC_PATH)pwd.c \
+			$(SRC_PATH)exit.c \
 			$(SRC_PATH)cd.c \
 			$(SRC_PATH)echo.c \
 			$(SRC_PATH)env.c \
@@ -58,6 +59,7 @@ SRC			= \
 			$(SRC_PATH)print_export.c \
 			$(SRC_PATH)open_file.c \
 			$(SRC_PATH)multipipe/dup.c \
+			#$(SRC_PATH)process.c \
 			#$(SRC_PATH)error_var_name.c \
 			#$(SRC_PATH)print_export.c \
 			#$(SRC_PATH)multipipe/init_pipe.c \
