@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/26 19:22:58 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/29 10:37:48 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ void	launch_built_in(t_data *data, t_cmd *cmd)
 	else if (!ft_strcmp("pwd", cmd->cmd[0])) //FONCTION OK
 		data->exit_status = ft_pwd(data);
 	else if (!ft_strcmp("export", cmd->cmd[0])) //NOTA BENE : ok mais a tester
-		ft_export(data, cmd->cmd);
+		data->exit_status = ft_export(data, cmd->cmd);
 	else if (!ft_strcmp("unset", cmd->cmd[0])) //NOTA BENE : ok mais a tester
-		ft_unset(data, cmd->cmd);
+		data->exit_status = ft_unset(data, cmd->cmd);
 	else if (!ft_strcmp("env", cmd->cmd[0])) //FONCTION OK
 		data->exit_status = ft_env(data, cmd->cmd);
 	else if (!ft_strcmp("exit", cmd->cmd[0])) //FONCTION OK

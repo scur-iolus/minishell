@@ -6,11 +6,56 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 15:19:41 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:08:05 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+
+static t_env	*find_previous_var_env(t_data *data, char *var_name)
+{
+	t_env	*temp;
+	t_env	*previous;
+	int		i;
+
+	previous = NULL;
+	temp = data->env_lst;
+	i = -1;
+	while(temp)
+	{
+		if (!ft_strcmp(var_name, temp->var))
+			return (previous);
+		previous = temp;
+		temp = temp->next;
+	}
+	return(NULL);
+}
+
+static void	pop_out_list_env(t_data *data, char *line) // a tester
+{
+	t_env *temp;
+	t_env *previous;
+
+	temp = find_var_env(data, line);
+	previous = find_previous_var_env(data, line);
+	if (!temp)
+		return ;
+	else if (!previous && !temp->next)
+		delete_one_env_var(temp);
+	else if (!previous && temp->next)
+	{
+		data->env_lst = temp->next;
+		delete_one_env_var(temp);
+	}
+	else if (previous && !temp->next)
+		delete_one_env_var(temp);
+	else if (previous && temp->next)
+	{
+		previous->next = temp->next;
+		delete_one_env_var(temp);
+	}
+}
 
 int	ft_unset(t_data *data, char **cmd)
 {
@@ -40,46 +85,25 @@ int	ft_unset(t_data *data, char **cmd)
 	return (0);
 }
 
-static t_env	*find_previous_var_env(t_data *data, char *var_name)
+int	error_var_name(char *line)
 {
-	t_env	*temp;
-	t_env	*previous;
-	int		i;
+	int i;
 
-	previous = NULL;
-	temp = data->env_lst;
 	i = -1;
-	while(temp)
+	if (ft_isdigit(line[0]))
+		return(1);
+	while (line[++i] && line[i]!= '=')
 	{
-		if (!ft_strcmp(var_name, temp->var))
-			return (previous);
-		previous = temp;
-		temp = temp->next;
+		if (!ft_is_var_name(line[i]))
+			return (1);
 	}
-	return(NULL);
+	return (0);
 }
 
-void	pop_out_list_env(t_data *data, char *line) // a tester
+int	ft_is_var_name(int c)
 {
-	t_env *temp;
-	t_env *previous;
-
-	temp = find_var_env(data, line);
-	previous = find_previous_var_env(data, line);
-	if (!temp)
-		return ;
-	else if (!previous && !temp->next) //cas ou il est seul dans la liste
-		delete_one_env_var(temp); //free temp --> du coup la list chaines sera a null
-	else if (!previous && temp->next) // cas ou c est le premier
-	{
-		data->env_lst = temp->next;
-		delete_one_env_var(temp);
-	}
-	else if (previous && !temp->next)
-		delete_one_env_var(temp);
-	else if (previous && temp->next)
-	{
-		previous->next = temp->next;
-		delete_one_env_var(temp);
-	}
+	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')
+		|| (c >= 'a' && c <= 'z') || c == '_')
+		return (1);
+	return (0);
 }

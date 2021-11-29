@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/26 17:22:11 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/29 12:13:08 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,8 @@ void	ft_exit2(t_data *data, char **cmd); // FIXME j en ai fait un autre plus en 
 //   Export                                     //
 // +------------------------------------------+ //
 int		ft_export(t_data *data, char **cmd);
-void	put_in_env_export(t_data *data, char **cmd, int i);
 int		check_is_env(char *line);
 int		check_equal_sign(char *str);
-int		error_var_name(char *line);
 void	print_export(t_data *data);
 void	print_env_with_export_layout(t_data *data);
 // +------------------------------------------+ //
@@ -95,13 +93,12 @@ int		check_argument_ft_env(char **cmd);
 //   Cd                                     //
 // +------------------------------------------+ //
 short	ft_cd(t_data *data, char **cmd);
-
 // +------------------------------------------+ //
 //   Unset                                     //
 // +------------------------------------------+ //
-int				ft_unset(t_data *data, char **cmd);
-static t_env	*find_previous_var_env(t_data *data, char *var_name);
-void			pop_out_list_env(t_data *data, char *line);
+int			ft_unset(t_data *data, char **cmd);
+int			error_var_name(char *line);
+int			ft_is_var_name(int c);
 
 // +------------------------------------------+ //
 //   Free                                       //
