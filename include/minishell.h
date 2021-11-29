@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/25 14:18:55 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/29 14:37:57 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@
 # include "structures.h"
 
 // +------------------------------------------+ //
+//   Unique global variable                     //
+// +------------------------------------------+ //
+
+extern long long	*g_exit_status;
+
+// +------------------------------------------+ //
 //   Define                                     //
 // +------------------------------------------+ //
 
@@ -55,7 +61,8 @@
 # define GNL_ERROR			"failed to malloc or to read standard input"
 # define HEREDOC_EOF		"Warning: here-document delimited by EOF.\n"
 # define CMD_NOT_FOUND		": command not found\n"
-# define BUFFER_SIZE 		254
+# define SIGQUIT_MSG		"Quit (core dumped)"
+# define BUFFER_SIZE 		511
 # define EMOJI_OK			"\033[32m[\xE2\x9C\x94]\033[0m "
 # define EMOJI_X			"\033[31m[\xE2\x9C\x96]\033[0m "
 # define ONE_RIGHT			1
@@ -68,6 +75,7 @@
 // +------------------------------------------+ //
 //   Utils                                      //
 // +------------------------------------------+ //
+void	signals_init(void);
 int		gnl_result(int ret, char **line, char **save);//CHECKED
 // +------------------------------------------+ //
 //   Builtins                                   //
@@ -99,10 +107,8 @@ short	switch_pwd(t_data *data, char * line, char *temp);
 // +------------------------------------------+ //
 //   Unset                                     //
 // +------------------------------------------+ //
-int				ft_unset(t_data *data, char **cmd);
-static t_env	*find_previous_var_env(t_data *data, char *var_name);
-void			pop_out_list_env(t_data *data, char *line);
-
+int		ft_unset(t_data *data, char **cmd);
+void	pop_out_list_env(t_data *data, char *line);
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
@@ -144,8 +150,8 @@ short	open_file(t_cmd *head, char *file, short opening);//CHECKED
 // +------------------------------------------+ //
 //   Environnement                              //
 // +------------------------------------------+ //
-void			delete_one_env_var(t_env *lst);//CHECKED
-void			ft_lstclear_env(t_env *head);//CHECKED
+void	delete_one_env_var(t_env *lst);//CHECKED
+void	ft_lstclear_env(t_env *head);//CHECKED
 t_env	*init_env(t_data *data, char **env);//CHECKED
 t_env	*ft_lstnew_env(void);//CHECKED
 char	*get_var_name(t_data *data, char *str);//CHECKED
@@ -182,21 +188,21 @@ void	last_process(t_data *data, t_pipe *pipe, t_cmd *cmd);
 // +------------------------------------------+ //
 //   Close_FD                                   //
 // +------------------------------------------+ //
-void		close_all_fd(t_pipe *pipe);
-void		close_fd_first_process(t_pipe *pipe);
-void		close_fd_middle_process(t_pipe *pipe);
-void		close_fd_last_process(t_pipe *pipe);
+void	close_all_fd(t_pipe *pipe);
+void	close_fd_first_process(t_pipe *pipe);
+void	close_fd_middle_process(t_pipe *pipe);
+void	close_fd_last_process(t_pipe *pipe);
 // +------------------------------------------+ //
 //   Dup                                   //
 // +------------------------------------------+ //
 void	open_infile_and_heredoc(t_cmd *cmd);
-void		up_outfile(t_cmd *cmd, t_pipe *pipe);
+void	up_outfile(t_cmd *cmd, t_pipe *pipe);
 // +------------------------------------------+ //
 //   Fonction list CMD                          //
 // +--------------------------------a----------+ //
-void			cmd_add_back(t_cmd **alst, t_cmd *new);//CHECKED
-t_cmd			*ft_lstnew_cmd(char *raw);//CHECKED
-void			ft_lstclear_cmd(t_cmd *head);//CHECKED
-int				ft_lstsize(t_cmd *lst);//CHECKED
+void	cmd_add_back(t_cmd **alst, t_cmd *new);//CHECKED
+t_cmd	*ft_lstnew_cmd(char *raw);//CHECKED
+void	ft_lstclear_cmd(t_cmd *head);//CHECKED
+int		ft_lstsize(t_cmd *lst);//CHECKED
 
 #endif

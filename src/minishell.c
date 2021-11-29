@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/25 11:53:07 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:53:59 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+long long	*g_exit_status;
+
 static void	init_data(t_data *data, char **env)
 {
+	data->exit_status = 0;
+	g_exit_status = &(data->exit_status);
 	data->env = 0;
 	data->path = 0;
 	data->line = 0;
-	data->exit_status = 0;
 	data->cmd = 0;
 	data->pipe.end = 0;
 	data->pipe.nb_pipe = 0;
@@ -92,20 +95,17 @@ static short	input_is_ok(t_data *data)//CHECKED
 	return (1);
 }
 
-/*
-** exit(0) may only happen when the user enters 'exit'.
-*/
-
 int	main(int argc, char **argv, char **env)// CHECKED
 {
 	t_data	data;
 
 	(void)argv;
+	signals_init();
 	init_data(&data, env);
 	while (argc == 1)
 	{
 		reset_data(&data);
-		data.line = readline("🌞 Mishell c'est le Brésil >");
+		data.line = readline("🌞 Mishell c'est le Brésil ▸ ");
 		if (ft_strlen(data.line) > 0)
 			add_history(data.line);
 		if (input_is_ok(&data) && parse_cmd(&data) && data.cmd)
