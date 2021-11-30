@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_list_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/12 13:54:07 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/30 12:21:25 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ t_env	*find_var_env(t_data *data, char *var_name)//CHECKED
 	t_env *temp;
 
 	temp = data->env_lst;
-	while(temp)
+	while (temp)
 	{
 		if (!ft_strcmp(var_name, temp->var))
 			return (temp);
 		temp = temp->next;
 	}
-	return(NULL);
+	return (NULL);
 }
 
 void	env_add_front(t_env **head, t_env *new)//CHECKED

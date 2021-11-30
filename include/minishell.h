@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/29 12:13:08 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/30 17:18:54 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@
 # define START_CHAR_ERR		"invalid char at the beginning of your command"
 # define TOO_MANY_ARG		"minishell does not accept any argument"
 # define TOO_MANY_ARG2		"too many arguments"
+# define HOME_NOT_SET		"HOME not set"
 # define LINE_TOO_LONG		"this command is too long, please try to split it"
 # define INVALID_STATUS		"this exit status is not an int"
+# define INVALID_OPTION		"- invalid option"
 # define FILE_NOT_FOUND		"no such file or directory"
 # define FAILED_TO_CLOSE	"failed to close one or more file descriptor(s)"
 # define GNL_ERROR			"failed to malloc or to read standard input"
@@ -73,7 +75,7 @@ int		gnl_result(int ret, char **line, char **save);//CHECKED
 // +------------------------------------------+ //
 //   Builtins                                   //
 // +------------------------------------------+ //
-int		ft_pwd(t_data *data);
+int		ft_pwd(t_data *data, char **cmd);
 void	ft_exit(t_data *data, char *str, char **split, long long exit_status);
 void	ft_exit2(t_data *data, char **cmd); // FIXME j en ai fait un autre plus en adéquation avec les autre fonction
 // +------------------------------------------+ //
@@ -155,7 +157,7 @@ char	**list_to_env(t_env *env_lst);
 //   Execute                                  //
 // +------------------------------------------+ //
 void	execute(t_data *data);
-int		is_built_in(t_data *data);
+int		is_built_in(char **cmd);
 void	make_one_built_in(t_data *data, t_cmd *cmd);
 void	launch_built_in(t_data *data, t_cmd *cmd);
 // +------------------------------------------+ //
@@ -166,7 +168,6 @@ void	find_command_path(t_data *data, t_cmd *head);
 //void	error_var_name(t_data *data, t_cmd *new, char *cmd_line);
 int		init_pipe(int nb_pipe, t_data *data, t_pipe *pipes);
 int		init_pipe_struct(t_data *data);
-int		len_before_redirection(t_cmd *cmd);
 void	fork_creation(t_pipe *pipe, t_data *data);
 void	command_failed(t_data *data, t_pipe *pipe, t_cmd *cmd);
 // +------------------------------------------+ //
@@ -186,7 +187,7 @@ void		close_fd_last_process(t_pipe *pipe);
 //   Dup                                   //
 // +------------------------------------------+ //
 void	open_infile_and_heredoc(t_cmd *cmd);
-void		up_outfile(t_cmd *cmd, t_pipe *pipe);
+void	dup_outfile(t_cmd *cmd, t_pipe *pipe);
 // +------------------------------------------+ //
 //   Fonction list CMD                          //
 // +--------------------------------a----------+ //

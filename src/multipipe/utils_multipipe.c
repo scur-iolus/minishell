@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/26 12:03:19 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/30 17:16:57 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,10 @@ void	find_command_path(t_data *data, t_cmd *head)
 		head->cmd_path = 0;
 		i++;
 	}
+}
+
+void	command_failed(t_data *data, t_pipe *pipe, t_cmd *cmd)
+{
+	write(2, cmd->cmd[0], ft_strlen(cmd->cmd[0]));
+	err_free(CMD_NOT_FOUND, data, 0);
 }

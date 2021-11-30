@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_to_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 15:44:53 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/12 13:33:08 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/30 12:14:53 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ size_t	get_lst_len(t_env *head)
 	return (len);
 }
 
-char	**list_to_env(t_env *lst_head)
+char	**list_to_env(t_env *lst_head) //NOTA BENE peut etre rajouter la notion -> if is_env
 {
 	char	**head;
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 19:20:04 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/26 19:20:26 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/30 17:33:57 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ void	first_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 		dup2(pipe->end[pipe->i + 1][1], STDOUT_FILENO);
 		close(pipe->end[pipe->i + 1][1]);
 	}
-
+	if (is_built_in(cmd->cmd))
+	{
+		launch_built_in(data, cmd);
+		free_everything(data, 0);
+		exit(data->exit_status);
+	}
 	if ((cmd->cmd_path == NULL ||
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
 		command_failed(data, pipe, cmd);
@@ -39,6 +44,12 @@ void	middle_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 	dup2(pipe->end[pipe->i + 1][1], STDOUT_FILENO);
 	close(pipe->end[pipe->i + 1][1]);
 	close(pipe->end[pipe->i][0]);
+	if (is_built_in(cmd->cmd))
+	{
+		launch_built_in(data, cmd);
+		free_everything(data, 0);
+		exit(data->exit_status);
+	}
 	if ((cmd->cmd_path == NULL ||
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
 		command_failed(data, pipe, cmd);
@@ -52,6 +63,12 @@ void	last_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 		dup_outfile(cmd, pipe);
 	dup2(pipe->end[pipe->i][0], STDIN_FILENO);
 	close(pipe->end[pipe->i][0]);
+	if (is_built_in(cmd->cmd))
+	{
+		launch_built_in(data, cmd);
+		free_everything(data, 0);
+		exit(data->exit_status);
+	}
 	if ((cmd->cmd_path == NULL ||
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
 		command_failed(data, pipe, cmd);

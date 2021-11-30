@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:18:10 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 13:54:22 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/30 15:45:41 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,4 @@ int	init_pipe_struct(t_data *data)
 	if (init_pipe(data->pipe.nb_pipe, data, &data->pipe))
 		return (1);
 	return (0);
+}

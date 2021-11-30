@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 12:24:06 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/17 14:22:56 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:47:53 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	print_export(t_data *data)
 				ft_putstr_fd("=", 1);
 				ft_putstr_fd("\"", 1);
 				ft_putstr_fd(temp->value, 1);
-				ft_putstr_fd("\"\n", 1);
+				ft_putstr_fd("\"", 1);
 			}
+				ft_putstr_fd("\n", 1);
 		}
 		temp = temp->next;
 	}

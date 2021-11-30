@@ -6,7 +6,7 @@
 #    By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/11/26 19:21:40 by fmonbeig         ###   ########.fr        #
+#    Updated: 2021/11/30 16:53:55 by fmonbeig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,14 +56,14 @@ SRC			= \
 			$(SRC_PATH)env.c \
 			$(SRC_PATH)unset.c \
 			$(SRC_PATH)export.c \
-			$(SRC_PATH)print_export.c \
 			$(SRC_PATH)open_file.c \
+			$(SRC_PATH)print_export.c \
 			$(SRC_PATH)multipipe/dup.c \
-			#$(SRC_PATH)process.c \
-			#$(SRC_PATH)error_var_name.c \
-			#$(SRC_PATH)print_export.c \
-			#$(SRC_PATH)multipipe/init_pipe.c \
-			#$(SRC_PATH)multipipe/multipipe.c
+			$(SRC_PATH)multipipe/process.c \
+			$(SRC_PATH)multipipe/close_fd.c \
+			$(SRC_PATH)multipipe/init_pipe.c \
+			$(SRC_PATH)multipipe/multipipe.c
+			# $(SRC_PATH)error_var_name.c \
 
 OBJS		= $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/29 12:42:29 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/30 12:33:30 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_var_name(t_data *data, char *str)//CHECKED
 	if (!var_name)
 		err_free(MALLOC_ERROR, data, 0);
 	i = 0;
-	while (str[i] && str[i] != '=') //FIXME  est ce qu'avoir rajouter str i pose un probleme ?
+	while (str[i] && str[i] != '=') //NOTA BENE est ce qu'avoir rajouter str i pose un probleme ?
 	{
 		var_name[i] = str[i];
 		i++;
@@ -45,9 +45,9 @@ char	*get_var_value(t_data *data, char *str)//CHECKED
 	size_t	j;
 	char	*var_value;
 
-	while (str && *str && *str != '=') //FIXME  J ai mis *str en plus
+	while (str && *str && *str != '=') //NOTA BENE  J ai mis *str en plus
 		str++;
-	if (str && *str && *str == '=') //FIXME la aussi
+	if (str && *str && *str == '=') //NOTA BENE la aussi
 		var_value = (char *)ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	else
 		var_value = (char *)ft_calloc(1, sizeof(char));

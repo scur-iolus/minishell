@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/26 12:05:36 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:01:28 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,3 +118,6 @@ int	main(int argc, char **argv, char **env)// CHECKED
 }
 
 //FIXME : trouver pourquoi
+
+
+// j ai fait des change sur cd et sur export et sur multipipe

@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:36:27 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/29 12:46:06 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/11/30 12:30:04 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void	put_in_env_export(t_data *data, char **cmd, int i) // ne fini pas le
 	new->is_env = check_is_env(cmd[i]);
 	if(!new->value || !new->var)
 		ft_error(MALLOC_ERROR);
-	env_add_front(&data->env_lst, new);
+	if (!find_var_env(data, temp))
+		env_add_front(&data->env_lst, new);
 	free(temp);
 }
 
@@ -84,6 +85,6 @@ int	ft_export(t_data *data, char **cmd)
 				continue ;
 			}
 			put_in_env_export(data, cmd, i);
-			return (j);
 		}
+			return (j);
 }
