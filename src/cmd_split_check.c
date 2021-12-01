@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/25 13:50:32 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/01 10:50:33 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,25 @@ static void	pipes_split(t_data *data, t_cmd **head)//CHECKED
 static short	is_syntax_error(t_data *data)//CHECKED
 {
 	t_cmd	*tmp;
-	char	*str;
 	char	*next;
 	size_t	i;
 
 	tmp = data->cmd;
 	while (tmp)
 	{
-		str = *(tmp->split);
-		while (*str && *(str + 1))
+		i = 0;
+		while (tmp->split[i] && tmp->split[i + 1])
 		{
-			if ((ft_strchr(str, '>') && ft_strchr(str + 1, '>')) \
-			|| (ft_strchr(str, '>') && ft_strchr(str + 1, '<')) \
-			|| (ft_strchr(str, '<') && ft_strchr(str + 1, '>')) \
-			|| (ft_strchr(str, '<') && ft_strchr(str + 1, '<')))
+			if ((ft_strchr(tmp->split[i], '>') && \
+			ft_strchr(tmp->split[i + 1] + 1, '>')) \
+			|| (ft_strchr(tmp->split[i], '>') && \
+			ft_strchr(tmp->split[i + 1] + 1, '<')) \
+			|| (ft_strchr(tmp->split[i], '<') && \
+			ft_strchr(tmp->split[i + 1] + 1, '>')) \
+			|| (ft_strchr(tmp->split[i], '<') && \
+			ft_strchr(tmp->split[i + 1] + 1, '<')))
 				return (1);
-			str++;
+			i++;
 		}
 		tmp = tmp->next;
 	}

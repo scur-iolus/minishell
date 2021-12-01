@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 11:20:26 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/01 10:36:51 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ void	ft_lstclear_cmd(t_cmd *head)//CHECKED
 {
 	t_cmd	*tmp;
 
-	tmp = head;
-	while (tmp)
+	while (head)
 	{
 		tmp = head->next;
 		if (head->raw)

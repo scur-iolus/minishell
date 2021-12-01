@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/25 12:17:32 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/01 11:25:19 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 
 void	execute(t_data *data)
 {
-	int i;
+	short	vertical_bar;
 
-	i = ft_lstsize(data->cmd);
-	if (i == 1 && is_built_in(data))
+	vertical_bar = ft_strrchr(data->line, '|');
+	if (!vertical_bar && data->cmd->cmd == 0)
+		return ;
+	if (!vertical_bar && is_built_in(data))
+	{
 		make_one_built_in(data);
+	}
 	// else
 	// {
 	// 	if (!init_pipe_struct(&data->pipe, data))
