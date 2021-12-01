@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/29 14:53:59 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/01 11:32:02 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static short	input_is_ok(t_data *data)//CHECKED
 	space_before_after_chevron(data);
 	if (too_many_chevrons_o_pipes(data) || invalid_suite(data))
 		return (0);
-	printf("✅ data->line contient 🔹%s🔹\n", data->line); //FIXME
+	//printf("✅ data->line contient 🔹%s🔹\n", data->line); //FIXME
 	return (1);
 }
 
@@ -116,3 +116,8 @@ int	main(int argc, char **argv, char **env)// CHECKED
 	ft_error(TOO_MANY_ARG);
 	return (1);
 }
+
+//FIXME : trouver pourquoi
+
+
+// j ai fait des change sur cd et sur export et sur multipipe

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/25 14:00:27 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/01 11:37:02 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,16 @@ void	find_command_path(t_data *data, t_cmd *head)
 		free(tmp);
 		if (!head->cmd_path)
 			err_free(MALLOC_ERROR, data, 0);
-		printf("\n%s\n", head->cmd_path); // FIXME
 		if (!access(head->cmd_path, X_OK))
 			break ;
 		free(head->cmd_path);
 		head->cmd_path = 0;
 		i++;
 	}
+}
+
+void	command_failed(t_data *data, t_pipe *pipe, t_cmd *cmd)
+{
+	write(2, cmd->cmd[0], ft_strlen(cmd->cmd[0]));
+	err_free(CMD_NOT_FOUND, data, 0);
 }

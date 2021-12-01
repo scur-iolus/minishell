@@ -6,36 +6,13 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:53:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/25 11:23:46 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/01 11:01:13 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	fork_creation(t_pipe *pipe, t_data *data)
-{
-	int	pid;
-	int	x;
-	t_cmd *list;
-
-	list = data->cmd;
-	x = -1;
-	while (++x < pipe->nb_pipe - 1 && list)
-	{
-		pipe->cmd_nb++; // a reset lors d'une redirection
-		pipe->i++;
-		if (pipe->cmd_len == 0)
-			pipe->cmd_len = len_before_redirection(list); // a reset lors d'une redirection pour recalculer le nb de commande
-		pid = fork();
-		if (pid < 0)
-			ft_putstr_fd("ERROR: Fork Failed", 1);
-		if (pid == 0)
-			do_cmd(data, &pipe, list);
-		list = list->next;
-	}
-}
-
-void	do_cmd(t_data *data, t_pipe *pipe, t_cmd *cmd)
+static void	do_cmd(t_data *data, t_pipe *pipe, t_cmd *cmd)
 {
 	if (pipe->cmd_nb == 1) // peut faire directement la redirection
 		first_process(data, pipe, cmd);
@@ -45,7 +22,7 @@ void	do_cmd(t_data *data, t_pipe *pipe, t_cmd *cmd)
 		last_process(data, pipe, cmd);
 }
 
-int	len_before_redirection(t_cmd *cmd)
+static int	len_before_redirection(t_cmd *cmd)
 {
 	t_cmd	*list;
 	int		i;
@@ -62,61 +39,43 @@ int	len_before_redirection(t_cmd *cmd)
 	return (i);
 }
 
-void	command_failed(t_data *data, t_pipe *pipe, t_cmd *cmd)
+static void	finish_pipe(t_data *data, t_pipe *pipe, pid_t pid)
 {
-	write(2, cmd->cmd[0], ft_strlen(cmd->cmd[0]));
-	err_free(CMD_NOT_FOUND, data, 0);
-}
+	int	i;
+	int	status;
 
-void	first_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
-{
-	if (pipe->cmd_nb == pipe->cmd_len) // s'il n y a qu une seule commande
-		close_all_fd(pipe);
-	close_fd_first_process(pipe); // A custom si outfile alors fermer plus de chose
-	open_infile_and_heredoc(cmd);
-	if (cmd->outfile) // si outfile
-		dup_outfile(cmd, pipe);
-	else if (pipe->cmd_nb < pipe->cmd_len) // ou si pas dernier
+	i = -1;
+	close_all_fd(pipe);
+	while (++i < pipe->nb_pipe - 1)
 	{
-		dup2(pipe->end[pipe->i + 1][1], STDOUT_FILENO);
-		close(pipe->end[pipe->i + 1][1]);
+		waitpid(pid ,&status , 0);
+		if (WIFEXITED(status))
+			data->exit_status = WEXITSTATUS(status);
+		else
+			data->exit_status = 1; // NOTA BENE : si jamais le programme fini sans passer par un return ou un exit, est ce que c'est la ou on met le retour du signal ?
 	}
-
-	if ((cmd->cmd_path == NULL ||
-				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
-		command_failed(data, pipe, cmd);
 }
 
-void	middle_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
+void	fork_creation(t_pipe *pipe, t_data *data)
 {
-	close_fd_middle_process(pipe);
-	open_infile_and_heredoc(cmd);
-	dup2(pipe->end[pipe->i][0], STDIN_FILENO);
-	dup2(pipe->end[pipe->i + 1][1], STDOUT_FILENO);
-	close(pipe->end[pipe->i + 1][1]);
-	close(pipe->end[pipe->i][0]);
-	if ((cmd->cmd_path == NULL ||
-				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
-		command_failed(data, pipe, cmd);
+	pid_t	pid;
+	int		x;
+	t_cmd *list;
+
+	list = data->cmd;
+	x = -1;
+	while (++x < pipe->nb_pipe - 1 && list)
+	{
+		pipe->cmd_nb++;
+		pipe->i++;
+		if (pipe->cmd_len == 0)
+			pipe->cmd_len = len_before_redirection(list);
+		pid = fork();
+		if (pid < 0)
+			ft_error("Fork Failed");
+		if (pid == 0)
+			do_cmd(data, pipe, list);
+		list = list->next;
+	}
+	finish_pipe(data, pipe, pid);
 }
-
-void	last_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
-{
-	close_fd_last_process(pipe);
-	open_infile_and_heredoc(cmd);
-	if (cmd->outfile) // si outfile
-		dup_outfile(cmd, pipe);
-	dup2(pipe->end[pipe->i][0], STDIN_FILENO);
-	close(pipe->end[pipe->i][0]);
-	if ((cmd->cmd_path == NULL ||
-				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
-		command_failed(data, pipe, cmd);
-}
-
-
-// 0	Entrée standard	STDIN_FILENO	stdin
-// 1	Sortie standard	STDOUT_FILENO	stdout
-
-
-//write end[1]
-// read end[0]

@@ -306,3 +306,8 @@ s_cmd                                s_cmd
 
 
 https://github.com/Binary-Hackers/42_Corrections/blob/master/00_Projects/01_Unix/minishell/00.pdf
+
+
+
+
+pipes entre ''

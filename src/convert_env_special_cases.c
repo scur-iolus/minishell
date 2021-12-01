@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_env_special_cases.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:09:25 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/19 17:07:43 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/30 15:52:12 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ short	special_cases(t_data *data, char **output, size_t *pos)//CHECKED
 	else if (data->line[*pos] == '.' || data->line[*pos] == '$' || \
 		data->line[*pos] == '?')
 		return (1);
-	else
+	else            //FIXME ?? ca fait une erreur lors de la compilation pas de return 
 		return (0);
 }

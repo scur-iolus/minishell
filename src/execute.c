@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/01 11:25:19 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/01 11:39:08 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,66 +14,76 @@
 
 void	execute(t_data *data)
 {
-	short	vertical_bar;
+	char	*vertical_bar;
 
 	vertical_bar = ft_strrchr(data->line, '|');
 	if (!vertical_bar && data->cmd->cmd == 0)
 		return ;
-	if (!vertical_bar && is_built_in(data))
+	if (!vertical_bar && is_built_in(data->cmd->cmd))
 	{
-		make_one_built_in(data);
+		make_one_built_in(data, data->cmd);
 	}
-	// else
-	// {
-	// 	if (!init_pipe_struct(&data->pipe, data))
-	// 		fork_creation(&data->pipe, data);
-	// }
-}
-
-int		is_built_in(t_data *data)
-{
-	printf("Bienvenue Built In %s \n", data->cmd->cmd[0]); // NOTA BENE
-	if (!ft_strcmp("echo", data->cmd->cmd[0]))
-		return (1);
-	else if (!ft_strcmp("cd", data->cmd->cmd[0]))
-		return (1);
-	else if (!ft_strcmp("pwd", data->cmd->cmd[0]))
-		return (1);
-	else if (!ft_strcmp("export", data->cmd->cmd[0]))
-		return (1);
-	else if (!ft_strcmp("unset", data->cmd->cmd[0]))
-		return (1);
-	else if (!ft_strcmp("env", data->cmd->cmd[0]))
-		return (1);
-	else if (!ft_strcmp("exit", data->cmd->cmd[0]))
-		return (1);
 	else
 	{
-		printf("Ah non... tu n'est pas un Built In\n"); // NOTA BENE
-		return(0);
+		if (!init_pipe_struct(data))
+			fork_creation(&data->pipe, data);
 	}
 }
 
-void	make_one_built_in(t_data *data)
+int		is_built_in(char **cmd)
 {
-	printf("bonjour tu veux quoi comme commande ?\n"); // NOTA BENE
-	open_infile_and_heredoc(data->cmd);
-	if (data->cmd->outfile) // si outfile
+	if (!ft_strcmp("echo", cmd[0]))
+		return (1);
+	else if (!ft_strcmp("cd", cmd[0]))
+		return (1);
+	else if (!ft_strcmp("pwd", cmd[0]))
+		return (1);
+	else if (!ft_strcmp("export", cmd[0]))
+		return (1);
+	else if (!ft_strcmp("unset", cmd[0]))
+		return (1);
+	else if (!ft_strcmp("env", cmd[0]))
+		return (1);
+	else if (!ft_strcmp("exit", cmd[0]))
+		return (1);
+	else
+		return(0);
+}
+
+void	make_one_built_in(t_data *data, t_cmd *cmd)
+{
+	int	save_stdout;
+	int	save_stdin;
+
+	save_stdout = dup(1) ;
+	save_stdin = dup(0);
+	open_infile_and_heredoc(cmd);
+	if (cmd->outfile) // si outfile
 	{
-		dup2(data->cmd->outfile, STDOUT_FILENO);
-		close(data->cmd->outfile);
+		dup2(cmd->outfile, STDOUT_FILENO);
+		close(cmd->outfile);
 	}
-	if (!ft_strcmp("echo", data->cmd->cmd[0])) //NOTA BENE : ok mais a tester
-		ft_echo(data, data->cmd->cmd);
-	else if (!ft_strcmp("cd", data->cmd->cmd[0])) //NOTA BENE : ok mais a tester
-		ft_cd(data, data->cmd->cmd);
-	else if (!ft_strcmp("pwd", data->cmd->cmd[0])) //FONCTION OK
-		ft_pwd(data);
-	else if (!ft_strcmp("export", data->cmd->cmd[0])) //NOTA BENE : ok mais a tester
-		ft_export(data, data->cmd->cmd);
-	else if (!ft_strcmp("unset", data->cmd->cmd[0])) //NOTA BENE : ok mais a tester
-		ft_unset(data, data->cmd->cmd);
-	else if (!ft_strcmp("env", data->cmd->cmd[0])) //FONCTION OK
-		ft_env(data, data->cmd->cmd);
-	//rajouter exit
+	launch_built_in(data, cmd);
+	if (cmd->outfile)
+		dup2(save_stdout, STDOUT_FILENO);
+	if (cmd->infile)
+		dup2(save_stdin, STDIN_FILENO);
+}
+
+void	launch_built_in(t_data *data, t_cmd *cmd)
+{
+	if (!ft_strcmp("echo", cmd->cmd[0])) //FONCTION OK
+		data->exit_status = ft_echo(cmd->cmd);
+	else if (!ft_strcmp("cd", cmd->cmd[0])) //FONCTION OK
+		data->exit_status = ft_cd(data, cmd->cmd);
+	else if (!ft_strcmp("pwd", cmd->cmd[0])) //FONCTION OK
+		data->exit_status = ft_pwd(data, cmd->cmd);
+	else if (!ft_strcmp("export", cmd->cmd[0])) //FONCTION OK
+		data->exit_status = ft_export(data, cmd->cmd);
+	else if (!ft_strcmp("unset", cmd->cmd[0])) //FONCTION OK
+		data->exit_status = ft_unset(data, cmd->cmd);
+	else if (!ft_strcmp("env", cmd->cmd[0])) //FONCTION OK
+		data->exit_status = ft_env(data, cmd->cmd);
+	else if (!ft_strcmp("exit", cmd->cmd[0])) //FONCTION OK
+		ft_exit2(data, cmd->cmd);
 }

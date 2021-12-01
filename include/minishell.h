@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/29 14:37:57 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/01 11:33:18 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,21 @@ extern long long	*g_exit_status;
 # define END_CHAR_ERR		"invalid char at the end of your command"
 # define START_CHAR_ERR		"invalid char at the beginning of your command"
 # define TOO_MANY_ARG		"minishell does not accept any argument"
+# define TOO_MANY_ARG2		"too many arguments"
+# define HOME_NOT_SET		"HOME not set"
 # define LINE_TOO_LONG		"this command is too long, please try to split it"
 # define INVALID_STATUS		"this exit status is not an int"
+# define INVALID_OPTION		"- invalid option"
 # define FILE_NOT_FOUND		"no such file or directory"
 # define FAILED_TO_CLOSE	"failed to close one or more file descriptor(s)"
 # define GNL_ERROR			"failed to malloc or to read standard input"
 # define HEREDOC_EOF		"Warning: here-document delimited by EOF.\n"
 # define CMD_NOT_FOUND		": command not found\n"
 # define SIGQUIT_MSG		"Quit (core dumped)"
-# define BUFFER_SIZE 		511
+# define NUMERIC_ARG		": numeric argument required"
 # define EMOJI_OK			"\033[32m[\xE2\x9C\x94]\033[0m "
 # define EMOJI_X			"\033[31m[\xE2\x9C\x96]\033[0m "
+# define BUFFER_SIZE 		511
 # define ONE_RIGHT			1
 # define TWO_RIGHT			2
 # define ONE_LEFT			3
@@ -80,16 +84,15 @@ int		gnl_result(int ret, char **line, char **save);//CHECKED
 // +------------------------------------------+ //
 //   Builtins                                   //
 // +------------------------------------------+ //
-int		ft_pwd(t_data *data);
+int		ft_pwd(t_data *data, char **cmd);
 void	ft_exit(t_data *data, char *str, char **split, long long exit_status);
+void	ft_exit2(t_data *data, char **cmd); // FIXME j en ai fait un autre plus en adéquation avec les autre fonction
 // +------------------------------------------+ //
 //   Export                                     //
 // +------------------------------------------+ //
 int		ft_export(t_data *data, char **cmd);
-void	put_in_env_export(t_data *data, char **cmd, int i);
 int		check_is_env(char *line);
 int		check_equal_sign(char *str);
-int		error_var_name(char *line);
 void	print_export(t_data *data);
 void	print_env_with_export_layout(t_data *data);
 // +------------------------------------------+ //
@@ -101,14 +104,12 @@ int		check_argument_ft_env(char **cmd);
 //   Cd                                     //
 // +------------------------------------------+ //
 short	ft_cd(t_data *data, char **cmd);
-int		error_ft_cd(char **cmd);
-short	switch_old_pwd(t_data *data, char * line);
-short	switch_pwd(t_data *data, char * line, char *temp);
 // +------------------------------------------+ //
 //   Unset                                     //
 // +------------------------------------------+ //
 int		ft_unset(t_data *data, char **cmd);
-void	pop_out_list_env(t_data *data, char *line);
+int		error_var_name(char *line);
+int		ft_is_var_name(int c);
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
@@ -121,8 +122,7 @@ void	free_pipe(t_data *data, t_pipe *pipe);
 // +------------------------------------------+ //
 //   Echo                                       //
 // +------------------------------------------+ //
-void	ft_echo(t_data *data, char **cmd);
-int		echo_argument_n(char *str);
+int		ft_echo(char **cmd);
 // +------------------------------------------+ //
 //   Error                                      //
 // +------------------------------------------+ //
@@ -165,9 +165,9 @@ char	**list_to_env(t_env *env_lst);
 //   Execute                                  //
 // +------------------------------------------+ //
 void	execute(t_data *data);
-int		is_built_in(t_data *data);
-void	make_one_cmd(t_data *data);
-void	make_one_built_in(t_data *data);
+int		is_built_in(char **cmd);
+void	make_one_built_in(t_data *data, t_cmd *cmd);
+void	launch_built_in(t_data *data, t_cmd *cmd);
 // +------------------------------------------+ //
 //   Multipipe                                  //
 // +------------------------------------------+ //
@@ -176,7 +176,6 @@ void	find_command_path(t_data *data, t_cmd *head);
 //void	error_var_name(t_data *data, t_cmd *new, char *cmd_line);
 int		init_pipe(int nb_pipe, t_data *data, t_pipe *pipes);
 int		init_pipe_struct(t_data *data);
-int		len_before_redirection(t_cmd *cmd);
 void	fork_creation(t_pipe *pipe, t_data *data);
 void	command_failed(t_data *data, t_pipe *pipe, t_cmd *cmd);
 // +------------------------------------------+ //
@@ -196,7 +195,7 @@ void	close_fd_last_process(t_pipe *pipe);
 //   Dup                                   //
 // +------------------------------------------+ //
 void	open_infile_and_heredoc(t_cmd *cmd);
-void	up_outfile(t_cmd *cmd, t_pipe *pipe);
+void	dup_outfile(t_cmd *cmd, t_pipe *pipe);
 // +------------------------------------------+ //
 //   Fonction list CMD                          //
 // +--------------------------------a----------+ //
