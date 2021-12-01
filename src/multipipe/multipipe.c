@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:53:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/01 11:01:13 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/01 12:36:52 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	do_cmd(t_data *data, t_pipe *pipe, t_cmd *cmd)
 {
-	if (pipe->cmd_nb == 1) // peut faire directement la redirection
+	if (pipe->cmd_nb == 1)
 		first_process(data, pipe, cmd);
 	else if (pipe->cmd_nb > 1 && pipe->cmd_nb < pipe->cmd_len)
 		middle_process(data, pipe, cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/01 11:33:18 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/01 12:41:18 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int		ft_echo(char **cmd);
 // +------------------------------------------+ //
 void	ft_error(char *str);//CHECKED
 void	err_free(char *msg, t_data *data, char *str);//CHECKED
+void	err_free_command_not_found(char *msg, t_data *data, char *str);
 // +------------------------------------------+ //
 //   Input checks                               //
 // +------------------------------------------+ //

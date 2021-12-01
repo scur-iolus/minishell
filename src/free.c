@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/30 17:27:35 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/01 12:43:47 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ static void	ft_lstclear_pipe(t_pipe *this, t_data *data)
 void	free_pipe(t_data *data, t_pipe *pipe)
 {
 	if (pipe->end)
-	{
-		//close_all_fd(pipe); //FIXME ------------
 		ft_lstclear_pipe(pipe, data);
-	}
 	free(pipe);
 }
 
@@ -93,4 +90,14 @@ void	err_free(char *msg, t_data *data, char *str)//CHECKED
 	else
 		ft_error(MALLOC_ERROR);
 	exit(EXIT_FAILURE);
+}
+
+void	err_free_command_not_found(char *msg, t_data *data, char *str) //NOTA BENE pareil que ci dessus mais avec un exit status different
+{
+	free_everything(data, str);
+	if (msg && *msg)
+		ft_error(msg);
+	else
+		ft_error(MALLOC_ERROR);
+	exit(127);
 }

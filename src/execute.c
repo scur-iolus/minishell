@@ -3,26 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/01 11:39:08 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/01 12:35:36 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+static short	no_command(t_cmd *cmd)
+{
+	t_cmd *temp;
+
+	temp = cmd;
+	while(temp)
+	{
+		if (temp->cmd != NULL)
+			return (0);
+		temp = temp->next;
+	}
+	return (1);
+}
+
 void	execute(t_data *data)
 {
 	char	*vertical_bar;
 
+	data->exit_status = 0;
 	vertical_bar = ft_strrchr(data->line, '|');
 	if (!vertical_bar && data->cmd->cmd == 0)
 		return ;
+	if (no_command(data->cmd))
+		return;
 	if (!vertical_bar && is_built_in(data->cmd->cmd))
-	{
 		make_one_built_in(data, data->cmd);
-	}
 	else
 	{
 		if (!init_pipe_struct(data))

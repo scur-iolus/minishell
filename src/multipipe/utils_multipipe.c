@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_multipipe.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/01 11:37:02 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/01 12:41:41 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ void	find_command_path(t_data *data, t_cmd *head)
 void	command_failed(t_data *data, t_pipe *pipe, t_cmd *cmd)
 {
 	write(2, cmd->cmd[0], ft_strlen(cmd->cmd[0]));
-	err_free(CMD_NOT_FOUND, data, 0);
+	err_free_command_not_found(CMD_NOT_FOUND, data, 0);
 }
