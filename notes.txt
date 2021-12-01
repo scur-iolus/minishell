@@ -303,3 +303,6 @@ s_cmd                                s_cmd
 
 
 ([,1-9]*) byte([\s\S]*)
+
+
+https://github.com/Binary-Hackers/42_Corrections/blob/master/00_Projects/01_Unix/minishell/00.pdf

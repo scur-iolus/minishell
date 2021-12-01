@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:31:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/25 13:55:49 by llalba           ###   ########.fr       */
+/*   Updated: 2021/11/29 14:52:20 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)//C
 	head->heredoc = (char *)ft_calloc(1, sizeof(char));
 	if (!(head->heredoc))
 		err_free(MALLOC_ERROR, data, 0);
-	write(1, ">", 1);
+	write(1, "> ", 2);
 	status = get_next_line(&line, HEREDOC_CONTINUE);
 	while (status > 0 && ft_strcmp(heredoc_delimiter, line) != 0)
 	{
@@ -78,7 +78,7 @@ static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)//C
 		ft_str_insert(&(head->heredoc), "\n", ft_strlen(head->heredoc));
 		free(line);
 		line = 0;
-		write(1, ">", 1);
+		write(1, "> ", 2);
 		status = get_next_line(&line, HEREDOC_CONTINUE);
 	}
 	(void)get_next_line(0, HEREDOC_END);
@@ -87,7 +87,7 @@ static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)//C
 	if (status == -1)
 		err_free(GNL_ERROR, data, 0);
 	else if (status == 0)
-		write(1, HEREDOC_EOF, ft_strlen(HEREDOC_EOF));
+		write(2, HEREDOC_EOF, ft_strlen(HEREDOC_EOF));
 }
 
 /*
