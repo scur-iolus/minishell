@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/30 17:19:29 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/01 10:58:14 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	execute(t_data *data)
 {
 	int i;
 
-	i = ft_lstsize(data->cmd);
+	i = ft_lstsize(data->cmd);// FIXME a changer
 	if (i == 1 && is_built_in(data->cmd->cmd))
 		make_one_built_in(data, data->cmd);
 	else

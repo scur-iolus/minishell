@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:53:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/30 17:51:46 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/01 11:01:13 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	len_before_redirection(t_cmd *cmd)
 	return (i);
 }
 
-static void	finish_pipe(t_data *data, t_pipe *pipe)  //FIXME : mieux gerer les exit status retour
+static void	finish_pipe(t_data *data, t_pipe *pipe, pid_t pid)
 {
 	int	i;
 	int	status;
@@ -48,17 +48,17 @@ static void	finish_pipe(t_data *data, t_pipe *pipe)  //FIXME : mieux gerer les e
 	close_all_fd(pipe);
 	while (++i < pipe->nb_pipe - 1)
 	{
-		waitpid(0 ,&status , 0);
+		waitpid(pid ,&status , 0);
 		if (WIFEXITED(status))
 			data->exit_status = WEXITSTATUS(status);
 		else
-			ft_error("Something goes wrong"); // NOTA BENE : si jamais le programme fini sans passer par un return ou un exit, est ce que c'est la ou on met le retour du signal ?
+			data->exit_status = 1; // NOTA BENE : si jamais le programme fini sans passer par un return ou un exit, est ce que c'est la ou on met le retour du signal ?
 	}
 }
 
 void	fork_creation(t_pipe *pipe, t_data *data)
 {
-	int		pid;
+	pid_t	pid;
 	int		x;
 	t_cmd *list;
 
@@ -77,5 +77,5 @@ void	fork_creation(t_pipe *pipe, t_data *data)
 			do_cmd(data, pipe, list);
 		list = list->next;
 	}
-	finish_pipe(data, pipe);
+	finish_pipe(data, pipe, pid);
 }
