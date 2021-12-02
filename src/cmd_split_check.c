@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/01 11:31:37 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 13:29:55 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,39 @@ static short	is_syntax_error(t_data *data)//CHECKED
 static void	cmds_split(t_data *data)//CHECKED
 {
 	t_cmd	*tmp;
+	char	*c;
 
 	tmp = data->cmd;
 	while (tmp)
 	{
+		c = tmp->raw;
+		while (*c)
+		{
+			if (*c == ';')
+				*c = '|';
+			c++;
+		}
 		tmp->split = ft_split(tmp->raw, ' ');
 		if (!(tmp->split))
 			err_free(MALLOC_ERROR, data, 0);
 		tmp = tmp->next;
+	}
+}
+
+static void	secure_pipes_between_apo(t_data *data)//CHECKED
+{
+	size_t	i;
+	long	apostrophes;
+
+	i = 0;
+	apostrophes = 0;
+	while ((data->line)[i])
+	{
+		if ((data->line)[i] == '\'')
+			apostrophes++;
+		else if ((data->line)[i] == '|' && apostrophes % 2 == 1)
+			(data->line)[i] = ';';
+		i++;
 	}
 }
 
@@ -105,6 +130,7 @@ short	parse_cmd(t_data *data)//CHECKED
 	t_cmd	*head;
 
 	head = 0;
+	secure_pipes_between_apo(data);
 	pipes_split(data, &head);
 	cmds_split(data);
 	if (is_syntax_error(data) == 1)
@@ -116,11 +142,9 @@ short	parse_cmd(t_data *data)//CHECKED
 	head = data->cmd;
 	while (head)
 	{
-		//printf("✅ s_cmd->cmd contient :\n");//FIXME
 		if (!parse_cmd_content(data, head))
 			return (0);
 		head = head->next;
 	}
-	//ft_exit(data, 0, 0, 0); //FIXME
 	return (1);
 }
