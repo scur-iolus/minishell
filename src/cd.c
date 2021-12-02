@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:32:59 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/30 14:33:26 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:34:24 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static int	go_to_home(t_data *data)
 
 
 
-short	ft_cd(t_data *data, char **cmd) //NOTA BENE : rajouter le bon message d'erreur quand
+t_bool	ft_cd(t_data *data, char **cmd) //NOTA BENE : rajouter le bon message d'erreur quand
 {
 	char	line[PATH_MAX];
 

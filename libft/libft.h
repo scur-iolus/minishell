@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 11:03:52 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/16 17:15:32 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 16:12:56 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+
+typedef int t_bool;
 
 void	ft_swap(int *a, int *b);
 void	ft_sort_int_tab(int *tab, int size);
@@ -66,7 +68,7 @@ int		ft_countnbr_base(unsigned int nbr, char *base);
 void	ft_putnbr_unsigned_int(unsigned int n);
 int		ft_countnbr_unsigned_int(unsigned int n);
 int		ft_countnbr_base_pointer(unsigned long int nbr, char *base);
-short	ft_str_insert(char **str1, char *str2, size_t position);
+t_bool	ft_str_insert(char **str1, char *str2, size_t position);
 void	ft_free_split(char **ptr);
 size_t	ft_strlen_split(char **s);
 

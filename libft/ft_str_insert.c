@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:40:26 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/12 15:58:52 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 15:34:24 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void ft_proceed(char *str1, char *str2, char **new, size_t position)
 	}
 }
 
-short	ft_str_insert(char **str1, char *str2, size_t position)
+t_bool	ft_str_insert(char **str1, char *str2, size_t position)
 {
 	size_t	len_str1;
 	size_t	len_str2;

@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/12/02 13:12:15 by llalba           ###   ########.fr        #
+#    Updated: 2021/12/02 13:49:22 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ SRC_LIST		= \
 				env.c \
 				unset.c \
 				export.c \
-				open_file.c \
+				utils.c \
 				print_export.c \
 				signals.c \
 				multipipe/dup.c \

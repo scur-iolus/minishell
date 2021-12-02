@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:09:22 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/24 15:28:20 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char *save_line(char *str)
 	return (line);
 }
 
-static char	*save_remainder(char *save)//CHECKED
+static char	*save_remainder(char *save)
 {
 	int		i;
 	int		j;
@@ -56,7 +56,7 @@ static char	*save_remainder(char *save)//CHECKED
 ** -> else, 1
 */
 
-int	gnl_result(int ret, char **line, char **save)//CHECKED
+int	gnl_result(int ret, char **line, char **save)
 {
 	char	*tmp;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/30 12:33:30 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Depuis init_env, On the heap: line, data->env_lst
 */
 
-char	*get_var_name(t_data *data, char *str)//CHECKED
+char	*get_var_name(t_data *data, char *str)
 {
 	size_t	i;
 	char	*var_name;
@@ -40,7 +40,7 @@ char	*get_var_name(t_data *data, char *str)//CHECKED
 ** Depuis init_env, On the heap: line, data->env_lst
 */
 
-char	*get_var_value(t_data *data, char *str)//CHECKED
+char	*get_var_value(t_data *data, char *str)
 {
 	size_t	j;
 	char	*var_value;
@@ -69,7 +69,7 @@ char	*get_var_value(t_data *data, char *str)//CHECKED
 ** On the heap: line
 */
 
-t_env	*init_env(t_data *data, char **env)//CHECKED
+t_env	*init_env(t_data *data, char **env)
 {
 	size_t	i;
 	t_env	*head;

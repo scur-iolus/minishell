@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/01 12:43:47 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	reset_data(t_data *data)
 ** (not on the heap).
 */
 
-void	free_everything(t_data *data, char *str)//CHECKED
+void	free_everything(t_data *data, char *str)
 {
 	rl_clear_history();
 	if (str)
@@ -82,7 +82,7 @@ void	free_everything(t_data *data, char *str)//CHECKED
 ** and exits the program with exit_status 1.
 */
 
-void	err_free(char *msg, t_data *data, char *str)//CHECKED
+void	err_free(char *msg, t_data *data, char *str)
 {
 	free_everything(data, str);
 	if (msg && *msg)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   convert_env_special_cases.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:09:25 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/30 15:52:12 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static unsigned long long	power(unsigned long x, unsigned long y)//CHECKED
+static unsigned long long	power(unsigned long x, unsigned long y)
 {
 	unsigned long		i;
 	unsigned long long	result;
@@ -27,7 +27,7 @@ static unsigned long long	power(unsigned long x, unsigned long y)//CHECKED
 	return (result);
 }
 
-static int	get_highest_pow(long long n)//CHECKED
+static int	get_highest_pow(long long n)
 {
 	int	y;
 
@@ -41,12 +41,12 @@ static int	get_highest_pow(long long n)//CHECKED
 ** On the heap: line, data->env_lst, output
 */
 
-static short	add_exit_status(t_data *data, char **output, size_t *pos)//CHECKED
+static t_bool	add_exit_status(t_data *data, char **output, size_t *pos)
 {
 	char		c;
 	int			highest_pow;
 	long long	tmp;
-	short		success;
+	t_bool		success;
 
 	success = 1;
 	tmp = data->exit_status;
@@ -72,9 +72,9 @@ static short	add_exit_status(t_data *data, char **output, size_t *pos)//CHECKED
 ** $? devient le dernier exit_status
 */
 
-short	special_cases(t_data *data, char **output, size_t *pos)//CHECKED
+t_bool	special_cases(t_data *data, char **output, size_t *pos)
 {
-	short	success;
+	t_bool	success;
 
 	if (data->line[*pos] == '?')
 		success = add_exit_status(data, output, pos);
@@ -91,6 +91,6 @@ short	special_cases(t_data *data, char **output, size_t *pos)//CHECKED
 	else if (data->line[*pos] == '.' || data->line[*pos] == '$' || \
 		data->line[*pos] == '?')
 		return (1);
-	else            //FIXME ?? ca fait une erreur lors de la compilation pas de return 
+	else            //FIXME ?? ca fait une erreur lors de la compilation pas de return
 		return (0);
 }

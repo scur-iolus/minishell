@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:26:32 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/19 17:06:29 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 15:57:56 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@
 ** On the heap: line, data->env_lst
 */
 
-static void	split_n_join(t_data *data, char c)//CHECKED
+static void	split_n_join(t_data *data, char **str, char c)
 {
 	char	**l_split;
 	size_t	i;
 
-	l_split = ft_split(data->line, c);
+	l_split = ft_split(*str, c);
 	if (!l_split)
 		err_free(MALLOC_ERROR, data, 0);
-	free(data->line);
+	free(*str);
 	i = 0;
-	data->line = (char *)ft_calloc(1, sizeof(char));
-	if (!data->line)
+	(*str) = (char *)ft_calloc(1, sizeof(char));
+	if (!(*str))
 	{
 		ft_free_split(l_split);
 		err_free(MALLOC_ERROR, data, 0);
 	}
 	while (l_split[i])
 	{
-		if (!ft_str_insert(&(data->line), l_split[i], ft_strlen(data->line)))
+		if (!ft_str_insert(str, l_split[i], ft_strlen(*str)))
 		{
 			ft_free_split(l_split);
 			err_free(MALLOC_ERROR, data, 0);
@@ -48,33 +48,15 @@ static void	split_n_join(t_data *data, char c)//CHECKED
 ** On the heap: line, data->env_lst
 */
 
-void	remove_quotation_marks(t_data *data)//CHECKED
+void	remove_quotation_marks(t_data *data)
 {
-	size_t	i;
-	long	apostrophes;
-
-	i = 0;
-	apostrophes = 0;
-	while ((data->line)[i])
-	{
-		if ((data->line)[i] == '\'')
-			apostrophes++;
-		else if ((data->line)[i] == '\"' && apostrophes % 2 == 1)
-			(data->line)[i] = ';';
-		i++;
-	}
+	secure_between_apo(data->line, '\'');
 	if (ft_strchr(data->line, (int) '\"'))
-		split_n_join(data, '\"');
-	i = 0;
-	while ((data->line)[i])
-	{
-		if ((data->line)[i] == ';')
-			(data->line)[i] = '\"';
-		i++;
-	}
+		split_n_join(data, &(data->line), '\"');
+	replace_semicolon(data->line, '\"');
 }
 
-short	even_nb_of_quote_marks(char *line)// CHECKED
+t_bool	even_nb_of_quote_marks(char *line)// CHECKED
 {
 	long	apostrophes;
 	long	quote_marks;
@@ -131,7 +113,7 @@ static void	copy_n_char(t_data *data, size_t len_without_0)// CHECKED
 void	remove_comment(t_data *data)// CHECKED
 {
 	size_t	len;
-	short	is_between_apostrophes;
+	t_bool	is_between_apostrophes;
 
 	len = 0;
 	is_between_apostrophes = 0;

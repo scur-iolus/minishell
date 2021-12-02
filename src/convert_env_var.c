@@ -6,13 +6,13 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/19 17:07:36 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static size_t	get_var_name_len(char *str)//CHECKED
+static size_t	get_var_name_len(char *str)
 {
 	size_t	i;
 
@@ -27,7 +27,7 @@ static size_t	get_var_name_len(char *str)//CHECKED
 ** On the heap: line, data->env_lst, *new, var_name
 */
 
-static void	add_var_value(char **new, char *var_name, t_data *data)//CHECKED
+static void	add_var_value(char **new, char *var_name, t_data *data)
 {
 	size_t	value_len;
 	size_t	insertion_position;
@@ -48,7 +48,7 @@ static void	add_var_value(char **new, char *var_name, t_data *data)//CHECKED
 ** On the heap: line, data->env_lst, *new
 */
 
-static void	replace_var(t_data *data, char **new, size_t *position)//CHECKED
+static void	replace_var(t_data *data, char **new, size_t *position)
 {
 	size_t	name_len;
 	char	*var_name;
@@ -78,7 +78,7 @@ static void	replace_var(t_data *data, char **new, size_t *position)//CHECKED
 ** On the heap: line, data->env_lst, *new
 */
 
-static void	next(t_data *data, char **new, short *between, size_t *position)//CHECKED
+static void	next(t_data *data, char **new, t_bool *between, size_t *position)
 {
 	char	c;
 
@@ -102,11 +102,11 @@ static void	next(t_data *data, char **new, short *between, size_t *position)//CH
 ** On the heap: line, data->env_lst
 */
 
-char	*convert_env_var(t_data *data)//CHECKED
+char	*convert_env_var(t_data *data)
 {
 	char	*new;
 	size_t	position;
-	short	between_apostrophes;
+	t_bool	between_apostrophes;
 
 	new = (char *) ft_calloc(1, sizeof(char));
 	if (!new)

@@ -6,15 +6,11 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:15:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/29 16:00:28 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 13:48:33 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-
-
-// TODO pbm avec << heredoc
 
 /*
 ** https://github.com/louisnfr/minishell

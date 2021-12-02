@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:45:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/25 17:45:58 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:34:24 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_exit(t_data *data, char *str, char **split, long long exit_status)
 	exit((int)exit_status);
 }
 
-static short	check_nb_argument_ft_exit(char **cmd)
+static t_bool	check_nb_argument_ft_exit(char **cmd)
 {
 	if (cmd[1])
 	{
@@ -41,7 +41,7 @@ static short	check_nb_argument_ft_exit(char **cmd)
 	return (0);
 }
 
-static short	check_argument_is_digit_ft_exit(char *str)
+static t_bool	check_argument_is_digit_ft_exit(char *str)
 {
 	int i;
 	long long int exit_status ;

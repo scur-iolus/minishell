@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_file.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 12:14:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/25 13:20:10 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 16:13:37 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static short	close_previous(t_cmd *head, char *file, short opening)//CHECKED
+static t_bool	close_previous(t_cmd *head, char *file, t_bool opening)
 {
 	int	fail;
 
@@ -29,7 +29,7 @@ static short	close_previous(t_cmd *head, char *file, short opening)//CHECKED
 	return (1);
 }
 
-short	open_file(t_cmd *head, char *file, short opening)//CHECKED
+t_bool	open_file(t_cmd *head, char *file, t_bool opening)
 {
 	int	fd;
 
@@ -52,4 +52,34 @@ short	open_file(t_cmd *head, char *file, short opening)//CHECKED
 	if (opening == ONE_RIGHT || opening == TWO_RIGHT)
 		head->outfile = fd;
 	return (1);
+}
+
+void	secure_between_apo(char *str, char c)
+{
+	size_t	i;
+	long	apostrophes;
+
+	i = 0;
+	apostrophes = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+			apostrophes++;
+		else if (str[i] == c && apostrophes % 2 == 1)
+			str[i] = ';';
+		i++;
+	}
+}
+
+void	replace_semicolon(char *str, char c)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ';')
+			str[i] = c;
+		i++;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/30 12:21:25 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** From add_var_value, on the heap: line, data->env_lst, output, var_name
 */
 
-t_env	*find_var_env(t_data *data, char *var_name)//CHECKED
+t_env	*find_var_env(t_data *data, char *var_name)
 {
 	t_env *temp;
 
@@ -30,7 +30,7 @@ t_env	*find_var_env(t_data *data, char *var_name)//CHECKED
 	return (NULL);
 }
 
-void	env_add_front(t_env **head, t_env *new)//CHECKED
+void	env_add_front(t_env **head, t_env *new)
 {
 	t_env	*temp;
 
@@ -39,7 +39,7 @@ void	env_add_front(t_env **head, t_env *new)//CHECKED
 	new->next = temp;
 }
 
-t_env	*ft_lstnew_env(void)//CHECKED
+t_env	*ft_lstnew_env(void)
 {
 	t_env	*new;
 
@@ -53,7 +53,7 @@ t_env	*ft_lstnew_env(void)//CHECKED
 	return (new);
 }
 
-void	delete_one_env_var(t_env *lst)//CHECKED
+void	delete_one_env_var(t_env *lst)
 {
 	if (lst)
 	{
@@ -66,7 +66,7 @@ void	delete_one_env_var(t_env *lst)//CHECKED
 	}
 }
 
-void	ft_lstclear_env(t_env *head)//CHECKED
+void	ft_lstclear_env(t_env *head)
 {
 	t_env	*tmp;
 

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 13:19:37 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 16:25:52 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
 */
 
-static void	add_str_to_cmd(t_data *data, t_cmd *head, size_t i)//CHECKED
+static void	add_str_to_cmd(t_data *data, t_cmd *head, size_t i)
 {
 	char	*to_add;
 	char	**new_split;
@@ -40,12 +40,12 @@ static void	add_str_to_cmd(t_data *data, t_cmd *head, size_t i)//CHECKED
 	head->cmd = new_split;
 }
 
-static short	heredoc_is_last(t_cmd *head)//CHECKED
+static t_bool	heredoc_is_last(t_cmd *head)
 {
 	size_t	i;
 	int		closed;
 
-	if (*(head->split) == 0)
+	if (head->ok == FALSE || *(head->split) == 0)
 		return (1);
 	i = ft_strlen_split(head->split) - 1;
 	closed = 0;
@@ -76,7 +76,7 @@ static short	heredoc_is_last(t_cmd *head)//CHECKED
 **			2, openable and possibly already closed, if not, added to data
 */
 
-static int	ret_categorize(t_data *data, t_cmd *head, size_t i, short category)//CHECKED
+static int	ret_categorize(t_data *data, t_cmd *head, size_t i, t_bool category)
 {
 	char	*str;
 
@@ -100,9 +100,9 @@ static int	ret_categorize(t_data *data, t_cmd *head, size_t i, short category)//
 **			2, openable and possibly already closed, if not, added to data
 */
 
-static int	categorize(t_data *data, t_cmd *head, size_t i)//CHECKED
+static int	categorize(t_data *data, t_cmd *head, size_t i)
 {
-	short	category;
+	t_bool	category;
 	char	**tmp;
 
 	category = 0;
@@ -129,7 +129,7 @@ static int	categorize(t_data *data, t_cmd *head, size_t i)//CHECKED
 ** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
 */
 
-short	parse_cmd_content(t_data *data, t_cmd *head)//CHECKED
+t_bool	parse_cmd_content(t_data *data, t_cmd *head)
 {
 	size_t	i;
 	int		status;
@@ -142,22 +142,22 @@ short	parse_cmd_content(t_data *data, t_cmd *head)//CHECKED
 		if (status == 0)
 			add_str_to_cmd(data, head, i);
 		else if (status == 1)
-			return (0);
+			head->ok = FALSE;
 		i++;
 	}
-	if (head->cmd)
+	if (head->ok && head->cmd)
 		find_command_path(data, head);
 	// FIXME ===============
-	// char	**hop;//FIXME
-	// hop = head->cmd;//FIXME
-	// while (hop && *hop)//FIXME
-	// {//FIXME
-	// 	printf("🔸%s🔸\n", *hop); // FIXME ===============
-	// 	hop++;//FIXME
-	// }//FIXME
-	// printf("💫 fd infile : %d\n", head->infile); // FIXME ===============
-	// printf("💫 fd outfile : %d\n", head->outfile); // FIXME ===============
-	// printf("💫 cmd_path : %s\n", head->cmd_path); // FIXME ===============
-	// printf("💫 [heredoc] : [%s]\n", head->heredoc); // FIXME ===============
+	char	**hop;//FIXME
+	hop = head->cmd;//FIXME
+	while (hop && *hop)//FIXME
+	{//FIXME
+		printf("🔸%s🔸\n", *hop); // FIXME ===============
+		hop++;//FIXME
+	}//FIXME
+	printf("▫ fd infile : %d\n", head->infile); // FIXME ===============
+	printf("▫ fd outfile : %d\n", head->outfile); // FIXME ===============
+	printf("▫ cmd_path : %s\n", head->cmd_path); // FIXME ===============
+	printf("▫ [heredoc] : [%s]\n", head->heredoc); // FIXME ===============
 	return (heredoc_is_last(head));
 }

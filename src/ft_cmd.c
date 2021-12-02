@@ -6,13 +6,13 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/01 11:31:35 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 16:01:31 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static t_cmd	*ft_lstlast(t_cmd *lst)//CHECKED
+static t_cmd	*ft_lstlast(t_cmd *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -21,7 +21,7 @@ static t_cmd	*ft_lstlast(t_cmd *lst)//CHECKED
 	return (lst);
 }
 
-void	cmd_add_back(t_cmd **alst, t_cmd *new)//CHECKED
+void	cmd_add_back(t_cmd **alst, t_cmd *new)
 {
 	t_cmd	*last;
 
@@ -34,7 +34,7 @@ void	cmd_add_back(t_cmd **alst, t_cmd *new)//CHECKED
 	}
 }
 
-t_cmd	*ft_lstnew_cmd(char *raw)//CHECKED
+t_cmd	*ft_lstnew_cmd(char *raw)
 {
 	t_cmd	*new;
 
@@ -42,6 +42,7 @@ t_cmd	*ft_lstnew_cmd(char *raw)//CHECKED
 	if (!new)
 		return (NULL);
 	new->raw = raw;
+	new->ok = TRUE;
 	new->split = NULL;
 	new->cmd_path = NULL;
 	new->cmd = NULL;
@@ -52,9 +53,9 @@ t_cmd	*ft_lstnew_cmd(char *raw)//CHECKED
 	return (new);
 }
 
-static void	close_fd(t_cmd *head)//CHECKED
+static void	close_fd(t_cmd *head)
 {
-	short	fail;
+	t_bool	fail;
 
 	fail = 0;
 	if (head->infile)
@@ -65,7 +66,7 @@ static void	close_fd(t_cmd *head)//CHECKED
 		ft_error(FAILED_TO_CLOSE);
 }
 
-void	ft_lstclear_cmd(t_cmd *head)//CHECKED
+void	ft_lstclear_cmd(t_cmd *head)
 {
 	t_cmd	*tmp;
 

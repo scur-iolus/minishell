@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 16:05:02 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 13:21:12 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** On the heap: line, data->env_lst
 */
 
-static short	max_n_consecutive_c(long long n, char c, char *str)//CHECKED
+static t_bool	max_n_consecutive_c(long long n, char c, char *str)
 {
 	long long	count;
 
@@ -38,9 +38,9 @@ static short	max_n_consecutive_c(long long n, char c, char *str)//CHECKED
 ** On the heap: line, data->env_lst
 */
 
-short	too_many_chevrons_o_pipes(t_data *data)//CHECKED
+t_bool	too_many_chevrons_o_pipes(t_data *data)
 {
-	short	fail;
+	t_bool	fail;
 
 	fail = 0;
 	if (!max_n_consecutive_c(2, '<', data->line))
@@ -59,7 +59,7 @@ short	too_many_chevrons_o_pipes(t_data *data)//CHECKED
 ** In bash, note that '>< test' raises an error but that '<> test' doesn't...
 */
 
-short	invalid_suite(t_data *data)//CHECKED
+t_bool	invalid_suite(t_data *data)
 {
 	unsigned long long	i;
 	char				prev_char;
@@ -78,4 +78,3 @@ short	invalid_suite(t_data *data)//CHECKED
 	}
 	return (0);
 }
-

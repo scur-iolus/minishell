@@ -6,13 +6,13 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:31:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/29 14:52:20 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static short	continue_reading(int *ret, char **save)//CHECKED
+static t_bool	continue_reading(int *ret, char **save)
 {
 	char	buff[BUFFER_SIZE + 1];
 
@@ -33,7 +33,7 @@ static short	continue_reading(int *ret, char **save)//CHECKED
 ** Customized GNL with free(line) when ret == 0, and a flag to free(save)
 */
 
-static int	get_next_line(char **line, short flag)//CHECKED
+static int	get_next_line(char **line, t_bool flag)
 {
 	static char	*save = 0;
 	int			ret;
@@ -61,7 +61,7 @@ static int	get_next_line(char **line, short flag)//CHECKED
 ** and progressively data->cmd->split
 */
 
-static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)//CHECKED
+static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)
 {
 	char	*line;
 	int		status;
@@ -95,10 +95,10 @@ static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)//C
 ** and progressively data->cmd->split
 */
 
-static void	spot_heredoc(t_data *data, t_cmd *head)//CHECKED
+static void	spot_heredoc(t_data *data, t_cmd *head)
 {
 	size_t	i;
-	short	sentinel;
+	t_bool	sentinel;
 
 	i = 0;
 	sentinel = 0;
@@ -125,7 +125,7 @@ static void	spot_heredoc(t_data *data, t_cmd *head)//CHECKED
 ** and progressively data->cmd->split
 */
 
-void	load_heredoc(t_data *data)//CHECKED
+void	load_heredoc(t_data *data)
 {
 	size_t	i;
 	t_cmd	*tmp;

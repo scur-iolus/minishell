@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/01 12:30:38 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 16:01:17 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	init_data(t_data *data, char **env)
 ** Basically prints an error message on fd 2
 */
 
-void	ft_error(char *str)//CHECKED
+void	ft_error(char *str)
 {
 	write(2, EMOJI_X, ft_strlen(EMOJI_X));
 	write(2, "Error: ", 7);
@@ -46,7 +46,7 @@ void	ft_error(char *str)//CHECKED
 ** On the heap: line
 */
 
-static short	is_too_long(char *line)//CHECKED
+static t_bool	is_too_long(char *line)
 {
 	long long	i;
 
@@ -67,7 +67,7 @@ static short	is_too_long(char *line)//CHECKED
 ** On the heap: line
 */
 
-static short	input_is_ok(t_data *data)//CHECKED
+static t_bool	input_is_ok(t_data *data)
 {
 	char	*tmp;
 

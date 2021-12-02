@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 13:29:55 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 19:34:25 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** and progressively data->cmd, data->cmd->raw
 */
 
-static void	pipes_split(t_data *data, t_cmd **head)//CHECKED
+static void	pipes_split(t_data *data, t_cmd **head)
 {
 	char	**ptr;
 	t_cmd	*new;
@@ -49,7 +49,7 @@ static void	pipes_split(t_data *data, t_cmd **head)//CHECKED
 ** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
 */
 
-static short	is_syntax_error(t_data *data)//CHECKED
+static t_bool	is_syntax_error(t_data *data)
 {
 	t_cmd	*tmp;
 	char	*next;
@@ -82,42 +82,27 @@ static short	is_syntax_error(t_data *data)//CHECKED
 ** and progressively data->cmd->split
 */
 
-static void	cmds_split(t_data *data)//CHECKED
+static void	cmds_split(t_data *data)
 {
 	t_cmd	*tmp;
 	char	*c;
+	size_t	i;
 
 	tmp = data->cmd;
 	while (tmp)
 	{
-		c = tmp->raw;
-		while (*c)
-		{
-			if (*c == ';')
-				*c = '|';
-			c++;
-		}
+		replace_semicolon(tmp->raw, '|');
+		secure_between_apo(tmp->raw, ' ');
 		tmp->split = ft_split(tmp->raw, ' ');
 		if (!(tmp->split))
 			err_free(MALLOC_ERROR, data, 0);
+		i = 0;
+		while (tmp->split[i])
+		{
+			replace_semicolon(tmp->split[i], ' ');
+			i++;
+		}
 		tmp = tmp->next;
-	}
-}
-
-static void	secure_pipes_between_apo(t_data *data)//CHECKED
-{
-	size_t	i;
-	long	apostrophes;
-
-	i = 0;
-	apostrophes = 0;
-	while ((data->line)[i])
-	{
-		if ((data->line)[i] == '\'')
-			apostrophes++;
-		else if ((data->line)[i] == '|' && apostrophes % 2 == 1)
-			(data->line)[i] = ';';
-		i++;
 	}
 }
 
@@ -125,14 +110,15 @@ static void	secure_pipes_between_apo(t_data *data)//CHECKED
 ** On the heap: line, data->env_lst
 */
 
-short	parse_cmd(t_data *data)//CHECKED
+t_bool	parse_cmd(t_data *data)
 {
 	t_cmd	*head;
 
 	head = 0;
-	secure_pipes_between_apo(data);
+	secure_between_apo(data->line, '|');
 	pipes_split(data, &head);
 	cmds_split(data);
+	
 	if (is_syntax_error(data) == 1)
 	{
 		ft_error(INVALID_CHAR_ERR);

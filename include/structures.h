@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/25 11:05:25 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 16:22:05 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-// /*
-// ** Structure s_pipe
-// ** path -> split du path
-// ** end -> les differents fd ouverts pour le multipipe
-// ** infile -> permet de recup le fd de l ouverture du infile
-// ** outfile -> permet de recup le fd de l ouverture du outfile
-// */
+typedef int t_bool;
+
+/*
+** Structure s_pipe
+** path -> split du path
+** end -> les differents fd ouverts pour le multipipe
+** infile -> permet de recup le fd de l ouverture du infile
+** outfile -> permet de recup le fd de l ouverture du outfile
+*/
+
 typedef struct s_pipe
 {
 	int		**end;
@@ -59,6 +62,7 @@ typedef struct s_data
 
 typedef struct s_cmd
 {
+	t_bool				ok;
 	char				*raw;
 	char				**split;
 	int					infile;

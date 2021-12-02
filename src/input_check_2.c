@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:34:50 by llalba            #+#    #+#             */
-/*   Updated: 2021/11/19 17:06:14 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** On the heap: line, data->env_lst
 */
 
-void	space_before_after_chevron(t_data *data)//CHECKED
+void	space_before_after_chevron(t_data *data)
 {
 	size_t	i;
 	char	*ptr;
@@ -41,10 +41,10 @@ void	space_before_after_chevron(t_data *data)//CHECKED
 	}
 }
 
-static size_t	ft_strlen_wth_duplicates_sp(char *str)//CHECKED
+static size_t	ft_strlen_wth_duplicates_sp(char *str)
 {
 	size_t	i;
-	short	was_space;
+	t_bool	was_space;
 
 	i = 0;
 	was_space = 0;
@@ -65,12 +65,12 @@ static size_t	ft_strlen_wth_duplicates_sp(char *str)//CHECKED
 ** On the heap: line, data->env_lst
 */
 
-void	deduplicate_spaces(t_data *data)//CHECKED
+void	deduplicate_spaces(t_data *data)
 {
 	char	*new;
 	char	*str;
 	size_t	i;
-	short	was_space;
+	t_bool	was_space;
 
 	new = ft_calloc(ft_strlen_wth_duplicates_sp(data->line) + 1, sizeof(char));
 	if (!new)
@@ -96,7 +96,7 @@ void	deduplicate_spaces(t_data *data)//CHECKED
 ** On the heap: line, data->env_lst
 */
 
-short	valid_start_end(char *line)//CHECKED
+t_bool	valid_start_end(char *line)
 {
 	char	last_char;
 
