@@ -6,82 +6,110 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/12/01 11:34:38 by llalba           ###   ########.fr        #
+#    Updated: 2021/12/02 13:12:15 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 UNAME := $(shell uname)
 
-LIBFT_DIR	= libft
-
 ifeq ($(UNAME), Linux)
-ADDONS		= -L/usr/include -lreadline -L$(PWD)/$(LIBFT_DIR) -lft
+ADDONS			= -L/usr/include -lreadline -L$(PWD)/$(LIBFT_DIR) -lft
 endif
 ifeq ($(UNAME), Darwin)
-ADDONS		=
+ADDONS			=
 endif
 
-NAME		= minishell
+blue			= /bin/echo -e -n "\x1b[1m\x1b[34m$1\x1b[0m"
+green			= /bin/echo -e -n "\x1b[1m\x1b[32m$1\x1b[0m"
+filename		= /bin/echo -e -n "\x1b[30m\x1b[47m\x1b[1m$1\x1b[0m"
 
-CC			= gcc
+NAME			= minishell
 
-FLAGS		= -Wall -Werror -Wextra
+CC				= gcc
 
-HEADERS		= include/
+FLAGS			= -Wall -Werror -Wextra
 
-SRC_PATH	= src/
+HEADERS_DIR		= ./include/
 
-SRC			= \
-			$(SRC_PATH)get_next_line.c \
-			$(SRC_PATH)minishell.c \
-			$(SRC_PATH)input_check_1.c \
-			$(SRC_PATH)input_check_2.c \
-			$(SRC_PATH)input_check_3.c \
-			$(SRC_PATH)env_to_list.c \
-			$(SRC_PATH)convert_env_var.c \
-			$(SRC_PATH)convert_env_special_cases.c \
-			$(SRC_PATH)ft_cmd.c \
-			$(SRC_PATH)ft_list_env.c \
-			$(SRC_PATH)free.c \
-			$(SRC_PATH)heredoc.c \
-			$(SRC_PATH)cmd_parsing.c \
-			$(SRC_PATH)cmd_split_check.c \
-			$(SRC_PATH)list_to_env.c \
-			$(SRC_PATH)multipipe/utils_multipipe.c \
-			$(SRC_PATH)execute.c \
-			$(SRC_PATH)pwd.c \
-			$(SRC_PATH)exit.c \
-			$(SRC_PATH)cd.c \
-			$(SRC_PATH)echo.c \
-			$(SRC_PATH)env.c \
-			$(SRC_PATH)unset.c \
-			$(SRC_PATH)export.c \
-			$(SRC_PATH)open_file.c \
-			$(SRC_PATH)print_export.c \
-			$(SRC_PATH)multipipe/dup.c \
-			$(SRC_PATH)signals.c \
-			$(SRC_PATH)multipipe/close_fd.c \
-			$(SRC_PATH)multipipe/init_pipe.c \
-			$(SRC_PATH)multipipe/process.c \
-			$(SRC_PATH)multipipe/multipipe.c \
-			# $(SRC_PATH)error_var_name.c
+LIBFT_DIR		= ./libft/
 
-OBJS		= $(SRC:.c=.o)
+SRC_DIR			= ./src/
 
-$(NAME):	$(OBJS)
-			@make -C $(LIBFT_DIR)
-			@$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(ADDONS)
+OBJ_DIR			= ./obj/
 
-all:		$(NAME)
+SRC_LIST		= \
+				get_next_line.c \
+				minishell.c \
+				input_check_1.c \
+				input_check_2.c \
+				input_check_3.c \
+				env_to_list.c \
+				convert_env_var.c \
+				convert_env_special_cases.c \
+				ft_cmd.c \
+				ft_list_env.c \
+				free.c \
+				heredoc.c \
+				cmd_parsing.c \
+				cmd_split_check.c \
+				list_to_env.c \
+				execute.c \
+				pwd.c \
+				exit.c \
+				cd.c \
+				echo.c \
+				env.c \
+				unset.c \
+				export.c \
+				open_file.c \
+				print_export.c \
+				signals.c \
+				multipipe/dup.c \
+				multipipe/utils_multipipe.c \
+				multipipe/close_fd.c \
+				multipipe/init_pipe.c \
+				multipipe/process.c \
+				multipipe/multipipe.c
+
+SRC				= $(SRC_LIST)
+
+OBJ				= $(SRC:%.c=$(OBJ_DIR)%.o)
+
+$(NAME):		$(OBJ)
+				@echo "🏗  Compiling libft..."
+				@make -C $(LIBFT_DIR) --no-print-directory
+				@$(call green,"Source code compiled in ")
+				@$(call filename,"$(OBJ_DIR)")
+				@$(call green,". ✅")
+				@/bin/echo -e "\n💫 Linking everything..."
+				@$(CC) $(FLAGS) -I $(HEADERS_DIR) -o $(NAME) $(OBJ) $(ADDONS)
+				@$(call green,"Executable ")
+				@$(call filename,"'$(NAME)'")
+				@$(call green," successfully created. ✅")
+				@/bin/echo -e "\n\n🚀 You're ready to go. Enjoy the ride!"
+
+$(OBJ):			| $(OBJ_DIR)
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+				@echo "🏗  Compiling $<..."
+				@$(CC) $(CC_FLAGS) -I $(HEADERS_DIR) -c $< -o $@
+
+$(OBJ_DIR):
+				@mkdir -p $(OBJ_DIR)multipipe
+
+all:			$(NAME)
 
 clean:
-			make clean -C $(LIBFT_DIR)
-			@rm -rf $(OBJS)
+				@/bin/echo "💦 Cleaning..."
+				@make clean -C $(LIBFT_DIR) --no-print-directory
+				@rm -rf $(OBJ)
+				@$(call green,"Directory cleaned. ✅")
+				@echo
 
-fclean:		clean
-			make fclean -C $(LIBFT_DIR)
-			@rm -f $(NAME)
+fclean:			clean
+				@make fclean -C $(LIBFT_DIR) --no-print-directory
+				@rm -f $(NAME)
 
-re:			fclean all
+re:				fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:			all clean fclean re

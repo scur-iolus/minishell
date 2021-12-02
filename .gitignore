@@ -1,6 +1,7 @@
 # Object files
 *.o
 *.obj
+obj/
 
 # Libraries
 *.lib
@@ -43,3 +44,5 @@
 minishell
 valgrind-trace.txt
 valgrind-out.txt
+
+test*
