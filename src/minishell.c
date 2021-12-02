@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/01 12:30:38 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 17:49:17 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init_data(t_data *data, char **env)
 	data->pipe.cmd_len = 0;
 	data->pipe.i = 0;
 	data->env_lst = init_env(data, env);
+	update_var_shlvl(data);
 }
 
 /*

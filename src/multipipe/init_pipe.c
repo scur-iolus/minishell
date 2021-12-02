@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:18:10 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/30 15:45:41 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 11:40:47 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ int	init_pipe(int nb_pipe, t_data *data, t_pipe *pipes)
 	pipes->end = ft_calloc(nb_pipe, sizeof(int *));
 	if (!pipes->end)
 	{
-		ft_putstr_fd("ERROR: Malloc Failed", 2);
-		return (1);   //FIXME : est ce qu on doit tout fermer ?? Je pense qu il faut aller au prochain readline
+		ft_error(MALLOC_ERROR);
+		return (1);
 	}
 	while (++i < nb_pipe)
 	{
 		pipes->end[i] = ft_calloc(2, sizeof(int));
 		if (!pipes->end[i])
 		{
-			ft_putstr_fd("ERROR: Malloc Failed", 2);
-			return (1);   //FIXME : est ce qu on doit tout fermer ??
+			ft_error(MALLOC_ERROR);
+			return (1);
 		}
 		pipe(pipes->end[i]);
 		if (pipe(pipes->end[i]) == -1)
 		{
-			ft_putstr_fd("ERROR: Pipe Failed", 2);
-			return (1);   //FIXME : est ce qu on doit tout fermer ??
+			ft_error(MALLOC_ERROR);
+			return (1);
 		}
 	}
 	return(0);

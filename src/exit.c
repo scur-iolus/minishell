@@ -6,13 +6,13 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:45:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/25 17:45:58 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 16:09:06 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_exit(t_data *data, char *str, char **split, long long exit_status)
+void	ft_exit(t_data *data, char *str, char **split, long long exit_status) // FIXME : A supprimer
 {
 	if (exit_status < -2147483646 || exit_status > 2147483646)
 	{
@@ -74,10 +74,10 @@ void	ft_exit2(t_data *data, char **cmd)
 			free_everything(data, 0);
 			exit(2);
 		}
-		exit_status = ft_atoi(cmd[1]); // NOTA BENE j ai change le atoi pour qu il corresponde a un int
+		exit_status = ft_atoi(cmd[1]);
 		free_everything(data, 0);
 		exit((int)exit_status);
 	}
 	free_everything(data, 0);
-	exit(1); // si exit sans exit status
+	exit(0); // si exit sans exit status
 }

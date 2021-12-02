@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/01 11:31:35 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 11:42:02 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_lstclear_cmd(t_cmd *head)//CHECKED
 	while (head)
 	{
 		tmp = head->next;
-		if (head->raw) // FIXME -> n'existe plus
+		if (head->raw)
 			free(head->raw);
 		if (head->split)
 			ft_free_split(head->split);
@@ -82,7 +82,6 @@ void	ft_lstclear_cmd(t_cmd *head)//CHECKED
 			ft_free_split(head->cmd);
 		if (head->cmd_path)
 			free(head->cmd_path);
-		//close_fd(head); // FIXME -> je close directement les fd lors des commandes
 		free(head);
 		head = tmp;
 	}

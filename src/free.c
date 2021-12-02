@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/01 12:43:47 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 17:59:04 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	ft_lstclear_pipe(t_pipe *this, t_data *data)
 {
-
 	int i;
 	int j;
 
@@ -46,6 +45,7 @@ void	reset_data(t_data *data)
 		free(data->line);
 	if (data->cmd)
 		ft_lstclear_cmd(data->cmd);
+	// FIXME free_pipe(data, data->pipe); Il faut free les pipes mais je n'arrive pas a passer les arguments
 	data->line = 0;
 	data->cmd = 0;
 	data->env = list_to_env(data->env_lst);
@@ -91,6 +91,9 @@ void	err_free(char *msg, t_data *data, char *str)//CHECKED
 		ft_error(MALLOC_ERROR);
 	exit(EXIT_FAILURE);
 }
+
+
+//FIXME  : mettre dans un autre fichier peut etre faire un fichier error
 
 void	err_free_command_not_found(char *msg, t_data *data, char *str) //NOTA BENE pareil que ci dessus mais avec un exit status different
 {

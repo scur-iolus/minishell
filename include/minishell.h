@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/01 12:41:18 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 17:34:22 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ void	close_fd_first_process(t_pipe *pipe);
 void	close_fd_middle_process(t_pipe *pipe);
 void	close_fd_last_process(t_pipe *pipe);
 // +------------------------------------------+ //
-//   Dup                                   //
+//   Dup                                        //
 // +------------------------------------------+ //
 void	open_infile_and_heredoc(t_cmd *cmd);
 void	dup_outfile(t_cmd *cmd, t_pipe *pipe);
@@ -204,5 +204,8 @@ void	cmd_add_back(t_cmd **alst, t_cmd *new);//CHECKED
 t_cmd	*ft_lstnew_cmd(char *raw);//CHECKED
 void	ft_lstclear_cmd(t_cmd *head);//CHECKED
 int		ft_lstsize(t_cmd *lst);//CHECKED
-
+// +-------------------------------------------+ //
+//   Utils Minishell                             //
+// +--------------------------------a----------+ //
+void	update_var_shlvl(t_data *data);
 #endif

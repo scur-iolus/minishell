@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 19:20:04 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/01 12:14:12 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 17:33:25 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	first_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 		free_everything(data, 0);
 		exit(data->exit_status);
 	}
+	if (access(cmd->cmd_path, X_OK))
+		err_free_command_not_found(FILE_NOT_FOUND, data, 0);
 	if ((cmd->cmd_path == NULL ||
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
 		command_failed(data, pipe, cmd);
@@ -50,6 +52,8 @@ void	middle_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 		free_everything(data, 0);
 		exit(data->exit_status);
 	}
+	if (access(cmd->cmd_path, X_OK))
+		err_free_command_not_found(FILE_NOT_FOUND, data, 0);
 	if ((cmd->cmd_path == NULL ||
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
 		command_failed(data, pipe, cmd);
@@ -69,6 +73,8 @@ void	last_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 		free_everything(data, 0);
 		exit(data->exit_status);
 	}
+	if (access(cmd->cmd_path, X_OK))
+		err_free_command_not_found(FILE_NOT_FOUND, data, 0);
 	if ((cmd->cmd_path == NULL ||
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
 		command_failed(data, pipe, cmd);
