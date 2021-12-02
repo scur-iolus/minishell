@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 20:44:53 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 21:31:55 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static t_bool	input_is_ok(t_data *data)
 	return (1);
 }
 
-int	main(int argc, char **argv, char **env)// CHECKED
+int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
 
