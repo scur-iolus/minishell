@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:31:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:43:46 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ static void	spot_heredoc(t_data *data, t_cmd *head)
 	sentinel = 0;
 	while ((head->split)[i])
 	{
-
 		if (sentinel && head->heredoc)
 		{
 			free(head->heredoc);

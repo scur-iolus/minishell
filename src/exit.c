@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:45:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 15:34:24 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:38:53 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ static t_bool	check_nb_argument_ft_exit(char **cmd)
 
 static t_bool	check_argument_is_digit_ft_exit(char *str)
 {
-	int i;
-	long long int exit_status ;
+	int			i;
+	long long	exit_status ;
 
 	i = -1;
-	while(str[++i])
+	while (str[++i])
 	{
 		if (!ft_isdigit(str[i]))
-			return(1);
+			return (1);
 	}
 	if (i > 10)
 		return (1);
@@ -62,7 +62,7 @@ static t_bool	check_argument_is_digit_ft_exit(char *str)
 
 void	ft_exit2(t_data *data, char **cmd)
 {
-	long long int exit_status ;
+	long long	exit_status ;
 
 	if (check_nb_argument_ft_exit(cmd))
 		return ;

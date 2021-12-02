@@ -6,12 +6,11 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:32:59 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 15:34:24 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:36:03 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 static int	error_ft_cd(char **cmd)
 {
@@ -35,7 +34,7 @@ static int	error_ft_cd(char **cmd)
 		return (0);
 }
 
-static void	switch_old_pwd(t_data *data, char * line)
+static void	switch_old_pwd(t_data *data, char *line)
 {
 	t_env	*env;
 
@@ -51,12 +50,12 @@ static void	switch_old_pwd(t_data *data, char * line)
 	}
 }
 
-static void	switch_pwd(t_data *data, char * line)
+static void	switch_pwd(t_data *data, char *line)
 {
 	t_env	*env;
 	char	*old_dir;
 
-	env =  NULL;
+	env = NULL;
 	old_dir = ft_strdup(line);
 	if (!old_dir)
 	{
@@ -82,7 +81,7 @@ static void	switch_pwd(t_data *data, char * line)
 static int	go_to_home(t_data *data)
 {
 	char	line[PATH_MAX];
-	t_env *env;
+	t_env	*env;
 
 	env = find_var_env(data, "HOME");
 	if (!env)
@@ -91,7 +90,6 @@ static int	go_to_home(t_data *data)
 		return (1);
 	}
 	getcwd(line, PATH_MAX);
-
 	if (env->value[0] == '\0')
 		return (0);
 	if (!chdir(env->value))
@@ -102,12 +100,10 @@ static int	go_to_home(t_data *data)
 	else
 	{
 		ft_error(FILE_NOT_FOUND);
-		return(1);
+		return (1);
 	}
 	return (0);
 }
-
-
 
 t_bool	ft_cd(t_data *data, char **cmd) //NOTA BENE : rajouter le bon message d'erreur quand
 {
@@ -126,7 +122,7 @@ t_bool	ft_cd(t_data *data, char **cmd) //NOTA BENE : rajouter le bon message d'e
 		else
 		{
 			ft_error(FILE_NOT_FOUND);
-			return(1);
+			return (1);
 		}
 	}
 	else

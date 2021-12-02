@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 16:13:18 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:30:10 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	replace_semicolon(char *str, char c);
 // +------------------------------------------+ //
 int		ft_pwd(t_data *data, char **cmd);
 void	ft_exit(t_data *data, char *str, char **split, long long exit_status);
-void	ft_exit2(t_data *data, char **cmd); // FIXME j en ai fait un autre plus en adéquation avec les autre fonction
+void	ft_exit2(t_data *data, char **cmd); // FIXME j en ai fait un autre plus en adéquation avec les autres fonctions
 // +------------------------------------------+ //
 //   Export                                     //
 // +------------------------------------------+ //

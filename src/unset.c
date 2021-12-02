@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/29 11:08:05 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 20:46:13 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 static t_env	*find_previous_var_env(t_data *data, char *var_name)
 {
@@ -22,20 +21,20 @@ static t_env	*find_previous_var_env(t_data *data, char *var_name)
 	previous = NULL;
 	temp = data->env_lst;
 	i = -1;
-	while(temp)
+	while (temp)
 	{
 		if (!ft_strcmp(var_name, temp->var))
 			return (previous);
 		previous = temp;
 		temp = temp->next;
 	}
-	return(NULL);
+	return (NULL);
 }
 
 static void	pop_out_list_env(t_data *data, char *line) // a tester
 {
-	t_env *temp;
-	t_env *previous;
+	t_env	*temp;
+	t_env	*previous;
 
 	temp = find_var_env(data, line);
 	previous = find_previous_var_env(data, line);
@@ -59,7 +58,7 @@ static void	pop_out_list_env(t_data *data, char *line) // a tester
 
 int	ft_unset(t_data *data, char **cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cmd[++i])
@@ -87,12 +86,12 @@ int	ft_unset(t_data *data, char **cmd)
 
 int	error_var_name(char *line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (ft_isdigit(line[0]))
-		return(1);
-	while (line[++i] && line[i]!= '=')
+		return (1);
+	while (line[++i] && line[i] != '=')
 	{
 		if (!ft_is_var_name(line[i]))
 			return (1);

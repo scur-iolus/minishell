@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 15:34:24 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:38:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static t_bool	no_command(t_cmd *cmd)
 {
-	t_cmd *temp;
+	t_cmd	*temp;
 
 	temp = cmd;
-	while(temp)
+	while (temp)
 	{
 		if (temp->cmd != NULL)
 			return (0);
@@ -35,7 +35,7 @@ void	execute(t_data *data)
 	if (!vertical_bar && data->cmd->cmd == 0)
 		return ;
 	if (no_command(data->cmd))
-		return;
+		return ;
 	if (!vertical_bar && is_built_in(data->cmd->cmd))
 		make_one_built_in(data, data->cmd);
 	else
@@ -45,7 +45,7 @@ void	execute(t_data *data)
 	}
 }
 
-int		is_built_in(char **cmd)
+int	is_built_in(char **cmd)
 {
 	if (!ft_strcmp("echo", cmd[0]))
 		return (1);
@@ -62,7 +62,7 @@ int		is_built_in(char **cmd)
 	else if (!ft_strcmp("exit", cmd[0]))
 		return (1);
 	else
-		return(0);
+		return (0);
 }
 
 void	make_one_built_in(t_data *data, t_cmd *cmd)
@@ -70,7 +70,7 @@ void	make_one_built_in(t_data *data, t_cmd *cmd)
 	int	save_stdout;
 	int	save_stdin;
 
-	save_stdout = dup(1) ;
+	save_stdout = dup(1);
 	save_stdin = dup(0);
 	open_infile_and_heredoc(cmd);
 	if (cmd->outfile) // si outfile

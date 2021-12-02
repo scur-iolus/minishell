@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 19:34:25 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:29:54 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,52 @@ static void	pipes_split(t_data *data, t_cmd **head)
 ** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
 */
 
-static t_bool	is_syntax_error(t_data *data)
+static t_bool	is_syntax_error_1(t_cmd *tmp)
 {
-	t_cmd	*tmp;
-	char	*next;
 	size_t	i;
+	char	**split;
 
-	tmp = data->cmd;
 	while (tmp)
 	{
 		i = 0;
 		while (tmp->split[i] && tmp->split[i + 1])
 		{
-			if ((ft_strchr(tmp->split[i], '>') && \
-			ft_strchr(tmp->split[i + 1] + 1, '>')) \
-			|| (ft_strchr(tmp->split[i], '>') && \
-			ft_strchr(tmp->split[i + 1] + 1, '<')) \
-			|| (ft_strchr(tmp->split[i], '<') && \
-			ft_strchr(tmp->split[i + 1] + 1, '>')) \
-			|| (ft_strchr(tmp->split[i], '<') && \
-			ft_strchr(tmp->split[i + 1] + 1, '<')))
+			split = tmp->split;
+			if ((!ft_strcmp(">", split[i]) && !ft_strcmp(">>", split[i + 1])) \
+			|| (!ft_strcmp(">", split[i]) && !ft_strcmp(">", split[i + 1])) \
+			|| (!ft_strcmp("<", split[i]) && !ft_strcmp(">>", split[i + 1])) \
+			|| (!ft_strcmp("<", split[i]) && !ft_strcmp(">", split[i + 1])) \
+			|| (!ft_strcmp(">>", split[i]) && !ft_strcmp(">>", split[i + 1])) \
+			|| (!ft_strcmp(">>", split[i]) && !ft_strcmp(">", split[i + 1])) \
+			|| (!ft_strcmp("<<", split[i]) && !ft_strcmp(">>", split[i + 1])) \
+			|| (!ft_strcmp("<<", split[i]) && !ft_strcmp(">", split[i + 1])))
+				return (1);
+			i++;
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+static t_bool	is_syntax_error_2(t_cmd *tmp)
+{
+	size_t	i;
+	char	**split;
+
+	while (tmp)
+	{
+		i = 0;
+		while (tmp->split[i] && tmp->split[i + 1])
+		{
+			split = tmp->split;
+			if ((!ft_strcmp(">", split[i]) && !ft_strcmp("<<", split[i + 1])) \
+			|| (!ft_strcmp(">", split[i]) && !ft_strcmp("<", split[i + 1])) \
+			|| (!ft_strcmp("<", split[i]) && !ft_strcmp("<<", split[i + 1])) \
+			|| (!ft_strcmp("<", split[i]) && !ft_strcmp("<", split[i + 1])) \
+			|| (!ft_strcmp(">>", split[i]) && !ft_strcmp("<<", split[i + 1])) \
+			|| (!ft_strcmp(">>", split[i]) && !ft_strcmp("<", split[i + 1])) \
+			|| (!ft_strcmp("<<", split[i]) && !ft_strcmp("<<", split[i + 1])) \
+			|| (!ft_strcmp("<<", split[i]) && !ft_strcmp("<", split[i + 1])))
 				return (1);
 			i++;
 		}
@@ -118,8 +144,7 @@ t_bool	parse_cmd(t_data *data)
 	secure_between_apo(data->line, '|');
 	pipes_split(data, &head);
 	cmds_split(data);
-	
-	if (is_syntax_error(data) == 1)
+	if (is_syntax_error_1(data->cmd) == 1 || is_syntax_error_2(data->cmd) == 1)
 	{
 		ft_error(INVALID_CHAR_ERR);
 		return (0);

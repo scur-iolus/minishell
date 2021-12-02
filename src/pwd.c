@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 16:01:58 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/30 17:03:01 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 20:45:41 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_pwd(t_data *data, char **cmd)
 {
-	char line[PATH_MAX];
+	char	line[PATH_MAX];
 
 	if (cmd[1])
 	{

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:36:33 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	add_var_value(char **new, char *var_name, t_data *data)
 	node = find_var_env(data, var_name);
 	if (!node)
 		return ;
-	insertion_position= ft_strlen(*new);
+	insertion_position = ft_strlen(*new);
 	if (!ft_str_insert(new, node->value, insertion_position))
 	{
 		free(var_name);

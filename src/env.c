@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:19:35 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/30 17:33:56 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 20:37:43 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	check_argument_ft_env(char **cmd)
 	{
 		if (cmd[1][0] == '-')
 		{
-			if(cmd[1][1])
+			if (cmd[1][1])
 			{
 				ft_putstr_fd("env: invalid option -- '", 2);
 				ft_putchar_fd(cmd[1][1], 2);
@@ -56,8 +56,8 @@ int	check_argument_ft_env(char **cmd)
 		}
 		else
 		{
-			{
 			if (!check_equal_sign(cmd[1]))
+			{
 				ft_putstr_fd("env: '", 2);
 				ft_putstr_fd(cmd[1], 2);
 				ft_putstr_fd("': ", 2);

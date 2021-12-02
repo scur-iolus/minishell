@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 16:25:52 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:36:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static t_bool	heredoc_is_last(t_cmd *head)
 **			2, openable and possibly already closed, if not, added to data
 */
 
-static int	ret_categorize(t_data *data, t_cmd *head, size_t i, t_bool category)
+static int	ret_categorize(t_data *data, t_cmd *head, size_t i, int category)
 {
 	char	*str;
 
@@ -102,12 +102,11 @@ static int	ret_categorize(t_data *data, t_cmd *head, size_t i, t_bool category)
 
 static int	categorize(t_data *data, t_cmd *head, size_t i)
 {
-	t_bool	category;
+	int		category;
 	char	**tmp;
 
 	category = 0;
 	tmp = head->split;
-
 	while (*tmp && *tmp != (head->split)[i])
 	{
 		if (!ft_strcmp(">", *tmp))

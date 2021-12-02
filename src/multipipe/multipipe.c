@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:53:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/01 12:36:52 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 20:35:14 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static int	len_before_redirection(t_cmd *cmd)
 
 	i = 0;
 	list = cmd;
-	while(list)
+	while (list)
 	{
 		i++;
 		if (list->outfile)
-			break;
+			break ;
 		list = list->next;
 	}
 	return (i);
@@ -48,7 +48,7 @@ static void	finish_pipe(t_data *data, t_pipe *pipe, pid_t pid)
 	close_all_fd(pipe);
 	while (++i < pipe->nb_pipe - 1)
 	{
-		waitpid(pid ,&status , 0);
+		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			data->exit_status = WEXITSTATUS(status);
 		else
@@ -60,7 +60,7 @@ void	fork_creation(t_pipe *pipe, t_data *data)
 {
 	pid_t	pid;
 	int		x;
-	t_cmd *list;
+	t_cmd	*list;
 
 	list = data->cmd;
 	x = -1;

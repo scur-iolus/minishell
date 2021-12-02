@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:59:53 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/26 12:54:38 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 20:37:05 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	echo_argument_n(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[i] == '-')
@@ -60,7 +60,7 @@ static void	print_echo(char **cmd, int i)
 
 int	ft_echo(char **cmd)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (cmd[i] && !echo_argument_n(cmd[i]))  // si argument est bien un -n ou un -nnn alors i++ on passe les arguments

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:40:26 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 static void	ft_lstclear_pipe(t_pipe *this, t_data *data)
 {
-
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	j = ft_lstsize(data->cmd) + 1;
 	if (this->end)
 	{
 		while (++i < j)
-				free(this->end[i]);
+			free(this->end[i]);
 		free(this->end);
 	}
 	free(this);

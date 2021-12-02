@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:43:32 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 t_env	*find_var_env(t_data *data, char *var_name)
 {
-	t_env *temp;
+	t_env	*temp;
 
 	temp = data->env_lst;
 	while (temp)

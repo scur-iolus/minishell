@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:37:29 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ char	*get_var_value(t_data *data, char *str)
 	size_t	j;
 	char	*var_value;
 
-	while (str && *str && *str != '=') //NOTA BENE  J ai mis *str en plus
+	while (str && *str && *str != '=')
 		str++;
-	if (str && *str && *str == '=') //NOTA BENE la aussi
+	if (str && *str && *str == '=')
 		var_value = (char *)ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	else
 		var_value = (char *)ft_calloc(1, sizeof(char));

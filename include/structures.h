@@ -6,21 +6,18 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 16:22:05 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:31:15 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-typedef int t_bool;
+typedef int	t_bool;
 
 /*
 ** Structure s_pipe
-** path -> split du path
-** end -> les differents fd ouverts pour le multipipe
-** infile -> permet de recup le fd de l ouverture du infile
-** outfile -> permet de recup le fd de l ouverture du outfile
+** i: pour savoir ou on en est dans les pipes
 */
 
 typedef struct s_pipe
@@ -29,7 +26,7 @@ typedef struct s_pipe
 	int		nb_pipe;
 	int		cmd_nb;
 	int		cmd_len;
-	int		i; // pour savoir ou on en est dans les pipes
+	int		i;
 }	t_pipe;
 
 typedef struct s_env

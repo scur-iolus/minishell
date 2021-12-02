@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:18:10 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/30 15:45:41 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 20:34:46 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	init_pipe(int nb_pipe, t_data *data, t_pipe *pipes)
 			return (1);   //FIXME : est ce qu on doit tout fermer ??
 		}
 	}
-	return(0);
+	return (0);
 }
 
 int	init_pipe_struct(t_data *data)

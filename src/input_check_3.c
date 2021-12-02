@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 16:05:02 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:44:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_bool	max_n_consecutive_c(long long n, char c, char *str)
 	long long	count;
 
 	count = 0;
-	while(*str)
+	while (*str)
 	{
 		if (*str == c)
 			count++;

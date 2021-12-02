@@ -6,20 +6,11 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 16:01:31 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:43:16 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-static t_cmd	*ft_lstlast(t_cmd *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
 
 void	cmd_add_back(t_cmd **alst, t_cmd *new)
 {
@@ -29,7 +20,9 @@ void	cmd_add_back(t_cmd **alst, t_cmd *new)
 		*alst = new;
 	else
 	{
-		last = ft_lstlast(*alst);
+		last = *alst;
+		while (last->next)
+			last = last->next;
 		last->next = new;
 	}
 }

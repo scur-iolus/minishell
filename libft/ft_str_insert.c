@@ -6,13 +6,13 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:40:26 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 15:34:24 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:32:57 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void ft_proceed(char *str1, char *str2, char **new, size_t position)
+static void	ft_proceed(char *str1, char *str2, char **new, size_t position)
 {
 	size_t	str1_i;
 	size_t	new_i;

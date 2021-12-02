@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 11:03:52 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 16:12:56 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/02 20:33:45 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-typedef int t_bool;
+typedef int	t_bool;
 
 void	ft_swap(int *a, int *b);
 void	ft_sort_int_tab(int *tab, int size);

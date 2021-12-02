@@ -3,23 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   dup.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:21:50 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/11/30 14:05:26 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/02 20:34:35 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+/*
+** on ouvre le infile quoi qu'il arrive...
+** ou le here_doc
+*/
+
 void	open_infile_and_heredoc(t_cmd *cmd)
 {
-	if (cmd->infile) // on ouvre le infile quoi qu'il arrive
+	if (cmd->infile)
 	{
 		dup2(cmd->infile, STDIN_FILENO);
 		close(cmd->infile);
 	}
-	else if (cmd->heredoc) // ou le here_doc
+	else if (cmd->heredoc)
 		write(0, cmd->heredoc, ft_strlen(cmd->heredoc));
 }
 
