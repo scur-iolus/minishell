@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:48:53 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 11:43:13 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 16:49:38 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	quote_status(char *str, size_t i)
 	{
 		if (str[j] == '\'' && !between_quotes)
 		{
-			between_apo != between_apo;
+			between_apo = !between_apo;
 			if (j == i)
 				return (2);
 		}
 		else if (str[j] == '\"' && !between_apo)
 		{
-			between_quotes != between_quotes;
+			between_quotes = !between_quotes;
 			if (j == i)
 				return (2);
 		}
@@ -69,17 +69,45 @@ void	secure_between(char *str, char to_secure, char tmp, t_bool remove)
 	}
 }
 
+char	*str_without_quotes(char **str)
+{
+	size_t	new_len;
+	size_t	i;
+	char	*new;
+
+	new_len = 0;
+	i = 0;
+	while ((*str)[i])
+	{
+		if (quote_status(*str, i) != 2)
+			new_len++;
+		i++;
+	}
+	new = (char *)ft_calloc(new_len + 1, sizeof(char));
+	return (new);
+}
+
 t_bool	remove_surrounding_quotes(char **str)
 {
-	size_t	last_char_id;
+	char	*new;
+	size_t	str_i;
+	size_t	new_i;
 
-	last_char_id = ft_strlen(*str) - 1;
-	if ((*str)[0] == '\'' || (*str)[0] == '\"')
+	new = str_without_quotes(str);
+	if (!new)
+		return (0);
+	str_i = 0;
+	new_i = 0;
+	while ((*str)[str_i])
 	{
-		if (!ft_remove_char(str, last_char_id))
-			return (0);
-		if (!ft_remove_char(str, 0))
-			return (0);
+		if (quote_status(*str, str_i) != 2)
+		{
+			new[new_i] = (*str)[str_i];
+			new_i++;
+		}
+		str_i++;
 	}
+	free(*str);
+	*str = new;
 	return (1);
 }
