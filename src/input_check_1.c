@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:26:32 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 12:30:58 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:41:23 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,31 +122,30 @@ t_bool	valid_start_end(char *line)
 ** On the heap: line, data->env_lst
 */
 
-void	deduplicate_spaces(t_data *data)
+void	space_before_after_chevron(t_data *data)
 {
-	char	*new;
-	char	*str;
 	size_t	i;
-	t_bool	was_space;
+	char	*ptr;
+	t_bool	between_q;
 
-	secure_between(data->line, ' ', ';', FALSE);
-	new = ft_calloc(ft_strlen_wth_duplicates_sp(data->line) + 1, sizeof(char));
-	if (!new)
-		err_free(MALLOC_ERROR, data, 0);
-	str = data->line;
 	i = 0;
-	was_space = 0;
-	while (*str)
+	while ((data->line)[i])
 	{
-		if (!was_space || (was_space && *str != ' '))
-			new[i++] = *str;
-		if (*str == ' ')
-			was_space = 1;
-		else
-			was_space = 0;
-		str++;
+		between_q = quote_status(data->line, i);
+		ptr = (data->line) + i;
+		if (!between_q && (*ptr == '<' || *ptr == '>') && i \
+			&& *(ptr - 1) != ' ' && *(ptr - 1) != '<' && *(ptr - 1) != '>')
+		{
+			if (!ft_str_insert(&data->line, " ", i))
+				err_free(MALLOC_ERROR, data, 0);
+		}
+		if (!between_q && (*ptr == '<' || *ptr == '>') \
+			&& *(ptr + 1) && *(ptr + 1) != ' ' && *(ptr + 1) != '<' \
+			&& *(ptr + 1) != '>')
+		{
+			if (!ft_str_insert(&data->line, " ", i + 1))
+				err_free(MALLOC_ERROR, data, 0);
+		}
+		i++;
 	}
-	free(data->line);
-	data->line = new;
-	secure_between(data->line, ' ', ';', TRUE);
 }

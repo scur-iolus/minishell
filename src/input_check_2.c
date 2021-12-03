@@ -6,43 +6,11 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:34:50 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 12:31:24 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:41:47 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/*
-** On the heap: line, data->env_lst
-*/
-
-void	space_before_after_chevron(t_data *data)
-{
-	size_t	i;
-	char	*ptr;
-	t_bool	between_q;
-
-	i = 0;
-	while ((data->line)[i])
-	{
-		between_q = quote_status(data->line, i);
-		ptr = (data->line) + i;
-		if (!between_q && (*ptr == '<' || *ptr == '>') && i \
-			&& *(ptr - 1) != ' ' && *(ptr - 1) != '<' && *(ptr - 1) != '>')
-		{
-			if (!ft_str_insert(&data->line, " ", i))
-				err_free(MALLOC_ERROR, data, 0);
-		}
-		if (!between_q && (*ptr == '<' || *ptr == '>') \
-			&& *(ptr + 1) && *(ptr + 1) != ' ' && *(ptr + 1) != '<' \
-			&& *(ptr + 1) != '>')
-		{
-			if (!ft_str_insert(&data->line, " ", i + 1))
-				err_free(MALLOC_ERROR, data, 0);
-		}
-		i++;
-	}
-}
 
 static size_t	ft_strlen_wth_duplicates_sp(char *str)
 {
@@ -62,6 +30,39 @@ static size_t	ft_strlen_wth_duplicates_sp(char *str)
 		str++;
 	}
 	return (i);
+}
+
+/*
+** On the heap: line, data->env_lst
+*/
+
+void	deduplicate_spaces(t_data *data)
+{
+	char	*new;
+	char	*str;
+	size_t	i;
+	t_bool	was_space;
+
+	secure_between(data->line, ' ', ';', FALSE);
+	new = ft_calloc(ft_strlen_wth_duplicates_sp(data->line) + 1, sizeof(char));
+	if (!new)
+		err_free(MALLOC_ERROR, data, 0);
+	str = data->line;
+	i = 0;
+	was_space = 0;
+	while (*str)
+	{
+		if (!was_space || (was_space && *str != ' '))
+			new[i++] = *str;
+		if (*str == ' ')
+			was_space = 1;
+		else
+			was_space = 0;
+		str++;
+	}
+	free(data->line);
+	data->line = new;
+	secure_between(data->line, ' ', ';', TRUE);
 }
 
 /*
