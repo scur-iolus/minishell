@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 12:19:16 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 14:48:56 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_lstclear_cmd(t_cmd *head)
 	while (head)
 	{
 		tmp = head->next;
-		if (head->raw) // FIXME -> n'existe plus
+		if (head->raw)
 			free(head->raw);
 		if (head->split)
 			ft_free_split(head->split);
@@ -76,7 +76,6 @@ void	ft_lstclear_cmd(t_cmd *head)
 			ft_free_split(head->cmd);
 		if (head->cmd_path)
 			free(head->cmd_path);
-		//close_fd(head); // FIXME -> je close directement les fd lors des commandes
 		free(head);
 		head = tmp;
 	}

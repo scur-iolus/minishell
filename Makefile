@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/12/03 12:31:42 by llalba           ###   ########.fr        #
+#    Updated: 2021/12/03 14:44:16 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,8 @@ SRC_LIST		= \
 				pwd.c \
 				exit.c \
 				cd.c \
+				cd2.c \
+				cdpath.c \
 				echo.c \
 				env.c \
 				unset.c \
@@ -98,6 +100,7 @@ $(OBJ_DIR):
 				@mkdir -p $(OBJ_DIR)multipipe
 
 all:			$(NAME)
+
 
 clean:
 				@/bin/echo "💦 Cleaning..."

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 12:35:32 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 15:24:35 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init_data(t_data *data, char **env)
 	data->pipe.cmd_len = 0;
 	data->pipe.i = 0;
 	data->env_lst = init_env(data, env);
+	update_var_shlvl(data);
 }
 
 static void	reset_data(t_data *data)
@@ -40,6 +41,7 @@ static void	reset_data(t_data *data)
 		free(data->line);
 	if (data->cmd)
 		ft_lstclear_cmd(data->cmd);
+	free_pipe(data, &(data->pipe));
 	data->line = 0;
 	data->cmd = 0;
 	data->env = list_to_env(data, data->env_lst);

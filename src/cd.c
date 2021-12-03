@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:32:59 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 12:33:11 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 14:55:42 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,28 @@ static int	error_ft_cd(char **cmd)
 	int	i;
 
 	i = 1;
-	if (cmd[i][0] == '-')
+	if (cmd[i])
 	{
-		ft_error(INVALID_OPTION);
-		return (1);
+		if (cmd[i][0] == '-')
+		{
+			ft_error(INVALID_OPTION);
+			return (1);
+		}
+		while (cmd[i])
+			i++;
+		i--;
+		if (i > 1)
+		{
+			ft_error(TOO_MANY_ARG2);
+			return (1);
+		}
+		else
+			return (0);
 	}
-	while (cmd[i])
-		i++;
-	i--;
-	if (i > 1)
-	{
-		ft_error(TOO_MANY_ARG2);
-		return (1);
-	}
-	else
-		return (0);
+	return (0);
 }
 
-static void	switch_old_pwd(t_data *data, char *line)
+void	switch_old_pwd(t_data *data, char *line)
 {
 	t_env	*env;
 
@@ -50,7 +54,7 @@ static void	switch_old_pwd(t_data *data, char *line)
 	}
 }
 
-static void	switch_pwd(t_data *data, char *line)
+void	switch_pwd(t_data *data, char *line)
 {
 	t_env	*env;
 	char	*old_dir;
@@ -105,20 +109,20 @@ static int	go_to_home(t_data *data)
 	return (0);
 }
 
-t_bool	ft_cd(t_data *data, char **cmd) //NOTA BENE : rajouter le bon message d'erreur quand
+t_bool	ft_cd(t_data *data, char **cmd)
 {
-	char	line[PATH_MAX];
-
 	if (error_ft_cd(cmd))
 		return (1);
+	if (find_var_env(data, "CDPATH") && cmd[1])
+	{
+		if (!arg_is_point_point(cmd[1]))
+			if (cdpath(data, cmd))
+				return (0);
+	}
 	if (cmd[1])
 	{
-		getcwd(line, PATH_MAX);
 		if (!chdir(cmd[1]))
-		{
-			switch_old_pwd(data, line);
-			switch_pwd(data, line);
-		}
+			change_directory(data);
 		else
 		{
 			ft_error(FILE_NOT_FOUND);
@@ -126,7 +130,9 @@ t_bool	ft_cd(t_data *data, char **cmd) //NOTA BENE : rajouter le bon message d'e
 		}
 	}
 	else
+	{
 		if (go_to_home(data))
 			return (1);
+	}
 	return (0);
 }

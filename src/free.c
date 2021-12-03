@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 12:35:03 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 15:24:26 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ void	err_free(char *msg, t_data *data, char *str)
 		ft_error(MALLOC_ERROR);
 	exit(EXIT_FAILURE);
 }
+
+
+//FIXME  : mettre dans un autre fichier peut etre faire un fichier error
 
 void	err_free_command_not_found(char *msg, t_data *data, char *str) //NOTA BENE pareil que ci dessus mais avec un exit status different
 {

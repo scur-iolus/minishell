@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 12:35:36 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 14:59:44 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,24 @@ extern long long	*g_exit_status;
 //   Define                                     //
 // +------------------------------------------+ //
 
-# define MALLOC_ERROR	"Error: malloc failed"
-# define INVALID_CHAR	"Error: invalid characters in your command"
-# define ODD_NB			"Error: odd number of \' or \""
-# define END_CHAR_ERR	"Error: invalid char at the end of your command"
-# define START_CHAR_ERR	"Error: invalid char at the beginning of your command"
-# define TOO_MANY_ARG	"Error: minishell does not accept any argument"
-# define TOO_MANY_ARG2	"Error: too many arguments"
-# define HOME_NOT_SET	"Error: HOME not set"
-# define LINE_TOO_LONG	"Error: this command is too long"
-# define INVALID_STATUS	"Error: this exit status is not an int"
-# define INVALID_OPTION	"Error: invalid option"
-# define FILE_NOT_FOUND	"Error: no such file or directory"
-# define CLOSE_FAILED	"Error: failed to close some file descriptors"
-# define GNL_ERROR		"Error: failed to malloc or to read standard input"
+# define MALLOC_ERROR	"Error: malloc failed\n"
+# define INVALID_CHAR	"Error: invalid characters in your command\n"
+# define ODD_NB			"Error: odd number of \' or \"\n"
+# define END_CHAR_ERR	"Error: invalid char at the end of your command\n"
+# define START_CHAR_ERR	"Error: invalid char at the beginning of your command\n"
+# define TOO_MANY_ARG	"Error: minishell does not accept any argument\n"
+# define TOO_MANY_ARG2	"Error: too many arguments\n"
+# define HOME_NOT_SET	"Error: HOME not set\n"
+# define LINE_TOO_LONG	"Error: this command is too long\n"
+# define INVALID_STATUS	"Error: this exit status is not an int\n"
+# define INVALID_OPTION	"Error: invalid option\n"
+# define FILE_NOT_FOUND	"Error: no such file or directory\n"
+# define CLOSE_FAILED	"Error: failed to close some file descriptors\n"
+# define GNL_ERROR		"Error: failed to malloc or to read standard input\n"
 # define CMD_NOT_FOUND	"Error: command not found\n"
-# define NUMERIC_ARG	"Error: numeric argument required"
+# define NUMERIC_ARG	"Error: numeric argument required\n"
 # define HEREDOC_EOF	"Warning: here-document delimited by EOF.\n"
-# define SIGQUIT_MSG	"Quit (core dumped)"
+# define SIGQUIT_MSG	"Quit (core dumped)\n"
 # define BUFFER_SIZE 	511
 # define ONE_RIGHT		1
 # define TWO_RIGHT		2
@@ -88,8 +88,7 @@ t_bool	remove_surrounding_quotes(char **str);
 //   Builtins                                   //
 // +------------------------------------------+ //
 int		ft_pwd(t_data *data, char **cmd);
-void	ft_exit(t_data *data, char *str, char **split, long long exit_status);
-void	ft_exit2(t_data *data, char **cmd); // FIXME j en ai fait un autre plus en adéquation avec les autres fonctions
+void	ft_exit(t_data *data, char **cmd); // FIXME j en ai fait un autre plus en adéquation avec les autres fonctions
 // +------------------------------------------+ //
 //   Export                                     //
 // +------------------------------------------+ //
@@ -107,6 +106,11 @@ int		check_argument_ft_env(char **cmd);
 //   Cd                                     //
 // +------------------------------------------+ //
 t_bool	ft_cd(t_data *data, char **cmd);
+void	change_directory(t_data *data);
+t_bool	cdpath(t_data *data, char **cmd);
+void	switch_old_pwd(t_data *data, char * line);
+void	switch_pwd(t_data *data, char * line);
+t_bool	arg_is_point_point(char *str);
 // +------------------------------------------+ //
 //   Unset                                     //
 // +------------------------------------------+ //
@@ -195,7 +199,7 @@ void	close_fd_first_process(t_pipe *pipe);
 void	close_fd_middle_process(t_pipe *pipe);
 void	close_fd_last_process(t_pipe *pipe);
 // +------------------------------------------+ //
-//   Dup                                   //
+//   Dup                                        //
 // +------------------------------------------+ //
 void	open_infile_and_heredoc(t_cmd *cmd);
 void	dup_outfile(t_cmd *cmd, t_pipe *pipe);
@@ -206,5 +210,9 @@ void	cmd_add_back(t_cmd **alst, t_cmd *new);
 t_cmd	*ft_lstnew_cmd(char *raw);
 void	ft_lstclear_cmd(t_cmd *head);
 int		ft_lstsize(t_cmd *lst);
+// +-------------------------------------------+ //
+//   Utils Minishell                             //
+// +--------------------------------a----------+ //
+void	update_var_shlvl(t_data *data);
 
 #endif

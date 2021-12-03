@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 12:14:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 12:32:43 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 14:58:27 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,21 @@ t_bool	open_file(t_cmd *head, char *file, t_bool opening)
 	if (opening == ONE_RIGHT || opening == TWO_RIGHT)
 		head->outfile = fd;
 	return (1);
+}
+
+void	update_var_shlvl(t_data *data)
+{
+	t_env	*temp;
+	int		i;
+
+	temp = find_var_env(data, "SHLVL");
+	if (temp)
+	{
+		i = ft_atoi(temp->value);
+		i++;
+		free(temp->value);
+		temp->value = ft_itoa(i);
+		if (!temp->value)
+			ft_error(MALLOC_ERROR);
+	}
 }
