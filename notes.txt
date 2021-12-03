@@ -311,3 +311,17 @@ https://github.com/Binary-Hackers/42_Corrections/blob/master/00_Projects/01_Unix
 
 
 pipes entre ''
+'' et "" d'une manière générale
+exit retourne 1 à zsh au lieu de 0
+
+
+
+
+void	remove_quotation_marks(t_data *data)
+{
+	secure_between_apo(data->line, '\'');
+	if (ft_strchr(data->line, (int) '\"'))
+		if (!ft_split_n_join(&(data->line), '\"'))
+			err_free(MALLOC_ERROR, data, 0);
+	replace_semicolon(data->line, '\"');
+}

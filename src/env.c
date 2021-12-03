@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:19:35 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 20:37:43 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:33:58 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_env(t_data *data, char **cmd)
 		return (i);
 	if (cmd[1] && cmd[1][0] == '-')
 		return (0);
-	temp  = data->env_lst;
+	temp = data->env_lst;
 	while (temp)
 	{
 		if (temp->is_env == 1)

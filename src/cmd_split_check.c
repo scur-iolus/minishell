@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 20:29:54 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:18:59 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,17 @@ static void	cmds_split(t_data *data)
 	tmp = data->cmd;
 	while (tmp)
 	{
-		replace_semicolon(tmp->raw, '|');
-		secure_between_apo(tmp->raw, ' ');
+		secure_between(tmp->raw, '|', ';', TRUE);
+		secure_between(tmp->raw, ' ', ';', FALSE);
 		tmp->split = ft_split(tmp->raw, ' ');
 		if (!(tmp->split))
 			err_free(MALLOC_ERROR, data, 0);
 		i = 0;
 		while (tmp->split[i])
 		{
-			replace_semicolon(tmp->split[i], ' ');
+			secure_between(tmp->split[i], ' ', ';', TRUE);
+			if (!remove_surrounding_quotes((tmp->split) + i))
+				err_free(MALLOC_ERROR, data, 0);
 			i++;
 		}
 		tmp = tmp->next;
@@ -141,12 +143,12 @@ t_bool	parse_cmd(t_data *data)
 	t_cmd	*head;
 
 	head = 0;
-	secure_between_apo(data->line, '|');
+	secure_between(data->line, '|', ';', FALSE);
 	pipes_split(data, &head);
 	cmds_split(data);
 	if (is_syntax_error_1(data->cmd) == 1 || is_syntax_error_2(data->cmd) == 1)
 	{
-		ft_error(INVALID_CHAR_ERR);
+		ft_error(INVALID_CHAR);
 		return (0);
 	}
 	load_heredoc(data);

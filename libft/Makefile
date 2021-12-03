@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/21 11:04:04 by fmonbeig          #+#    #+#              #
-#    Updated: 2021/12/02 21:25:07 by llalba           ###   ########.fr        #
+#    Updated: 2021/12/03 11:03:56 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ SRC				= ft_strlen.c \
 				ft_str_insert.c \
 				ft_free_split.c \
 				ft_split_n_join.c \
+				ft_remove_char.c \
 				ft_strlen_split.c
 
 OBJ				= $(SRC:.c=.o)

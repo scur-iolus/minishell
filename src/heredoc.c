@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:31:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 20:43:46 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:19:51 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)
 	if (!(head->heredoc))
 		err_free(MALLOC_ERROR, data, 0);
 	write(1, "> ", 2);
-	status = get_next_line(&line, HEREDOC_CONTINUE);
+	status = get_next_line(&line, HEREDOC_CONT);
 	while (status > 0 && ft_strcmp(heredoc_delimiter, line) != 0)
 	{
 		ft_str_insert(&(head->heredoc), line, ft_strlen(head->heredoc));
@@ -79,7 +79,7 @@ static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)
 		free(line);
 		line = 0;
 		write(1, "> ", 2);
-		status = get_next_line(&line, HEREDOC_CONTINUE);
+		status = get_next_line(&line, HEREDOC_CONT);
 	}
 	(void)get_next_line(0, HEREDOC_END);
 	if (line)

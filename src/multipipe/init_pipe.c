@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:18:10 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 20:34:46 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:36:53 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	init_pipe(int nb_pipe, t_data *data, t_pipe *pipes)
 	if (!pipes->end)
 	{
 		ft_putstr_fd("ERROR: Malloc Failed", 2);
-		return (1);   //FIXME : est ce qu on doit tout fermer ?? Je pense qu il faut aller au prochain readline
+		return (1); //FIXME : est ce qu on doit tout fermer ?? Je pense qu il faut aller au prochain readline
 	}
 	while (++i < nb_pipe)
 	{
@@ -29,13 +29,13 @@ int	init_pipe(int nb_pipe, t_data *data, t_pipe *pipes)
 		if (!pipes->end[i])
 		{
 			ft_putstr_fd("ERROR: Malloc Failed", 2);
-			return (1);   //FIXME : est ce qu on doit tout fermer ??
+			return (1); //FIXME : est ce qu on doit tout fermer ??
 		}
 		pipe(pipes->end[i]);
 		if (pipe(pipes->end[i]) == -1)
 		{
 			ft_putstr_fd("ERROR: Pipe Failed", 2);
-			return (1);   //FIXME : est ce qu on doit tout fermer ??
+			return (1); //FIXME : est ce qu on doit tout fermer ??
 		}
 	}
 	return (0);

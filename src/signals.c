@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:15:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 13:48:33 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 11:12:09 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static void	update_exit_status(pid_t	this_pid)
 ** rl_redisplay: Replace the contents of rl_line_buffer with text
 */
 
-static void	signal_handler(int signo) {
+static void	signal_handler(int signo)
+{
 	if (signo == SIGINT)
 	{
 		*g_exit_status = 130;

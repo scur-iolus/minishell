@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 21:31:55 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:35:32 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,20 @@ static void	init_data(t_data *data, char **env)
 	data->env_lst = init_env(data, env);
 }
 
-/*
-** Basically prints an error message on fd 2
-*/
-
-void	ft_error(char *str)
+static void	reset_data(t_data *data)
 {
-	write(2, EMOJI_X, ft_strlen(EMOJI_X));
-	write(2, "Error: ", 7);
-	write(2, str, ft_strlen(str));
-	write(2, "\n", 1);
+	if (data->env)
+		ft_free_split(data->env);
+	if (data->path)
+		ft_free_split(data->path);
+	if (data->line)
+		free(data->line);
+	if (data->cmd)
+		ft_lstclear_cmd(data->cmd);
+	data->line = 0;
+	data->cmd = 0;
+	data->env = list_to_env(data, data->env_lst);
+	take_path(data);
 }
 
 /*
@@ -78,20 +82,18 @@ static t_bool	input_is_ok(t_data *data)
 	if (ft_strlen(data->line) > 0 && !even_nb_of_quote_marks(data->line))
 		return (0);
 	data->line = convert_env_var(data);
-	if (*(data->line) != '\0')
-		remove_quotation_marks(data);
 	tmp = data->line;
 	data->line = ft_strtrim(data->line, "  ");
+	free(tmp);
 	if (!(data->line))
 		err_free(MALLOC_ERROR, data, 0);
-	free(tmp);
 	if (!valid_start_end(data->line))
 		return (0);
 	deduplicate_spaces(data);
 	space_before_after_chevron(data);
 	if (too_many_chevrons_o_pipes(data) || invalid_suite(data))
 		return (0);
-	printf("✅ data->line contient 🔹%s🔹\n", data->line); //FIXME
+	printf("▫ data->line contient 🔹%s🔹\n", data->line); //FIXME
 	return (1);
 }
 

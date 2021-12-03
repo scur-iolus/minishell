@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/12/02 13:49:22 by llalba           ###   ########.fr        #
+#    Updated: 2021/12/03 12:31:42 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,6 @@ SRC_LIST		= \
 				minishell.c \
 				input_check_1.c \
 				input_check_2.c \
-				input_check_3.c \
 				env_to_list.c \
 				convert_env_var.c \
 				convert_env_special_cases.c \
@@ -64,6 +63,7 @@ SRC_LIST		= \
 				utils.c \
 				print_export.c \
 				signals.c \
+				quotes.c \
 				multipipe/dup.c \
 				multipipe/utils_multipipe.c \
 				multipipe/close_fd.c \

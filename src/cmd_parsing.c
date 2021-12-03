@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 20:36:12 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:19:16 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static t_bool	heredoc_is_last(t_cmd *head)
 		closed = close(head->infile);
 		if (closed == -1)
 		{
-			ft_error(FAILED_TO_CLOSE);
+			ft_error(CLOSE_FAILED);
 			return (0);
 		}
 	}
@@ -151,9 +151,11 @@ t_bool	parse_cmd_content(t_data *data, t_cmd *head)
 	hop = head->cmd;//FIXME
 	while (hop && *hop)//FIXME
 	{//FIXME
-		printf("🔸%s🔸\n", *hop); // FIXME ===============
+		printf("🔸%s", *hop); // FIXME ===============
 		hop++;//FIXME
 	}//FIXME
+	if (hop) // FIXME
+		printf("🔸\n"); // FIXME ===============
 	printf("▫ fd infile : %d\n", head->infile); // FIXME ===============
 	printf("▫ fd outfile : %d\n", head->outfile); // FIXME ===============
 	printf("▫ cmd_path : %s\n", head->cmd_path); // FIXME ===============

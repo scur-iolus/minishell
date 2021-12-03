@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 23:31:57 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 20:43:16 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:19:16 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	close_fd(t_cmd *head)
 	if (head->outfile)
 		fail -= close(head->outfile);
 	if (fail)
-		ft_error(FAILED_TO_CLOSE);
+		ft_error(CLOSE_FAILED);
 }
 
 void	ft_lstclear_cmd(t_cmd *head)

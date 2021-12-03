@@ -6,11 +6,20 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 12:14:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 16:13:37 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:32:43 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+/*
+** Basically prints an error message on fd 2
+*/
+
+void	ft_error(char *str)
+{
+	write(2, str, ft_strlen(str));
+}
 
 static t_bool	close_previous(t_cmd *head, char *file, t_bool opening)
 {
@@ -23,7 +32,7 @@ static t_bool	close_previous(t_cmd *head, char *file, t_bool opening)
 		fail = close(head->outfile);
 	if (fail == -1)
 	{
-		ft_error(FAILED_TO_CLOSE);
+		ft_error(CLOSE_FAILED);
 		return (0);
 	}
 	return (1);
@@ -52,34 +61,4 @@ t_bool	open_file(t_cmd *head, char *file, t_bool opening)
 	if (opening == ONE_RIGHT || opening == TWO_RIGHT)
 		head->outfile = fd;
 	return (1);
-}
-
-void	secure_between_apo(char *str, char c)
-{
-	size_t	i;
-	long	apostrophes;
-
-	i = 0;
-	apostrophes = 0;
-	while (str[i])
-	{
-		if (str[i] == '\'')
-			apostrophes++;
-		else if (str[i] == c && apostrophes % 2 == 1)
-			str[i] = ';';
-		i++;
-	}
-}
-
-void	replace_semicolon(char *str, char c)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == ';')
-			str[i] = c;
-		i++;
-	}
 }

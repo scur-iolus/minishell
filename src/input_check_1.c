@@ -6,24 +6,11 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:26:32 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 21:32:15 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:30:58 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/*
-** On the heap: line, data->env_lst
-*/
-
-void	remove_quotation_marks(t_data *data)
-{
-	secure_between_apo(data->line, '\'');
-	if (ft_strchr(data->line, (int) '\"'))
-		if (!ft_split_n_join(&(data->line), '\"'))
-			err_free(MALLOC_ERROR, data, 0);
-	replace_semicolon(data->line, '\"');
-}
 
 t_bool	even_nb_of_quote_marks(char *line)
 {
@@ -36,7 +23,7 @@ t_bool	even_nb_of_quote_marks(char *line)
 	{
 		if ((*line) == '\\' || (*line) == ';')
 		{
-			ft_error(INVALID_CHAR_ERR);
+			ft_error(INVALID_CHAR);
 			return (0);
 		}
 		else if ((*line) == '\'' && quote_marks % 2 == 0)
@@ -45,9 +32,9 @@ t_bool	even_nb_of_quote_marks(char *line)
 			quote_marks++;
 		line++;
 	}
-	if (apostrophes % 2 == 1 || quote_marks % 2 == 1)
+	if (apostrophes % 2 || quote_marks % 2)
 	{
-		ft_error(ODD_NB_APOSTROPHES);
+		ft_error(ODD_NB);
 		return (0);
 	}
 	return (1);
@@ -102,4 +89,64 @@ void	remove_comment(t_data *data)
 		}
 	}
 	copy_n_char(data, len);
+}
+
+/*
+** On the heap: line, data->env_lst
+*/
+
+t_bool	valid_start_end(char *line)
+{
+	char	last_char;
+
+	if (*line == 0)
+		return (1);
+	last_char = line[ft_strlen(line) - 1];
+	if (last_char != '<' && last_char != '>' && last_char != '|')
+	{
+		if (line[0] == '|')
+		{
+			ft_error(START_CHAR_ERR);
+			return (0);
+		}
+		return (1);
+	}
+	else
+	{
+		ft_error(END_CHAR_ERR);
+		return (0);
+	}
+}
+
+/*
+** On the heap: line, data->env_lst
+*/
+
+void	deduplicate_spaces(t_data *data)
+{
+	char	*new;
+	char	*str;
+	size_t	i;
+	t_bool	was_space;
+
+	secure_between(data->line, ' ', ';', FALSE);
+	new = ft_calloc(ft_strlen_wth_duplicates_sp(data->line) + 1, sizeof(char));
+	if (!new)
+		err_free(MALLOC_ERROR, data, 0);
+	str = data->line;
+	i = 0;
+	was_space = 0;
+	while (*str)
+	{
+		if (!was_space || (was_space && *str != ' '))
+			new[i++] = *str;
+		if (*str == ' ')
+			was_space = 1;
+		else
+			was_space = 0;
+		str++;
+	}
+	free(data->line);
+	data->line = new;
+	secure_between(data->line, ' ', ';', TRUE);
 }

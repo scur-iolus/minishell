@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 20:40:26 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:35:03 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,6 @@ void	free_pipe(t_data *data, t_pipe *pipe)
 	if (pipe->end)
 		ft_lstclear_pipe(pipe, data);
 	free(pipe);
-}
-
-void	reset_data(t_data *data)
-{
-	if (data->env)
-		ft_free_split(data->env);
-	if (data->path)
-		ft_free_split(data->path);
-	if (data->line)
-		free(data->line);
-	if (data->cmd)
-		ft_lstclear_cmd(data->cmd);
-	data->line = 0;
-	data->cmd = 0;
-	data->env = list_to_env(data->env_lst);
-	take_path(data);
 }
 
 /*

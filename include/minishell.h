@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 20:30:10 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 12:35:36 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,43 +48,42 @@ extern long long	*g_exit_status;
 //   Define                                     //
 // +------------------------------------------+ //
 
-# define MALLOC_ERROR		"malloc failed"
-# define INVALID_CHAR_ERR	"invalid characters in your command"
-# define ODD_NB_APOSTROPHES	"odd number of \' or \""
-# define END_CHAR_ERR		"invalid char at the end of your command"
-# define START_CHAR_ERR		"invalid char at the beginning of your command"
-# define TOO_MANY_ARG		"minishell does not accept any argument"
-# define TOO_MANY_ARG2		"too many arguments"
-# define HOME_NOT_SET		"HOME not set"
-# define LINE_TOO_LONG		"this command is too long, please try to split it"
-# define INVALID_STATUS		"this exit status is not an int"
-# define INVALID_OPTION		"- invalid option"
-# define FILE_NOT_FOUND		"no such file or directory"
-# define FAILED_TO_CLOSE	"failed to close one or more file descriptor(s)"
-# define GNL_ERROR			"failed to malloc or to read standard input"
-# define HEREDOC_EOF		"Warning: here-document delimited by EOF.\n"
-# define CMD_NOT_FOUND		": command not found\n"
-# define SIGQUIT_MSG		"Quit (core dumped)"
-# define NUMERIC_ARG		": numeric argument required"
-# define EMOJI_OK			"\033[32m[\xE2\x9C\x94]\033[0m "
-# define EMOJI_X			"\033[31m[\xE2\x9C\x96]\033[0m "
-# define BUFFER_SIZE 		511
-# define ONE_RIGHT			1
-# define TWO_RIGHT			2
-# define ONE_LEFT			3
-# define TWO_LEFT			4
-# define HEREDOC_CONTINUE	0
-# define HEREDOC_END		1
-# define TRUE				1
-# define FALSE				0
+# define MALLOC_ERROR	"Error: malloc failed"
+# define INVALID_CHAR	"Error: invalid characters in your command"
+# define ODD_NB			"Error: odd number of \' or \""
+# define END_CHAR_ERR	"Error: invalid char at the end of your command"
+# define START_CHAR_ERR	"Error: invalid char at the beginning of your command"
+# define TOO_MANY_ARG	"Error: minishell does not accept any argument"
+# define TOO_MANY_ARG2	"Error: too many arguments"
+# define HOME_NOT_SET	"Error: HOME not set"
+# define LINE_TOO_LONG	"Error: this command is too long"
+# define INVALID_STATUS	"Error: this exit status is not an int"
+# define INVALID_OPTION	"Error: invalid option"
+# define FILE_NOT_FOUND	"Error: no such file or directory"
+# define CLOSE_FAILED	"Error: failed to close some file descriptors"
+# define GNL_ERROR		"Error: failed to malloc or to read standard input"
+# define CMD_NOT_FOUND	"Error: command not found\n"
+# define NUMERIC_ARG	"Error: numeric argument required"
+# define HEREDOC_EOF	"Warning: here-document delimited by EOF.\n"
+# define SIGQUIT_MSG	"Quit (core dumped)"
+# define BUFFER_SIZE 	511
+# define ONE_RIGHT		1
+# define TWO_RIGHT		2
+# define ONE_LEFT		3
+# define TWO_LEFT		4
+# define HEREDOC_CONT	0
+# define HEREDOC_END	1
+# define TRUE			1
+# define FALSE			0
 
 // +------------------------------------------+ //
 //   Utils                                      //
 // +------------------------------------------+ //
 void	signals_init(void);
 int		gnl_result(int ret, char **line, char **save);
-void	secure_between_apo(char *str, char c);
-void	replace_semicolon(char *str, char c);
+void	secure_between(char *str, char to_secure, char tmp, t_bool remove);
+int		quote_status(char *str, size_t i);
+t_bool	remove_surrounding_quotes(char **str);
 // +------------------------------------------+ //
 //   Builtins                                   //
 // +------------------------------------------+ //
@@ -117,7 +116,6 @@ int		ft_is_var_name(int c);
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
-void	reset_data(t_data *data);
 void	free_data(t_data *data);
 void	free_everything(t_data *data, char *str);
 void	delete_one_env_var(t_env *env);
@@ -165,7 +163,7 @@ char	*convert_env_var(t_data *data);
 t_bool	special_cases(t_data *data, char **output, size_t *pos);
 t_env	*find_var_env(t_data *data, char *var_name);
 void	env_add_front(t_env **head, t_env *new);
-char	**list_to_env(t_env *env_lst);
+char	**list_to_env(t_data *data, t_env *env_lst);
 // +------------------------------------------+ //
 //   Execute                                  //
 // +------------------------------------------+ //
