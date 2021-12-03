@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 14:59:44 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 17:57:24 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ void	close_fd_last_process(t_pipe *pipe);
 // +------------------------------------------+ //
 void	open_infile_and_heredoc(t_cmd *cmd);
 void	dup_outfile(t_cmd *cmd, t_pipe *pipe);
+void	command_failed_because_of_file_opening(t_data *data);
 // +------------------------------------------+ //
 //   Fonction list CMD                          //
 // +--------------------------------a----------+ //

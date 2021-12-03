@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:32:59 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 14:55:42 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 17:10:34 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	switch_old_pwd(t_data *data, char *line)
 	env = find_var_env(data, "OLDPWD");
 	if (!env)
 		return ;
+	free(env->value);
 	env->value = ft_strdup(line);
 	if (!env->value)
 	{

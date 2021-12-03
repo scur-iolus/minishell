@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 15:58:30 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 17:26:46 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	ft_lstclear_pipe(t_pipe *pipe, t_data *data)
 		while (++i < j)
 			free(pipe->end[i]);
 		free(pipe->end);
+		pipe->end = NULL;
 	}
 }
 

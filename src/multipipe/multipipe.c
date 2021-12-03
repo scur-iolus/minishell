@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:53:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 20:35:14 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 18:30:50 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ void	fork_creation(t_pipe *pipe, t_data *data)
 			ft_error("Fork Failed");
 		if (pid == 0)
 			do_cmd(data, pipe, list);
+		if (list->outfile || list->ok == 0)
+		{
+			pipe->cmd_nb = 0;
+			pipe->cmd_len = 0;
+		}
 		list = list->next;
 	}
 	finish_pipe(data, pipe, pid);

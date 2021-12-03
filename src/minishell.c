@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 15:24:35 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 18:37:28 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	init_data(t_data *data, char **env)
 	data->pipe.cmd_nb = 0;
 	data->pipe.cmd_len = 0;
 	data->pipe.i = 0;
-	data->env_lst = init_env(data, env);
+	data->env_lst = init_env(data, env); //FIXME : un leak lors du free de la list chainée ?
 	update_var_shlvl(data);
 }
 
@@ -95,7 +95,7 @@ static t_bool	input_is_ok(t_data *data)
 	space_before_after_chevron(data);
 	if (too_many_chevrons_o_pipes(data) || invalid_suite(data))
 		return (0);
-	printf("▫ data->line contient 🔹%s🔹\n", data->line); //FIXME
+	// printf("▫ data->line contient 🔹%s🔹\n", data->line); //FIXME
 	return (1);
 }
 
@@ -120,6 +120,3 @@ int	main(int argc, char **argv, char **env)
 	ft_error(TOO_MANY_ARG);
 	return (1);
 }
-
-//FIXME : trouver pourquoi
-// j ai fait des change sur cd et sur export et sur multipipe

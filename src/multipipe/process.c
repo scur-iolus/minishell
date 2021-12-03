@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 19:20:04 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 17:33:25 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/03 18:34:00 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,27 @@
 
 void	first_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 {
-	if (pipe->cmd_nb == pipe->cmd_len) // s'il n y a qu une seule commande
+	if (pipe->cmd_nb == pipe->cmd_len)
 		close_all_fd(pipe);
-	close_fd_first_process(pipe); // A custom si outfile alors fermer plus de chose
+	close_fd_first_process(pipe);
 	open_infile_and_heredoc(cmd);
-	if (cmd->outfile) // si outfile
+	if (cmd->outfile)
 		dup_outfile(cmd, pipe);
-	else if (pipe->cmd_nb < pipe->cmd_len) // ou si pas dernier
+	else if (pipe->cmd_nb < pipe->cmd_len)
 	{
 		dup2(pipe->end[pipe->i + 1][1], STDOUT_FILENO);
 		close(pipe->end[pipe->i + 1][1]);
 	}
+	if (cmd->ok == 0)
+		command_failed_because_of_file_opening(data);
 	if (is_built_in(cmd->cmd))
 	{
 		launch_built_in(data, cmd);
 		free_everything(data, 0);
 		exit(data->exit_status);
 	}
-	if (access(cmd->cmd_path, X_OK))
-		err_free_command_not_found(FILE_NOT_FOUND, data, 0);
+	// if (access(cmd->cmd_path, X_OK))
+	// 	err_free_command_not_found(FILE_NOT_FOUND, data, 0); //FIXME changer ca car ca ne met pas le bon message d erreur Command noot found
 	if ((cmd->cmd_path == NULL ||
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
 		command_failed(data, pipe, cmd);
@@ -46,14 +48,16 @@ void	middle_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 	dup2(pipe->end[pipe->i + 1][1], STDOUT_FILENO);
 	close(pipe->end[pipe->i + 1][1]);
 	close(pipe->end[pipe->i][0]);
+	if (cmd->ok == 0)
+		command_failed_because_of_file_opening(data);
 	if (is_built_in(cmd->cmd))
 	{
 		launch_built_in(data, cmd);
 		free_everything(data, 0);
 		exit(data->exit_status);
 	}
-	if (access(cmd->cmd_path, X_OK))
-		err_free_command_not_found(FILE_NOT_FOUND, data, 0);
+	// if (access(cmd->cmd_path, X_OK))
+	// 	err_free_command_not_found(FILE_NOT_FOUND, data, 0);
 	if ((cmd->cmd_path == NULL ||
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
 		command_failed(data, pipe, cmd);
@@ -63,18 +67,20 @@ void	last_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 {
 	close_fd_last_process(pipe);
 	open_infile_and_heredoc(cmd);
-	if (cmd->outfile) // si outfile
+	if (cmd->outfile)
 		dup_outfile(cmd, pipe);
 	dup2(pipe->end[pipe->i][0], STDIN_FILENO);
 	close(pipe->end[pipe->i][0]);
+	if (cmd->ok == 0)
+		command_failed_because_of_file_opening(data);
 	if (is_built_in(cmd->cmd))
 	{
 		launch_built_in(data, cmd);
 		free_everything(data, 0);
 		exit(data->exit_status);
 	}
-	if (access(cmd->cmd_path, X_OK))
-		err_free_command_not_found(FILE_NOT_FOUND, data, 0);
+	// if (access(cmd->cmd_path, X_OK))
+	// 	err_free_command_not_found(FILE_NOT_FOUND, data, 0);
 	if ((cmd->cmd_path == NULL ||
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
 		command_failed(data, pipe, cmd);
