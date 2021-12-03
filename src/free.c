@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 15:24:26 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 15:57:25 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	free_pipe(t_data *data, t_pipe *pipe)
 {
 	if (pipe->end)
 		ft_lstclear_pipe(pipe, data);
-	free(pipe);
 }
 
 /*
