@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 14:59:44 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 17:33:49 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ extern long long	*g_exit_status;
 
 # define MALLOC_ERROR	"Error: malloc failed\n"
 # define INVALID_CHAR	"Error: invalid characters in your command\n"
-# define ODD_NB			"Error: odd number of \' or \"\n"
 # define END_CHAR_ERR	"Error: invalid char at the end of your command\n"
 # define START_CHAR_ERR	"Error: invalid char at the beginning of your command\n"
+# define ODD_NB			"Error: odd number of \' or \"\n"
 # define TOO_MANY_ARG	"Error: minishell does not accept any argument\n"
 # define TOO_MANY_ARG2	"Error: too many arguments\n"
 # define HOME_NOT_SET	"Error: HOME not set\n"
@@ -84,6 +84,8 @@ int		gnl_result(int ret, char **line, char **save);
 void	secure_between(char *str, char to_secure, char tmp, t_bool remove);
 int		quote_status(char *str, size_t i);
 t_bool	remove_surrounding_quotes(char **str);
+void	protect_with_backslash(t_data *data);
+void	replace_backslash(t_data *data);
 // +------------------------------------------+ //
 //   Builtins                                   //
 // +------------------------------------------+ //

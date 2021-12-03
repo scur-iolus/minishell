@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 15:24:35 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 17:45:32 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,11 @@ static t_bool	input_is_ok(t_data *data)
 		remove_comment(data);
 	if (ft_strlen(data->line) > 0 && !even_nb_of_quote_marks(data->line))
 		return (0);
+	protect_with_backslash(data);
 	data->line = convert_env_var(data);
+	replace_backslash(data);
 	tmp = data->line;
-	data->line = ft_strtrim(data->line, "  ");
+	data->line = ft_strtrim(data->line, " 	");
 	free(tmp);
 	if (!(data->line))
 		err_free(MALLOC_ERROR, data, 0);

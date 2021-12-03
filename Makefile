@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/12/03 14:44:16 by llalba           ###   ########.fr        #
+#    Updated: 2021/12/03 17:10:04 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRC_LIST		= \
 				ft_list_env.c \
 				free.c \
 				heredoc.c \
+				heredoc_special_cases.c \
 				cmd_parsing.c \
 				cmd_split_check.c \
 				list_to_env.c \
