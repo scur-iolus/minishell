@@ -6,7 +6,7 @@
 #    By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/12/02 17:36:21 by fmonbeig         ###   ########.fr        #
+#    Updated: 2021/12/03 14:34:19 by fmonbeig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,8 @@ SRC			= \
 			$(SRC_PATH)pwd.c \
 			$(SRC_PATH)exit.c \
 			$(SRC_PATH)cd.c \
+			$(SRC_PATH)cd2.c \
+			$(SRC_PATH)cdpath.c \
 			$(SRC_PATH)echo.c \
 			$(SRC_PATH)env.c \
 			$(SRC_PATH)unset.c \
