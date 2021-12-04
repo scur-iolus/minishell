@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 19:20:04 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/04 14:41:58 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/04 15:46:53 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	first_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 {
-	if (pipe->cmd_nb == pipe->cmd_len)
-		close_all_fd(pipe);
 	close_fd_first_process(pipe);
 	open_infile_and_heredoc(cmd);
 	if (cmd->outfile)
