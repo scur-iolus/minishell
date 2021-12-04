@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cdpath.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:23:36 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 14:54:33 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/04 11:33:26 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,17 @@ static void	print_cdpath_cmd(char *cdpath, char *arg)
 static t_bool	cdpath_check_every_path(t_data *data, char **cdpath, char **cmd, char *path)
 {
 	int	i;
+	char	line[PATH_MAX];
 
 	i = -1;
+	getcwd(line, PATH_MAX);
 	while(cdpath[++i])
 	{
 		path = make_path(cdpath[i], cmd[1]);
 		if (!chdir(path))
 		{
 			print_cdpath_cmd(cdpath[i], cmd[1]);
-			change_directory(data);
+			change_directory(data, line);
 			free(path);
 			ft_free_split(cdpath);
 			return (1);

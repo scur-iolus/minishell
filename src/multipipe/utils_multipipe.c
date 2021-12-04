@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 15:03:24 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/04 11:56:44 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	take_path(t_data *data)
 static char	*name_of_program(char *s1)
 {
 	char *ptr;
-	
+
 	s1 += 2;
 	ptr = ft_strdup(s1);
 	return (ptr);
@@ -86,5 +86,6 @@ void	find_command_path(t_data *data, t_cmd *head)
 void	command_failed(t_data *data, t_pipe *pipe, t_cmd *cmd)
 {
 	write(2, cmd->cmd[0], ft_strlen(cmd->cmd[0]));
+	ft_putstr_fd(" : ", 2);
 	err_free_command_not_found(CMD_NOT_FOUND, data, 0);
 }

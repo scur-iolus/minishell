@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 17:57:24 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/04 11:31:26 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int		check_argument_ft_env(char **cmd);
 //   Cd                                     //
 // +------------------------------------------+ //
 t_bool	ft_cd(t_data *data, char **cmd);
-void	change_directory(t_data *data);
+void	change_directory(t_data *data, char *line);
 t_bool	cdpath(t_data *data, char **cmd);
 void	switch_old_pwd(t_data *data, char * line);
 void	switch_pwd(t_data *data, char * line);
