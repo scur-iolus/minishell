@@ -6,20 +6,26 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:31:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 11:40:18 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 15:45:46 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static t_bool	continue_reading(int *ret, char **save)
+static t_bool	continue_reading(t_data *data, int *ret, char **save)
 {
-	char	buff[BUFFER_SIZE + 1];
+	char	buff[2];
+	int		success;
 
-	*ret = read(0, buff, BUFFER_SIZE);
-	if (*ret == -1)
+	buff[1] = 0;
+	buff[0] = getch(data);
+	success = write(1, &buff, 1);
+	if (!success)
 		return (0);
-	buff[*ret] = '\0';
+	if (buff[0] == '\0')
+		*ret = 0;
+	else
+		*ret = 1;
 	if (!(*save))
 		*save = ft_strdup(buff);
 	else
@@ -31,9 +37,10 @@ static t_bool	continue_reading(int *ret, char **save)
 
 /*
 ** Customized GNL with free(line) when ret == 0, and a flag to free(save)
+** It also writes "> " on stdout
 */
 
-static int	get_next_line(char **line, t_bool flag)
+static int	get_next_line(t_data *data, char **line, t_bool flag)
 {
 	static char	*save = 0;
 	int			ret;
@@ -45,18 +52,19 @@ static int	get_next_line(char **line, t_bool flag)
 		save = 0;
 		return (42);
 	}
-	if (!line || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
+	write(1, "> ", 2);
+	if (!line)
 		return (-1);
 	ret = 1;
 	while ((!save || !ft_strrchr(save, '\n')) && ret > 0)
 	{
-		if (!continue_reading(&ret, &save))
+		if (!continue_reading(data, &ret, &save))
 			return (-1);
 	}
 	return (gnl_result(ret, line, &save));
 }
 
-static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)
+static void	heredoc_input(t_data *data, t_cmd *head, char *delimiter)
 {
 	char	*line;
 	int		status;
@@ -65,18 +73,16 @@ static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)
 	head->heredoc = (char *)ft_calloc(1, sizeof(char));
 	if (!(head->heredoc))
 		err_free(MALLOC_ERROR, data, 0);
-	write(1, "> ", 2);
-	status = get_next_line(&line, HEREDOC_CONT);
-	while (status > 0 && ft_strcmp(heredoc_delimiter, line) != 0)
+	status = get_next_line(data, &line, HEREDOC_CONT);
+	while (status > 0 && ft_strcmp(delimiter, line) != 0)
 	{
 		ft_str_insert(&(head->heredoc), line, ft_strlen(head->heredoc));
 		ft_str_insert(&(head->heredoc), "\n", ft_strlen(head->heredoc));
 		free(line);
 		line = 0;
-		write(1, "> ", 2);
-		status = get_next_line(&line, HEREDOC_CONT);
+		status = get_next_line(data, &line, HEREDOC_CONT);
 	}
-	(void)get_next_line(0, HEREDOC_END);
+	(void)get_next_line(data, 0, HEREDOC_END);
 	if (line)
 		free(line);
 	if (status == -1)
@@ -89,6 +95,7 @@ static void	spot_heredoc(t_data *data, t_cmd *head)
 {
 	size_t	i;
 	t_bool	sentinel;
+	int		id;
 
 	i = 0;
 	sentinel = 0;

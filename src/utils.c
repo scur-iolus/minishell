@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 12:14:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 11:39:22 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 15:45:41 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,27 @@ void	update_var_shlvl(t_data *data)
 		if (!temp->value)
 			ft_error(MALLOC_ERROR);
 	}
+}
+
+char	getch(t_data *data)
+{
+	char			buf;
+	struct termios	old;
+
+	buf = 0;
+	if (tcgetattr(0, &old) < 0)
+		err_free(GETCH_ERROR, data, 0);
+	old.c_lflag &= ~ICANON;
+	old.c_lflag &= ~ECHO;
+	old.c_cc[VMIN] = 1;
+	old.c_cc[VTIME] = 0;
+	if (tcsetattr(0, TCSANOW, &old) < 0)
+		err_free(GETCH_ERROR, data, 0);
+	if (read(0, &buf, 1) < 0)
+		err_free(GETCH_ERROR, data, 0);
+	old.c_lflag |= ICANON;
+	old.c_lflag |= ECHO;
+	if (tcsetattr(0, TCSADRAIN, &old) < 0)
+		err_free(GETCH_ERROR, data, 0);
+	return (buf);
 }

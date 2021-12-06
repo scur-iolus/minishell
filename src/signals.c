@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:15:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 12:24:10 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 16:00:50 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ void	update_exit_status(pid_t this_pid)
 {
 	if (WIFEXITED(this_pid))
 	{
-		*g_exit_status = WEXITSTATUS(this_pid);
-		printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
+		*g_status = WEXITSTATUS(this_pid);
+		printf("*g_status : %lld\n", *g_status); // FIXME
 	}
 	else if (WIFSIGNALED(this_pid))
 	{
-		*g_exit_status = WTERMSIG(this_pid);
-		printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
-		if (*g_exit_status != 131)
-			*g_exit_status += 128;
+		*g_status = WTERMSIG(this_pid);
+		printf("*g_status : %lld\n", *g_status); // FIXME
+		if (*g_status != 131)
+			*g_status += 128;
 	}
 	fflush(stdout); // FIXME
 }
@@ -64,8 +64,8 @@ static void	signal_handler(int signo)
 {
 	if (signo == SIGINT)
 	{
-		*g_exit_status = 130;
-		write(1, "\n", 1);
+		*g_status = 130;
+		write(0, "\0", 1);
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
@@ -73,7 +73,7 @@ static void	signal_handler(int signo)
 	else if (signo == SIGQUIT)
 	{
 		//ft_putstr_fd("\b\b  \b\b", 1);
-		*g_exit_status = 131;
+		*g_status = 131;
 		ft_putstr_fd(SIGQUIT_MSG, 2);
 	}
 }

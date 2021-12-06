@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 12:14:22 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 16:02:02 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,19 +136,19 @@ t_bool	parse_cmd_content(t_data *data, t_cmd *head)
 	}
 	if (head->ok && head->cmd)
 		find_command_path(data, head);
-	// FIXME ===============
-	// char	**hop;//FIXME
-	// hop = head->cmd;//FIXME
-	// while (hop && *hop)//FIXME
-	// {//FIXME
-	// 	printf("🔸%s", *hop); // FIXME ===============
-	// 	hop++;//FIXME
-	// }//FIXME
-	// if (hop) // FIXME
-	// 	printf("🔸\n"); // FIXME ===============
-	// printf("▫ fd infile : %d\n", head->infile); // FIXME ===============
-	// printf("▫ fd outfile : %d\n", head->outfile); // FIXME ===============
-	// printf("▫ cmd_path : %s\n", head->cmd_path); // FIXME ===============
-	// printf("▫ [heredoc] : [%s]\n", head->heredoc); // FIXME ===============
+	//FIXME ===============
+	char	**hop;//FIXME
+	hop = head->cmd;//FIXME
+	while (hop && *hop)//FIXME
+	{//FIXME
+		printf("🔸%s", *hop); // FIXME ===============
+		hop++;//FIXME
+	}//FIXME
+	if (hop) // FIXME
+		printf("🔸\n"); // FIXME ===============
+	printf("▫ fd infile : %d\n", head->infile); // FIXME ===============
+	printf("▫ fd outfile : %d\n", head->outfile); // FIXME ===============
+	printf("▫ cmd_path : %s\n", head->cmd_path); // FIXME ===============
+	printf("▫ [heredoc] : [%s]\n", head->heredoc); // FIXME ===============
 	return (heredoc_is_last(head));
 }

@@ -6,18 +6,18 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 12:20:44 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 14:29:02 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-long long	*g_exit_status;
+long long	*g_status;
 
 static void	init_data(t_data *data, char **env)
 {
 	data->exit_status = 0;
-	g_exit_status = &(data->exit_status);
+	g_status = &(data->exit_status);
 	data->env = 0;
 	data->path = 0;
 	data->line = 0;

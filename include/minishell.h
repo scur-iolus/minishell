@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 12:15:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 15:37:46 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # include <signal.h>
 # include <unistd.h>
+# include <termios.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -42,7 +43,7 @@
 //   Unique global variable                     //
 // +------------------------------------------+ //
 
-extern long long	*g_exit_status;
+extern long long	*g_status;
 
 // +------------------------------------------+ //
 //   Define                                     //
@@ -65,9 +66,9 @@ extern long long	*g_exit_status;
 # define CMD_NOT_FOUND	"Error: command not found\n"
 # define NUMERIC_ARG	"Error: numeric argument required\n"
 # define FORK_FAILED	"Error: fork failed\n"
+# define GETCH_ERROR	"Error: termios error\n"
 # define HEREDOC_EOF	"Warning: here-document delimited by EOF.\n"
 # define SIGQUIT_MSG	"Quit (core dumped)\n"
-# define BUFFER_SIZE 	511
 # define ONE_RIGHT		1
 # define TWO_RIGHT		2
 # define ONE_LEFT		3
@@ -88,6 +89,7 @@ int		quote_status(char *str, size_t i);
 t_bool	remove_surrounding_quotes(char **str);
 void	protect_with_backslash(t_data *data);
 void	replace_backslash(t_data *data);
+char	getch(t_data *data);
 // +------------------------------------------+ //
 //   Builtins                                   //
 // +------------------------------------------+ //
