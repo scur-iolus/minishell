@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dup.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:21:50 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 20:34:35 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 18:01:08 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	dup_outfile(t_cmd *cmd, t_pipe *pipe)
 {
 	dup2(cmd->outfile, STDOUT_FILENO);
 	close(cmd->outfile);
-	pipe->cmd_nb = 0;
-	pipe->cmd_len = 0;
+}
+
+void	command_failed_because_of_file_opening(t_data *data)
+{
+	free_everything(data, 0);
+	exit(1);
 }

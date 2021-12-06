@@ -6,13 +6,13 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:36:27 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 11:42:01 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 12:14:08 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	put_in_env_export(t_data *data, char **cmd, int i) // ne fini pas le programme quand on change une variable de env
+static void	put_in_env_export(t_data *data, char **cmd, int i)
 {
 	t_env	*new;
 	char	*temp;
@@ -78,9 +78,9 @@ int	ft_export(t_data *data, char **cmd)
 		{
 			if (error_var_name(cmd[i]))
 			{
-				ft_putstr_fd("export: '", 1);
+				ft_putstr_fd("export: `", 1);
 				ft_putstr_fd(cmd[i], 1);
-				ft_putstr_fd("': not a valid identifier\n", 1);
+				ft_putstr_fd("\': not a valid identifier\n", 1);
 				j = 1;
 				continue ;
 			}

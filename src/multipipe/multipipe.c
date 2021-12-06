@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:53:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 12:06:04 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 12:13:18 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,28 @@ static void	do_cmd(t_data *data, t_pipe *pipe, t_cmd *cmd)
 {
 	if (pipe->cmd_nb == 1)
 		first_process(data, pipe, cmd);
-	else if (pipe->cmd_nb > 1 && pipe->cmd_nb < pipe->cmd_len)
+	else if (pipe->cmd_nb > 1 && pipe->cmd_nb < pipe->nb_pipe - 1)
 		middle_process(data, pipe, cmd);
-	else if (pipe->cmd_nb > 1 && pipe->cmd_nb == pipe->cmd_len)
+	else if (pipe->cmd_nb > 1 && pipe->cmd_nb == pipe->nb_pipe - 1)
 		last_process(data, pipe, cmd);
-}
-
-static int	len_before_redirection(t_cmd *cmd)
-{
-	t_cmd	*list;
-	int		i;
-
-	i = 0;
-	list = cmd;
-	while (list)
-	{
-		i++;
-		if (list->outfile)
-			break ;
-		list = list->next;
-	}
-	return (i);
 }
 
 static void	finish_pipe(t_data *data, t_pipe *pipe, pid_t pid)
 {
 	int	i;
-	int	status;
+	t_pid	tmp; // FIXME
+	int	wstatus;
 
 	i = -1;
 	close_all_fd(pipe);
 	while (++i < pipe->nb_pipe - 1)
 	{
-		waitpid(pid, &status, 0);
-		update_exit_status(status);
+		printf("pid avant wait : %d", pid); // FIXME
+		fflush(stdout); // FIXME
+		tmp = waitpid(pid, &wstatus, 0);
+		printf("pid apres : %d", tmp); // FIXME
+		fflush(stdout); // FIXME
+		update_exit_status(wstatus);
 	}
 }
 
@@ -65,8 +53,6 @@ void	fork_creation(t_pipe *pipe, t_data *data)
 	{
 		pipe->cmd_nb++;
 		pipe->i++;
-		if (pipe->cmd_len == 0)
-			pipe->cmd_len = len_before_redirection(list);
 		pid = fork();
 		if (pid < 0)
 			ft_error(FORK_FAILED);

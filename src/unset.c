@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 20:46:13 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/03 18:53:51 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	ft_unset(t_data *data, char **cmd)
 		}
 		if (error_var_name(cmd[i]))
 		{
-			ft_putstr_fd("unset: ", 1);
+			ft_putstr_fd("unset: `", 1);
 			ft_putstr_fd(cmd[i], 1);
-			ft_putstr_fd(": not a valid identifier\n", 1);
+			ft_putstr_fd("\': not a valid identifier\n", 1);
 			return (127);
 		}
 	}
@@ -89,6 +89,8 @@ int	error_var_name(char *line)
 	int	i;
 
 	i = -1;
+	if (!line[0])
+		return(1);
 	if (ft_isdigit(line[0]))
 		return (1);
 	while (line[++i] && line[i] != '=')

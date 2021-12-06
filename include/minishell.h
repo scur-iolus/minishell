@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 12:04:17 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 12:15:09 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int		check_argument_ft_env(char **cmd);
 //   Cd                                     //
 // +------------------------------------------+ //
 t_bool	ft_cd(t_data *data, char **cmd);
-void	change_directory(t_data *data);
+void	change_directory(t_data *data, char *line);
 t_bool	cdpath(t_data *data, char **cmd);
 void	switch_old_pwd(t_data *data, char *line);
 void	switch_pwd(t_data *data, char *line);
@@ -207,6 +207,7 @@ void	close_fd_last_process(t_pipe *pipe);
 // +------------------------------------------+ //
 void	open_infile_and_heredoc(t_cmd *cmd);
 void	dup_outfile(t_cmd *cmd, t_pipe *pipe);
+void	command_failed_because_of_file_opening(t_data *data);
 // +------------------------------------------+ //
 //   Fonction list CMD                          //
 // +--------------------------------a----------+ //
