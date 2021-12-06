@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:09:25 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 15:48:12 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:36:44 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,7 @@ static int	get_highest_pow(long long n)
 	return (y - 1);
 }
 
-/*
-** On the heap: line, data->env_lst, output
-*/
-
-static t_bool	add_exit_status(t_data *data, char **output, size_t *pos)
+static t_bool	add_exit_status(t_data *data, char **output)
 {
 	char		c;
 	int			highest_pow;
@@ -50,10 +46,13 @@ static t_bool	add_exit_status(t_data *data, char **output, size_t *pos)
 
 	success = 1;
 	tmp = data->exit_status;
-	highest_pow = get_highest_pow(tmp);
 	if (!tmp)
+	{
 		success = ft_str_insert(output, "0", ft_strlen(*output));
-	while (success && tmp && highest_pow + 1)
+		return (success);
+	}
+	highest_pow = get_highest_pow(tmp);
+	while (success && highest_pow + 1)
 	{
 		c = (tmp / power(10, (unsigned long) highest_pow)) + '0';
 		success *= ft_str_insert(output, &c, ft_strlen(*output));
@@ -64,20 +63,18 @@ static t_bool	add_exit_status(t_data *data, char **output, size_t *pos)
 }
 
 /*
-** On the heap: line, data->env_lst, output
-**
 ** $$ reste $$ (on ne doit pas gérer l'affichage du PID)
 ** $. reste $.
 ** $ESPACE reste $ESPACE
 ** $? devient le dernier exit_status
 */
 
-t_bool	special_cases(t_data *data, char **output, size_t *pos)
+t_bool	env_special_cases(t_data *data, char **output, size_t *pos)
 {
 	t_bool	success;
 
 	if (data->line[*pos] == '?')
-		success = add_exit_status(data, output, pos);
+		success = add_exit_status(data, output);
 	else if (data->line[*pos] == ' ')
 		success = ft_str_insert(output, "$ ", ft_strlen(*output));
 	else if (data->line[*pos] == '$')
@@ -88,9 +85,7 @@ t_bool	special_cases(t_data *data, char **output, size_t *pos)
 		success = ft_str_insert(output, "$", ft_strlen(*output));
 	if (!success)
 		err_free(MALLOC_ERROR, data, *output);
-	else if (data->line[*pos] == '.' || data->line[*pos] == '$' || \
-		data->line[*pos] == '?')
+	if (data->line[*pos] != '\0')
 		return (1);
-	else            //FIXME ?? ca fait une erreur lors de la compilation pas de return
-		return (0);
+	return (0);
 }

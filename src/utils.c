@@ -6,15 +6,11 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 12:14:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 14:58:27 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:39:22 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/*
-** Basically prints an error message on fd 2
-*/
 
 void	ft_error(char *str)
 {

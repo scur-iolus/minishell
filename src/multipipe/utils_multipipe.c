@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_multipipe.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:18:37 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 15:03:24 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/06 11:46:33 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	take_path(t_data *data)
 
 static char	*name_of_program(char *s1)
 {
-	char *ptr;
-	
+	char	*ptr;
+
 	s1 += 2;
 	ptr = ft_strdup(s1);
 	return (ptr);
@@ -44,7 +44,7 @@ static void	the_command_is_the_path(t_data *data, t_cmd *head)
 		if (!head->cmd_path)
 		{
 			ft_error(MALLOC_ERROR);
-			return;
+			return ;
 		}
 	}
 	else
@@ -64,7 +64,7 @@ void	find_command_path(t_data *data, t_cmd *head)
 	if (head->cmd[0][0] == '/' || head->cmd[0][0] == '.')
 	{
 		the_command_is_the_path(data, head);
-		return;
+		return ;
 	}
 	while (data->path && data->path[i])
 	{

@@ -6,15 +6,11 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 12:19:16 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:43:37 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/*
-** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
-*/
 
 static void	add_str_to_cmd(t_data *data, t_cmd *head, size_t i)
 {
@@ -69,7 +65,6 @@ static t_bool	heredoc_is_last(t_cmd *head)
 }
 
 /*
-** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
 ** update_data() and categorize() have 3 possible outputs:
 **			0, the "word" belongs to the command itself (head, cat, -e, -1)
 **			1, this file could not be opened
@@ -93,7 +88,6 @@ static int	ret_categorize(t_data *data, t_cmd *head, size_t i, int category)
 }
 
 /*
-** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
 ** update_data() and categorize() have 3 possible outputs:
 **			0, the "word" belongs to the command itself (head, cat, -e, -1)
 **			1, this file could not be opened
@@ -123,10 +117,6 @@ static int	categorize(t_data *data, t_cmd *head, size_t i)
 	}
 	return (ret_categorize(data, head, i, category));
 }
-
-/*
-** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
-*/
 
 t_bool	parse_cmd_content(t_data *data, t_cmd *head)
 {

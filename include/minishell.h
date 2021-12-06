@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 17:33:49 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 12:04:17 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ extern long long	*g_exit_status;
 # define GNL_ERROR		"Error: failed to malloc or to read standard input\n"
 # define CMD_NOT_FOUND	"Error: command not found\n"
 # define NUMERIC_ARG	"Error: numeric argument required\n"
+# define FORK_FAILED	"Error: fork failed\n"
 # define HEREDOC_EOF	"Warning: here-document delimited by EOF.\n"
 # define SIGQUIT_MSG	"Quit (core dumped)\n"
 # define BUFFER_SIZE 	511
@@ -80,6 +81,7 @@ extern long long	*g_exit_status;
 //   Utils                                      //
 // +------------------------------------------+ //
 void	signals_init(void);
+void	update_exit_status(pid_t this_pid);
 int		gnl_result(int ret, char **line, char **save);
 void	secure_between(char *str, char to_secure, char tmp, t_bool remove);
 int		quote_status(char *str, size_t i);
@@ -110,8 +112,8 @@ int		check_argument_ft_env(char **cmd);
 t_bool	ft_cd(t_data *data, char **cmd);
 void	change_directory(t_data *data);
 t_bool	cdpath(t_data *data, char **cmd);
-void	switch_old_pwd(t_data *data, char * line);
-void	switch_pwd(t_data *data, char * line);
+void	switch_old_pwd(t_data *data, char *line);
+void	switch_pwd(t_data *data, char *line);
 t_bool	arg_is_point_point(char *str);
 // +------------------------------------------+ //
 //   Unset                                     //
@@ -166,7 +168,7 @@ t_env	*ft_lstnew_env(void);
 char	*get_var_name(t_data *data, char *str);
 char	*get_var_value(t_data *data, char *str);
 char	*convert_env_var(t_data *data);
-t_bool	special_cases(t_data *data, char **output, size_t *pos);
+t_bool	env_special_cases(t_data *data, char **output, size_t *pos);
 t_env	*find_var_env(t_data *data, char *var_name);
 void	env_add_front(t_env **head, t_env *new);
 char	**list_to_env(t_data *data, t_env *env_lst);

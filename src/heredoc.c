@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:31:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 12:19:51 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:40:18 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,6 @@ static int	get_next_line(char **line, t_bool flag)
 	return (gnl_result(ret, line, &save));
 }
 
-/*
-** On the heap: line, data->env_lst, data->cmd, data->cmd->raw
-** and progressively data->cmd->split
-*/
-
 static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)
 {
 	char	*line;
@@ -90,11 +85,6 @@ static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)
 		write(2, HEREDOC_EOF, ft_strlen(HEREDOC_EOF));
 }
 
-/*
-** On the heap: line, data->env_lst, data->cmd, data->cmd->raw
-** and progressively data->cmd->split
-*/
-
 static void	spot_heredoc(t_data *data, t_cmd *head)
 {
 	size_t	i;
@@ -118,11 +108,6 @@ static void	spot_heredoc(t_data *data, t_cmd *head)
 		i++;
 	}
 }
-
-/*
-** On the heap: line, data->env_lst, data->cmd, data->cmd->raw
-** and progressively data->cmd->split
-*/
 
 void	load_heredoc(t_data *data)
 {

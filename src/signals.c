@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:15:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 11:12:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:38:24 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,31 @@
 
 // TODO cat pas cat, child pas child
 
-static void	update_exit_status(pid_t	this_pid)
+/*
+** WIFEXITED return TRUE if the process returning status exited via the exit()
+** system call. Then, WEXITSTATUS evaluates the exit code returned by the child.
+**
+** WIFSIGNALED evaluates to TRUE when the child process for which status was
+** returned by the wait or waitpid function exited because it raised a signal
+** that caused it to exit. Then, WTERMSIG evaluates the numeric value of the
+** signal that was raised by the child process.
+*/
+
+void	update_exit_status(pid_t this_pid)
 {
 	if (WIFEXITED(this_pid))
+	{
 		*g_exit_status = WEXITSTATUS(this_pid);
+		printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
+	}
 	else if (WIFSIGNALED(this_pid))
 	{
 		*g_exit_status = WTERMSIG(this_pid);
-		if (*g_exit_status != 131) // TODO pourquoi
-			*g_exit_status += 128; // TODO pourquoi
+		printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
+		if (*g_exit_status != 131)
+			*g_exit_status += 128;
 	}
+	fflush(stdout); // FIXME
 }
 
 /*
@@ -52,7 +67,7 @@ static void	signal_handler(int signo)
 		*g_exit_status = 130;
 		write(1, "\n", 1);
 		rl_replace_line("", 1);
-		rl_on_new_line();
+		//rl_on_new_line();
 		rl_redisplay();
 	}
 	else if (signo == SIGQUIT)

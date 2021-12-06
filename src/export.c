@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:36:27 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 20:39:48 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:42:01 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	put_in_env_export(t_data *data, char **cmd, int i) // ne fini pas le programme quand on change une variable de env
 {
-	t_env *new;
-	char *temp;
+	t_env	*new;
+	char	*temp;
 
 	temp = get_var_name(data, cmd[i]);
 	new = find_var_env(data, temp);

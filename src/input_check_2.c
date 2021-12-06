@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:34:50 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 12:41:47 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:40:39 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,6 @@ static size_t	ft_strlen_wth_duplicates_sp(char *str)
 	}
 	return (i);
 }
-
-/*
-** On the heap: line, data->env_lst
-*/
 
 void	deduplicate_spaces(t_data *data)
 {
@@ -65,10 +61,6 @@ void	deduplicate_spaces(t_data *data)
 	secure_between(data->line, ' ', ';', TRUE);
 }
 
-/*
-** On the heap: line, data->env_lst
-*/
-
 static t_bool	max_n_consecutive_c(long long n, char c, char *str)
 {
 	long long	count;
@@ -89,10 +81,6 @@ static t_bool	max_n_consecutive_c(long long n, char c, char *str)
 	return (1);
 }
 
-/*
-** On the heap: line, data->env_lst
-*/
-
 t_bool	too_many_chevrons_o_pipes(t_data *data)
 {
 	t_bool	fail;
@@ -110,7 +98,6 @@ t_bool	too_many_chevrons_o_pipes(t_data *data)
 }
 
 /*
-** On the heap: line, data->env_lst
 ** In bash, note that '>< test' raises an error but that '<> test' doesn't...
 */
 

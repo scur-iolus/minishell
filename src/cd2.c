@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:33:11 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 14:54:33 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:45:38 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,17 @@ void	change_directory(t_data *data) // FIXME petit souci de changement de PWD en
 t_bool	arg_is_point_point(char *str)
 {
 	if (str[0] == '.')
-		if(str[1] == '.')
-			if(!str[2])
+	{
+		if (str[1] == '.')
+		{
+			if (!str[2])
 				return (1);
+		}
+	}
 	if (str[0] == '.')
-		if(!str[1])
+	{
+		if (!str[1])
 			return (1);
+	}
 	return (0);
 }

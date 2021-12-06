@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:26:32 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 17:42:16 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:41:11 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,6 @@ t_bool	even_nb_of_quote_marks(char *line)
 	return (1);
 }
 
-/*
-** On the heap: line
-*/
-
 static void	copy_n_char(t_data *data, size_t len_without_0)
 {
 	char	*new;
@@ -61,10 +57,6 @@ static void	copy_n_char(t_data *data, size_t len_without_0)
 	free(data->line);
 	(data->line) = new;
 }
-
-/*
-** On the heap: line
-*/
 
 void	remove_comment(t_data *data)
 {
@@ -91,10 +83,6 @@ void	remove_comment(t_data *data)
 	copy_n_char(data, len);
 }
 
-/*
-** On the heap: line, data->env_lst
-*/
-
 t_bool	valid_start_end(char *line)
 {
 	char	last_char;
@@ -117,10 +105,6 @@ t_bool	valid_start_end(char *line)
 		return (0);
 	}
 }
-
-/*
-** On the heap: line, data->env_lst
-*/
 
 void	space_before_after_chevron(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 17:45:32 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:50:38 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ static void	reset_data(t_data *data)
 	data->env = list_to_env(data, data->env_lst);
 	take_path(data);
 }
-
-/*
-** On the heap: line
-*/
 
 static t_bool	is_too_long(char *line)
 {
@@ -110,7 +106,9 @@ int	main(int argc, char **argv, char **env)
 	init_data(&data, env);
 	while (argc == 1)
 	{
+		printf("AVANT RESET\n");//FIXME
 		reset_data(&data);
+		printf("RESET OK\n");//FIXME
 		data.line = readline("🌞 Mishell c'est le Brésil ▸ ");
 		if (ft_strlen(data.line) > 0)
 			add_history(data.line);

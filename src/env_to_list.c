@@ -6,15 +6,11 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 20:37:29 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:42:41 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/*
-** Depuis init_env, On the heap: line, data->env_lst
-*/
 
 char	*get_var_name(t_data *data, char *str)
 {
@@ -35,10 +31,6 @@ char	*get_var_name(t_data *data, char *str)
 	}
 	return (var_name);
 }
-
-/*
-** Depuis init_env, On the heap: line, data->env_lst
-*/
 
 char	*get_var_value(t_data *data, char *str)
 {
@@ -64,10 +56,6 @@ char	*get_var_value(t_data *data, char *str)
 	}
 	return (var_value);
 }
-
-/*
-** On the heap: line
-*/
 
 t_env	*init_env(t_data *data, char **env)
 {

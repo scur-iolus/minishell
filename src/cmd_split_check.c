@@ -6,16 +6,11 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 16:37:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:43:15 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/*
-** On the heap: line, data->env_lst,
-** and progressively data->cmd, data->cmd->raw
-*/
 
 static void	pipes_split(t_data *data, t_cmd **head)
 {
@@ -44,10 +39,6 @@ static void	pipes_split(t_data *data, t_cmd **head)
 	free(ptr);
 	data->cmd = *head;
 }
-
-/*
-** On the heap: line, data->env_lst, data->cmd, data->cmd->raw, data->cmd->split
-*/
 
 static t_bool	is_syntax_error_1(t_cmd *tmp)
 {
@@ -103,11 +94,6 @@ static t_bool	is_syntax_error_2(t_cmd *tmp)
 	return (0);
 }
 
-/*
-** On the heap: line, data->env_lst, data->cmd, data->cmd->raw
-** and progressively data->cmd->split
-*/
-
 static void	cmds_split(t_data *data)
 {
 	t_cmd	*tmp;
@@ -133,10 +119,6 @@ static void	cmds_split(t_data *data)
 		tmp = tmp->next;
 	}
 }
-
-/*
-** On the heap: line, data->env_lst
-*/
 
 t_bool	parse_cmd(t_data *data)
 {

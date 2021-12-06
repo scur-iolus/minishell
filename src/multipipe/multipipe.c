@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:53:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 20:35:14 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 12:06:04 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ static void	finish_pipe(t_data *data, t_pipe *pipe, pid_t pid)
 	while (++i < pipe->nb_pipe - 1)
 	{
 		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			data->exit_status = WEXITSTATUS(status);
-		else
-			data->exit_status = 1; // NOTA BENE : si jamais le programme fini sans passer par un return ou un exit, est ce que c'est la ou on met le retour du signal ?
+		update_exit_status(status);
 	}
 }
 
@@ -72,7 +69,7 @@ void	fork_creation(t_pipe *pipe, t_data *data)
 			pipe->cmd_len = len_before_redirection(list);
 		pid = fork();
 		if (pid < 0)
-			ft_error("Fork Failed");
+			ft_error(FORK_FAILED);
 		if (pid == 0)
 			do_cmd(data, pipe, list);
 		list = list->next;

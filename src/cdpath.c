@@ -6,13 +6,13 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:23:36 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 14:54:33 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 11:44:17 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static char *make_path(char *cdpath, char *cmd)
+static char	*make_path(char *cdpath, char *cmd)
 {
 	char	*temp;
 	char	*path;
@@ -36,12 +36,14 @@ static char *make_path(char *cdpath, char *cmd)
 static void	print_cdpath_cmd(char *cdpath, char *arg)
 {
 	if (cdpath[0] == '/')
+	{
 		if (!cdpath[1])
-			{
-				ft_putstr_fd("/", 1);
-				ft_putstr_fd(arg, 1);
-				ft_putstr_fd("\n", 1);
-			}
+		{
+			ft_putstr_fd("/", 1);
+			ft_putstr_fd(arg, 1);
+			ft_putstr_fd("\n", 1);
+		}
+	}
 }
 
 static t_bool	cdpath_check_every_path(t_data *data, char **cdpath, char **cmd, char *path)
@@ -49,7 +51,7 @@ static t_bool	cdpath_check_every_path(t_data *data, char **cdpath, char **cmd, c
 	int	i;
 
 	i = -1;
-	while(cdpath[++i])
+	while (cdpath[++i])
 	{
 		path = make_path(cdpath[i], cmd[1]);
 		if (!chdir(path))
@@ -65,7 +67,6 @@ static t_bool	cdpath_check_every_path(t_data *data, char **cdpath, char **cmd, c
 	return (0);
 }
 
-
 t_bool	cdpath(t_data *data, char **cmd)
 {
 	t_env	*temp;
@@ -79,7 +80,7 @@ t_bool	cdpath(t_data *data, char **cmd)
 	if (!(cdpath))
 	{
 		err_free(MALLOC_ERROR, data, 0);
-		return(1);
+		return (1);
 	}
 	if (cmd[1])
 	{
