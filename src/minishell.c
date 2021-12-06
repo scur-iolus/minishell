@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 12:13:40 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 12:20:44 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,7 @@ int	main(int argc, char **argv, char **env)
 	init_data(&data, env);
 	while (argc == 1)
 	{
-		printf("AVANT RESET\n");//FIXME
 		reset_data(&data);
-		printf("RESET OK\n");//FIXME
 		data.line = readline("🌞 Mishell c'est le Brésil ▸ ");
 		if (ft_strlen(data.line) > 0)
 			add_history(data.line);

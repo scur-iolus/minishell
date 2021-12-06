@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:15:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 11:38:24 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 12:24:10 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	signal_handler(int signo)
 		*g_exit_status = 130;
 		write(1, "\n", 1);
 		rl_replace_line("", 1);
-		//rl_on_new_line();
+		rl_on_new_line();
 		rl_redisplay();
 	}
 	else if (signo == SIGQUIT)
