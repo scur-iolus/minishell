@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 13:39:52 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 11:54:33 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/06 14:48:41 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	close_all_fd(t_pipe *pipe)
 	while (++i < pipe->nb_pipe)
 	{
 		if (i != pipe->nb_pipe)
-			close(pipe->end[i][0]); // FIXME : rajout d un message d erreur
+			close(pipe->end[i][0]); // FIXME rajout d'un message d'erreur sur close
 		if (i != 0)
 			close(pipe->end[i][1]);
 	}

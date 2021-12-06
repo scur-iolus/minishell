@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:15:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 12:24:10 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 15:06:49 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	update_exit_status(pid_t this_pid)
 	if (WIFEXITED(this_pid))
 	{
 		*g_exit_status = WEXITSTATUS(this_pid);
-		printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
+		//printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
 	}
 	else if (WIFSIGNALED(this_pid))
 	{
 		*g_exit_status = WTERMSIG(this_pid);
-		printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
+		//printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
 		if (*g_exit_status != 131)
 			*g_exit_status += 128;
 	}

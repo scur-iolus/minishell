@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 12:20:44 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 14:57:05 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	init_data(t_data *data, char **env)
 	data->pipe.end = 0;
 	data->pipe.nb_pipe = 0;
 	data->pipe.cmd_nb = 0;
-	data->pipe.cmd_len = 0;
 	data->pipe.i = 0;
 	data->env_lst = init_env(data, env); //FIXME : un leak lors du free de la list chainée ?
 	update_var_shlvl(data);

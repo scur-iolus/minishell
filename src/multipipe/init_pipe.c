@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:18:10 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 14:48:20 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 14:57:10 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	init_pipe_struct(t_data *data)
 {
 	data->pipe.end = NULL;
 	data->pipe.cmd_nb = 0;
-	data->pipe.cmd_len = 0;
 	data->pipe.i = 0;
 	data->pipe.nb_pipe = ft_lstsize(data->cmd) + 1;
 	if (init_pipe(data->pipe.nb_pipe, data, &data->pipe))

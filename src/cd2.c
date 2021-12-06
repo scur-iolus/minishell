@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd2.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:33:11 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 12:15:29 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 15:50:37 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,30 @@ void	switch_pwd(t_data *data, char *line)
 		chdir(old_dir);
 	}
 	free(old_dir);
+}
+
+int	go_to_old_pwd(t_data *data, char **cmd)
+{
+	char	line[PATH_MAX];
+	t_env	*env;
+
+	env = find_var_env(data, "OLDPWD");
+	if (!env)
+	{
+		ft_error("OLD_PWD is not set");
+		return (1);
+	}
+	getcwd(line, PATH_MAX);
+	if (!chdir(env->value))
+	{
+		ft_putstr_fd(env->value, 1);
+		ft_putstr_fd("\n", 1);
+		change_directory(data, line);
+	}
+	else
+	{
+		ft_error(FILE_NOT_FOUND);
+		return (1);
+	}
+	return (0);
 }

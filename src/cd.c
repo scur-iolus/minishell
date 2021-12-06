@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:32:59 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/04 12:11:57 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/06 15:50:41 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ static int	error_ft_cd(char **cmd)
 	{
 		if (cmd[i][0] == '-')
 		{
-			ft_error(INVALID_OPTION);
-			return (1);
+			if(cmd[i][1])
+			{
+				ft_error(INVALID_OPTION);
+				return (1);
+			}
 		}
 		while (cmd[i])
 			i++;
@@ -32,8 +35,6 @@ static int	error_ft_cd(char **cmd)
 			ft_error(TOO_MANY_ARG2);
 			return (1);
 		}
-		else
-			return (0);
 	}
 	return (0);
 }
@@ -77,7 +78,6 @@ static int	cd_with_no_cdpath(t_data *data, char **cmd)
 		ft_error(FILE_NOT_FOUND);
 		return (1);
 	}
-
 	return (0);
 }
 
@@ -94,6 +94,11 @@ t_bool	ft_cd(t_data *data, char **cmd)
 {
 	if (error_ft_cd(cmd))
 		return (1);
+	if (cmd[1])
+	{
+		if (cmd[1][0] == '-')
+			return (go_to_old_pwd(data, cmd));
+	}
 	if (find_var_env(data, "CDPATH") && cmd[1])
 	{
 		if (!arg_is_point_point(cmd[1]))

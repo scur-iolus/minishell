@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 12:15:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/06 16:39:06 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ t_bool	cdpath(t_data *data, char **cmd);
 void	switch_old_pwd(t_data *data, char *line);
 void	switch_pwd(t_data *data, char *line);
 t_bool	arg_is_point_point(char *str);
+int		go_to_old_pwd(t_data *data, char **cmd);
 // +------------------------------------------+ //
 //   Unset                                     //
 // +------------------------------------------+ //
@@ -205,7 +206,7 @@ void	close_fd_last_process(t_pipe *pipe);
 // +------------------------------------------+ //
 //   Dup                                        //
 // +------------------------------------------+ //
-void	open_infile_and_heredoc(t_cmd *cmd);
+void	open_infile_and_heredoc(t_cmd *cmd, t_pipe *pipe);
 void	dup_outfile(t_cmd *cmd, t_pipe *pipe);
 void	command_failed_because_of_file_opening(t_data *data);
 // +------------------------------------------+ //
