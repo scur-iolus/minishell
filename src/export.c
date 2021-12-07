@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:36:27 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 12:14:08 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/07 18:29:09 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_export(t_data *data, char **cmd)
 	{
 		while (cmd[++i])
 		{
-			if (error_var_name(cmd[i]))
+			if (error_var_name(cmd[i]) || cmd[i][0] == '=')
 			{
 				ft_putstr_fd("export: `", 1);
 				ft_putstr_fd(cmd[i], 1);

@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 18:53:51 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/07 18:24:53 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,22 @@ static void	pop_out_list_env(t_data *data, char *line) // a tester
 	}
 }
 
+static void	print_error_unset(char **cmd, int i, int flag)
+{
+	if (flag == 0)
+	{
+		ft_putstr_fd("unset: -", 1);
+		ft_putchar_fd(cmd[i][1], 1);
+		ft_putstr_fd("': invalid option\n", 1);
+	}
+	if (flag == 1)
+	{
+		ft_putstr_fd("unset: `", 1);
+		ft_putstr_fd(cmd[i], 1);
+		ft_putstr_fd("\': not a valid identifier\n", 1);
+	}
+}
+
 int	ft_unset(t_data *data, char **cmd)
 {
 	int	i;
@@ -65,46 +81,22 @@ int	ft_unset(t_data *data, char **cmd)
 	{
 		if (cmd[i][0] == '-')
 		{
-			ft_putstr_fd("unset: -", 1);
-			ft_putchar_fd(cmd[i][1], 1);
-			ft_putstr_fd("': invalid option\n", 1);
+			print_error_unset(cmd, i, 0);
 			return (2);
 		}
 		if (error_var_name(cmd[i]))
 		{
-			ft_putstr_fd("unset: `", 1);
-			ft_putstr_fd(cmd[i], 1);
-			ft_putstr_fd("\': not a valid identifier\n", 1);
+			print_error_unset(cmd, i, 1);
 			return (127);
+		}
+		if (check_equal_sign(cmd[i]))
+		{
+			print_error_unset(cmd, i, 1);
+			return (1);
 		}
 	}
 	i = 0;
 	while (cmd[++i])
 		pop_out_list_env(data, cmd[i]);
-	return (0);
-}
-
-int	error_var_name(char *line)
-{
-	int	i;
-
-	i = -1;
-	if (!line[0])
-		return(1);
-	if (ft_isdigit(line[0]))
-		return (1);
-	while (line[++i] && line[i] != '=')
-	{
-		if (!ft_is_var_name(line[i]))
-			return (1);
-	}
-	return (0);
-}
-
-int	ft_is_var_name(int c)
-{
-	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')
-		|| (c >= 'a' && c <= 'z') || c == '_')
-		return (1);
 	return (0);
 }
