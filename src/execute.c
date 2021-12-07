@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/07 12:31:08 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/07 12:41:17 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	is_built_in(char **cmd)
 		return (0);
 }
 
-void	make_one_built_in(t_data *data, t_cmd *cmd)// FIXME segault echo << EOF
+void	make_one_built_in(t_data *data, t_cmd *cmd)
 {
 	int	save_stdout;
 	int	save_stdin;
@@ -82,7 +82,7 @@ void	make_one_built_in(t_data *data, t_cmd *cmd)// FIXME segault echo << EOF
 	launch_built_in(data, cmd);
 	if (cmd->outfile)
 		dup2(save_stdout, STDOUT_FILENO);
-	if (cmd->infile)
+	if (cmd->infile || cmd->heredoc)
 		dup2(save_stdin, STDIN_FILENO);
 }
 
