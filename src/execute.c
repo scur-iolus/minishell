@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 14:51:26 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/07 12:31:08 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,15 @@ int	is_built_in(char **cmd)
 		return (0);
 }
 
-void	make_one_built_in(t_data *data, t_cmd *cmd)
+void	make_one_built_in(t_data *data, t_cmd *cmd)// FIXME segault echo << EOF
 {
 	int	save_stdout;
 	int	save_stdin;
+	int	fd[2];
 
 	save_stdout = dup(1);
 	save_stdin = dup(0);
-	open_infile_and_heredoc(cmd);
+	open_infile_and_heredoc(cmd, fd);
 	if (cmd->outfile) // si outfile
 	{
 		dup2(cmd->outfile, STDOUT_FILENO);

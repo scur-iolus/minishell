@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:21:50 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 16:43:14 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/07 12:30:31 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 ** ou le here_doc
 */
 
-void	open_infile_and_heredoc(t_cmd *cmd, t_pipe *pipe)
+void	open_infile_and_heredoc(t_cmd *cmd, int fd[2])
 {
+	pipe(fd);
 	if (cmd->infile)
 	{
 		dup2(cmd->infile, STDIN_FILENO);
@@ -26,10 +27,12 @@ void	open_infile_and_heredoc(t_cmd *cmd, t_pipe *pipe)
 	}
 	else if (cmd->heredoc)
 	{
-		write(0, cmd->heredoc, ft_strlen(cmd->heredoc));
+		write(fd[1], cmd->heredoc, ft_strlen(cmd->heredoc));
+		dup2(fd[0], STDIN_FILENO);
 	}
+	close(fd[0]);
+	close(fd[1]);
 }
-		//FIXME changer l'endroit ou on écrit ?  quand le process est le premier est qu on part sur le stdin
 
 void	dup_outfile(t_cmd *cmd, t_pipe *pipe)
 {

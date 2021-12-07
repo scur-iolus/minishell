@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 19:20:04 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 16:38:49 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:52:28 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	first_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 {
+	int	fd[2];
+
 	close_fd_first_process(pipe);
-	open_infile_and_heredoc(cmd, pipe);
+	open_infile_and_heredoc(cmd, fd);
 	if (cmd->outfile)
 		dup_outfile(cmd, pipe);
 	else if (pipe->cmd_nb < pipe->nb_pipe - 1)
@@ -40,10 +42,12 @@ void	first_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 
 void	middle_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 {
+	int	fd[2];
+
 	close_fd_middle_process(pipe);
 	dup2(pipe->end[pipe->i][0], STDIN_FILENO);
 	dup2(pipe->end[pipe->i + 1][1], STDOUT_FILENO);
-	open_infile_and_heredoc(cmd, pipe);
+	open_infile_and_heredoc(cmd, fd);
 	close(pipe->end[pipe->i + 1][1]);
 	close(pipe->end[pipe->i][0]);
 	if (cmd->ok == 0)
@@ -63,11 +67,13 @@ void	middle_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 
 void	last_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 {
+	int	fd[2];
+
 	close_fd_last_process(pipe);
 	if (cmd->outfile)
 		dup_outfile(cmd, pipe);
 	dup2(pipe->end[pipe->i][0], STDIN_FILENO);
-	open_infile_and_heredoc(cmd, pipe);
+	open_infile_and_heredoc(cmd, fd);
 	close(pipe->end[pipe->i][0]);
 	if (cmd->ok == 0)
 		command_failed_because_of_file_opening(data);

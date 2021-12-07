@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:18:10 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 14:57:10 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:00:25 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ int	init_pipe(int nb_pipe, t_data *data, t_pipe *pipes)
 			ft_error(MALLOC_ERROR);
 			return (1);
 		}
-		pipe(pipes->end[i]);
 		if (pipe(pipes->end[i]) == -1)
 		{
-			ft_error(MALLOC_ERROR);
+			ft_error("Failed to create pipe\n");
 			return (1);
 		}
 	}

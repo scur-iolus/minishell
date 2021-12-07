@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 16:39:06 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:42:09 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ void	close_fd_last_process(t_pipe *pipe);
 // +------------------------------------------+ //
 //   Dup                                        //
 // +------------------------------------------+ //
-void	open_infile_and_heredoc(t_cmd *cmd, t_pipe *pipe);
+void	open_infile_and_heredoc(t_cmd *cmd, int fd[2]);
 void	dup_outfile(t_cmd *cmd, t_pipe *pipe);
 void	command_failed_because_of_file_opening(t_data *data);
 // +------------------------------------------+ //

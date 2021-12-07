@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 14:57:05 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/07 12:24:21 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_data(t_data *data, char **env)
 	data->pipe.nb_pipe = 0;
 	data->pipe.cmd_nb = 0;
 	data->pipe.i = 0;
-	data->env_lst = init_env(data, env); //FIXME : un leak lors du free de la list chainée ?
+	data->env_lst = init_env(data, env);
 	update_var_shlvl(data);
 }
 
