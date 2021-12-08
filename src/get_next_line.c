@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:09:22 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 20:43:36 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/08 16:00:26 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	*save_remainder(char *save)
 ** -> else, 1
 */
 
-int	gnl_result(int ret, char **line, char **save)
+static int	gnl_result(int ret, char **line, char **save)
 {
 	char	*tmp;
 
@@ -74,4 +74,48 @@ int	gnl_result(int ret, char **line, char **save)
 	if (*save == 0)
 		return (-1);
 	return (1);
+}
+
+static t_bool	continue_reading(int *ret, char **save)
+{
+	char	buff[BUFFER_SIZE + 1];
+
+	*ret = read(0, buff, BUFFER_SIZE);
+	if (*ret == -1)
+		return (0);
+	buff[*ret] = '\0';
+	if (!(*save))
+		*save = ft_strdup(buff);
+	else
+		ft_str_insert(save, buff, ft_strlen(*save));
+	if (!(*save))
+		return (0);
+	return (1);
+}
+
+/*
+** Customized GNL with free(line) when ret == 0, and a flag to free(save)
+*/
+
+int	get_next_line(char **line, t_bool flag)
+{
+	static char	*save = 0;
+	int			ret;
+
+	if (flag)
+	{
+		if (save)
+			free(save);
+		save = 0;
+		return (42);
+	}
+	if (!line || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
+		return (-1);
+	ret = 1;
+	while ((!save || !ft_strrchr(save, '\n')) && ret > 0)
+	{
+		if (!continue_reading(&ret, &save))
+			return (-1);
+	}
+	return (gnl_result(ret, line, &save));
 }

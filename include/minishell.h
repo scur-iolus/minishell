@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/07 11:42:09 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/08 17:32:17 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ extern long long	*g_exit_status;
 # define GNL_ERROR		"Error: failed to malloc or to read standard input\n"
 # define CMD_NOT_FOUND	"Error: command not found\n"
 # define NUMERIC_ARG	"Error: numeric argument required\n"
+# define PIPE_FAILED	"Error: pipe failed\n"
 # define FORK_FAILED	"Error: fork failed\n"
 # define HEREDOC_EOF	"Warning: here-document delimited by EOF.\n"
 # define SIGQUIT_MSG	"Quit (core dumped)\n"
@@ -81,13 +82,14 @@ extern long long	*g_exit_status;
 //   Utils                                      //
 // +------------------------------------------+ //
 void	signals_init(void);
+void	signals_init_child(void);
 void	update_exit_status(pid_t this_pid);
-int		gnl_result(int ret, char **line, char **save);
 void	secure_between(char *str, char to_secure, char tmp, t_bool remove);
 int		quote_status(char *str, size_t i);
 t_bool	remove_surrounding_quotes(char **str);
 void	protect_with_backslash(t_data *data);
 void	replace_backslash(t_data *data);
+int		get_next_line(char **line, t_bool flag);
 // +------------------------------------------+ //
 //   Builtins                                   //
 // +------------------------------------------+ //

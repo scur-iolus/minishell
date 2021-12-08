@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:53:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 12:44:34 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/08 16:58:59 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	do_cmd(t_data *data, t_pipe *pipe, t_cmd *cmd)
 
 static void	finish_pipe(t_data *data, t_pipe *pipe)
 {
-	int	i;
+	int		i;
 	pid_t	tmp;
-	int	wstatus;
+	int		wstatus;
 
 	i = -1;
 	close_all_fd(pipe);

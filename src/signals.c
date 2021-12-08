@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:15:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 15:06:49 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/08 18:25:26 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	update_exit_status(pid_t this_pid)
 
 static void	signal_handler(int signo)
 {
+	printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
+	fflush(stdout); //FIXME
 	if (signo == SIGINT)
 	{
 		*g_exit_status = 130;
@@ -69,6 +71,23 @@ static void	signal_handler(int signo)
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
+	}
+	else if (signo == SIGQUIT)
+	{
+		//ft_putstr_fd("\b\b  \b\b", 1);
+		*g_exit_status = 131;
+		ft_putstr_fd(SIGQUIT_MSG, 2);
+	}
+}
+
+static void	signal_handler_child(int signo)
+{
+	printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
+	fflush(stdout); //FIXME
+	if (signo == SIGINT)
+	{
+		write(1, "\n", 1);
+		exit(130);
 	}
 	else if (signo == SIGQUIT)
 	{
@@ -92,6 +111,24 @@ void	signals_init(void)
 	action.sa_mask = empty_set;
 	action.sa_flags = SA_RESTART;
 	action.sa_handler = signal_handler;
+	sigaction(SIGINT, &action, NULL);
+	sigaction(SIGQUIT, &action, NULL);
+}
+
+void	signals_init_child(void)
+
+{
+	struct sigaction	action;
+	sigset_t			empty_set;
+	sigset_t			usr_set;
+
+	sigemptyset(&empty_set);
+	sigemptyset(&usr_set);
+	sigaddset(&usr_set, SIGINT);
+	sigaddset(&usr_set, SIGQUIT);
+	action.sa_mask = empty_set;
+	action.sa_flags = SA_RESTART;
+	action.sa_handler = signal_handler_child;
 	sigaction(SIGINT, &action, NULL);
 	sigaction(SIGQUIT, &action, NULL);
 }

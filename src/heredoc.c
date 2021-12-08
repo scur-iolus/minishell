@@ -6,57 +6,13 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:31:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 11:40:18 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/08 18:29:38 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static t_bool	continue_reading(int *ret, char **save)
-{
-	char	buff[BUFFER_SIZE + 1];
-
-	*ret = read(0, buff, BUFFER_SIZE);
-	if (*ret == -1)
-		return (0);
-	buff[*ret] = '\0';
-	if (!(*save))
-		*save = ft_strdup(buff);
-	else
-		ft_str_insert(save, buff, ft_strlen(*save));
-	if (!(*save))
-		return (0);
-	return (1);
-}
-
-/*
-** Customized GNL with free(line) when ret == 0, and a flag to free(save)
-*/
-
-static int	get_next_line(char **line, t_bool flag)
-{
-	static char	*save = 0;
-	int			ret;
-
-	if (flag)
-	{
-		if (save)
-			free(save);
-		save = 0;
-		return (42);
-	}
-	if (!line || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
-		return (-1);
-	ret = 1;
-	while ((!save || !ft_strrchr(save, '\n')) && ret > 0)
-	{
-		if (!continue_reading(&ret, &save))
-			return (-1);
-	}
-	return (gnl_result(ret, line, &save));
-}
-
-static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)
+static void	heredoc_input(t_data *data, t_cmd *head, char *delimiter)
 {
 	char	*line;
 	int		status;
@@ -67,7 +23,7 @@ static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)
 		err_free(MALLOC_ERROR, data, 0);
 	write(1, "> ", 2);
 	status = get_next_line(&line, HEREDOC_CONT);
-	while (status > 0 && ft_strcmp(heredoc_delimiter, line) != 0)
+	while (status > 0 && ft_strcmp(delimiter, line) != 0)
 	{
 		ft_str_insert(&(head->heredoc), line, ft_strlen(head->heredoc));
 		ft_str_insert(&(head->heredoc), "\n", ft_strlen(head->heredoc));
@@ -85,39 +41,105 @@ static void	heredoc_input(t_data *data, t_cmd *head, char *heredoc_delimiter)
 		write(2, HEREDOC_EOF, ft_strlen(HEREDOC_EOF));
 }
 
-static void	spot_heredoc(t_data *data, t_cmd *head)
+static void	write_to_pipe(t_data *data, t_cmd *head, int fd[2])
 {
-	size_t	i;
-	t_bool	sentinel;
+	int		ret;
+	char	*c;
 
-	i = 0;
-	sentinel = 0;
-	while ((head->split)[i])
+	ret = close(fd[0]);
+	if (ret == -1)
+		err_free(CLOSE_FAILED, data, 0);
+	c = head->heredoc;
+	while (c && *c)
 	{
-		if (sentinel && head->heredoc)
-		{
-			free(head->heredoc);
-			head->heredoc = 0;
-		}
-		if (sentinel)
-			heredoc_input(data, head, (head->split)[i]);
-		if (!ft_strcmp("<<", (head->split)[i]))
-			sentinel = 1;
-		else
-			sentinel = 0;
-		i++;
+		write(fd[1], c, 1);
+		c++;
+	}
+	write(fd[1], "\0", 1);
+	ret = close(fd[1]);
+	if (ret == -1)
+		err_free(CLOSE_FAILED, data, 0);
+}
+
+static void	read_from_pipe(t_data *data, t_cmd *head, int fd[2])
+{
+	int		ret;
+	char	c[2];
+
+	ret = close(fd[1]);
+	if (ret == -1)
+		err_free(CLOSE_FAILED, data, 0);
+	head->heredoc = (char *)ft_calloc(1, sizeof(char));
+	if (!(head->heredoc))
+		err_free(MALLOC_ERROR, data, 0);
+	c[0] = 1;
+	c[1] = '\0';
+	ret = 1;
+	while (ret && c[0] != '\0')
+	{
+		ret = read(fd[0], &(c[0]), 1);
+		if (c[0])
+			ft_str_insert(&(head->heredoc), &(c[0]), ft_strlen(head->heredoc));
+	}
+	ret = close(fd[0]);
+	if (ret == -1)
+		err_free(CLOSE_FAILED, data, 0);
+}
+
+static void	fork_heredoc(t_data *data, t_cmd *head, char *delimiter)
+{
+	int	ret;
+	int	status;
+	int	fd[2];
+
+	if (pipe(fd) == -1)
+		err_free(PIPE_FAILED, data, 0);
+	ret = fork();
+	if (ret == -1)
+		err_free(FORK_FAILED, data, 0);
+	if (ret == 0)
+	{
+		free_everything(data, 0);
+		signals_init_child();
+		heredoc_input(data, head, delimiter);
+		write_to_pipe(data, head, fd);
+		exit(data->exit_status);
+	}
+	else
+	{
+		read_from_pipe(data, head, fd);
+		ret = wait(&status);
+		printf("wait returned\n"); //FIXME
+		fflush(stdout); // FIXME
+		update_exit_status(status);
 	}
 }
 
 void	load_heredoc(t_data *data)
 {
 	size_t	i;
-	t_cmd	*tmp;
+	t_bool	sentinel;
+	t_cmd	*head;
 
-	tmp = data->cmd;
-	while (tmp)
+	head = data->cmd;
+	while (head)
 	{
-		spot_heredoc(data, tmp);
-		tmp = tmp->next;
+		i = 0;
+		sentinel = 0;
+		while ((head->split)[i])
+		{
+			if (sentinel && head->heredoc)
+			{
+				free(head->heredoc);
+				head->heredoc = 0;
+			}
+			if (sentinel)
+				fork_heredoc(data, head, (head->split)[i]);
+			sentinel = 0;
+			if (!ft_strcmp("<<", (head->split)[i]))
+				sentinel = 1;
+			i++;
+		}
+		head = head->next;
 	}
 }
