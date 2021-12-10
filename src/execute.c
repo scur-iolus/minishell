@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/07 12:41:17 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:35:06 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	execute(t_data *data)
 {
 	char	*vertical_bar;
 
-	data->exit_status = 0;
 	vertical_bar = ft_strrchr(data->line, '|');
 	if (!vertical_bar && data->cmd->cmd == 0)
 		return ;
@@ -89,17 +88,17 @@ void	make_one_built_in(t_data *data, t_cmd *cmd)
 void	launch_built_in(t_data *data, t_cmd *cmd)
 {
 	if (!ft_strcmp("echo", cmd->cmd[0])) //FONCTION OK
-		data->exit_status = ft_echo(cmd->cmd);
+		data->new_status = ft_echo(cmd->cmd);
 	else if (!ft_strcmp("cd", cmd->cmd[0])) //FONCTION OK
-		data->exit_status = ft_cd(data, cmd->cmd);
+		data->new_status = ft_cd(data, cmd->cmd);
 	else if (!ft_strcmp("pwd", cmd->cmd[0])) //FONCTION OK
-		data->exit_status = ft_pwd(data, cmd->cmd);
+		data->new_status = ft_pwd(data, cmd->cmd);
 	else if (!ft_strcmp("export", cmd->cmd[0])) //FONCTION OK
-		data->exit_status = ft_export(data, cmd->cmd);
+		data->new_status = ft_export(data, cmd->cmd);
 	else if (!ft_strcmp("unset", cmd->cmd[0])) //FONCTION OK
-		data->exit_status = ft_unset(data, cmd->cmd);
+		data->new_status = ft_unset(data, cmd->cmd);
 	else if (!ft_strcmp("env", cmd->cmd[0])) //FONCTION OK
-		data->exit_status = ft_env(data, cmd->cmd);
+		data->new_status = ft_env(data, cmd->cmd);
 	else if (!ft_strcmp("exit", cmd->cmd[0])) //FONCTION OK
 		ft_exit(data, cmd->cmd);
 }

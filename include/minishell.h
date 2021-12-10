@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/08 17:32:17 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/10 18:36:59 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 //   Unique global variable                     //
 // +------------------------------------------+ //
 
-extern long long	*g_exit_status;
+extern long long	*g_status;
 
 // +------------------------------------------+ //
 //   Define                                     //
@@ -66,6 +66,7 @@ extern long long	*g_exit_status;
 # define NUMERIC_ARG	"Error: numeric argument required\n"
 # define PIPE_FAILED	"Error: pipe failed\n"
 # define FORK_FAILED	"Error: fork failed\n"
+# define HEREDOC_LEN	"Error: this heredoc delimiter is too long.\n"
 # define HEREDOC_EOF	"Warning: here-document delimited by EOF.\n"
 # define SIGQUIT_MSG	"Quit (core dumped)\n"
 # define BUFFER_SIZE 	511
@@ -77,13 +78,17 @@ extern long long	*g_exit_status;
 # define HEREDOC_END	1
 # define TRUE			1
 # define FALSE			0
+# define HAS_HEREDOC	-9223372036854775665
+# define HAS_CHILD		-9223372036854775666
+# define IS_HEREDOC		-9223372036854775665
+# define DELIMITER_LEN	2047
 
 // +------------------------------------------+ //
 //   Utils                                      //
 // +------------------------------------------+ //
 void	signals_init(void);
 void	signals_init_child(void);
-void	update_exit_status(pid_t this_pid);
+void	update_status(pid_t this_pid);
 void	secure_between(char *str, char to_secure, char tmp, t_bool remove);
 int		quote_status(char *str, size_t i);
 t_bool	remove_surrounding_quotes(char **str);
@@ -157,7 +162,8 @@ t_bool	valid_start_end(char *line);
 // +------------------------------------------+ //
 //   Parsing                                    //
 // +------------------------------------------+ //
-void	load_heredoc(t_data *data);
+t_bool	load_heredoc(t_data *data);
+t_bool	load_delimiter(char *new, char *str);
 t_bool	parse_cmd(t_data *data);
 t_bool	parse_cmd_content(t_data *data, t_cmd *head);
 t_bool	open_file(t_cmd *head, char *file, t_bool opening);

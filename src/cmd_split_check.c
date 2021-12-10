@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 11:43:15 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/10 18:44:48 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,10 @@ t_bool	parse_cmd(t_data *data)
 		ft_error(INVALID_CHAR);
 		return (0);
 	}
-	load_heredoc(data);
+	if (!load_heredoc(data))
+		return (0);
+	if (data->new_status == 143)
+		data->new_status = 0;
 	head = data->cmd;
 	while (head)
 	{

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:31:43 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/08 18:29:38 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/10 18:41:43 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ static void	heredoc_input(t_data *data, t_cmd *head, char *delimiter)
 		write(2, HEREDOC_EOF, ft_strlen(HEREDOC_EOF));
 }
 
-static void	write_to_pipe(t_data *data, t_cmd *head, int fd[2])
+static void	write_to_pipe(t_data *data, t_cmd *head, int fd[2], char *delimiter)
 {
 	int		ret;
 	char	*c;
 
+	free_everything(data, 0);
+	signals_init_child();
+	data->new_status = IS_HEREDOC;
+	heredoc_input(data, head, delimiter);
 	ret = close(fd[0]);
 	if (ret == -1)
 		err_free(CLOSE_FAILED, data, 0);
@@ -59,6 +63,7 @@ static void	write_to_pipe(t_data *data, t_cmd *head, int fd[2])
 	ret = close(fd[1]);
 	if (ret == -1)
 		err_free(CLOSE_FAILED, data, 0);
+	exit(data->new_status);
 }
 
 static void	read_from_pipe(t_data *data, t_cmd *head, int fd[2])
@@ -66,6 +71,7 @@ static void	read_from_pipe(t_data *data, t_cmd *head, int fd[2])
 	int		ret;
 	char	c[2];
 
+	data->new_status = HAS_HEREDOC;
 	ret = close(fd[1]);
 	if (ret == -1)
 		err_free(CLOSE_FAILED, data, 0);
@@ -86,11 +92,12 @@ static void	read_from_pipe(t_data *data, t_cmd *head, int fd[2])
 		err_free(CLOSE_FAILED, data, 0);
 }
 
-static void	fork_heredoc(t_data *data, t_cmd *head, char *delimiter)
+static t_bool	fork_heredoc(t_data *data, t_cmd *head, char *str)
 {
-	int	ret;
-	int	status;
-	int	fd[2];
+	int		ret;
+	int		status;
+	int		fd[2];
+	char	delimiter[DELIMITER_LEN + 1];
 
 	if (pipe(fd) == -1)
 		err_free(PIPE_FAILED, data, 0);
@@ -99,47 +106,44 @@ static void	fork_heredoc(t_data *data, t_cmd *head, char *delimiter)
 		err_free(FORK_FAILED, data, 0);
 	if (ret == 0)
 	{
-		free_everything(data, 0);
-		signals_init_child();
-		heredoc_input(data, head, delimiter);
-		write_to_pipe(data, head, fd);
-		exit(data->exit_status);
+		if (!load_delimiter(&(delimiter[0]), str))
+			return (0);
+		write_to_pipe(data, head, fd, delimiter);
 	}
 	else
 	{
 		read_from_pipe(data, head, fd);
 		ret = wait(&status);
-		printf("wait returned\n"); //FIXME
-		fflush(stdout); // FIXME
-		update_exit_status(status);
+		update_status(status);
 	}
+	return (1);
 }
 
-void	load_heredoc(t_data *data)
+t_bool	load_heredoc(t_data *data)
 {
 	size_t	i;
 	t_bool	sentinel;
 	t_cmd	*head;
 
 	head = data->cmd;
-	while (head)
+	while (head && *g_status != 130)
 	{
-		i = 0;
+		i = -1;
 		sentinel = 0;
-		while ((head->split)[i])
+		while ((head->split)[++i] && *g_status != 130)
 		{
 			if (sentinel && head->heredoc)
 			{
 				free(head->heredoc);
 				head->heredoc = 0;
 			}
-			if (sentinel)
-				fork_heredoc(data, head, (head->split)[i]);
+			if (sentinel && !fork_heredoc(data, head, (head->split)[i]))
+				return (0);
 			sentinel = 0;
 			if (!ft_strcmp("<<", (head->split)[i]))
 				sentinel = 1;
-			i++;
 		}
 		head = head->next;
 	}
+	return (1);
 }

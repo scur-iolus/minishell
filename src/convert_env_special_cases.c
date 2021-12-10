@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:09:25 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 11:36:44 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/10 18:30:15 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static t_bool	add_exit_status(t_data *data, char **output)
 	t_bool		success;
 
 	success = 1;
-	tmp = data->exit_status;
+	tmp = data->old_status;
 	if (!tmp)
 	{
 		success = ft_str_insert(output, "0", ft_strlen(*output));

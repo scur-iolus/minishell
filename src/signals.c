@@ -6,26 +6,11 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:15:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/08 18:25:26 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/10 18:53:00 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/*
-** https://github.com/louisnfr/minishell
-** http://manpagesfr.free.fr/man/man2/wait.2.html
-** https://github.com/iciamyplant/Minishell
-** https://github.com/M0-san/minishell/blob/main/main/ft_signals.c
-**
-** https://www.youtube.com/watch?v=xVSPv-9x3gk
-** https://putaindecode.io/articles/maitriser-les-redirections-shell/
-** https://www.youtube.com/watch?v=EqndHT606Tw
-** https://www.youtube.com/watch?v=uHH7nHkgZ4w
-** https://brennan.io/2015/01/16/write-a-shell-in-c/
-*/
-
-// TODO cat pas cat, child pas child
 
 /*
 ** WIFEXITED return TRUE if the process returning status exited via the exit()
@@ -37,21 +22,21 @@
 ** signal that was raised by the child process.
 */
 
-void	update_exit_status(pid_t this_pid)
+void	update_status(pid_t this_pid)
 {
-	if (WIFEXITED(this_pid))
+	if (*g_status != 130)
 	{
-		*g_exit_status = WEXITSTATUS(this_pid);
-		//printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
+		if (WIFEXITED(this_pid))
+		{
+			*g_status = WEXITSTATUS(this_pid);
+		}
+		else if (WIFSIGNALED(this_pid))
+		{
+			*g_status = WTERMSIG(this_pid);
+			if (*g_status != 131)
+				*g_status += 128;
+		}
 	}
-	else if (WIFSIGNALED(this_pid))
-	{
-		*g_exit_status = WTERMSIG(this_pid);
-		//printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
-		if (*g_exit_status != 131)
-			*g_exit_status += 128;
-	}
-	fflush(stdout); // FIXME
 }
 
 /*
@@ -62,39 +47,37 @@ void	update_exit_status(pid_t this_pid)
 
 static void	signal_handler(int signo)
 {
-	printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
-	fflush(stdout); //FIXME
-	if (signo == SIGINT)
+	if (signo == SIGINT && *g_status != HAS_HEREDOC && *g_status != HAS_CHILD)
 	{
-		*g_exit_status = 130;
 		write(1, "\n", 1);
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
+		*g_status = 130;
 	}
-	else if (signo == SIGQUIT)
+	else if (signo == SIGINT)
 	{
-		//ft_putstr_fd("\b\b  \b\b", 1);
-		*g_exit_status = 131;
-		ft_putstr_fd(SIGQUIT_MSG, 2);
+		write(1, "\n", 1);
+	}
+	else if (signo == SIGQUIT && *g_status == HAS_CHILD)
+	{
+		write(2, SIGQUIT_MSG, ft_strlen(SIGQUIT_MSG));
+	}
+	else if (signo == SIGQUIT \
+	&& *g_status != HAS_CHILD && *g_status != HAS_HEREDOC)
+	{
+		write(1, "\b\b  \b\b", 6);
 	}
 }
 
 static void	signal_handler_child(int signo)
 {
-	printf("*g_exit_status : %lld\n", *g_exit_status); // FIXME
-	fflush(stdout); //FIXME
 	if (signo == SIGINT)
-	{
-		write(1, "\n", 1);
 		exit(130);
-	}
-	else if (signo == SIGQUIT)
-	{
-		//ft_putstr_fd("\b\b  \b\b", 1);
-		*g_exit_status = 131;
-		ft_putstr_fd(SIGQUIT_MSG, 2);
-	}
+	else if (signo == SIGQUIT && *g_status == IS_HEREDOC)
+		write(1, "\b\b  \b\b", 6);
+	else if (signo == SIGQUIT && *g_status != IS_HEREDOC)
+		exit(131);
 }
 
 void	signals_init(void)

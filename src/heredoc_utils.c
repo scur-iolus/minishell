@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_special_cases.c                            :+:      :+:    :+:   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 17:06:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 17:45:16 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/10 18:02:55 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,24 @@ void	replace_backslash(t_data *data)
 			data->line[i] = '$';
 		i++;
 	}
+}
+
+t_bool	load_delimiter(char *new, char *str)
+{
+	size_t	i;
+
+	if (ft_strlen(str) > DELIMITER_LEN)
+	{
+		write(2, HEREDOC_LEN, ft_strlen(HEREDOC_LEN));
+		return (0);
+	}
+	i = 0;
+	while (*str)
+	{
+		new[i] = *str;
+		str++;
+		i++;
+	}
+	new[i] = '\0';
+	return (1);
 }

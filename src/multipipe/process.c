@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 19:20:04 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/07 12:41:01 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:28:07 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	first_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 	{
 		launch_built_in(data, cmd);
 		free_everything(data, 0);
-		exit(data->exit_status);
+		exit(data->new_status);
 	}
 	if ((cmd->cmd_path == NULL || \
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
@@ -54,7 +54,7 @@ void	middle_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 	{
 		launch_built_in(data, cmd);
 		free_everything(data, 0);
-		exit(data->exit_status);
+		exit(data->new_status);
 	}
 	if ((cmd->cmd_path == NULL || \
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
@@ -77,7 +77,7 @@ void	last_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 	{
 		launch_built_in(data, cmd);
 		free_everything(data, 0);
-		exit(data->exit_status);
+		exit(data->new_status);
 	}
 	if ((cmd->cmd_path == NULL || \
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))

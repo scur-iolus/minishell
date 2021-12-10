@@ -6,18 +6,19 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/08 18:26:49 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/10 18:48:18 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-long long	*g_exit_status;
+long long	*g_status;
 
 static void	init_data(t_data *data, char **env)
 {
-	data->exit_status = 0;
-	g_exit_status = &(data->exit_status);
+	data->new_status = 0;
+	data->old_status = 0;
+	g_status = &(data->new_status);
 	data->env = 0;
 	data->path = 0;
 	data->line = 0;
@@ -32,6 +33,8 @@ static void	init_data(t_data *data, char **env)
 
 static void	reset_data(t_data *data)
 {
+	data->old_status = data->new_status;
+	data->new_status = 0;
 	if (data->env)
 		ft_free_split(data->env);
 	if (data->path)
@@ -63,10 +66,6 @@ static t_bool	is_too_long(char *line)
 	}
 	return (0);
 }
-
-/*
-** On the heap: line
-*/
 
 static t_bool	input_is_ok(t_data *data)
 {
@@ -109,9 +108,10 @@ int	main(int argc, char **argv, char **env)
 		data.line = readline("🌞 Mishell c'est le Brésil ▸ ");
 		if (ft_strlen(data.line) > 0)
 			add_history(data.line);
-		if (input_is_ok(&data) && parse_cmd(&data) && data.cmd)
+		if (input_is_ok(&data) && parse_cmd(&data))
 		{
-			execute(&data);
+			if (data.cmd && data.cmd->cmd && data.new_status != 130)
+				execute(&data);
 		}
 	}
 	ft_error(TOO_MANY_ARG);

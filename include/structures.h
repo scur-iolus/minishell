@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/08 18:26:56 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/10 18:41:57 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ typedef struct s_data
 	char			**env;
 	char			**path;
 	char			*line;
-	long long		exit_status;
+	long long		old_status;
+	long long		new_status;
 	struct s_cmd	*cmd;
 	struct s_pipe	pipe;
 	struct s_env	*env_lst;
