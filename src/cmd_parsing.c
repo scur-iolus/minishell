@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/13 15:52:10 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/13 17:39:15 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,13 @@ static t_bool	heredoc_is_last(t_cmd *head)
 	if (head->ok == FALSE || *(head->split) == 0)
 		return (1);
 	i = ft_strlen_split(head->split) - 1;
-	closed = 0;
-	while (i && !ft_strrchr((head->split)[i], '<'))
+	while (i && !ft_strcmp((head->split)[i], "<<") && \
+	!ft_strcmp((head->split)[i], "<"))
 		i--;
 	if (!ft_strcmp((head->split)[i], "<<") && head->infile)
 	{
 		closed = close(head->infile);
+		head->infile = 0;
 		if (closed == -1)
 		{
 			ft_error(CLOSE_FAILED);
@@ -85,7 +86,8 @@ static int	ret_categorize(t_data *data, t_cmd *head, size_t i, int category)
 		}
 		return (2);
 	}
-	if (!category && !ft_strrchr(str, '<') && !ft_strrchr(str, '>'))
+	if (!category && ft_strcmp(str, "<") && ft_strcmp(str, ">") && \
+	ft_strcmp(str, ">>") && ft_strcmp(str, "<<"))
 		return (0);
 	return (2);
 }
@@ -128,7 +130,7 @@ t_bool	parse_cmd_content(t_data *data, t_cmd *head)
 
 	i = 0;
 	status = 0;
-	while ((head->split)[i])
+	while (head->ok && (head->split)[i])
 	{
 		status = categorize(data, head, i);
 		if (status == 0)
@@ -139,19 +141,19 @@ t_bool	parse_cmd_content(t_data *data, t_cmd *head)
 	}
 	if (head->ok && head->cmd)
 		find_command_path(data, head);
-	// FIXME ===============
-	// char	**hop;//FIXME
-	// hop = head->cmd;//FIXME
-	// while (hop && *hop)//FIXME
-	// {//FIXME
-	// 	printf("🔸%s", *hop); // FIXME ===============
-	// 	hop++;//FIXME
-	// }//FIXME
-	// if (hop) // FIXME
-	// 	printf("🔸\n"); // FIXME ===============
-	// printf("▫ fd infile : %d\n", head->infile); // FIXME ===============
-	// printf("▫ fd outfile : %d\n", head->outfile); // FIXME ===============
-	// printf("▫ cmd_path : %s\n", head->cmd_path); // FIXME ===============
-	// printf("▫ [heredoc] : [%s]\n", head->heredoc); // FIXME ===============
+	//// FIXME ===============
+	//char	**hop;//FIXME
+	//hop = head->cmd;//FIXME
+	//while (hop && *hop)//FIXME
+	//{//FIXME
+	//	printf("🔸%s", *hop); // FIXME ===============
+	//	hop++;//FIXME
+	//}//FIXME
+	//if (hop) // FIXME
+	//	printf("🔸\n"); // FIXME ===============
+	//printf("▫ fd infile : %d\n", head->infile); // FIXME ===============
+	//printf("▫ fd outfile : %d\n", head->outfile); // FIXME ===============
+	//printf("▫ cmd_path : %s\n", head->cmd_path); // FIXME ===============
+	//printf("▫ [heredoc] : [%s]\n", head->heredoc); // FIXME ===============
 	return (heredoc_is_last(head));
 }
