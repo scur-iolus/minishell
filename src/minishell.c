@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/10 18:48:18 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/13 16:18:20 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static t_bool	input_is_ok(t_data *data)
 	space_before_after_chevron(data);
 	if (too_many_chevrons_o_pipes(data) || invalid_suite(data))
 		return (0);
-	// printf("▫ data->line contient 🔹%s🔹\n", data->line); //FIXME
+	printf("▫ data->line contient 🔹%s🔹\n", data->line); //FIXME
 	return (1);
 }
 
@@ -106,11 +106,13 @@ int	main(int argc, char **argv, char **env)
 	{
 		reset_data(&data);
 		data.line = readline("🌞 Mishell c'est le Brésil ▸ ");
+		if (!data.line)
+			err_free(EOF_EXIT, &data, 0);
 		if (ft_strlen(data.line) > 0)
 			add_history(data.line);
 		if (input_is_ok(&data) && parse_cmd(&data))
 		{
-			if (data.cmd && data.cmd->cmd && data.new_status != 130)
+			if (data.cmd && data.cmd->cmd && data.new_status == 0)
 				execute(&data);
 		}
 	}

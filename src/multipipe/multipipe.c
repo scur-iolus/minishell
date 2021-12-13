@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:53:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/10 18:30:33 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/13 15:21:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,11 @@ static void	finish_pipe(t_data *data, t_pipe *pipe)
 	pid_t	tmp;
 	int		wstatus;
 
-	//i = -1;
+	i = -1;
 	close_all_fd(pipe);
-	//while (++i < pipe->nb_pipe - 1)
-	//{
-	//	tmp = waitpid(0, &wstatus, 0);
-	//	update_status(wstatus);
-	//}
-	tmp = 0;
-	while (tmp != -1)
+	while (++i < pipe->nb_pipe - 1)
 	{
-		tmp = wait(&wstatus);
-		//printf("%d waited for : %d\n", getpid(), tmp); // FIXME
+		tmp = waitpid(0, &wstatus, 0);
 	}
 	update_status(wstatus);
 }
@@ -67,7 +60,6 @@ void	fork_creation(t_pipe *pipe, t_data *data)
 		else
 		{
 			data->new_status = HAS_CHILD;
-			//printf("parent %d, child %d\n", getpid(), pid); // FIXME
 		}
 		list = list->next;
 	}

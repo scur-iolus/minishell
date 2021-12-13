@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:15:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/10 18:53:00 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/13 15:52:32 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,18 @@ void	update_status(pid_t this_pid)
 		else if (WIFSIGNALED(this_pid))
 		{
 			*g_status = WTERMSIG(this_pid);
-			if (*g_status != 131)
+			if (*g_status == SIGINT)
 				*g_status += 128;
+			else if (*g_status == SIGSEGV)
+			{
+				write(2, SIGSEGV_ERR, ft_strlen(SIGSEGV_ERR));
+				*g_status = 139;
+			}
+			else if (*g_status == 15)
+			{
+				write(2, TERMINATED, ft_strlen(TERMINATED));
+				*g_status = 143;
+			}
 		}
 	}
 }
@@ -45,7 +55,7 @@ void	update_status(pid_t this_pid)
 ** rl_redisplay: Replace the contents of rl_line_buffer with text
 */
 
-static void	signal_handler(int signo)
+static void	sig_handler(int signo)
 {
 	if (signo == SIGINT && *g_status != HAS_HEREDOC && *g_status != HAS_CHILD)
 	{
@@ -70,7 +80,7 @@ static void	signal_handler(int signo)
 	}
 }
 
-static void	signal_handler_child(int signo)
+static void	sig_handler_child(int signo)
 {
 	if (signo == SIGINT)
 		exit(130);
@@ -83,35 +93,30 @@ static void	signal_handler_child(int signo)
 void	signals_init(void)
 
 {
-	struct sigaction	action;
-	sigset_t			empty_set;
-	sigset_t			usr_set;
+	void	*ret;
 
-	sigemptyset(&empty_set);
-	sigemptyset(&usr_set);
-	sigaddset(&usr_set, SIGINT);
-	sigaddset(&usr_set, SIGQUIT);
-	action.sa_mask = empty_set;
-	action.sa_flags = SA_RESTART;
-	action.sa_handler = signal_handler;
-	sigaction(SIGINT, &action, NULL);
-	sigaction(SIGQUIT, &action, NULL);
+	ret = 0;
+	ret = signal(SIGSEGV, sig_handler);
+	if (ret == SIG_ERR)
+		write(2, SIG_FAILED, ft_strlen(SIG_FAILED));
+	ret = signal(SIGQUIT, sig_handler);
+	if (ret == SIG_ERR)
+		write(2, SIG_FAILED, ft_strlen(SIG_FAILED));
+	ret = signal(SIGINT, sig_handler);
+	if (ret == SIG_ERR)
+		write(2, SIG_FAILED, ft_strlen(SIG_FAILED));
 }
 
 void	signals_init_child(void)
 
 {
-	struct sigaction	action;
-	sigset_t			empty_set;
-	sigset_t			usr_set;
+	void	*ret;
 
-	sigemptyset(&empty_set);
-	sigemptyset(&usr_set);
-	sigaddset(&usr_set, SIGINT);
-	sigaddset(&usr_set, SIGQUIT);
-	action.sa_mask = empty_set;
-	action.sa_flags = SA_RESTART;
-	action.sa_handler = signal_handler_child;
-	sigaction(SIGINT, &action, NULL);
-	sigaction(SIGQUIT, &action, NULL);
+	ret = 0;
+	ret = signal(SIGSEGV, sig_handler_child);
+	if (ret == SIG_ERR)
+		write(2, SIG_FAILED, ft_strlen(SIG_FAILED));
+	ret = signal(SIGQUIT, sig_handler_child);
+	if (ret == SIG_ERR)
+		write(2, SIG_FAILED, ft_strlen(SIG_FAILED));
 }

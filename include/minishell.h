@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/10 18:36:59 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/13 15:47:25 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ extern long long	*g_status;
 //   Define                                     //
 // +------------------------------------------+ //
 
+# define SIGSEGV_ERR	"Segmentation fault (core dumped).\n"
+# define TERMINATED		"Terminated.\n"
+# define EOF_EXIT		"exit\n"
 # define MALLOC_ERROR	"Error: malloc failed\n"
 # define INVALID_CHAR	"Error: invalid characters in your command\n"
 # define END_CHAR_ERR	"Error: invalid char at the end of your command\n"
@@ -66,6 +69,7 @@ extern long long	*g_status;
 # define NUMERIC_ARG	"Error: numeric argument required\n"
 # define PIPE_FAILED	"Error: pipe failed\n"
 # define FORK_FAILED	"Error: fork failed\n"
+# define SIG_FAILED		"Error: a signal-related function failed.\n"
 # define HEREDOC_LEN	"Error: this heredoc delimiter is too long.\n"
 # define HEREDOC_EOF	"Warning: here-document delimited by EOF.\n"
 # define SIGQUIT_MSG	"Quit (core dumped)\n"

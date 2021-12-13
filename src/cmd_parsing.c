@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:14:06 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 12:14:22 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/13 15:52:10 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ static int	ret_categorize(t_data *data, t_cmd *head, size_t i, int category)
 	if (category == ONE_RIGHT || category == TWO_RIGHT || category == ONE_LEFT)
 	{
 		if (!open_file(head, str, category))
+		{
+			data->new_status = 1;
 			return (1);
+		}
 		return (2);
 	}
 	if (!category && !ft_strrchr(str, '<') && !ft_strrchr(str, '>'))
