@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 17:06:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/10 18:02:55 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/14 12:43:50 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_bool	load_delimiter(char *new, char *str)
 		str++;
 		i++;
 	}
-	new[i] = '\0';
+	new[i] = '\n';
+	new[i + 1] = '\0';
 	return (1);
 }

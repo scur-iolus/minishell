@@ -6,32 +6,37 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/10 17:30:59 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/14 11:53:11 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	ft_lstclear_pipe(t_pipe *pipe, t_data *data)
+static void	ft_lstclear_pipe(t_data *data)
 {
 	int	i;
 	int	j;
 
-	i = -1;
-	j = ft_lstsize(data->cmd) + 1;
-	if (pipe->end)
+	i = 0;
+	j = 1;
+	if (data->cmd)
+		j = ft_lstsize(data->cmd) + 1;
+	if (data->pipe.end)
 	{
-		while (++i < j)
-			free(pipe->end[i]);
-		free(pipe->end);
-		pipe->end = NULL;
+		while (i < j)
+		{
+			free(data->pipe.end[i]);
+			i++;
+		}
+		free(data->pipe.end);
+		data->pipe.end = NULL;
 	}
 }
 
-void	free_pipe(t_data *data, t_pipe *pipe)
+void	free_pipe(t_data *data)
 {
-	if (pipe->end)
-		ft_lstclear_pipe(pipe, data);
+	if (data->pipe.end)
+		ft_lstclear_pipe(data);
 }
 
 /*

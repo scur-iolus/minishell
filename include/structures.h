@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:42:05 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/10 18:41:57 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/14 12:49:36 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef struct s_data
 /*
 ** Structure s_cmd : une s_cmd par 'pipe'
 ** cmd
-** -> ["cat", "-e", "<", "infile", "poil.txt", "<", "3"]
-** -> ["cat", "-e", "poil.txt"]
+** -> ["cat", "-e", "<", "infile", "test.txt", "<", "3"]
+** -> ["cat", "-e", "test.txt"]
 ** cmd_path -> /usr/bin/head ou autre du PATH
 */
 

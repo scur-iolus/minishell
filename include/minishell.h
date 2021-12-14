@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/13 15:47:25 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/14 10:27:40 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	free_data(t_data *data);
 void	free_everything(t_data *data, char *str);
 void	delete_one_env_var(t_env *env);
 void	ft_lstclear_env(t_env *lst);
-void	free_pipe(t_data *data, t_pipe *pipe);
+void	free_pipe(t_data *data);
 // +------------------------------------------+ //
 //   Echo                                       //
 // +------------------------------------------+ //

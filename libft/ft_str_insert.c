@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:40:26 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/02 20:32:57 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/14 12:30:27 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_bool	ft_str_insert(char **str1, char *str2, size_t position)
 	size_t	len_str2;
 	char	*new_str;
 
-	if (!(*str1) || !(*str2))
+	if (!(*str1) || !str2)
 		return (0);
 	len_str2 = ft_strlen(str2);
 	if (!len_str2)

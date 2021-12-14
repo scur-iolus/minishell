@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/13 17:38:19 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/14 12:01:07 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static void	reset_data(t_data *data)
 		ft_free_split(data->path);
 	if (data->line)
 		free(data->line);
+	free_pipe(data);
 	if (data->cmd)
 		ft_lstclear_cmd(data->cmd);
-	free_pipe(data, &(data->pipe));
 	data->line = 0;
 	data->cmd = 0;
 	data->env = list_to_env(data, data->env_lst);

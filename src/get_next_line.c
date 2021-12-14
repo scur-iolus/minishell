@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:09:22 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/08 16:00:26 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/14 12:37:32 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ static char	*save_line(char *str)
 		return (0);
 	while (str[i] && str[i] != '\n')
 		i++;
-	line = (char *)ft_calloc(i + 1, sizeof(char));
+	line = (char *)ft_calloc(i + 2, sizeof(char));
 	if (!line)
 		return (0);
 	i = -1;
 	while (str[++i] && str[i] != '\n')
 		line[i] = str[i];
+	line[i] = '\n';
 	return (line);
 }
 
@@ -79,7 +80,9 @@ static int	gnl_result(int ret, char **line, char **save)
 static t_bool	continue_reading(int *ret, char **save)
 {
 	char	buff[BUFFER_SIZE + 1];
+	t_bool	success;
 
+	success = TRUE;
 	*ret = read(0, buff, BUFFER_SIZE);
 	if (*ret == -1)
 		return (0);
@@ -87,14 +90,15 @@ static t_bool	continue_reading(int *ret, char **save)
 	if (!(*save))
 		*save = ft_strdup(buff);
 	else
-		ft_str_insert(save, buff, ft_strlen(*save));
-	if (!(*save))
+		success = ft_str_insert(save, buff, ft_strlen(*save));
+	if (!(*save) || !success)
 		return (0);
 	return (1);
 }
 
 /*
 ** Customized GNL with free(line) when ret == 0, and a flag to free(save)
+** It also writes "> " on stdout
 */
 
 int	get_next_line(char **line, t_bool flag)
@@ -109,6 +113,7 @@ int	get_next_line(char **line, t_bool flag)
 		save = 0;
 		return (42);
 	}
+	write(1, "> ", 2);
 	if (!line || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
 		return (-1);
 	ret = 1;
