@@ -228,3 +228,185 @@
 ==2556929==    by 0x10D25C: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
 ==2556929==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
 ==2556929==
+
+
+==2557220== Conditional jump or move depends on uninitialised value(s)
+==2557220==    at 0x110947: ft_strlen (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x110C5C: ft_strdup (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10DD94: switch_old_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10DCC4: change_directory (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10E1C4: cdpath_check_every_path (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10E2D9: cdpath (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10DC2F: ft_cd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D4F4: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Uninitialised value was created by a stack allocation
+==2557220==    at 0x10E0C8: cdpath_check_every_path (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==
+==2557220== Conditional jump or move depends on uninitialised value(s)
+==2557220==    at 0x110947: ft_strlen (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x110C5C: ft_strdup (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10DDEE: switch_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10DCD7: change_directory (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10E1C4: cdpath_check_every_path (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10E2D9: cdpath (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10DC2F: ft_cd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D4F4: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Uninitialised value was created by a stack allocation
+==2557220==    at 0x10E0C8: cdpath_check_every_path (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==
+==2557220== Conditional jump or move depends on uninitialised value(s)
+==2557220==    at 0x110947: ft_strlen (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D094: list_to_env (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109A51: reset_data (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109C90: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Uninitialised value was created by a stack allocation
+==2557220==    at 0x10E0C8: cdpath_check_every_path (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==
+==2557220== Invalid read of size 1
+==2557220==    at 0x1113D4: ft_putstr_fd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D6F3: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Address 0x4b70580 is 0 bytes inside a block of size 4,096 free'd
+==2557220==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2557220==    by 0x10D6E2: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Block was alloc'd at
+==2557220==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2557220==    by 0x49C3C3C: getcwd (getcwd.c:66)
+==2557220==    by 0x10D6AC: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==
+==2557220== Syscall param write(buf) points to unaddressable byte(s)
+==2557220==    at 0x49C31E7: write (write.c:26)
+==2557220==    by 0x1113CF: ft_putstr_fd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D6F3: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Address 0x4b70580 is 0 bytes inside a block of size 4,096 free'd
+==2557220==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2557220==    by 0x10D6E2: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Block was alloc'd at
+==2557220==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2557220==    by 0x49C3C3C: getcwd (getcwd.c:66)
+==2557220==    by 0x10D6AC: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==
+
+==2557220== 6 errors in context 1 of 5:
+==2557220== Conditional jump or move depends on uninitialised value(s)
+==2557220==    at 0x110947: ft_strlen (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x110C5C: ft_strdup (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10DDEE: switch_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10DCD7: change_directory (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10E1C4: cdpath_check_every_path (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10E2D9: cdpath (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10DC2F: ft_cd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D4F4: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Uninitialised value was created by a stack allocation
+==2557220==    at 0x10E0C8: cdpath_check_every_path (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==
+==2557220==
+==2557220== 6 errors in context 2 of 5:
+==2557220== Conditional jump or move depends on uninitialised value(s)
+==2557220==    at 0x110947: ft_strlen (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x110C5C: ft_strdup (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10DD94: switch_old_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10DCC4: change_directory (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10E1C4: cdpath_check_every_path (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10E2D9: cdpath (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10DC2F: ft_cd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D4F4: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Uninitialised value was created by a stack allocation
+==2557220==    at 0x10E0C8: cdpath_check_every_path (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==
+==2557220==
+==2557220== 10 errors in context 3 of 5:
+==2557220== Conditional jump or move depends on uninitialised value(s)
+==2557220==    at 0x110947: ft_strlen (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D094: list_to_env (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109A51: reset_data (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109C90: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Uninitialised value was created by a stack allocation
+==2557220==    at 0x10E0C8: cdpath_check_every_path (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==
+==2557220==
+==2557220== 16 errors in context 4 of 5:
+==2557220== Syscall param write(buf) points to unaddressable byte(s)
+==2557220==    at 0x49C31E7: write (write.c:26)
+==2557220==    by 0x1113CF: ft_putstr_fd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D6F3: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Address 0x4b70580 is 0 bytes inside a block of size 4,096 free'd
+==2557220==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2557220==    by 0x10D6E2: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Block was alloc'd at
+==2557220==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2557220==    by 0x49C3C3C: getcwd (getcwd.c:66)
+==2557220==    by 0x10D6AC: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==
+==2557220==
+==2557220== 20 errors in context 5 of 5:
+==2557220== Invalid read of size 1
+==2557220==    at 0x1113D4: ft_putstr_fd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D6F3: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Address 0x4b70580 is 0 bytes inside a block of size 4,096 free'd
+==2557220==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2557220==    by 0x10D6E2: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==  Block was alloc'd at
+==2557220==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2557220==    by 0x49C3C3C: getcwd (getcwd.c:66)
+==2557220==    by 0x10D6AC: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2557220==
