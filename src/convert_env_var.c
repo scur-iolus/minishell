@@ -6,20 +6,25 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 11:42:57 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/15 18:27:47 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static size_t	get_var_name_len(char *str)
+static size_t	get_var_name_len(char *line, size_t position)
 {
 	size_t	i;
 
 	i = 0;
-	while (str[i] && str[i] != '<' && str[i] != '>' && str[i] != '$' && \
-		str[i] != '|' && str[i] != '?' && str[i] != ' ' && str[i] != '.')
+	while ((line + position)[i] && (line + position)[i] != '<' && \
+	(line + position)[i] != '>' && (line + position)[i] != '$' && \
+	(line + position)[i] != '|' && (line + position)[i] != '?' && \
+	(line + position)[i] != ' ' && (line + position)[i] != '.' && \
+	(line + position)[i] != '\"')
+	{
 		i++;
+	}
 	return (i);
 }
 
@@ -46,7 +51,7 @@ static void	replace_var(t_data *data, char **new, size_t *position)
 	char	*var_name;
 	size_t	i;
 
-	name_len = get_var_name_len(data->line + (*position));
+	name_len = get_var_name_len(data->line, *position);
 	if (name_len == 0)
 	{
 		(*position) += env_special_cases(data, new, position);
