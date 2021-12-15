@@ -212,3 +212,19 @@
 ==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
 ==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
 ==2549165==
+==2556929== 16 bytes in 1 blocks are still reachable in loss record 7 of 60
+==2556929==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2556929==    by 0x110C05: ft_calloc (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2556929==    by 0x1100FD: init_pipe (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2556929==    by 0x110238: init_pipe_struct (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2556929==    by 0x10D25C: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2556929==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2556929==
+==2556929== 16 bytes in 2 blocks are still reachable in loss record 8 of 60
+==2556929==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2556929==    by 0x110C05: ft_calloc (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2556929==    by 0x11014D: init_pipe (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2556929==    by 0x110238: init_pipe_struct (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2556929==    by 0x10D25C: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2556929==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2556929==
