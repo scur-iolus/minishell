@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 18:11:57 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 11:42:41 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/15 17:51:52 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_var_name(t_data *data, char *str)
 	if (!var_name)
 		err_free(MALLOC_ERROR, data, 0);
 	i = 0;
-	while (str[i] && str[i] != '=') //NOTA BENE est ce qu'avoir rajouter str i pose un probleme ?
+	while (str[i] && str[i] != '=')
 	{
 		var_name[i] = str[i];
 		i++;

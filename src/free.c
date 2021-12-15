@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/14 11:53:11 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/15 17:52:42 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	free_everything(t_data *data, char *str)
 		ft_free_split(data->path);
 	if (data->line)
 		free(data->line);
+	free_pipe(data);
 	if (data->cmd)
 		ft_lstclear_cmd(data->cmd);
 	if (data->env_lst)
@@ -79,10 +80,7 @@ void	err_free(char *msg, t_data *data, char *str)
 	exit(EXIT_FAILURE);
 }
 
-
-//FIXME  : mettre dans un autre fichier peut etre faire un fichier error
-
-void	err_free_command_not_found(char *msg, t_data *data, char *str) //NOTA BENE pareil que ci dessus mais avec un exit status different
+void	err_free_command_not_found(char *msg, t_data *data, char *str)
 {
 	free_everything(data, str);
 	if (msg && *msg)

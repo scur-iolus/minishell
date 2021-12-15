@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/10 18:35:06 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/15 17:52:18 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	make_one_built_in(t_data *data, t_cmd *cmd)
 	save_stdout = dup(1);
 	save_stdin = dup(0);
 	open_infile_and_heredoc(cmd, fd);
-	if (cmd->outfile) // si outfile
+	if (cmd->outfile)
 	{
 		dup2(cmd->outfile, STDOUT_FILENO);
 		close(cmd->outfile);
@@ -87,28 +87,18 @@ void	make_one_built_in(t_data *data, t_cmd *cmd)
 
 void	launch_built_in(t_data *data, t_cmd *cmd)
 {
-	if (!ft_strcmp("echo", cmd->cmd[0])) //FONCTION OK
+	if (!ft_strcmp("echo", cmd->cmd[0]))
 		data->new_status = ft_echo(cmd->cmd);
-	else if (!ft_strcmp("cd", cmd->cmd[0])) //FONCTION OK
+	else if (!ft_strcmp("cd", cmd->cmd[0]))
 		data->new_status = ft_cd(data, cmd->cmd);
-	else if (!ft_strcmp("pwd", cmd->cmd[0])) //FONCTION OK
+	else if (!ft_strcmp("pwd", cmd->cmd[0]))
 		data->new_status = ft_pwd(data, cmd->cmd);
-	else if (!ft_strcmp("export", cmd->cmd[0])) //FONCTION OK
+	else if (!ft_strcmp("export", cmd->cmd[0]))
 		data->new_status = ft_export(data, cmd->cmd);
-	else if (!ft_strcmp("unset", cmd->cmd[0])) //FONCTION OK
+	else if (!ft_strcmp("unset", cmd->cmd[0]))
 		data->new_status = ft_unset(data, cmd->cmd);
-	else if (!ft_strcmp("env", cmd->cmd[0])) //FONCTION OK
+	else if (!ft_strcmp("env", cmd->cmd[0]))
 		data->new_status = ft_env(data, cmd->cmd);
-	else if (!ft_strcmp("exit", cmd->cmd[0])) //FONCTION OK
+	else if (!ft_strcmp("exit", cmd->cmd[0]))
 		ft_exit(data, cmd->cmd);
 }
-
-
-// Si une commande commence par/ alors pas la peine de chercher le path
-// il faut le acces pour voir si c est valide
-// si valide alors on fait la commmande
-// une commande pourra etre comme suit :
-// execve(/bin/ls,{cmd[0] = /bin/ls , cmd[i...] = option, arguments...}, char **env);
-
-// en gros  quand on trouve une commande qui commence par / ou ../ on le split normalement
-// si ./ alors on doit enlever le ./ pour faire le access

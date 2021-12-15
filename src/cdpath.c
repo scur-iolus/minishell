@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cdpath.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:23:36 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 12:15:00 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/15 17:50:37 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static void	print_cdpath_cmd(char *cdpath, char *arg)
 	}
 }
 
-static t_bool	cdpath_check_every_path(t_data *data, char **cdpath, char **cmd, char *path)
+static t_bool	cdpath_check_every_path(t_data *data, char **cdpath,
+		char **cmd, char *path)
 {
 	int		i;
 	char	line[PATH_MAX];

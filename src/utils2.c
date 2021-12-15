@@ -6,7 +6,7 @@
 /*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 18:17:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/07 18:17:44 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/15 17:54:21 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	error_var_name(char *line)
 
 	i = -1;
 	if (!line[0])
-		return(1);
+		return (1);
 	if (ft_isdigit(line[0]))
 		return (1);
 	while (line[++i] && line[i] != '=')
