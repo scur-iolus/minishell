@@ -46,3 +46,169 @@
 ==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
 ==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
 ==2549165==
+==2549183== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2549165== Invalid read of size 1
+==2549165==    at 0x1113D4: ft_putstr_fd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D6F3: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==  Address 0x4b1c460 is 0 bytes inside a block of size 4,096 free'd
+==2549165==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549165==    by 0x10D6E2: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==  Block was alloc'd at
+==2549165==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549165==    by 0x49C3C3C: getcwd (getcwd.c:66)
+==2549165==    by 0x10D6AC: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==
+==2549165== Syscall param write(buf) points to unaddressable byte(s)
+==2549165==    at 0x49C31E7: write (write.c:26)
+==2549165==    by 0x1113CF: ft_putstr_fd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D6F3: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==  Address 0x4b1c460 is 0 bytes inside a block of size 4,096 free'd
+==2549165==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549165==    by 0x10D6E2: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==  Block was alloc'd at
+==2549165==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549165==    by 0x49C3C3C: getcwd (getcwd.c:66)
+==2549165==    by 0x10D6AC: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==
+==2549206==
+==2549206==
+==2549206== 24 bytes in 1 blocks are still reachable in loss record 9 of 60
+==2549206==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549206==    by 0x110C05: ft_calloc (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x1100FD: init_pipe (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x110238: init_pipe_struct (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D25C: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==
+==2549206== 24 bytes in 3 blocks are still reachable in loss record 10 of 60
+==2549206==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549206==    by 0x110C05: ft_calloc (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x11014D: init_pipe (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x110238: init_pipe_struct (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D25C: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==
+==2549206== 31 errors in context 1 of 2:
+==2549206== Syscall param write(buf) points to unaddressable byte(s)
+==2549206==    at 0x49C31E7: write (write.c:26)
+==2549206==    by 0x1113CF: ft_putstr_fd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D6F3: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==  Address 0x4b1c460 is 0 bytes inside a block of size 4,096 free'd
+==2549206==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549206==    by 0x10D6E2: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==  Block was alloc'd at
+==2549206==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549206==    by 0x49C3C3C: getcwd (getcwd.c:66)
+==2549206==    by 0x10D6AC: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==
+==2549206==
+==2549206== 32 errors in context 2 of 2:
+==2549206== Invalid read of size 1
+==2549206==    at 0x1113D4: ft_putstr_fd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D6F3: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==  Address 0x4b1c460 is 0 bytes inside a block of size 4,096 free'd
+==2549206==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549206==    by 0x10D6E2: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==  Block was alloc'd at
+==2549206==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549206==    by 0x49C3C3C: getcwd (getcwd.c:66)
+==2549206==    by 0x10D6AC: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549206==
+==2549165== 37 errors in context 1 of 2:
+==2549165== Syscall param write(buf) points to unaddressable byte(s)
+==2549165==    at 0x49C31E7: write (write.c:26)
+==2549165==    by 0x1113CF: ft_putstr_fd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D6F3: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==  Address 0x4b1c460 is 0 bytes inside a block of size 4,096 free'd
+==2549165==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549165==    by 0x10D6E2: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==  Block was alloc'd at
+==2549165==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549165==    by 0x49C3C3C: getcwd (getcwd.c:66)
+==2549165==    by 0x10D6AC: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==
+==2549165==
+==2549165== 40 errors in context 2 of 2:
+==2549165== Invalid read of size 1
+==2549165==    at 0x1113D4: ft_putstr_fd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D6F3: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==  Address 0x4b1c460 is 0 bytes inside a block of size 4,096 free'd
+==2549165==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549165==    by 0x10D6E2: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==  Block was alloc'd at
+==2549165==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2549165==    by 0x49C3C3C: getcwd (getcwd.c:66)
+==2549165==    by 0x10D6AC: ft_pwd (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D539: launch_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D415: make_one_built_in (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x10D24E: execute (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==    by 0x109D29: main (in /mnt/nfs/homes/llalba/minishell/minishell)
+==2549165==
