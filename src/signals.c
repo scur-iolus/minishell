@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:15:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/16 18:15:41 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/16 18:16:59 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	sig_handler(int signo)
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
-		*g_status = 130;
+		*g_status = SIGINT_PARENT;
 	}
 	else if (signo == SIGINT)
 	{

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/14 10:27:40 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/16 18:07:42 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ extern long long	*g_status;
 # define HAS_HEREDOC	-9223372036854775665
 # define HAS_CHILD		-9223372036854775666
 # define IS_HEREDOC		-9223372036854775665
+# define SIGINT_PARENT	-9223372036854775664
 # define DELIMITER_LEN	2047
 
 // +------------------------------------------+ //

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:59:45 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/14 12:01:07 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/16 18:19:26 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,15 +106,18 @@ int	main(int argc, char **argv, char **env)
 	{
 		reset_data(&data);
 		data.line = readline("🌞 Mishell c'est le Brésil ▸ ");
+		if (data.new_status == SIGINT_PARENT)
+		{
+			data.old_status = 130;
+			data.new_status = 0;
+		}
 		if (!data.line)
 			err_free(EOF_EXIT, &data, 0);
 		if (ft_strlen(data.line) > 0)
 			add_history(data.line);
 		if (input_is_ok(&data) && parse_cmd(&data))
-		{
 			if (data.cmd && data.cmd->cmd && data.new_status == 0)
 				execute(&data);
-		}
 	}
 	ft_error(TOO_MANY_ARG);
 	return (1);
