@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:15:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/13 15:52:32 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/16 18:15:41 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	signals_init_child(void)
 	void	*ret;
 
 	ret = 0;
-	ret = signal(SIGSEGV, sig_handler_child);
+	ret = signal(SIGINT, sig_handler_child);
 	if (ret == SIG_ERR)
 		write(2, SIG_FAILED, ft_strlen(SIG_FAILED));
 	ret = signal(SIGQUIT, sig_handler_child);
