@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/14 11:53:11 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/16 18:23:19 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ void	err_free(char *msg, t_data *data, char *str)
 	exit(EXIT_FAILURE);
 }
 
-
-//FIXME  : mettre dans un autre fichier peut etre faire un fichier error
-
-void	err_free_command_not_found(char *msg, t_data *data, char *str) //NOTA BENE pareil que ci dessus mais avec un exit status different
+void	err_free_command_not_found(char *msg, t_data *data, char *str)
 {
 	free_everything(data, str);
 	if (msg && *msg)

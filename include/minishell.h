@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/16 18:07:42 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/16 18:27:07 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		get_next_line(char **line, t_bool flag);
 //   Builtins                                   //
 // +------------------------------------------+ //
 int		ft_pwd(t_data *data, char **cmd);
-void	ft_exit(t_data *data, char **cmd); // FIXME j en ai fait un autre plus en adéquation avec les autres fonctions
+void	ft_exit(t_data *data, char **cmd);
 // +------------------------------------------+ //
 //   Export                                     //
 // +------------------------------------------+ //

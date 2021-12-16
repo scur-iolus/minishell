@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:32:59 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 15:50:41 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:25:38 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	error_ft_cd(char **cmd)
 	{
 		if (cmd[i][0] == '-')
 		{
-			if(cmd[i][1])
+			if (cmd[i][1])
 			{
 				ft_error(INVALID_OPTION);
 				return (1);
@@ -81,13 +81,12 @@ static int	cd_with_no_cdpath(t_data *data, char **cmd)
 	return (0);
 }
 
-static t_bool cmd_is_tilde(char *str)
+static t_bool	cmd_is_tilde(char *str)
 {
 	if (str[0] == '~')
 		if (!str[1])
 			return (1);
 	return (0);
-
 }
 
 t_bool	ft_cd(t_data *data, char **cmd)

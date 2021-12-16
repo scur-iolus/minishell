@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 15:44:53 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 12:27:25 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/16 18:34:36 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static size_t	get_lst_len(t_env *head)
 	return (len);
 }
 
-char	**list_to_env(t_data * data, t_env *lst_head) //NOTA BENE peut etre rajouter la notion -> if is_env
+char	**list_to_env(t_data *data, t_env *lst_head)
 {
 	char	**head;
 	size_t	i;

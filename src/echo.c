@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:59:53 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/02 20:37:05 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/16 17:56:43 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	ft_echo(char **cmd)
 	int	i;
 
 	i = 1;
-	while (cmd[i] && !echo_argument_n(cmd[i]))  // si argument est bien un -n ou un -nnn alors i++ on passe les arguments
+	while (cmd[i] && !echo_argument_n(cmd[i]))
 		i++;
-	if (i > 1) // si -n on print sans le /n a la fin
+	if (i > 1)
 		print_echo_flag(cmd, i);
 	else
 		print_echo(cmd, i);

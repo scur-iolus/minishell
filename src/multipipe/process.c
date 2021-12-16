@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 19:20:04 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/10 18:28:07 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/16 18:25:48 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,3 @@ void	last_process(t_data *data, t_pipe *pipe, t_cmd *cmd)
 				execve (cmd->cmd_path, cmd->cmd, data->env) == -1))
 		command_failed(data, pipe, cmd);
 }
-
-// 0	Entrée standard	STDIN_FILENO	stdin
-// 1	Sortie standard	STDOUT_FILENO	stdout
-
-//write end[1]
-// read end[0]

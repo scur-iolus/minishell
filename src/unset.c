@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/07 18:24:53 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:22:06 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_env	*find_previous_var_env(t_data *data, char *var_name)
 	return (NULL);
 }
 
-static void	pop_out_list_env(t_data *data, char *line) // a tester
+static void	pop_out_list_env(t_data *data, char *line)
 {
 	t_env	*temp;
 	t_env	*previous;

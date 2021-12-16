@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:45:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/10 18:31:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/16 18:23:35 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ void	ft_exit(t_data *data, char **cmd)
 		exit((int)exit_status);
 	}
 	free_everything(data, 0);
-	exit (0); // si exit sans exit status
+	exit (0);
 }

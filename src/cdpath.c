@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:23:36 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/06 12:15:00 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/16 18:25:17 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	print_cdpath_cmd(char *cdpath, char *arg)
 	}
 }
 
-static t_bool	cdpath_check_every_path(t_data *data, char **cdpath, char **cmd, char *path)
+static t_bool	check_paths(t_data *data, char **cdpath, char **cmd, char *path)
 {
 	int		i;
 	char	line[PATH_MAX];
@@ -86,7 +86,7 @@ t_bool	cdpath(t_data *data, char **cmd)
 	}
 	if (cmd[1])
 	{
-		if (cdpath_check_every_path(data, cdpath, cmd, path))
+		if (check_paths(data, cdpath, cmd, path))
 			return (1);
 	}
 	ft_free_split(cdpath);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 18:17:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/07 18:17:44 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:21:57 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	error_var_name(char *line)
 
 	i = -1;
 	if (!line[0])
-		return(1);
+		return (1);
 	if (ft_isdigit(line[0]))
 		return (1);
 	while (line[++i] && line[i] != '=')
