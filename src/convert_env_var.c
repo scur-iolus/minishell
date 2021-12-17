@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/15 18:27:47 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/17 12:45:55 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static size_t	get_var_name_len(char *line, size_t position)
 	(line + position)[i] != '>' && (line + position)[i] != '$' && \
 	(line + position)[i] != '|' && (line + position)[i] != '?' && \
 	(line + position)[i] != ' ' && (line + position)[i] != '.' && \
-	(line + position)[i] != '\"')
+	(line + position)[i] != '\"' && (line + position)[i] != '=' && \
+	(line + position)[i] != ':')
 	{
 		i++;
 	}
@@ -31,14 +32,14 @@ static size_t	get_var_name_len(char *line, size_t position)
 static void	add_var_value(char **new, char *var_name, t_data *data)
 {
 	size_t	value_len;
-	size_t	insertion_position;
 	t_env	*node;
 
 	node = find_var_env(data, var_name);
 	if (!node)
 		return ;
-	insertion_position = ft_strlen(*new);
-	if (!ft_str_insert(new, node->value, insertion_position))
+	if (!ft_str_insert(new, "\"", ft_strlen(*new)) || \
+	!ft_str_insert(new, node->value, ft_strlen(*new)) || \
+	!ft_str_insert(new, "\"", ft_strlen(*new)))
 	{
 		free(var_name);
 		err_free(MALLOC_ERROR, data, *new);
