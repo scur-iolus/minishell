@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 11:14:54 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/16 18:23:19 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/17 11:09:20 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	free_everything(t_data *data, char *str)
 		ft_free_split(data->path);
 	if (data->line)
 		free(data->line);
+	free_pipe(data);
 	if (data->cmd)
 		ft_lstclear_cmd(data->cmd);
 	if (data->env_lst)
