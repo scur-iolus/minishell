@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:23:36 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/17 11:10:07 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/17 11:54:02 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,13 @@ static void	print_cdpath_cmd(char *cdpath, char *arg)
 static t_bool	check_paths(t_data *data, char **cdpath, char **cmd, char *path)
 {
 	int		i;
+	int		j;
 	char	line[PATH_MAX];
 
 	i = -1;
+	j = -1;
+	while (++j < PATH_MAX)
+		line[j] = 0;
 	getcwd(line, PATH_MAX);
 	while (cdpath[++i])
 	{
