@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:45:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/17 11:09:25 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/17 14:13:20 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ static t_bool	check_argument_is_digit_ft_exit(char *str)
 	return (0);
 }
 
-void	ft_exit(t_data *data, char **cmd)
+int	ft_exit(t_data *data, char **cmd)
 {
 	long long	exit_status ;
 
 	if (check_nb_argument_ft_exit(cmd))
-		return ;
+		return (1);
 	if (cmd[1])
 	{
 		if (check_argument_is_digit_ft_exit(cmd[1]))

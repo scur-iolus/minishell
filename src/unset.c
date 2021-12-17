@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/16 18:22:06 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/17 14:25:09 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,31 +72,42 @@ static void	print_error_unset(char **cmd, int i, int flag)
 	}
 }
 
+static int	unset_while(int i, char **cmd)
+{
+	if (cmd[i][0] == '-')
+	{
+		print_error_unset(cmd, i, 0);
+		return (2);
+	}
+	if (error_var_name(cmd[i]))
+	{
+		print_error_unset(cmd, i, 1);
+		return (127);
+	}
+	if (check_equal_sign(cmd[i]))
+	{
+		print_error_unset(cmd, i, 1);
+		return (1);
+	}
+	return (0);
+}
+
 int	ft_unset(t_data *data, char **cmd)
 {
 	int	i;
+	int	ret;
+	int	status;
 
+	status = 0;
+	ret = 0;
 	i = 0;
 	while (cmd[++i])
 	{
-		if (cmd[i][0] == '-')
-		{
-			print_error_unset(cmd, i, 0);
-			return (2);
-		}
-		if (error_var_name(cmd[i]))
-		{
-			print_error_unset(cmd, i, 1);
-			return (127);
-		}
-		if (check_equal_sign(cmd[i]))
-		{
-			print_error_unset(cmd, i, 1);
-			return (1);
-		}
+		status = unset_while(i, cmd);
+		if (status && !ret)
+			ret = status;
+		if (!status)
+			pop_out_list_env(data, cmd[i]);
 	}
-	i = 0;
-	while (cmd[++i])
-		pop_out_list_env(data, cmd[i]);
-	return (0);
+	return (ret);
 }

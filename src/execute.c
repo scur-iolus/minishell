@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:33:21 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/17 11:09:29 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/17 14:14:11 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,5 @@ void	launch_built_in(t_data *data, t_cmd *cmd)
 	else if (!ft_strcmp("env", cmd->cmd[0]))
 		data->new_status = ft_env(data, cmd->cmd);
 	else if (!ft_strcmp("exit", cmd->cmd[0]))
-		ft_exit(data, cmd->cmd);
+		data->new_status = ft_exit(data, cmd->cmd);
 }
