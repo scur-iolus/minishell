@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:15:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/16 18:16:59 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/17 12:27:08 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	update_status(pid_t this_pid)
 		else if (WIFSIGNALED(this_pid))
 		{
 			*g_status = WTERMSIG(this_pid);
-			if (*g_status == SIGINT)
+			if (*g_status == SIGINT || *g_status == SIGQUIT)
 				*g_status += 128;
 			else if (*g_status == SIGSEGV)
 			{
