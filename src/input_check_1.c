@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:26:32 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/06 11:41:11 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/20 13:45:12 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,27 +109,20 @@ t_bool	valid_start_end(char *line)
 void	space_before_after_chevron(t_data *data)
 {
 	size_t	i;
-	char	*ptr;
 	t_bool	between_q;
 
 	i = 0;
-	while ((data->line)[i])
+	while ((data->line)[i] && (data->line)[i + 1])
 	{
 		between_q = quote_status(data->line, i);
-		ptr = (data->line) + i;
-		if (!between_q && (*ptr == '<' || *ptr == '>') && i \
-			&& *(ptr - 1) != ' ' && *(ptr - 1) != '<' && *(ptr - 1) != '>')
-		{
-			if (!ft_str_insert(&data->line, " ", i))
-				err_free(MALLOC_ERROR, data, 0);
-		}
-		if (!between_q && (*ptr == '<' || *ptr == '>') \
-			&& *(ptr + 1) && *(ptr + 1) != ' ' && *(ptr + 1) != '<' \
-			&& *(ptr + 1) != '>')
-		{
-			if (!ft_str_insert(&data->line, " ", i + 1))
-				err_free(MALLOC_ERROR, data, 0);
-		}
+		if (i && !between_q && (data->line[i] == '<' || data->line[i] == '>') \
+		&& data->line[i - 1] != ' ' && data->line[i - 1] != '<' && \
+		data->line[i - 1] != '>' && !ft_str_insert(&data->line, " ", i))
+			err_free(MALLOC_ERROR, data, 0);
+		if (!between_q && (data->line[i] == '<' || data->line[i] == '>') \
+		&& data->line[i + 1] != ' ' && data->line[i + 1] != '<' && \
+		data->line[i + 1] != '>' && !ft_str_insert(&data->line, " ", i + 1))
+			err_free(MALLOC_ERROR, data, 0);
 		i++;
 	}
 }
