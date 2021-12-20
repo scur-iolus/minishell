@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:09:25 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/20 11:40:35 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/20 17:20:15 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_bool	env_special_cases(t_data *data, char **output, size_t *pos)
 	else if (c == '.')
 		success = ft_str_insert(output, "$.", ft_strlen(*output));
 	else if (c == '\0' || c == '=' || c == ':' || c == '>' || c == '<' \
-	|| c == '|')
+	|| c == '|' || (c == '\"' && quote_status(data->line, *pos) == 3))
 		success = ft_str_insert(output, "$", ft_strlen(*output));
 	if (!success)
 		err_free(MALLOC_ERROR, data, *output);
