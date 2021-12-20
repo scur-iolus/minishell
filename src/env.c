@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:19:35 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/03 12:33:58 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/20 11:36:53 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	check_argument_ft_env(char **cmd)
 				ft_putstr_fd("env: '", 2);
 				ft_putstr_fd(cmd[1], 2);
 				ft_putstr_fd("': ", 2);
-				ft_putstr_fd("No such file or directory\n", 1);
+				ft_putstr_fd("No such file or directory\n", 2);
 				return (127);
 			}
 		}

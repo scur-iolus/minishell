@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:36:27 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/07 18:29:09 by fmonbeig         ###   ########.fr       */
+/*   Updated: 2021/12/20 11:35:09 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ int	ft_export(t_data *data, char **cmd)
 		{
 			if (error_var_name(cmd[i]) || cmd[i][0] == '=')
 			{
-				ft_putstr_fd("export: `", 1);
-				ft_putstr_fd(cmd[i], 1);
-				ft_putstr_fd("\': not a valid identifier\n", 1);
+				ft_putstr_fd("export: `", 2);
+				ft_putstr_fd(cmd[i], 2);
+				ft_putstr_fd("\': not a valid identifier\n", 2);
 				j = 1;
 				continue ;
 			}

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:09:25 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/10 18:30:15 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/20 11:40:35 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,31 @@ static t_bool	add_exit_status(t_data *data, char **output)
 ** $. reste $.
 ** $ESPACE reste $ESPACE
 ** $? devient le dernier exit_status
+**
+** Les caractères [<>|"=:']
 */
 
 t_bool	env_special_cases(t_data *data, char **output, size_t *pos)
 {
 	t_bool	success;
+	char	c;
 
-	if (data->line[*pos] == '?')
+	success = TRUE;
+	c = data->line[*pos];
+	if (c == '?')
 		success = add_exit_status(data, output);
-	else if (data->line[*pos] == ' ')
+	else if (c == ' ')
 		success = ft_str_insert(output, "$ ", ft_strlen(*output));
-	else if (data->line[*pos] == '$')
+	else if (c == '$')
 		success = ft_str_insert(output, "$$", ft_strlen(*output));
-	else if (data->line[*pos] == '.')
+	else if (c == '.')
 		success = ft_str_insert(output, "$.", ft_strlen(*output));
-	else if (data->line[*pos] == '\0')
+	else if (c == '\0' || c == '=' || c == ':' || c == '>' || c == '<' \
+	|| c == '|')
 		success = ft_str_insert(output, "$", ft_strlen(*output));
 	if (!success)
 		err_free(MALLOC_ERROR, data, *output);
-	if (data->line[*pos] != '\0')
+	if (c == '?' || c == ' ' || c == '$' || c == '.')
 		return (1);
 	return (0);
 }

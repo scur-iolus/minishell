@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:07:17 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/17 14:25:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/20 11:35:37 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ static void	print_error_unset(char **cmd, int i, int flag)
 {
 	if (flag == 0)
 	{
-		ft_putstr_fd("unset: -", 1);
-		ft_putchar_fd(cmd[i][1], 1);
-		ft_putstr_fd("': invalid option\n", 1);
+		ft_putstr_fd("unset: -", 2);
+		ft_putchar_fd(cmd[i][1], 2);
+		ft_putstr_fd("': invalid option\n", 2);
 	}
 	if (flag == 1)
 	{
-		ft_putstr_fd("unset: `", 1);
-		ft_putstr_fd(cmd[i], 1);
-		ft_putstr_fd("\': not a valid identifier\n", 1);
+		ft_putstr_fd("unset: `", 2);
+		ft_putstr_fd(cmd[i], 2);
+		ft_putstr_fd("\': not a valid identifier\n", 2);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:12:34 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/17 12:45:55 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/20 12:39:29 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static size_t	get_var_name_len(char *line, size_t position)
 	(line + position)[i] != '|' && (line + position)[i] != '?' && \
 	(line + position)[i] != ' ' && (line + position)[i] != '.' && \
 	(line + position)[i] != '\"' && (line + position)[i] != '=' && \
-	(line + position)[i] != ':')
+	(line + position)[i] != ':' && (line + position)[i] != '\'')
 	{
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:52:32 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/17 14:13:52 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/20 11:30:27 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,6 @@ int		go_to_old_pwd(t_data *data, char **cmd);
 // +------------------------------------------+ //
 int		ft_unset(t_data *data, char **cmd);
 int		error_var_name(char *line);
-int		ft_is_var_name(int c);
 // +------------------------------------------+ //
 //   Free                                       //
 // +------------------------------------------+ //
@@ -198,7 +197,6 @@ void	launch_built_in(t_data *data, t_cmd *cmd);
 // +------------------------------------------+ //
 void	take_path(t_data *data);
 void	find_command_path(t_data *data, t_cmd *head);
-//void	error_var_name(t_data *data, t_cmd *new, char *cmd_line);
 int		init_pipe(int nb_pipe, t_data *data, t_pipe *pipes);
 int		init_pipe_struct(t_data *data);
 void	fork_creation(t_pipe *pipe, t_data *data);
