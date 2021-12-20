@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 09:48:53 by llalba            #+#    #+#             */
-/*   Updated: 2021/12/03 16:49:38 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/20 15:51:39 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int	quote_status(char *str, size_t i)
 	t_bool	between_apo;
 	t_bool	between_quotes;
 
-	j = 0;
+	j = -1;
 	between_apo = FALSE;
 	between_quotes = FALSE;
-	while (str[j])
+	while (str[++j])
 	{
 		if (str[j] == '\'' && !between_quotes)
 		{
@@ -50,8 +50,8 @@ int	quote_status(char *str, size_t i)
 		}
 		if (j == i)
 			return (is_surrounded(between_quotes, between_apo));
-		j++;
 	}
+	return (0);
 }
 
 void	secure_between(char *str, char to_secure, char tmp, t_bool remove)

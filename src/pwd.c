@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 16:01:58 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/17 12:42:04 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/20 15:49:03 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_pwd(t_data *data, char **cmd)
 {
 	char	line[PATH_MAX];
 	int		j;
+	int		ret;
 
 	j = -1;
 	while (++j < PATH_MAX)
@@ -28,8 +29,8 @@ int	ft_pwd(t_data *data, char **cmd)
 			return (1);
 		}
 	}
-	getcwd(line, PATH_MAX);
-	if (!line)
+	ret = getcwd(line, PATH_MAX);
+	if (!ret)
 	{
 		ft_error("error retrieving current directory\n");
 		return (1);

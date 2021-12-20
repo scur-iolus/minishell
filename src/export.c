@@ -6,7 +6,7 @@
 /*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:36:27 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/20 11:35:09 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/20 15:49:52 by llalba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ int	ft_export(t_data *data, char **cmd)
 			}
 			put_in_env_export(data, cmd, i);
 		}
-		return (j);
 	}
+	return (j);
 }
