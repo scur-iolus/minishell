@@ -6,7 +6,7 @@
 #    By: llalba <llalba@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/24 16:05:23 by llalba            #+#    #+#              #
-#    Updated: 2021/12/10 17:41:14 by llalba           ###   ########.fr        #
+#    Updated: 2021/12/20 15:31:44 by llalba           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ filename		= /bin/echo -e -n "\x1b[30m\x1b[47m\x1b[1m$1\x1b[0m"
 
 NAME			= minishell
 
-CC				= gcc
+CC				= clang
 
 FLAGS			= -Wall -Werror -Wextra
 

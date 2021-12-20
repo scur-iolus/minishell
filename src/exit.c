@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:45:42 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/17 14:13:20 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/17 17:29:37 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,15 @@ int	ft_exit(t_data *data, char **cmd)
 		{
 			ft_error(NUMERIC_ARG);
 			free_everything(data, 0);
+			ft_putstr_fd("exit\n", 1);
 			exit(2);
 		}
 		exit_status = ft_atoi(cmd[1]);
 		free_everything(data, 0);
+		ft_putstr_fd("exit\n", 1);
 		exit((int)exit_status);
 	}
 	free_everything(data, 0);
+	ft_putstr_fd("exit\n", 1);
 	exit (0);
 }

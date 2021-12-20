@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd2.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llalba <llalba@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmonbeig <fmonbeig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:33:11 by fmonbeig          #+#    #+#             */
-/*   Updated: 2021/12/17 13:46:37 by llalba           ###   ########.fr       */
+/*   Updated: 2021/12/17 18:01:54 by fmonbeig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ void	switch_pwd(t_data *data, char *line)
 	char	*old_dir;
 
 	env = NULL;
+	env = find_var_env(data, "PWD");
+	if (!env)
+		return ;
 	old_dir = ft_strdup(line);
 	if (!old_dir)
 	{
@@ -66,9 +69,6 @@ void	switch_pwd(t_data *data, char *line)
 		return ;
 	}
 	getcwd(line, PATH_MAX);
-	env = find_var_env(data, "PWD");
-	if (!env)
-		return ;
 	free(env->value);
 	env->value = ft_strdup(line);
 	if (!env->value)
@@ -93,7 +93,7 @@ int	go_to_old_pwd(t_data *data, char **cmd)
 	env = find_var_env(data, "OLDPWD");
 	if (!env)
 	{
-		ft_error("OLD_PWD is not set");
+		ft_error("OLD_PWD is not set\n");
 		return (1);
 	}
 	getcwd(line, PATH_MAX);
